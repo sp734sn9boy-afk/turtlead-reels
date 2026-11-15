@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;900&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@800&text=turtle%20ad&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:3128px;height:1350px;background:#05091a}
+.m{position:relative;width:3128px;height:1350px;overflow:hidden;font-family:'Noto Sans JP',sans-serif;color:#f2f6ff;
+ background:
+  radial-gradient(700px 620px at 2900px 150px, rgba(40,110,170,.55), transparent 70%),
+  radial-gradient(760px 560px at 1564px 760px, rgba(79,227,255,.07), transparent 70%),
+  radial-gradient(700px 640px at 300px 1250px, rgba(80,50,160,.50), transparent 70%),
+  linear-gradient(100deg,#0b1a36 0%,#081024 50%,#06091a 100%);}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(79,227,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(79,227,255,.035) 1px,transparent 1px);background-size:54px 54px}
+svg.deco{position:absolute;left:0;top:0;width:3128px;height:1350px}
+.t{position:absolute;top:0;width:1080px;height:1350px}
+.label{position:absolute;left:130px;top:132px;display:flex;align-items:center;gap:20px;font-family:'Outfit',sans-serif;font-weight:700;font-size:32px;letter-spacing:.3em;color:#4fe3ff}
+.label i{display:block;width:56px;height:3px;background:#4fe3ff}
+.h{position:absolute;left:130px;font-weight:900;line-height:1.08;letter-spacing:.01em}
+.g{background:linear-gradient(90deg,#c9d4f0 0%,#3CD6F0 50%,#8b6bff 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{position:absolute;left:130px;font-weight:700;color:#c9d4f0}
+.desc{position:absolute;left:130px;font-size:32px;font-weight:500;color:#a9b6d8;line-height:1.6}
+.card{position:absolute;border-radius:16px;background:rgba(16,28,60,.72);border:1.5px solid rgba(169,182,216,.16)}
+.hi{border:2px solid transparent;background-image:linear-gradient(rgba(14,26,62,.95),rgba(14,26,62,.95)),linear-gradient(90deg,#4fe3ff,#8b6bff);background-origin:border-box;background-clip:padding-box,border-box;box-shadow:0 0 40px rgba(79,227,255,.16)}
+.foot{position:absolute;left:130px;top:1166px;font-size:27px;font-weight:500;color:#a9b6d8;letter-spacing:.02em}
+.foot b{color:#4fe3ff;font-weight:700}
+/* tile1 list */
+.list{left:130px;top:770px;width:820px;height:350px;padding:26px 40px}
+.row{display:flex;align-items:center;height:59.6px;border-bottom:1px solid rgba(169,182,216,.12)}
+.row:last-child{border-bottom:none}
+.row .no{font-family:'Outfit',sans-serif;font-weight:700;font-size:26px;letter-spacing:.06em;width:70px;color:#4fe3ff}
+.row .nm{font-size:32px;font-weight:700}
+.row .tag{margin-left:auto;font-size:22px;font-weight:500;color:#a9b6d8}
+.logo{position:absolute;left:740px;top:118px;display:flex;align-items:center;gap:12px}
+.logo svg{width:56px;height:56px;filter:drop-shadow(0 0 10px rgba(60,214,240,.45))}
+.logo span{font-family:'M PLUS Rounded 1c',sans-serif;font-weight:800;font-size:34px}
+.logo em{font-style:normal;color:#3CD6F0}
+/* tile2 browser */
+.br{left:130px;top:745px;width:820px;height:300px;overflow:hidden}
+.bar{height:44px;border-bottom:1px solid rgba(169,182,216,.16);display:flex;align-items:center;gap:10px;padding:0 20px}
+.bar i{width:12px;height:12px;border-radius:50%;background:rgba(169,182,216,.35)}
+.bar i:first-child{background:#4fe3ff}
+.bar span{margin-left:16px;height:18px;width:300px;border-radius:9px;background:rgba(169,182,216,.12)}
+.hero{position:absolute;left:30px;top:70px;width:470px}
+.hero .l1{height:26px;width:340px;border-radius:6px;background:linear-gradient(90deg,#c9d4f0,#3CD6F0)}
+.hero .l2{margin-top:16px;height:14px;width:420px;border-radius:7px;background:rgba(169,182,216,.28)}
+.hero .l3{margin-top:10px;height:14px;width:360px;border-radius:7px;background:rgba(169,182,216,.2)}
+.hero .btn{margin-top:22px;height:40px;width:170px;border-radius:20px;background:linear-gradient(90deg,#4fe3ff,#8b6bff)}
+.tiles{position:absolute;left:30px;top:228px;display:flex;gap:14px}
+.tiles i{display:block;width:140px;height:52px;border-radius:8px;border:1.5px solid rgba(79,227,255,.35);background:rgba(79,227,255,.05)}
+.img{position:absolute;left:530px;top:70px;width:180px;height:140px;border-radius:10px;background:linear-gradient(135deg,rgba(79,227,255,.35),rgba(139,107,255,.35));}
+.ph{position:absolute;left:770px;top:770px;width:140px;height:250px;border-radius:24px;background:#0b1430;border:2px solid #4fe3ff;box-shadow:0 0 30px rgba(79,227,255,.25);padding:26px 14px}
+.ph .a{height:62px;border-radius:8px;background:linear-gradient(135deg,rgba(79,227,255,.4),rgba(139,107,255,.4))}
+.ph .b{margin-top:12px;height:12px;border-radius:6px;background:#c9d4f0;width:90px}
+.ph .c{margin-top:8px;height:9px;border-radius:5px;background:rgba(169,182,216,.35)}
+.ph .d{margin-top:6px;height:9px;border-radius:5px;background:rgba(169,182,216,.25);width:80px}
+.ph .e{margin-top:16px;height:26px;border-radius:13px;background:linear-gradient(90deg,#4fe3ff,#8b6bff)}
+.price{position:absolute;left:130px;top:1066px;font-size:25px;font-weight:500;color:#c9d4f0;line-height:1.5}
+.price b{font-weight:900;color:#f2f6ff;font-size:29px}
+/* tile3 */
+.svc{left:130px;width:480px;padding:28px 32px}
+.svc .k{font-size:36px;font-weight:900}
+.svc .s{margin-top:10px;font-size:26px;font-weight:500;color:#a9b6d8;line-height:1.55}
+.svc .p{margin-top:12px;font-size:28px;font-weight:700;color:#c9d4f0}
+.svc .p b{font-size:46px;font-weight:900;color:#4fe3ff;margin:0 4px}
+.pf{position:absolute;left:650px;top:600px;width:290px;height:515px;border-radius:40px;border:2.5px solid #4fe3ff;background:linear-gradient(180deg,rgba(20,40,90,.9),rgba(10,16,40,.95));box-shadow:0 0 50px rgba(79,227,255,.22);overflow:hidden}
+.pf .notch{position:absolute;left:105px;top:14px;width:80px;height:10px;border-radius:5px;background:rgba(169,182,216,.3)}
+.pf .scene{position:absolute;left:18px;top:44px;width:254px;height:300px;border-radius:18px;background:
+ radial-gradient(160px 140px at 70% 30%, rgba(139,107,255,.55), transparent 70%),
+ radial-gradient(160px 160px at 25% 75%, rgba(79,227,255,.45), transparent 70%), #101c3c}
+.pf .play{position:absolute;left:97px;top:150px;width:96px;height:96px;border-radius:50%;background:rgba(255,255,255,.14);border:2px solid rgba(255,255,255,.6)}
+.pf .play:after{content:'';position:absolute;left:38px;top:28px;border-left:30px solid #fff;border-top:19px solid transparent;border-bottom:19px solid transparent}
+.pf .reel{position:absolute;left:30px;top:58px;font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;letter-spacing:.2em;color:#fff;opacity:.85}
+.pf .cap{position:absolute;left:30px;top:362px;width:230px}
+.pf .cap i{display:block;height:14px;border-radius:7px;background:#f2f6ff;margin-bottom:10px}
+.pf .cap i:nth-child(2){width:160px;background:rgba(242,246,255,.6)}
+.pf .wave{position:absolute;left:30px;top:440px;display:flex;align-items:center;gap:6px;height:44px}
+.pf .wave i{display:block;width:6px;border-radius:3px;background:linear-gradient(180deg,#4fe3ff,#8b6bff)}
+</style></head><body><div class="m">
+<div class="grid"></div>
+
+<svg class="deco" viewBox="0 0 3128 1350">
+ <defs>
+  <linearGradient id="hz" x1="0" x2="1" y1="0" y2="0">
+   <stop offset="0" stop-color="#c9d4f0" stop-opacity=".15"/><stop offset=".15" stop-color="#c9d4f0" stop-opacity=".7"/>
+   <stop offset=".5" stop-color="#3CD6F0"/><stop offset=".85" stop-color="#8b6bff"/><stop offset="1" stop-color="#8b6bff" stop-opacity=".2"/>
+  </linearGradient>
+ </defs>
+ <!-- network band across top -->
+ <g stroke="#3CD6F0" stroke-opacity=".38" stroke-width="1.6" fill="none">
+  <path d="M-20 70 L180 40 L420 78 L640 30 L860 64 L1180 52 L1420 84 L1660 40 L1900 70 L2240 48 L2480 86 L2700 36 L2950 72 L3150 50"/>
+  <path d="M180 40 L300 100 L420 78 M640 30 L740 96 L860 64 M1420 84 L1540 104 L1660 40 M2480 86 L2600 104 L2700 36"/>
+  <path d="M2700 36 L2820 200 L2950 72 M2820 200 L3010 290 L3128 230 M2820 200 L2700 330"/>
+ </g>
+ <g fill="#3CD6F0">
+  <circle cx="180" cy="40" r="5"/><circle cx="420" cy="78" r="5"/><circle cx="640" cy="30" r="9" fill-opacity=".95"/><circle cx="860" cy="64" r="5"/>
+  <circle cx="300" cy="100" r="4"/><circle cx="740" cy="96" r="4"/><circle cx="1180" cy="52" r="5"/><circle cx="1420" cy="84" r="5"/>
+  <circle cx="1660" cy="40" r="9" fill-opacity=".95"/><circle cx="1540" cy="104" r="4"/><circle cx="1900" cy="70" r="5"/><circle cx="2240" cy="48" r="5"/>
+  <circle cx="2480" cy="86" r="5"/><circle cx="2600" cy="104" r="4"/><circle cx="2700" cy="36" r="5"/><circle cx="2950" cy="72" r="5"/>
+  <circle cx="2820" cy="200" r="10" fill-opacity=".95"/><circle cx="3010" cy="290" r="6"/><circle cx="2700" cy="330" r="5"/>
+ </g>
+ <g fill="#3CD6F0" fill-opacity=".14"><circle cx="640" cy="30" r="24"/><circle cx="1660" cy="40" r="24"/><circle cx="2820" cy="200" r="26"/></g>
+ <!-- horizon line -->
+ <rect x="0" y="1140" width="3128" height="2" fill="url(#hz)"/>
+ <rect x="0" y="1136" width="3128" height="10" fill="url(#hz)" opacity=".12"/>
+</svg>
+
+<!-- ===== tile 1 ===== -->
+<div class="t" style="left:0">
+ <div class="label"><i></i>ABOUT US</div>
+ <div class="logo"><svg viewBox="0 0 100 100"><polygon points="50,6 88.1,28 88.1,72 50,94 11.9,72 11.9,28" fill="#0D3A34" stroke="#3CD6F0" stroke-width="3" stroke-linejoin="round"/><polygon points="50,32 65.6,41 65.6,59 50,68 34.4,59 34.4,41" fill="none" stroke="#3CD6F0" stroke-width="2.5" stroke-linejoin="round"/><path d="M50 6 L50 32 M88.1 28 L65.6 41 M88.1 72 L65.6 59 M50 94 L50 68 M11.9 72 L34.4 59 M11.9 28 L34.4 41" stroke="#3CD6F0" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.8"/><circle cx="50" cy="32" r="3" fill="#fff"/><circle cx="65.6" cy="41" r="3" fill="#fff"/><circle cx="65.6" cy="59" r="3" fill="#fff"/><circle cx="50" cy="68" r="3" fill="#fff"/><circle cx="34.4" cy="59" r="3" fill="#fff"/><circle cx="34.4" cy="41" r="3" fill="#fff"/><circle cx="50" cy="50" r="5" fill="#3CD6F0"/></svg><span>turtle <em>ad</em></span></div>
+ <div class="sub" style="top:290px;font-size:46px">鹿児島の会社の</div>
+ <div class="h" style="top:368px;font-size:112px">「<span class="g">伝える</span>」を、<br>まるごと。</div>
+ <div class="desc" style="top:628px">紙とWebとAIで、お店や会社の<br>「伝えたい」をお手伝いします。</div>
+ <div class="card list">
+  <div class="row"><span class="no">01</span><span class="nm">AI活用サポート</span><span class="tag">ChatGPT・Claude</span></div>
+  <div class="row"><span class="no">02</span><span class="nm">AI動画作成（リール）</span><span class="tag">縦型動画</span></div>
+  <div class="row"><span class="no">03</span><span class="nm">ホームページ制作</span><span class="tag">WordPress対応</span></div>
+  <div class="row"><span class="no">04</span><span class="nm">マイタウンガイド</span><span class="tag">地域情報誌</span></div>
+  <div class="row"><span class="no">05</span><span class="nm">マイタウンジョブ</span><span class="tag">求人媒体</span></div>
+ </div>
+ <div class="foot">鹿児島市 ｜ 地域情報誌 約5年 ｜ <b>ご相談は無料</b></div>
+</div>
+
+<!-- ===== tile 2 ===== -->
+<div class="t" style="left:1024px">
+ <div class="label"><i></i>WEB DESIGN</div>
+ <div class="h" style="top:280px;font-size:106px"><span class="g">おしゃれな</span><br>ホームページ、<br>つくります。</div>
+ <div class="desc" style="top:652px">スマホで見やすく、ちゃんと伝わるサイトを。</div>
+ <div class="card hi br">
+  <div class="bar"><i></i><i></i><i></i><span></span></div>
+  <div class="hero"><div class="l1"></div><div class="l2"></div><div class="l3"></div><div class="btn"></div></div>
+  <div class="img"></div>
+  <div class="tiles"><i></i><i></i><i></i></div>
+ </div>
+ <div class="ph"><div class="a"></div><div class="b"></div><div class="c"></div><div class="d"></div><div class="e"></div></div>
+ <div class="price">制作 <b>55,000</b>円〜 ／ 修正 <b>3,300</b>円〜 ／ 管理 月<b>5,500</b>円（税込）</div>
+ <div class="foot">新規制作から「ここだけ直したい」まで ｜ <b>turtle-ad.com</b></div>
+</div>
+
+<!-- ===== tile 3 ===== -->
+<div class="t" style="left:2048px">
+ <div class="label"><i></i>AI SOLUTIONS</div>
+ <div class="h" style="top:280px;font-size:118px"><span class="g">AI</span>で、<br>仕事も動画も。</div>
+ <div class="card svc" style="top:600px;height:230px">
+  <div class="k">AI活用サポート</div>
+  <div class="s">ChatGPT・Claudeを<br>毎日の仕事に。</div>
+  <div class="p" style="font-size:26px">初回相談 <span style="color:#4fe3ff;font-weight:900">無料</span></div>
+ </div>
+ <div class="card hi svc" style="top:858px;height:258px">
+  <div class="k">AI動画（リール）</div>
+  <div class="s">写真を送るだけで、<br>字幕・声入りの縦型動画に。</div>
+  <div class="p">1本<b>9,800</b>円（税込）</div>
+ </div>
+ <div class="pf">
+  <div class="notch"></div>
+  <div class="scene"></div>
+  <div class="reel">REEL</div>
+  <div class="play"></div>
+  <div class="cap"><i></i><i></i></div>
+  <div class="wave"><i style="height:14px"></i><i style="height:28px"></i><i style="height:40px"></i><i style="height:22px"></i><i style="height:34px"></i><i style="height:44px"></i><i style="height:26px"></i><i style="height:16px"></i><i style="height:32px"></i><i style="height:42px"></i><i style="height:20px"></i><i style="height:30px"></i><i style="height:12px"></i><i style="height:24px"></i><i style="height:38px"></i><i style="height:18px"></i><i style="height:28px"></i><i style="height:14px"></i></div>
+ </div>
+ <div class="foot">099-210-3511 ｜ <b>DMでもどうぞ</b></div>
+</div>
+</div></body></html>
