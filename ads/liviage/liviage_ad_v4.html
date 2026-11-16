@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<title>リビアジェ 広告原稿 v4</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700;900&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* 180 x 75mm（仕上がり）／ホームページのオレンジ #F8A119・#F79700 */
+@page{size:180mm 75mm;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:180mm;height:75mm}
+body{font-family:'Noto Sans JP',sans-serif;color:#3b2a1e;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+:root{--o1:#f8a119;--o2:#f79700;--o3:#e98300;--brown:#3b2a1e;--soft:#fff7ea;--line:#f3dcb8}
+.ad{position:relative;width:180mm;height:75mm;overflow:hidden;background:#fffdf8}
+.ad:before{content:'';position:absolute;right:-18mm;top:-22mm;width:70mm;height:70mm;border-radius:50%;background:radial-gradient(circle,rgba(248,161,25,.13),transparent 70%)}
+
+/* curve */
+.wave{position:absolute;left:0;bottom:0;width:180mm;height:37mm}
+
+/* top */
+.logo{position:absolute;left:6mm;top:5mm;width:27mm;height:27mm;border-radius:50%;background:#fff;box-shadow:0 0 0 .5mm #fff,0 0 0 .9mm var(--o1),0 1.2mm 3mm rgba(200,120,20,.18)}
+.logo img{width:100%;height:100%;display:block;border-radius:50%}
+.head{position:absolute;left:38mm;top:5mm}
+.head .sub{font-size:2.75mm;font-weight:700;letter-spacing:.14em;color:var(--brown)}
+.head .nm{margin-top:.4mm;font-family:'Zen Maru Gothic',sans-serif;font-weight:900;font-size:11.4mm;line-height:1.05;letter-spacing:.07em;color:var(--o2)}
+.head .catch{margin-top:1.2mm;font-family:'Zen Maru Gothic',sans-serif;font-weight:700;font-size:3.7mm;letter-spacing:.04em;color:var(--brown)}
+.head .catch em{font-style:normal;color:var(--o3)}
+
+.side{position:absolute;left:38mm;right:6mm;top:30.4mm}
+.badges{position:absolute;right:6mm;top:6mm;display:flex;flex-direction:column;align-items:flex-end;gap:1.4mm}
+.badges span{font-size:2.9mm;font-weight:900;letter-spacing:.04em;padding:.9mm 3mm;border-radius:3mm;color:#fff;background:var(--brown)}
+.badges span.o{background:var(--o2)}
+.svc{display:grid;grid-template-columns:repeat(6,1fr);gap:1.2mm}
+.svc span{display:flex;align-items:center;justify-content:center;height:6.4mm;border-radius:3.2mm;background:var(--soft);border:.3mm solid var(--line);font-size:2.55mm;font-weight:700;color:var(--brown);white-space:nowrap}
+
+/* bottom band (on orange) */
+.band{position:absolute;left:0;right:0;bottom:0;height:31mm;color:#fff;padding:0 6mm 0 7mm;display:flex;align-items:flex-end;padding-bottom:4.4mm;gap:5mm}
+.tel .lb{font-size:2.6mm;font-weight:700;letter-spacing:.1em;opacity:.95}
+.tel .num{display:flex;align-items:center;gap:1.6mm;margin-top:.6mm;font-family:'Outfit',sans-serif;font-weight:700;font-size:10.2mm;line-height:1;letter-spacing:.01em;white-space:nowrap;text-shadow:0 .4mm 1.2mm rgba(150,70,0,.25)}
+.tel .num svg{width:6.4mm;height:6.4mm;flex:none}
+.tel .hr{margin-top:1.4mm;font-size:2.7mm;font-weight:500}
+.tel .hr b{display:inline-block;font-weight:700;font-size:2.3mm;padding:.2mm 1.4mm;margin-right:1mm;border:.25mm solid rgba(255,255,255,.85);border-radius:1mm}
+.info{flex:1;min-width:0;font-size:2.65mm;line-height:1.55;padding-bottom:.2mm}
+.info .ad1{font-weight:700}
+.info .op{opacity:.92}
+.qrs{display:flex;gap:2mm}
+.qr{width:15mm;text-align:center}
+.qr .bx{width:15mm;height:15mm;padding:1.1mm;background:#fff;border-radius:1.4mm}
+.qr .bx img{width:100%;height:100%;display:block}
+.qr p{margin-top:.6mm;font-family:'Outfit';font-size:2.2mm;font-weight:700;letter-spacing:.08em}
+</style></head>
+<body><div class="ad">
+
+  <svg class="wave" viewBox="0 0 180 37" preserveAspectRatio="none">
+    <defs><linearGradient id="og" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8a119"/><stop offset="1" stop-color="#f08a00"/></linearGradient></defs>
+    <path d="M0 9 Q90 -3 180 9 V37 H0 Z" fill="url(#og)"/>
+    <path d="M0 6.2 Q90 -5.8 180 6.2" fill="none" stroke="#f8a119" stroke-width=".35" opacity=".55"/>
+  </svg>
+
+  <div class="logo"><img src="assets/toji_logo_circle.png" alt="TOJI"></div>
+  <div class="head">
+    <div class="sub">遺品・生前整理・不用品買取</div>
+    <div class="nm">リビアジェ</div>
+    <p class="catch">大切な品々、<em>想いと一緒に</em>お預かりします。</p>
+  </div>
+
+  <div class="badges"><span class="o">九州全域対応</span><span>遺品整理士認定</span></div>
+  <div class="side">
+    <div class="svc">
+      <span>遺品整理</span><span>生前整理</span><span>不用品回収・買取</span>
+      <span>空き家整理・管理</span><span>ゴミ屋敷片付け</span><span>特殊清掃</span>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="tel">
+      <div class="lb">ご相談はお気軽にどうぞ</div>
+      <div class="num"><svg viewBox="0 0 24 24" fill="#fff"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>080-9142-2824</div>
+      <div class="hr"><b>営業時間</b>9:00〜20:00　<b>定休日</b>不定休</div>
+    </div>
+    <div class="info">
+      <div class="ad1">〒898-0005<br>鹿児島県枕崎市中町1 松田ビル2FA</div>
+      <div class="op">LINEでもご相談いただけます<br>運営　株式会社燈志</div>
+    </div>
+    <div class="qrs">
+      <div class="qr"><div class="bx"><img src="qr_web.svg" alt=""></div><p>WEB</p></div>
+      <div class="qr"><div class="bx"><img src="qr_ig.svg" alt=""></div><p>Instagram</p></div>
+    </div>
+  </div>
+
+</div></body></html>
