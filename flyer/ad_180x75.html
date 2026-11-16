@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<title>turtle ad 広告 180x75</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@800&text=turtle%20ad&display=swap" rel="stylesheet">
+<style>
+/* 180 x 75mm 仕上がり（塗り足しなし） */
+@page{size:180mm 75mm;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:180mm;height:75mm;background:#060b1a}
+body{font-family:'Noto Sans JP',sans-serif;color:#eef2ff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{position:relative;width:180mm;height:75mm;overflow:hidden;
+  background:
+   radial-gradient(70mm 50mm at 90% 0%,rgba(46,120,190,.40),transparent 70%),
+   radial-gradient(60mm 50mm at 0% 100%,rgba(92,60,170,.30),transparent 70%),
+   linear-gradient(180deg,#0b1a36 0%,#081024 60%,#04070f 100%)}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(79,227,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(79,227,255,.05) 1px,transparent 1px);background-size:6mm 6mm}
+.grad{background:linear-gradient(90deg,#c9d4f0,#3CD6F0 50%,#8b6bff);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ---- left ---- */
+.left{position:absolute;left:5.5mm;top:5mm;bottom:5mm;width:58mm;display:flex;flex-direction:column}
+.logo{display:flex;align-items:center;gap:1.8mm}
+.logo svg{width:7mm;height:7mm}
+.logo span{font-family:'M PLUS Rounded 1c',sans-serif;font-weight:800;font-size:4.8mm;letter-spacing:.02em}
+.logo em{font-style:normal;color:#3CD6F0}
+.eyebrow{margin-top:2.6mm;display:flex;align-items:center;gap:1.8mm;font-family:'Outfit',sans-serif;font-weight:700;font-size:2.3mm;letter-spacing:.3em;color:#4fe3ff}
+.eyebrow:before{content:'';width:6mm;height:.35mm;background:#4fe3ff}
+h1{margin-top:1.4mm;font-weight:900;font-size:4.7mm;line-height:1.28;letter-spacing:.01em}
+.lead{margin-top:1.8mm;font-size:2.2mm;line-height:1.6;color:#b9c5e6}
+.lead b{color:#fff;font-weight:700}
+.pts{margin-top:auto;display:flex;flex-direction:column;gap:.9mm}
+.pt{display:flex;align-items:center;gap:1.6mm;padding:.55mm 2mm;border-radius:2mm;background:linear-gradient(100deg,rgba(79,227,255,.13),rgba(139,107,255,.13));border:.3mm solid rgba(79,227,255,.55)}
+.pt .no{flex:none;width:4.6mm;height:4.6mm;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-weight:700;font-size:2.1mm;color:#061024;background:linear-gradient(140deg,#4fe3ff,#8b6bff)}
+.pt b{font-size:2.55mm;font-weight:900}
+.pt small{margin-left:auto;font-size:2mm;color:#b9c5e6}
+
+/* ---- right ---- */
+.right{position:absolute;left:67mm;right:5mm;top:5mm;bottom:5mm;display:flex;flex-direction:column}
+.badge{position:absolute;right:0;top:0;padding:.9mm 3mm;border-radius:5mm;font-weight:900;font-size:2.5mm;letter-spacing:.05em;color:#061024;background:linear-gradient(90deg,#4fe3ff,#8b6bff);box-shadow:0 0 3mm rgba(79,227,255,.35)}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:2.2mm;margin-top:6.2mm}
+.card{border-radius:2.4mm;padding:2mm 2.4mm 2.2mm;background:linear-gradient(180deg,rgba(18,34,74,.80),rgba(10,22,52,.84));border:.25mm solid rgba(120,160,230,.32)}
+.card .no{font-family:'Outfit',sans-serif;font-weight:700;font-size:2mm;letter-spacing:.26em;color:#4fe3ff}
+.card h2{margin-top:.3mm;font-size:3.7mm;font-weight:900;letter-spacing:.02em}
+.card .ds{margin-top:.6mm;font-size:2mm;line-height:1.5;color:#b9c5e6}
+.rows{margin-top:1.5mm;display:flex;flex-direction:column;gap:1.1mm}
+.row{display:flex;align-items:center;justify-content:space-between;border-radius:1.4mm;padding:.9mm 2mm;background:rgba(6,14,36,.6);border:.2mm solid rgba(120,160,230,.25)}
+.row.hl{border-color:rgba(79,227,255,.8);background:rgba(79,227,255,.08)}
+.row .n{font-size:2.3mm;font-weight:700;line-height:1.2}
+.row .n small{display:block;font-size:1.75mm;font-weight:500;color:#9fb0d8}
+.row .p{font-family:'Outfit',sans-serif;font-weight:700;font-size:3.6mm;white-space:nowrap}
+.row .p i{font-style:normal;font-family:'Noto Sans JP';font-size:1.9mm;font-weight:700;margin-left:.3mm}
+.row .p .pre{font-family:'Noto Sans JP';font-size:1.9mm;margin-right:.5mm}
+
+/* contact */
+.ct{margin-top:auto;display:flex;align-items:flex-end;gap:3mm;border-top:.25mm solid rgba(120,160,230,.3);padding-top:1.8mm}
+.ct .info{flex:1;min-width:0}
+.ct .tel{display:flex;align-items:baseline;gap:1.4mm}
+.ct .tel small{font-size:2.2mm;font-weight:700}
+.ct .tel strong{font-family:'Outfit',sans-serif;font-weight:700;font-size:6mm;line-height:1}
+.ct .sub{margin-top:.8mm;font-size:1.95mm;color:#b9c5e6;line-height:1.55;white-space:nowrap}
+.ct .sub b{color:#4fe3ff;font-weight:700;margin-right:.6mm}
+.qrs{display:flex;gap:2mm}
+.qr{width:12mm;text-align:center}
+.qr .bx{width:12mm;height:12mm;padding:1mm;border-radius:1.2mm;background:#fff}
+.qr .bx img{width:100%;height:100%;display:block}
+.qr.line .bx{box-shadow:0 0 0 .5mm #06c755}
+.qr p{margin-top:.6mm;font-size:1.9mm;font-weight:900}
+.qr.line p{color:#4be38a}
+.note{margin-top:1mm;font-size:1.7mm;color:#8d9cc4}
+</style></head>
+<body><div class="page"><div class="grid"></div>
+
+<div class="left">
+  <div class="logo"><svg viewBox="0 0 100 100"><polygon points="50,6 88.1,28 88.1,72 50,94 11.9,72 11.9,28" fill="#0D3A34" stroke="#3CD6F0" stroke-width="3" stroke-linejoin="round"/><polygon points="50,32 65.6,41 65.6,59 50,68 34.4,59 34.4,41" fill="none" stroke="#3CD6F0" stroke-width="2.5" stroke-linejoin="round"/><path d="M50 6 L50 32 M88.1 28 L65.6 41 M88.1 72 L65.6 59 M50 94 L50 68 M11.9 72 L34.4 59 M11.9 28 L34.4 41" stroke="#3CD6F0" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.8"/><circle cx="50" cy="32" r="3" fill="#fff"/><circle cx="65.6" cy="41" r="3" fill="#fff"/><circle cx="65.6" cy="59" r="3" fill="#fff"/><circle cx="50" cy="68" r="3" fill="#fff"/><circle cx="34.4" cy="59" r="3" fill="#fff"/><circle cx="34.4" cy="41" r="3" fill="#fff"/><circle cx="50" cy="50" r="5" fill="#3CD6F0"/></svg><span>turtle <em>ad</em></span></div>
+  <div class="eyebrow">WEB × AI MOVIE</div>
+  <h1>ホームページと動画で、<br>お店の魅力を<br><span class="grad">まっすぐ届ける。</span></h1>
+  <p class="lead"><b>「ホームページがない」「動画を作る時間がない」</b><br>そんなお店・会社を、制作から更新までお手伝い。</p>
+  <div class="pts">
+    <div class="pt"><span class="no">01</span><b>相談・お見積りは無料</b><small>LINE・お電話で</small></div>
+    <div class="pt"><span class="no">02</span><b>スマホの写真でOK</b><small>撮影代行も相談可</small></div>
+    <div class="pt"><span class="no">03</span><b>公開後もおまかせ</b><small>更新・修正も</small></div>
+  </div>
+</div>
+
+<div class="right">
+  <div class="badge">ご相談・お見積り無料</div>
+  <div class="cards">
+    <div class="card">
+      <div class="no">01  WEB DESIGN</div>
+      <h2>ホームページ制作</h2>
+      <div class="rows">
+        <div class="row"><div class="n">ライト<small>TOP＋基本2ページ</small></div><div class="p">55,000<i>円〜</i></div></div>
+        <div class="row hl"><div class="n">スタンダード<small>TOP＋4〜5ページ・基本SEO</small></div><div class="p">88,000<i>円〜</i></div></div>
+        <div class="row"><div class="n">しっかり<small>TOP＋6〜8ページ・ブログ</small></div><div class="p">132,000<i>円〜</i></div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="no">02  AI MOVIE</div>
+      <h2>AI動画作成</h2>
+      <div class="rows">
+        <div class="row"><div class="n">1本<small>ナレーション・字幕・BGM</small></div><div class="p">9,800<i>円</i></div></div>
+        <div class="row hl"><div class="n">3本<small>15秒前後</small></div><div class="p">24,800<i>円</i></div></div>
+        <div class="row"><div class="n">毎月4本<small>契約期間の縛りなし</small></div><div class="p"><span class="pre">月</span>29,800<i>円</i></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ct">
+    <div class="info">
+      <div class="tel"><small>お電話</small><strong>099-210-3511</strong></div>
+      <div class="sub">受付 9:00〜18:00（土日祝休み）　合同会社turtle ad<br><b>LINE</b>@486zunqz　<b>WEB</b>turtle-ad.com　<b>住所</b>〒891-0109 鹿児島市清和3-25-15</div>
+      <p class="note">※価格はすべて税込。月額管理 5,500円（ご希望の方のみ）／WordPress修正 1か所3,300円〜</p>
+    </div>
+    <div class="qrs">
+      <div class="qr line"><div class="bx"><img src="qr_line.svg" alt=""></div><p>LINEで相談</p></div>
+      <div class="qr"><div class="bx"><img src="qr_web.svg" alt=""></div><p>ホームページ</p></div>
+    </div>
+  </div>
+</div>
+
+</div></body></html>
