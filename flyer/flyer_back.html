@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<title>一般向けチラシ 裏面</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@800&text=turtle%20ad&display=swap" rel="stylesheet">
+<style>
+@page{size:216mm 303mm;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:216mm;height:303mm;background:#060b1a}
+body{font-family:'Noto Sans JP',sans-serif;color:#eef2ff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{position:relative;width:216mm;height:303mm;overflow:hidden;
+  background:
+   radial-gradient(90mm 70mm at 100% 0%,rgba(46,120,190,.35),transparent 70%),
+   radial-gradient(80mm 70mm at 0% 100%,rgba(92,60,170,.28),transparent 70%),
+   linear-gradient(180deg,#0b1a36 0%,#081024 55%,#04070f 100%)}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(79,227,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(79,227,255,.05) 1px,transparent 1px);background-size:10mm 10mm}
+.in{position:absolute;left:14mm;right:14mm;top:12mm;bottom:11mm;display:flex;flex-direction:column}
+.c{color:#4fe3ff}
+
+.hd{display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:2.2mm}
+.logo svg{width:8.5mm;height:8.5mm}
+.logo span{font-family:'M PLUS Rounded 1c',sans-serif;font-weight:800;font-size:5.6mm;letter-spacing:.02em}
+.logo em{font-style:normal;color:#3CD6F0}
+.hd{margin-bottom:-1mm}
+.hd .ttl{font-family:'Outfit',sans-serif;font-weight:700;font-size:3.1mm;letter-spacing:.3em;color:#a9b6d8}
+
+.sec{margin-top:4.6mm}
+.sh{display:flex;align-items:baseline;gap:3mm;margin-bottom:2.2mm}
+.sh .no{font-family:'Outfit',sans-serif;font-weight:700;font-size:3mm;letter-spacing:.28em;color:#4fe3ff}
+.sh h2{font-size:6mm;font-weight:900;letter-spacing:.02em}
+.sh .sub{font-size:3mm;color:#a9b6d8}
+
+.box{border-radius:3.4mm;background:linear-gradient(180deg,rgba(18,34,74,.78),rgba(10,22,52,.82));border:.3mm solid rgba(120,160,230,.32)}
+h3{font-size:3.5mm;font-weight:900;margin-bottom:1.6mm;display:flex;align-items:center;gap:1.6mm}
+h3:before{content:'';width:1mm;height:3.6mm;border-radius:.5mm;background:linear-gradient(180deg,#4fe3ff,#8b6bff)}
+
+/* plan table */
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:3mm}
+th,td{padding:1.3mm 2mm;text-align:center;border-bottom:.25mm solid rgba(120,160,230,.18)}
+th:first-child,td:first-child{text-align:left;color:#b9c5e6;font-weight:500;padding-left:4mm}
+thead th{padding-top:2.6mm;padding-bottom:1.8mm;font-weight:900;font-size:3.6mm}
+thead th small{display:block;font-family:'Outfit',sans-serif;font-size:5.4mm;font-weight:700;margin-top:.6mm}
+thead th small i{font-style:normal;font-family:'Noto Sans JP';font-size:2.6mm;margin-left:.3mm}
+thead th em{display:block;font-style:normal;font-size:2.5mm;font-weight:500;color:#9fb0d8;margin-top:.4mm}
+th.rec,td.rec{background:rgba(79,227,255,.08)}
+th.rec{border-radius:2.4mm 2.4mm 0 0;position:relative}
+th.rec:after{content:'おすすめ';position:absolute;top:-2.4mm;left:50%;transform:translateX(-50%);font-size:2.4mm;font-weight:900;color:#061024;background:linear-gradient(90deg,#4fe3ff,#8b6bff);border-radius:3mm;padding:.3mm 2.2mm}
+td .ok{color:#4fe3ff;font-weight:900;font-size:3.6mm}
+td .no{color:#52608a}
+tbody tr:last-child td{border-bottom:0}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin-top:2.8mm}
+.pad{padding:3mm 3.8mm}
+ul.ck{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:.9mm 3mm;font-size:2.95mm;line-height:1.45}
+ul.ck.one{grid-template-columns:1fr}
+ul.ck li{padding-left:3.8mm;position:relative}
+ul.ck li:before{content:'';position:absolute;left:0;top:1.1mm;width:2.2mm;height:1.2mm;border-left:.5mm solid #4fe3ff;border-bottom:.5mm solid #4fe3ff;transform:rotate(-45deg)}
+.price-l{display:flex;align-items:baseline;gap:1.5mm;margin-bottom:1.8mm}
+.price-l b{font-family:'Outfit',sans-serif;font-size:5.6mm;font-weight:700}
+.price-l span{font-size:2.8mm;color:#a9b6d8}
+.note{font-size:2.6mm;color:#8d9cc4;line-height:1.55;margin-top:1.4mm}
+
+/* flow */
+.flow{display:grid;gap:1.6mm}
+.flow.f6{grid-template-columns:repeat(6,1fr)}
+.flow.f4{grid-template-columns:repeat(4,1fr)}
+.st{position:relative;border-radius:2.6mm;padding:2.4mm 2.2mm;background:rgba(6,14,36,.6);border:.25mm solid rgba(120,160,230,.28)}
+.st .n{font-family:'Outfit',sans-serif;font-weight:700;font-size:2.7mm;color:#4fe3ff;letter-spacing:.1em}
+.st b{display:block;font-size:3.1mm;font-weight:900;margin-top:.4mm}
+.st small{display:block;font-size:2.45mm;color:#a9b6d8;line-height:1.45;margin-top:.6mm}
+
+.tags{display:flex;flex-wrap:wrap;gap:1.4mm}
+.tags span{font-size:2.8mm;font-weight:500;padding:.8mm 2.4mm;border-radius:5mm;border:.25mm solid rgba(79,227,255,.45);color:#cfe9ff}
+
+/* AI price strip */
+.ap{display:grid;grid-template-columns:repeat(3,1fr);gap:2mm;margin-bottom:2.4mm}
+.ap div{border-radius:2.4mm;padding:2mm 3mm;background:rgba(6,14,36,.6);border:.25mm solid rgba(120,160,230,.25);display:flex;justify-content:space-between;align-items:baseline}
+.ap div.hl{border-color:rgba(79,227,255,.8);background:rgba(79,227,255,.08)}
+.ap span{font-size:3mm;font-weight:700}
+.ap b{font-family:'Outfit',sans-serif;font-size:5mm;font-weight:700}
+.ap b i{font-style:normal;font-family:'Noto Sans JP';font-size:2.5mm;margin-left:.3mm}
+
+/* QA */
+.qa{display:grid;grid-template-columns:1fr 1fr;gap:1.8mm 5mm;padding:3mm 4.2mm}
+.q{font-size:3mm;font-weight:700;line-height:1.4;display:flex;gap:1.6mm}
+.q:before{content:'Q';flex:none;font-family:'Outfit',sans-serif;color:#4fe3ff;font-weight:700}
+.a{font-size:2.75mm;color:#b9c5e6;line-height:1.5;padding-left:3.6mm;margin-top:.4mm}
+
+/* footer */
+.ft{margin-top:auto;display:flex;align-items:center;gap:5mm;border-top:.3mm solid rgba(120,160,230,.3);padding-top:3mm}
+.ft .info{flex:1}
+.ft .co{font-size:3.1mm;font-weight:700;color:#cfd8f2}
+.ft .tel{display:flex;align-items:baseline;gap:1.6mm;margin-top:.6mm}
+.ft .tel small{font-size:2.9mm;font-weight:700}
+.ft .tel strong{font-family:'Outfit',sans-serif;font-weight:700;font-size:7.6mm;line-height:1}
+.ft .sub{margin-top:1mm;font-size:2.65mm;color:#b9c5e6;line-height:1.55}
+.qrs{display:flex;gap:3mm}
+.qr{text-align:center;width:19mm}
+.qr .bx{width:19mm;height:19mm;border-radius:2mm;background:#fff;padding:1.6mm}
+.qr .bx img{width:100%;height:100%;display:block}
+.qr.line .bx{box-shadow:0 0 0 .6mm #06c755}
+.qr p{margin-top:1mm;font-size:2.4mm;font-weight:700}
+.qr.line p{color:#4be38a}
+</style></head>
+<body><div class="page"><div class="grid"></div><div class="in">
+
+<div class="hd">
+  <div class="logo"><svg viewBox="0 0 100 100"><polygon points="50,6 88.1,28 88.1,72 50,94 11.9,72 11.9,28" fill="#0D3A34" stroke="#3CD6F0" stroke-width="3" stroke-linejoin="round"/><polygon points="50,32 65.6,41 65.6,59 50,68 34.4,59 34.4,41" fill="none" stroke="#3CD6F0" stroke-width="2.5" stroke-linejoin="round"/><path d="M50 6 L50 32 M88.1 28 L65.6 41 M88.1 72 L65.6 59 M50 94 L50 68 M11.9 72 L34.4 59 M11.9 28 L34.4 41" stroke="#3CD6F0" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.8"/><circle cx="50" cy="32" r="3" fill="#fff"/><circle cx="65.6" cy="41" r="3" fill="#fff"/><circle cx="65.6" cy="59" r="3" fill="#fff"/><circle cx="50" cy="68" r="3" fill="#fff"/><circle cx="34.4" cy="59" r="3" fill="#fff"/><circle cx="34.4" cy="41" r="3" fill="#fff"/><circle cx="50" cy="50" r="5" fill="#3CD6F0"/></svg><span>turtle <em>ad</em></span></div>
+  <div class="ttl">SERVICE DETAILS</div>
+</div>
+
+<!-- HOMEPAGE -->
+<div class="sec">
+  <div class="sh"><span class="no">01  WEB DESIGN</span><h2>ホームページ制作</h2><span class="sub">ご予算や目的に合わせて選べる3つのプラン</span></div>
+  <div class="box">
+    <table>
+      <thead><tr>
+        <th></th>
+        <th>ライト<small>55,000<i>円〜</i></small><em>まずはシンプルに</em></th>
+        <th class="rec">スタンダード<small>88,000<i>円〜</i></small><em>しっかりPRしたい方に</em></th>
+        <th>しっかり<small>132,000<i>円〜</i></small><em>集客・発信も強化</em></th>
+      </tr></thead>
+      <tbody>
+        <tr><td>ページ数</td><td>TOP＋基本2ページ</td><td class="rec">TOP＋基本4〜5ページ</td><td>TOP＋6〜8ページ</td></tr>
+        <tr><td>スマホ対応・お問い合わせフォーム</td><td><span class="ok">✓</span></td><td class="rec"><span class="ok">✓</span></td><td><span class="ok">✓</span></td></tr>
+        <tr><td>SNS</td><td>リンク</td><td class="rec">連携</td><td>連携</td></tr>
+        <tr><td>SEO設定</td><td><span class="no">―</span></td><td class="rec">基本SEO</td><td>SEO設定</td></tr>
+        <tr><td>ブログ・お知らせ機能</td><td><span class="no">―</span></td><td class="rec"><span class="no">―</span></td><td><span class="ok">✓</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="two">
+    <div class="box pad">
+      <h3>月額管理プラン（ご希望の方のみ）</h3>
+      <div class="price-l"><span>月額</span><b>5,500</b><span>円（税込）</span></div>
+      <ul class="ck">
+        <li>WordPressの更新管理</li><li>セキュリティ対策</li>
+        <li>バックアップ（定期保存）</li><li>アクセス解析の確認</li>
+        <li>文章の修正（軽微なもの）</li><li>Googleマップ更新サポート</li>
+        <li>画像の差し替え</li><li>操作方法のサポート</li>
+      </ul>
+    </div>
+    <div class="box pad">
+      <h3>WordPressの修正だけでもOK</h3>
+      <div class="price-l"><span>1か所</span><b>3,300</b><span>円〜（税込）</span></div>
+      <h3 style="margin-top:2.6mm">さらにこんなことも</h3>
+      <div class="tags"><span>写真撮影</span><span>原稿作成（文章サポート）</span><span>Googleマップ登録サポート</span><span>アクセス解析・改善提案</span><span>スタッフブログ更新代行</span><span>チラシ・名刺などのデザイン</span></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- AI MOVIE -->
+<div class="sec">
+  <div class="sh"><span class="no">02  AI MOVIE</span><h2>AI動画作成（リール）</h2><span class="sub">縦型・15秒前後／ナレーション・字幕・BGM入り</span></div>
+  <div class="ap">
+    <div><span>1本</span><b>9,800<i>円</i></b></div>
+    <div class="hl"><span>3本</span><b>24,800<i>円</i></b></div>
+    <div><span>毎月4本</span><b><i style="margin:0 .6mm 0 0">月</i>29,800<i>円</i></b></div>
+  </div>
+  <div class="two" style="margin-top:0;grid-template-columns:1fr 1fr 1fr">
+    <div class="box pad">
+      <h3>ご用意いただくもの</h3>
+      <ul class="ck one">
+        <li>写真5〜10枚（スマホ縦向きでOK）<br><span style="color:#a9b6d8;font-size:2.6mm">外観・店内・看板メニューや商品など</span></li>
+        <li>店名（読み方も）</li>
+        <li>営業時間・定休日・予約方法</li>
+        <li>いちばん伝えたいこと</li>
+      </ul>
+    </div>
+    <div class="box pad">
+      <h3>写真がないときは</h3>
+      <ul class="ck one">
+        <li>AIの「イメージ写真」で補えます<br><span style="color:#a9b6d8;font-size:2.6mm">5枚まで無料、6枚目から1枚550円。動画に「※写真はイメージです」と表示します</span></li>
+        <li>撮影代行もできます<br><span style="color:#a9b6d8;font-size:2.6mm">鹿児島県内のみ・別途お見積り</span></li>
+      </ul>
+    </div>
+    <div class="box pad">
+      <h3>料金について</h3>
+      <ul class="ck one">
+        <li>最短3営業日でお届け</li>
+        <li>軽い修正は2回まで無料<br><span style="color:#a9b6d8;font-size:2.6mm">文字・色・順番の修正</span></li>
+        <li>毎月プランは契約期間の縛りなし<br><span style="color:#a9b6d8;font-size:2.6mm">毎月25日までのご連絡で翌月から停止</span></li>
+        <li>お支払いは銀行振込（制作開始前）</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- QA -->
+<div class="sec">
+  <div class="sh"><span class="no">03  Q&amp;A</span><h2>よくあるご質問</h2></div>
+  <div class="box qa">
+    <div><p class="q">サーバーやドメインはどうなりますか？</p><p class="a">お客さまの名義で取得します。取得方法もサポートします。</p></div>
+    <div><p class="q">月額管理は必ず必要ですか？</p><p class="a">必須ではありません。ご希望の方だけご利用いただけます。</p></div>
+    <div><p class="q">自分で更新できますか？</p><p class="a">はい。操作方法もサポートしますので、はじめての方も安心です。</p></div>
+    <div><p class="q">写真や文章を用意できないのですが？</p><p class="a">写真撮影・原稿作成のサポートもできます。ご相談ください。</p></div>
+  </div>
+</div>
+
+<div class="ft">
+  <div class="info">
+    <div class="co">合同会社turtle ad（タートルアド）</div>
+    <div class="tel"><small>お電話</small><strong>099-210-3511</strong></div>
+    <div class="sub">受付 9:00〜18:00（土日祝休み）／ご相談・お見積りは無料<br>LINE @486zunqz ｜ turtle-ad.com ｜ 〒891-0109 鹿児島市清和3-25-15</div>
+  </div>
+  <div class="qrs">
+    <div class="qr line"><div class="bx"><img src="qr_line.svg" alt=""></div><p>LINEで相談</p></div>
+    <div class="qr"><div class="bx"><img src="qr_web.svg" alt=""></div><p>ホームページ</p></div>
+  </div>
+</div>
+
+</div></div></body></html>
