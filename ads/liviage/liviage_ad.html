@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<title>リビアジェ 広告原稿</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@500;700;900&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* 1.5枠 180 x 88mm（仕上がり） */
+@page{size:180mm 88mm;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:180mm;height:88mm}
+body{font-family:'Noto Sans JP',sans-serif;color:#2b1d16;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.ad{position:relative;width:180mm;height:88mm;overflow:hidden;background:#fbf6ee;border:.35mm solid #c9b8a4}
+
+/* left */
+.l{position:absolute;left:0;top:0;bottom:0;width:116mm;padding:5mm 5mm 0 6mm}
+.kicker{display:inline-block;font-size:2.9mm;font-weight:700;letter-spacing:.08em;color:#fff;background:#c4472b;padding:.8mm 3mm;border-radius:4mm}
+.name{margin-top:1.6mm;font-family:'Zen Maru Gothic',sans-serif;font-weight:900;font-size:13.5mm;line-height:1;letter-spacing:.06em;color:#c4472b}
+.catch{margin-top:2.2mm;font-family:'Zen Maru Gothic',sans-serif;font-weight:700;font-size:4.5mm;line-height:1.45;color:#4a3427}
+.catch em{font-style:normal;background:linear-gradient(transparent 62%,#f6d9a8 62%)}
+.svc{margin-top:3.4mm;display:grid;grid-template-columns:repeat(6,1fr);gap:1.6mm}
+.svc span{grid-column:span 2;display:flex;align-items:center;justify-content:center;height:8.4mm;border-radius:2mm;background:#fff;border:.35mm solid #e2b774;
+  font-weight:900;font-size:3.75mm;color:#2f3a62;letter-spacing:.02em;box-shadow:0 .5mm 0 #e9cf9f}
+.svc span.w{grid-column:span 3}
+
+/* phone band */
+.tel{position:absolute;left:0;right:0;bottom:0;height:19mm;background:#c4472b;display:flex;align-items:center;padding:0 6mm;gap:3mm}
+.tel .lb{flex:none;white-space:nowrap;color:#fff;font-size:2.8mm;font-weight:700;line-height:1.35;border:.3mm solid rgba(255,255,255,.7);border-radius:1.4mm;padding:1mm 1.8mm;text-align:center}
+.tel .num{display:flex;align-items:center;gap:1.6mm;white-space:nowrap;color:#fff;font-family:'Outfit',sans-serif;font-weight:700;font-size:10.6mm;letter-spacing:.01em;line-height:1}
+.tel .num svg{width:7mm;height:7mm;flex:none}
+.tel .addr{margin-left:auto;min-width:0;color:#fff;font-size:2.8mm;line-height:1.5;text-align:right}
+.tel .addr b{display:block;font-size:2.4mm;font-weight:700;opacity:.85;letter-spacing:.1em}
+
+/* right */
+.r{position:absolute;right:0;top:0;width:64mm;bottom:19mm;padding:4.5mm 5mm 0 0}
+.face{position:absolute;right:30mm;top:6mm;width:30mm;height:44mm;border-radius:3mm;border:.4mm dashed #c9a27a;background:rgba(255,255,255,.6);
+  display:flex;align-items:center;justify-content:center;text-align:center;font-size:2.6mm;color:#9a7b5d;line-height:1.5}
+.qrs{position:absolute;right:5mm;top:5mm;display:flex;flex-direction:column;gap:2.2mm}
+.qr{display:flex;flex-direction:column;align-items:center;width:22mm}
+.qr .bx{width:19mm;height:19mm;background:#fff;border-radius:1.6mm;padding:1.4mm;border:.3mm solid #d9c8b4}
+.qr .bx img{width:100%;height:100%;display:block}
+.qr p{margin-top:.8mm;font-size:2.5mm;font-weight:900;color:#4a3427;letter-spacing:.04em}
+.ph{background:rgba(255,220,90,.35);outline:.35mm dashed #d4a017;border-radius:.8mm;padding:0 .8mm;color:#7a5600}
+.qr .bx.ph{display:flex;align-items:center;justify-content:center;font-size:2.4mm;text-align:center;line-height:1.4;padding:1mm}
+</style></head>
+<body><div class="ad">
+  <div class="l">
+    <span class="kicker">遺品整理・生前整理のご相談</span>
+    <div class="name">リビアジェ</div>
+    <p class="catch">大切な品々、<em>想いと一緒に</em>お預かりします。</p>
+    <div class="svc">
+      <span>遺品整理</span><span>生前整理</span><span>特殊清掃</span>
+      <span class="w">空き家整理・管理</span><span class="w">ゴミ屋敷片付け</span>
+    </div>
+  </div>
+
+  <div class="r">
+    <div class="face">似顔絵<br>（元データを<br>差し込み）</div>
+    <div class="qrs">
+      <div class="qr"><div class="bx"><img src="qr_web.svg" alt=""></div><p>ホームページ</p></div>
+      <div class="qr"><div class="bx ph">Instagram<br>QR</div><p>Instagram</p></div>
+    </div>
+  </div>
+
+  <div class="tel">
+    <div class="lb">ご相談・<br>お問い合わせ</div>
+    <div class="num"><svg viewBox="0 0 24 24" fill="#fff"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>080-9142-2824</div>
+    <div class="addr"><b>ADDRESS</b><span class="ph" style="color:#fff;background:rgba(255,220,90,.25)">〒◯◯◯-◯◯◯◯<br>志布志市◯◯◯◯</span></div>
+  </div>
+</div></body></html>
