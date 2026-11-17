@@ -1,0 +1,283 @@
+<title>業種別 AI活用ガイド</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&display=swap">
+<style>
+/* Layout: 縦に読む一枚の案内書。上で全体像、業種チップで目的の業種へ、各業種は「困りごと→AIでできること」のカード */
+:root{
+  --bg:#f5f8f8;
+  --surface:#ffffff;
+  --ink:#16302e;
+  --muted:#5b7270;
+  --line:#d8e3e2;
+  --accent:#0f766e;
+  --accent-soft:#e1f1ef;
+  --sun:#f2b632;
+  --sun-soft:#fdf3d9;
+  --font-display:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;
+  --font-body:"Noto Sans JP","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1a19;--surface:#152523;--ink:#e3eeec;--muted:#9bb2af;--line:#26403d;
+    --accent:#4fc1b4;--accent-soft:#163a36;--sun:#f2c45a;--sun-soft:#3a3018;color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1a19;--surface:#152523;--ink:#e3eeec;--muted:#9bb2af;--line:#26403d;
+  --accent:#4fc1b4;--accent-soft:#163a36;--sun:#f2c45a;--sun-soft:#3a3018;color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:15px;line-height:1.75;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 56px}
+.wrap{max-width:880px;margin:0 auto}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;line-height:1.35;margin:0}
+p{margin:0}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+header.hero{padding-block:40px 28px;display:grid;gap:14px}
+.eyebrow{font-size:12px;letter-spacing:.12em;color:var(--accent);font-weight:700}
+h1{font-size:clamp(28px,6vw,40px);font-weight:900}
+.lead{color:var(--muted);max-width:62ch}
+
+.promise{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:8px}
+.promise div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;min-width:0}
+.promise b{display:block;font-family:var(--font-display);font-size:16px;margin-bottom:2px}
+.promise span{color:var(--muted);font-size:13px}
+
+nav.chips{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);margin-bottom:8px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.chiprow{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.chiprow::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 14px;font:500 13px var(--font-body);cursor:pointer;white-space:nowrap}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+
+section.block{padding-block:28px 4px;display:grid;gap:14px}
+.block h2{font-size:22px;font-weight:900;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.block h2 small{font:500 13px var(--font-body);color:var(--muted)}
+.pain{background:var(--sun-soft);border-radius:10px;padding:12px 16px;font-size:14px}
+.pain b{font-family:var(--font-display);margin-right:6px}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;gap:6px;align-content:start;min-width:0}
+.card h3{font-size:16px;font-weight:700}
+.card p{color:var(--muted);font-size:14px}
+.tag{justify-self:start;font-size:11px;font-weight:700;letter-spacing:.04em;border-radius:999px;padding:2px 10px}
+.tag.easy{background:var(--accent-soft);color:var(--accent)}
+.tag.mid{background:var(--sun-soft);color:var(--ink)}
+.tag.ad{background:var(--accent);color:var(--surface)}
+
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);align-items:center}
+
+.steps{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:4px;min-width:0}
+.step .n{font-family:var(--font-display);font-weight:900;font-size:28px;color:var(--accent);line-height:1}
+.step h3{font-size:16px}
+.step p{color:var(--muted);font-size:14px}
+
+.ask{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.ask ul{margin:0;padding-left:1.2em;display:grid;gap:4px}
+
+footer{margin-top:36px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;display:grid;gap:4px}
+footer b{color:var(--ink);font-family:var(--font-display);font-size:15px}
+[hidden]{display:none!important}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+
+<div class="wrap">
+<header class="hero">
+  <div class="eyebrow">合同会社turtle ad ／ AI活用のご相談資料</div>
+  <h1>業種別・AIでできること一覧</h1>
+  <p class="lead">「AIで何ができるのか分からない」という方のために、業種ごとのよくある困りごとと、AIで手伝えることの例をまとめました。実際に使えるかどうかはお仕事の中身で変わるため、まずはお話を伺い、合うものから小さく試すことをおすすめしています。</p>
+  <div class="promise">
+    <div><b>広告×AIが得意分野</b><span>動画・チラシ・ホームページ・SNSなど、集客まわりのAI活用を中心にお手伝いします</span></div>
+    <div><b>それ以外もご相談ください</b><span>事務・接客・社内の作業など、困りごとを伺ってAIで手伝えるか一緒に考えます</span></div>
+    <div><b>全国どこでもオンライン</b><span>鹿児島を拠点に、打ち合わせ・導入・使い方の説明までオンラインで対応します</span></div>
+  </div>
+</header>
+
+<nav class="chips" aria-label="業種で絞り込む">
+  <div class="chiprow" id="chiprow">
+    <button class="chip" type="button" data-f="all" aria-pressed="true">すべて</button>
+    <button class="chip" type="button" data-f="common" aria-pressed="false">全業種共通</button>
+    <button class="chip" type="button" data-f="food" aria-pressed="false">飲食店</button>
+    <button class="chip" type="button" data-f="retail" aria-pressed="false">小売・特産品</button>
+    <button class="chip" type="button" data-f="tour" aria-pressed="false">観光・宿泊</button>
+    <button class="chip" type="button" data-f="beauty" aria-pressed="false">美容・サロン</button>
+    <button class="chip" type="button" data-f="care" aria-pressed="false">医療・介護</button>
+    <button class="chip" type="button" data-f="build" aria-pressed="false">建設・不動産</button>
+    <button class="chip" type="button" data-f="agri" aria-pressed="false">農業・水産・食品</button>
+    <button class="chip" type="button" data-f="office" aria-pressed="false">士業・事務所</button>
+    <button class="chip" type="button" data-f="maker" aria-pressed="false">製造業</button>
+    <button class="chip" type="button" data-f="school" aria-pressed="false">教室・スクール</button>
+  </div>
+</nav>
+
+<div class="legend" aria-label="目印の説明">
+  <span class="tag easy">すぐ始められる</span>今ある道具で数日〜で試せる
+  <span class="tag mid">準備が必要</span>データ整理や仕組みづくりが要る
+  <span class="tag ad">広告×AI</span>turtle adが特に得意な分野
+</div>
+
+<section class="block" data-k="common">
+  <h2>全業種共通 <small>どの会社でも効果が出やすいもの</small></h2>
+  <p class="pain"><b>よくある困りごと</b>文書づくりに時間がかかる／問い合わせ対応で手が止まる／SNSや広告まで手が回らない</p>
+  <div class="cards">
+    <div class="card"><span class="tag easy">すぐ始められる</span><h3>文書・メールの下書き</h3><p>見積もりの添え状、お知らせ文、お詫びメールなどをAIが下書き。人は確認して直すだけにします。</p></div>
+    <div class="card"><span class="tag easy">すぐ始められる</span><h3>会議・打ち合わせのまとめ</h3><p>録音から議事録と「決まったこと・やること」の一覧を自動で作ります。</p></div>
+    <div class="card"><span class="tag mid">準備が必要</span><h3>よくある質問への自動回答</h3><p>ホームページやLINEで、営業時間・料金・予約方法などの定番の質問にAIが答えます。</p></div>
+    <div class="card"><span class="tag ad">広告×AI</span><h3>SNS投稿・リール動画づくり</h3><p>投稿文、画像、短い動画をAIで作り、予約投稿まで自動化。毎日の更新の手間を減らします。</p></div>
+    <div class="card"><span class="tag easy">すぐ始められる</span><h3>翻訳・外国語対応</h3><p>メニュー、案内文、問い合わせの返信を英語・中国語・韓国語などに。インバウンド対応に。</p></div>
+    <div class="card"><span class="tag mid">準備が必要</span><h3>社内マニュアル・引き継ぎ</h3><p>ベテランの手順を聞き取って手順書に。新人がAIに質問しながら覚えられる形にもできます。</p></div>
+  </div>
+</section>
+
+<section class="block" data-k="food">
+  <h2>飲食店</h2>
+  <p class="pain"><b>よくある困りごと</b>人手不足／新メニューの告知が続かない／口コミへの返信が追いつかない</p>
+  <div class="cards">
+    <div class="card"><span class="tag ad">広告×AI</span><h3>メニュー写真から告知動画</h3><p>料理の写真数枚から、インスタ用のリールや店頭モニター用の動画を作ります。</p></div>
+    <div class="card"><span class="tag easy">すぐ始められる</span><h3>口コミへの返信文</h3><p>Googleマップなどの口コミに、お店らしい言葉づかいで返信の下書きを作ります。</p></div>
+    <div class="card"><span class="tag easy">すぐ始められる</span><h3>多言語メニュー</h3><p>日本語メニューから英語・中国語版を作成。料理の説明文もそえられます。</p></div>
+    <div class="card"><span class="tag mid">準備が必要</span><h3>仕入れ・仕込み量の目安</h3><p>過去の売上と曜日・天気から、仕込み量の目安を出してロスを減らします。</p></div>
+  </div>
+</section>
+
+<section class="block" data-k="retail">
+  <h2>小売・特産品・ネット販売</h2>
+  <p class="pain"><b>よくある困りごと</b>商品説明を書くのが大変／ネットショップの更新が止まる／県外への知名度が低い</p>
+  <div class="cards">
+    <div class="card"><span class="tag easy">すぐ始められる</span><h3>商品説明文の作成</h3><p>商品の特徴を数行伝えるだけで、ネットショップ用の説明文やキャッチコピーを作ります。</p></div>
+    <div class="card"><span class="tag ad">広告×AI</span><h3>商品紹介動画・広告画像</h3><p>商品写真から紹介動画やバナー広告を作成。県外向けのネット広告に使えます。</p></div>
+    <div class="card"><span class="tag ad">広告×AI</span><h3>ギフト・季節の売り場づくり</h3><p>お中元・お歳暮・ふるさと納税向けの特集ページやチラシを短期間で用意します。</p></div>
+    <div class="card"><span class="tag mid">準備が必要</span><h3>在庫・売れ筋の見える化</h3><p>販売データを整理し、売れ筋や発注のタイミングをAIがまとめて知らせます。</p></div>
+  </div>
+</section>
+
+<section class="block" data-k="tour">
+  <h2>観光・宿泊</h2>
+  <p class="pain"><b>よくある困りごと</b>外国人のお客様への対応／予約サイトごとの更新作業／閑散期の集客</p>
+  <div class="cards">
+    <div class="card"><span class="tag mid">準備が必要</span><h3>多言語の問い合わせ対応</h3><p>メールやチャットの問い合わせを翻訳し、返信案まで作ります。夜間の一次対応にも。</p></div>
+    <div class="card"><span class="tag ad">広告×AI</span><h3>周辺観光の紹介動画</h3><p>宿や地域の魅力を短い動画にまとめ、SNSや予約ページで発信します。</p></div>
+    <div class="card"><span class="tag easy">すぐ始められる</span><h3>プラン・館内案内の文章</h3><p>宿泊プランの説明、館内案内、周辺のおすすめ情報を多言語で作ります。</p></div>
+    <div class="card"><span class="tag easy">すぐ始められる</span><h3>口コミの分析</h3><p>たくさんの口コミから、ほめられている点・不満の多い点をまとめて改善に生かします。</p></div>
+  </div>
+</section>
+
+<section class="block" data-k="beauty">
+  <h2>美容・サロン</h2>
+  <p class="pain"><b>よくある困りごと</b>施術中は電話に出られない／インスタ更新の負担／リピートにつながらない</p>
+  <div class="cards">
+    <div class="card"><span class="tag ad">広告×AI</span><h3>ビフォーアフター投稿</h3><p>施術写真から投稿文・ハッシュタグ・短い動画を作り、更新を続けやすくします。</p></div>
+    <div class="card"><span class="tag mid">準備が必要</span><h3>LINEの予約・質問の自動対応</h3><p>空き状況や料金の質問にAIが答え、予約の受付を手伝います。</p></div>
+    <div class="card"><span class="tag easy">すぐ始められる</span><h3>来店後のお礼・再来店のご案内</h3><p>お客様ごとに文面を変えたお礼メッセージや、次回来店のご案内を作ります。</p></div>
+  </div>
+</section>
+
+<section class="block" data-k="care">
+  <h2>医療・介護・福祉</h2>
+  <p class="pain"><b>よくある困りごと</b>記録や書類の作業が多い／職員の採用が難しい／家族への連絡の負担</p>
+  <div class="cards">
+    <div class="card"><span class="tag mid">準備が必要</span><h3>記録・日誌の下書き</h3><p>職員が話した内容から、介護記録や日誌の下書きを作ります（個人情報の扱いを決めた上で導入します）。</p></div>
+    <div class="card"><span class="tag ad">広告×AI</span><h3>求人動画・採用ページ</h3><p>職場の雰囲気が伝わる求人動画や採用ページを作り、応募につなげます。</p></div>
+    <div class="card"><span class="tag easy">すぐ始められる</span><h3>お知らせ・おたよりづくり</h3><p>ご家族向けのおたより、掲示物、行事の案内をすばやく作ります。</p></div>
+  </div>
+</section>
+
+<section class="block" data-k="build">
+  <h2>建設・リフォーム・不動産</h2>
+  <p class="pain"><b>よくある困りごと</b>見積もり・書類づくりに追われる／施工事例を発信できていない／物件紹介の手間</p>
+  <div class="cards">
+    <div class="card"><span class="tag easy">すぐ始められる</span><h3>見積書・提案書の下書き</h3><p>過去の書式に合わせて、見積もりの説明文や提案書のたたき台を作ります。</p></div>
+    <div class="card"><span class="tag ad">広告×AI</span><h3>施工事例・物件の紹介動画</h3><p>現場写真から施工事例の投稿や、物件紹介の動画・チラシを作ります。</p></div>
+    <div class="card"><span class="tag easy">すぐ始められる</span><h3>現場日報・安全書類のまとめ</h3><p>現場からの音声メモを日報の形に整え、写真と一緒に整理します。</p></div>
+  </div>
+</section>
+
+<section class="block" data-k="agri">
+  <h2>農業・水産・食品加工</h2>
+  <p class="pain"><b>よくある困りごと</b>直販や加工品の販路づくり／ラベル・表示の作業／作業記録が手書きのまま</p>
+  <div class="cards">
+    <div class="card"><span class="tag ad">広告×AI</span><h3>生産者の想いを伝える動画</h3><p>畑や漁の様子から、商品のストーリー動画を作ってネット販売やSNSで発信します。</p></div>
+    <div class="card"><span class="tag easy">すぐ始められる</span><h3>商品ページ・ギフト案内</h3><p>産直サイトやふるさと納税用の商品説明、季節の案内文を作ります。</p></div>
+    <div class="card"><span class="tag mid">準備が必要</span><h3>作業記録のデジタル化</h3><p>スマホで話すだけで作業記録をつけ、出荷や収穫の振り返りに使えるようにします。</p></div>
+  </div>
+</section>
+
+<section class="block" data-k="office">
+  <h2>士業・事務所・オフィス</h2>
+  <p class="pain"><b>よくある困りごと</b>定型の書類が多い／問い合わせの一次対応／専門的な内容を分かりやすく伝えたい</p>
+  <div class="cards">
+    <div class="card"><span class="tag easy">すぐ始められる</span><h3>書類の下書き・チェック</h3><p>定型の文書を下書きし、抜けやすい項目の確認を手伝います（最終判断は専門家が行います）。</p></div>
+    <div class="card"><span class="tag easy">すぐ始められる</span><h3>やさしい解説コンテンツ</h3><p>制度や手続きを、お客様向けのやさしい記事・動画にして発信します。</p></div>
+    <div class="card"><span class="tag mid">準備が必要</span><h3>受付・問い合わせの振り分け</h3><p>メールやフォームの内容をAIが読み、担当や緊急度ごとに振り分けます。</p></div>
+  </div>
+</section>
+
+<section class="block" data-k="maker">
+  <h2>製造業</h2>
+  <p class="pain"><b>よくある困りごと</b>技術の伝え方が難しい／技能の引き継ぎ／取引先向け資料づくり</p>
+  <div class="cards">
+    <div class="card"><span class="tag mid">準備が必要</span><h3>作業手順書・教育動画</h3><p>熟練者の作業を撮影・聞き取りして、手順書や新人教育用の動画にまとめます。</p></div>
+    <div class="card"><span class="tag ad">広告×AI</span><h3>会社・製品の紹介動画</h3><p>工場や製品の強みを短い動画にして、展示会や採用、取引先への提案に使います。</p></div>
+    <div class="card"><span class="tag easy">すぐ始められる</span><h3>見積もり・仕様書の整理</h3><p>問い合わせ内容から必要な情報を抜き出し、見積もりの準備を早めます。</p></div>
+  </div>
+</section>
+
+<section class="block" data-k="school">
+  <h2>教室・スクール・習いごと</h2>
+  <p class="pain"><b>よくある困りごと</b>生徒募集／教材づくりの手間／保護者への連絡</p>
+  <div class="cards">
+    <div class="card"><span class="tag ad">広告×AI</span><h3>体験レッスンの集客動画</h3><p>教室の雰囲気が伝わる動画やチラシで、体験の申込みにつなげます。</p></div>
+    <div class="card"><span class="tag easy">すぐ始められる</span><h3>教材・問題づくり</h3><p>レベルに合わせた練習問題やプリントをAIで作ります。</p></div>
+    <div class="card"><span class="tag easy">すぐ始められる</span><h3>保護者へのお知らせ</h3><p>月ごとのおたよりや連絡文を、すばやく丁寧に作ります。</p></div>
+  </div>
+</section>
+
+<section class="block" id="flow">
+  <h2>ご相談の進め方</h2>
+  <div class="steps">
+    <div class="step"><span class="n">1</span><h3>お話を伺う</h3><p>オンラインで30分ほど。今の仕事の流れと、困っていることを伺います。</p></div>
+    <div class="step"><span class="n">2</span><h3>合うものを選ぶ</h3><p>効果が出やすく、始めやすいものから1〜2個を一緒に選びます。</p></div>
+    <div class="step"><span class="n">3</span><h3>小さく試す</h3><p>まず短い期間で試し、手間が減ったか・成果が出たかを確かめます。</p></div>
+    <div class="step"><span class="n">4</span><h3>使い続けられる形に</h3><p>社内の方が自分で使えるよう、手順書づくりや使い方の説明までお手伝いします。</p></div>
+  </div>
+</section>
+
+<section class="block">
+  <h2>最初のお打ち合わせで伺いたいこと</h2>
+  <div class="ask">
+    <ul>
+      <li>どんなお仕事で、何人くらいで回していますか</li>
+      <li>一番時間がかかっている作業、面倒だと感じている作業は何ですか</li>
+      <li>お客様を増やしたいのか、社内の手間を減らしたいのか、どちらを優先したいですか</li>
+      <li>今使っている道具（LINE、Instagram、Excel、予約システムなど）</li>
+      <li>ご予算と、いつまでに形にしたいか</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <b>合同会社turtle ad（タートルアド）</b>
+  <span>広告・AI動画制作・ホームページ制作・AI活用のサポート</span>
+  <span>ここに載っているのは一例です。効果や導入期間はお仕事の内容によって変わります。</span>
+</footer>
+</div>
+
+<script>
+(function(){
+  var chips=document.querySelectorAll('.chip');
+  var blocks=document.querySelectorAll('section.block[data-k]');
+  function apply(f){
+    chips.forEach(function(c){c.setAttribute('aria-pressed',String(c.dataset.f===f));});
+    blocks.forEach(function(b){b.hidden=!(f==='all'||b.dataset.k===f||(b.dataset.k==='common'&&f!=='all'&&false));});
+    try{localStorage.setItem('aiuse-filter',f);}catch(e){}
+  }
+  chips.forEach(function(c){c.addEventListener('click',function(){apply(c.dataset.f);window.scrollTo({top:document.querySelector('nav.chips').offsetTop,behavior:'smooth'});});});
+  var saved='all';try{saved=localStorage.getItem('aiuse-filter')||'all';}catch(e){}
+  apply(saved);
+})();
+</script>
