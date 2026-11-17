@@ -660,7 +660,7 @@ html{scroll-behavior:smooth}body{-webkit-font-smoothing:antialiased;text-renderi
         '<div><h4>デザイン</h4>'+list(des)+'<h4 style="margin-top:16px">プランに含まれるもの</h4>'+list(P.inc)+'</div>'+
         '<div><h4>このデモで動く機能</h4>'+list(feats)+(cur===3?'<p style="margin-top:10px">お知らせ・ブログは、納品後にWordPressの管理画面からお客様ご自身で更新でき、テロップにも自動で表示されます。</p>':'')+'<p style="margin-top:10px">Instagram投稿の表示には、お客様のアカウントの接続条件の確認が必要です。</p></div>'+
         '<div class="opt"><h4>別途お見積りになるもの（オレンジのラベル）</h4>'+list(cfg.opts.concat(['写真撮影','原稿（文章）作成']))+
-        '<p style="margin-top:12px">公開後の更新は、月額管理プラン 5,500円（税込）／月（任意）で承ります。サーバー・ドメイン費用は別途実費です。</p>'+
+        '<p style="margin-top:12px">制作費とは別に、月額5,500円（税込）のご契約が必要です。ドメイン・サーバー代込みで、更新・バックアップ・文章の軽い修正・画像の差し替えなどを承ります。24か月未満で解約される場合は、5,500円×残りの月数をいただきます。</p>'+
         '<label><input type="checkbox" id="tad-hide"'+(html.classList.contains('tad-nolab')?' checked':'')+'> ページ上のラベルを隠す</label></div>'+
       '</div>';
       document.getElementById('tad-hide').addEventListener('change',function(e){html.classList.toggle('tad-nolab',e.target.checked);});
