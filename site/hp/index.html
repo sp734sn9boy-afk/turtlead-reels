@@ -115,6 +115,8 @@
   .plans{gap:8px}
   .pl{padding:20px 4px 14px}
   .pl-name{font-size:14px}
+  .pl-price{font-size:clamp(19px,5.6vw,24px)}
+  .pl-price span{font-size:11px}
   .costs dl{grid-template-columns:minmax(0,1fr)}
   .costs dt{padding:12px 6px 0;border-bottom:0}
   .costs dd{padding:2px 6px 12px}
@@ -310,7 +312,7 @@
       <p class="pl-pages">TOP＋<br>6〜8ページ</p>
     </div>
   </div>
-  <p class="inc">どのプランも<em>スマホ対応</em>・<em>お問い合わせフォーム</em>込み</p>
+  <p class="inc">どのプランも<span style="white-space:nowrap"><em>スマホ対応</em>・</span><span style="white-space:nowrap"><em>お問い合わせフォーム</em>込み</span></p>
   <div class="costs">
     <h3>追加でかかる費用も、先にお見せします</h3>
     <dl>
@@ -327,7 +329,7 @@
 <!-- 5. 信用・流れ・よくある不安 -->
 <section class="sec" id="about"><div class="wrap">
   <p class="sec-no">ABOUT</p>
-  <h2 class="h2">鹿児島の、地域情報誌の会社です</h2>
+  <h2 class="h2">鹿児島の、<br>地域情報誌の会社です</h2>
   <div class="trust">
     <div class="card co">
       <p class="lead">地域情報誌「マイタウンガイド」と、求人誌「マイタウンジョブ」を発行している会社です。</p>
@@ -366,7 +368,7 @@
 <section class="sec" id="contact"><div class="wrap">
   <p class="sec-no">CONTACT</p>
   <h2 class="h2">無料見本・ご相談のお申し込み</h2>
-  <p class="txt">入力は1分ほどです。ご相談・お見積もりは無料です。</p>
+  <p class="txt">入力は4項目だけ。ご相談・お見積もりは無料です。</p>
   <div class="form-wrap">
     <div class="card">
       <form class="cf" id="cf" novalidate>
