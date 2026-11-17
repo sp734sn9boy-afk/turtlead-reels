@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>マイホームガイド電子ブック｜合同会社turtle ad</title>
+<meta name="description" content="マイホームガイドの電子ブックです。">
+<!-- 公開前の確認用：検索に出ないようにしています。公開するときはこの1行を消してください -->
+<meta name="theme-color" content="#050913">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/sub.css">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+.mh-gallery{max-width:850px;margin:0 auto}
+.mh-intro{text-align:center;color:var(--sub);margin-bottom:30px}
+.mh-cards{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.mh-card{display:block;text-align:center;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;transition:border-color .2s,transform .2s}
+.mh-card:hover{border-color:var(--cyan);transform:translateY(-3px)}
+.mh-card img{width:100%;max-width:290px;height:auto;margin:0 auto;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.mh-card h2{font-family:var(--en);font-size:24px;margin:18px 0 4px}
+.mh-card p{font-size:14px;color:var(--muted);margin-bottom:14px}
+.mh-read{display:inline-block;padding:11px 24px;border-radius:30px;background:linear-gradient(90deg,var(--cyan),#a9c0ff);color:#04101c;font-weight:700}
+.mh-note{font-size:14px;color:var(--muted);text-align:center;margin-top:24px;line-height:1.9}
+.mh-panel{display:none;scroll-margin-top:80px}
+.mh-panel:target{display:block}
+.mh-panel:target ~ .mh-gallery{display:none}
+.mh-panel iframe{display:block;border:0;width:100%;height:100vh;min-height:760px;border-radius:10px;background:#eef1ed}
+.mh-back{display:inline-flex;margin-bottom:14px}
+@media (max-width:600px){.mh-cards{gap:12px}.mh-card{padding:12px 8px}.mh-card h2{font-size:19px}.mh-card p{font-size:12px}.mh-read{font-size:13px;padding:9px 12px}}
+</style>
+
+<link rel="icon" href="../favicon.ico?v=2" sizes="16x16 32x32 48x48"><link rel="apple-touch-icon" href="../images/logo/apple-touch-icon.png?v=2"><link rel="manifest" href="../site.webmanifest">
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@800&amp;text=turtle%20ad&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/logo.css">
+</head>
+<body>
+<svg class="bg-lines" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
+  <defs><linearGradient id="bgl" x1="0" x2="1"><stop offset="0" stop-color="#4fe3ff" stop-opacity="0"/><stop offset=".5" stop-color="#4fe3ff" stop-opacity=".22"/><stop offset="1" stop-color="#4fe3ff" stop-opacity="0"/></linearGradient></defs>
+  <path stroke="url(#bgl)" d="M-50 760C320 640 560 860 860 680S1260 440 1500 500"/>
+  <path stroke="url(#bgl)" d="M-50 200C300 110 600 300 900 170S1300 70 1500 120"/>
+</svg>
+<header class="hd">
+  <a class="logo" href="../index.html" aria-label="合同会社turtle ad トップへ">
+    <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><polygon points="50,6 88.1,28 88.1,72 50,94 11.9,72 11.9,28" fill="#0D3A34" stroke="#3CD6F0" stroke-width="3" stroke-linejoin="round"/><polygon points="50,32 65.6,41 65.6,59 50,68 34.4,59 34.4,41" fill="none" stroke="#3CD6F0" stroke-width="2.5" stroke-linejoin="round"/><path d="M50 6 L50 32 M88.1 28 L65.6 41 M88.1 72 L65.6 59 M50 94 L50 68 M11.9 72 L34.4 59 M11.9 28 L34.4 41" stroke="#3CD6F0" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.8"/><circle class="lm-dot" cx="50" cy="32" r="3" fill="#fff"/><circle class="lm-dot" cx="65.6" cy="41" r="3" fill="#fff"/><circle class="lm-dot" cx="65.6" cy="59" r="3" fill="#fff"/><circle class="lm-dot" cx="50" cy="68" r="3" fill="#fff"/><circle class="lm-dot" cx="34.4" cy="59" r="3" fill="#fff"/><circle class="lm-dot" cx="34.4" cy="41" r="3" fill="#fff"/><circle cx="50" cy="50" r="5" fill="#3CD6F0"/></svg>
+    <span class="logo-word">turtle <b>ad</b></span>
+  </a>
+  <nav class="nav" aria-label="メニュー">
+    <a href="../index.html#business">事業紹介</a>
+    <a href="../index.html#web">ホームページ料金</a>
+    <a href="../index.html#company">会社概要</a>
+    <a class="btn" href="../index.html#contact">お問い合わせ</a>
+  </nav>
+</header>
+<main>
+<section class="page-hd"><div class="wrap">
+  <p class="crumb"><a href="../index.html">トップ</a> ／ マイホームガイド 電子ブック</p>
+  <p class="page-en">MY HOME GUIDE · E-BOOKS</p>
+  <h1 class="page-title">マイホームガイド電子ブック</h1>
+  
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <section id="vol5" class="mh-panel" aria-label="マイホームガイド vol.5">
+    <a class="lk mh-back" href="./">← 表紙の一覧へ戻る</a>
+    <iframe loading="lazy" title="マイホームガイド vol.5 電子ブック" src="vol5.html"></iframe>
+  </section>
+  <section id="vol4" class="mh-panel" aria-label="マイホームガイド vol.4">
+    <a class="lk mh-back" href="./">← 表紙の一覧へ戻る</a>
+    <iframe loading="lazy" title="マイホームガイド vol.4 電子ブック" src="vol4.html"></iframe>
+  </section>
+  <div class="mh-gallery">
+    <p class="mh-intro">家づくりのヒントを、誌面のまま。<br>表紙を選ぶと、電子ブックをお読みいただけます。</p>
+    <div class="mh-cards">
+      <a class="mh-card" href="#vol5"><img src="../images/myhome/myhome-vol5-cover.jpg" alt="マイホームガイド vol.5 表紙" loading="lazy"><h2>vol.5</h2><p>2026年7月発行・全16ページ</p><span class="mh-read">電子ブックを読む →</span></a>
+      <a class="mh-card" href="#vol4"><img src="../images/myhome/myhome-vol4-cover.jpg" alt="マイホームガイド vol.4 表紙" loading="lazy"><h2>vol.4</h2><p>2026年2月発行・全16ページ</p><span class="mh-read">電子ブックを読む →</span></a>
+    </div>
+    <p class="mh-note">パソコンでは見開き、スマートフォンでは1ページずつ表示します。<br>ページめくり・拡大・ページ選択に対応しています。<br>掲載内容は各号の発行時点の情報です。</p>
+  </div>
+</div></section>
+</main>
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft-top">
+      <div>
+        <address>
+          合同会社turtle ad<br>
+          〒891-0109 鹿児島県鹿児島市清和3-25-15<br>
+          電話 <a href="tel:0992103511">099-210-3511</a>／メール <a href="mailto:info@turtle-ad.com">info@turtle-ad.com</a><br>
+          受付時間 9:00〜18:00（土日祝休み）
+        </address>
+      </div>
+      <nav class="ft-links" aria-label="フッターメニュー">
+        <a href="../index.html">トップページ</a>
+        <a href="../index.html#ai">AI活用サポート</a>
+        <a href="../index.html#web">ホームページ制作</a>
+        <a href="../index.html#guide">マイタウンガイド</a>
+        <a href="../index.html#job">マイタウンジョブ</a>
+        <a href="../index.html#company">会社概要</a>
+        <a href="../index.html#contact">お問い合わせ</a>
+      </nav>
+    </div>
+    <p class="copy">© 合同会社turtle ad</p>
+  </div>
+</footer>
+<script src="../assets/sub.js"></script>
+</body>
+</html>

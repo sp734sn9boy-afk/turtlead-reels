@@ -1,0 +1,825 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI活用サポート・ChatGPT研修｜鹿児島｜合同会社turtle ad</title>
+<meta name="description" content="ChatGPTやClaudeで、メール返信・求人文・SNS投稿をラクに。鹿児島の合同会社turtle adが、AI活用の初回相談（無料）と少人数研修（2時間・33,000円〜税込）で、はじめての方にもわかるようにお手伝いします。">
+<link rel="canonical" href="https://www.turtle-ad.com/ai/">
+<meta property="og:title" content="AI活用サポート・ChatGPT研修｜鹿児島｜合同会社turtle ad">
+<meta property="og:description" content="ChatGPTやClaudeで、メール返信・求人文・SNS投稿をラクに。鹿児島の合同会社turtle adが、AI活用の初回相談（無料）と少人数研修（2時間・33,000円〜税込）で、はじめての方にもわかるようにお手伝いします。">
+<meta property="og:image" content="https://www.turtle-ad.com/images/logo/icon-512.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/images/logo/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/images/logo/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/images/logo/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:url" content="https://www.turtle-ad.com/ai/">
+<meta property="og:site_name" content="合同会社turtle ad">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#050913">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050913;
+  --bg2:#0a1124;
+  --bg3:#0e1830;
+  --line:rgba(140,180,255,.16);
+  --text:#e9efff;
+  --muted:#93a1c4;
+  --cyan:#4fe3ff;
+  --violet:#8b6bff;
+  --glow:0 0 24px rgba(79,227,255,.45);
+  --en:'Outfit',system-ui,sans-serif;
+  --jp:'Noto Sans JP',system-ui,sans-serif;
+  --gut:clamp(16px,5vw,64px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);font-family:var(--jp);line-height:1.8;overflow-x:hidden;font-feature-settings:"palt"}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1200px;margin:0 auto;padding:0 var(--gut)}
+
+/* ===== ヘッダー ===== */
+.hd{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px var(--gut);transition:background .3s}
+.hd.scrolled{background:rgba(5,9,19,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hd-left{display:flex;align-items:center;gap:18px;min-width:0}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--en);font-weight:700;letter-spacing:.04em;font-size:18px;white-space:nowrap}
+.logo img{width:28px;height:auto}
+.logo b{color:var(--cyan)}
+.back{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;text-decoration:none;color:var(--text);padding:6px 14px;border:1px solid rgba(79,227,255,.45);border-radius:999px;white-space:nowrap;transition:background .2s}
+.back:hover{background:rgba(79,227,255,.12)}
+.nav{display:flex;gap:26px;align-items:center;font-size:14px}
+.nav a{text-decoration:none;color:var(--muted);transition:color .2s}
+.nav a:hover{color:var(--text)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 26px;border-radius:999px;text-decoration:none;font-weight:700;font-size:14px;color:#04101c;background:linear-gradient(90deg,var(--cyan),#9fb6ff);box-shadow:0 0 0 1px rgba(255,255,255,.1),0 8px 30px rgba(79,227,255,.25);transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 0 0 1px rgba(255,255,255,.2),0 12px 40px rgba(79,227,255,.4)}
+.nav .btn{color:#04101c;padding:10px 20px}
+
+/* ===== トップ ===== */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;overflow:hidden;background:radial-gradient(120% 80% at 70% 20%,#12204a 0%,#070d1d 45%,#03060d 100%)}
+#heroCanvas{position:absolute;inset:0;width:100%;height:100%}
+.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:180px;background:linear-gradient(transparent,var(--bg));pointer-events:none}
+.hero-in{position:relative;z-index:2;width:100%;max-width:1200px;margin:0 auto;padding:130px var(--gut) 100px}
+.eyebrow{font-family:var(--en);font-size:13px;letter-spacing:.3em;color:var(--cyan);display:flex;align-items:center;gap:14px}
+.eyebrow::before{content:"";width:40px;height:1px;background:var(--cyan);box-shadow:var(--glow)}
+.catch{margin:28px 0 26px;font-weight:900;font-size:clamp(40px,8.4vw,112px);line-height:1.18;letter-spacing:.02em;text-shadow:0 0 40px rgba(79,227,255,.25)}
+.catch .ln{display:block;white-space:nowrap}
+.catch .ch{display:inline-block;width:1em;text-align:center}
+.catch .ch.bin{color:var(--cyan);font-family:var(--en);font-weight:300;opacity:.85}
+.catch .ch.ok{animation:pop .5s ease-out}
+.catch .grad{background:linear-gradient(90deg,#fff 0%,var(--cyan) 60%,var(--violet) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+@keyframes pop{from{text-shadow:0 0 30px var(--cyan);opacity:.6}to{text-shadow:none;opacity:1}}
+.lead{max-width:600px;color:#c2cdea;font-size:clamp(15px,1.6vw,18px)}
+.hero-cta{margin-top:40px;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.ghost{color:var(--text);text-decoration:none;font-size:14px;border-bottom:1px solid var(--line);padding-bottom:4px}
+.free{display:inline-block;margin-top:22px;font-size:14px;font-weight:700;color:var(--cyan);border:1px solid rgba(79,227,255,.4);border-radius:4px;padding:4px 12px}
+.scroll-ind{position:absolute;left:50%;bottom:28px;z-index:3;transform:translateX(-50%);font-family:var(--en);font-size:11px;letter-spacing:.3em;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:10px}
+.scroll-ind::after{content:"";width:1px;height:46px;background:linear-gradient(var(--cyan),transparent);animation:drip 2.4s ease-in-out infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ===== 共通の見出し ===== */
+section{position:relative}
+.sec{padding:clamp(90px,12vw,160px) 0}
+.sec-head{position:relative;margin-bottom:clamp(48px,7vw,90px)}
+.sec-en{font-family:var(--en);font-weight:700;font-size:clamp(56px,13vw,180px);line-height:.9;letter-spacing:-.02em;color:transparent;-webkit-text-stroke:1px rgba(140,180,255,.22);user-select:none;display:block;white-space:nowrap;overflow:hidden}
+.sec-title{margin-top:-.2em;font-size:clamp(26px,4vw,44px);font-weight:900;line-height:1.35;position:relative}
+.sec-title .num{font-family:var(--en);font-size:.45em;color:var(--cyan);vertical-align:middle;margin-right:12px;letter-spacing:.1em}
+.sec-desc{margin-top:16px;color:var(--muted);max-width:640px}
+
+/* 出てくる動き */
+.rv{opacity:0;transform:translateY(32px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+/* ===== できること ===== */
+.svc{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);align-items:center;padding:clamp(36px,5vw,64px) 0;border-top:1px solid var(--line)}
+.svc:last-child{border-bottom:1px solid var(--line)}
+.svc:nth-child(even) .svc-img{order:2}
+.svc-img{position:relative;border-radius:6px;overflow:hidden;aspect-ratio:16/10;border:1px solid rgba(79,227,255,.22);
+  background:radial-gradient(70% 80% at 50% 50%,rgba(79,227,255,.10),transparent 70%),
+  linear-gradient(rgba(140,180,255,.06) 1px,transparent 1px) 0 0/30px 30px,
+  linear-gradient(90deg,rgba(140,180,255,.06) 1px,transparent 1px) 0 0/30px 30px,#060c1c}
+.svc-img svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+/* ===== グラフィック共通 ===== */
+.art text{font-family:var(--jp);font-weight:700;fill:#cfe0ff}
+.art .base{fill:none;stroke:rgba(79,227,255,.28);stroke-width:1.5}
+.art .box{fill:rgba(8,18,40,.9);stroke:rgba(79,227,255,.55);stroke-width:1.5}
+.art .acc{stroke:var(--violet)}
+.art .comet{fill:none;stroke:var(--cyan);stroke-width:3;stroke-linecap:round;stroke-dasharray:10 100;stroke-dashoffset:110;filter:drop-shadow(0 0 4px var(--cyan));animation:comet 3.6s linear infinite}
+.art .comet.v{stroke:var(--violet);filter:drop-shadow(0 0 4px var(--violet))}
+@keyframes comet{to{stroke-dashoffset:0}}
+.art .node{fill:#0b1a36;stroke:var(--cyan);stroke-width:1.5}
+.art .blink{animation:blink 3s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:.35}50%{opacity:1}}
+.art .scan{animation:scan 5s ease-in-out infinite}
+@keyframes scan{0%,100%{transform:translateY(0)}50%{transform:translateY(170px)}}
+/* 画面外のグラフィックは動きを止めて軽くする */
+.art:not(.live) *{animation-play-state:paused!important}
+.svc-no{font-family:var(--en);font-weight:300;font-size:clamp(72px,10vw,140px);line-height:1;background:linear-gradient(180deg,var(--cyan),rgba(139,107,255,.1));-webkit-background-clip:text;background-clip:text;color:transparent}
+.svc h3{font-size:clamp(24px,3.2vw,38px);font-weight:900;line-height:1.4;margin:8px 0 16px}
+.svc p{color:#b9c4e2}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.tags span{font-size:12px;padding:5px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+
+/* ===== 研修で練習すること ===== */
+.lessons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.lesson{padding:clamp(32px,4vw,56px) clamp(20px,3vw,40px)}
+.lesson+.lesson{border-left:1px solid var(--line)}
+.lesson-en{font-family:var(--en);font-weight:700;font-size:clamp(48px,5.4vw,80px);line-height:1;color:#fff;text-shadow:0 0 30px rgba(79,227,255,.45)}
+.lesson h3{font-size:20px;font-weight:900;margin:18px 0 12px}
+.lesson .bf{font-size:14px;color:var(--muted)}
+.lesson .af{margin-top:8px;font-size:15px;font-weight:700;color:#d4ddf5;padding-left:18px;position:relative}
+.lesson .af::before{content:"";position:absolute;left:0;top:.7em;width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+.note{margin-top:18px;font-size:13px;color:var(--muted)}
+
+/* ===== 導入の流れ ===== */
+.flow-sec{background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 50%,var(--bg) 100%)}
+.flow{position:relative;max-width:900px;margin:0 auto;padding-left:clamp(56px,10vw,120px)}
+.flow-track,.flow-fill{position:absolute;left:clamp(20px,4vw,48px);top:10px;bottom:10px;width:2px}
+.flow-track{background:var(--line)}
+.flow-fill{bottom:auto;height:0;background:linear-gradient(180deg,var(--cyan),var(--violet));box-shadow:0 0 14px rgba(79,227,255,.7)}
+.step{position:relative;padding:0 0 clamp(56px,8vw,96px)}
+.step:last-child{padding-bottom:0}
+.step-dot{position:absolute;left:calc(-1 * clamp(56px,10vw,120px) + clamp(20px,4vw,48px) - 9px);top:6px;width:20px;height:20px;border-radius:50%;background:var(--bg);border:2px solid rgba(140,180,255,.35);transition:all .4s}
+.step.on .step-dot{border-color:var(--cyan);background:var(--cyan);box-shadow:0 0 0 6px rgba(79,227,255,.15),0 0 24px var(--cyan)}
+.step-k{font-family:var(--en);letter-spacing:.3em;font-size:13px;color:var(--muted);transition:color .4s}
+.step.on .step-k{color:var(--cyan)}
+.step h3{font-size:clamp(22px,3vw,34px);font-weight:900;margin:4px 0 10px;opacity:.45;transition:opacity .5s}
+.step.on h3{opacity:1}
+.step p{color:#b9c4e2;max-width:600px}
+.step .term{display:inline-block;margin-top:12px;font-size:13px;color:var(--cyan)}
+
+/* ===== 料金 ===== */
+.price-sec{overflow:hidden}
+.price-sec::before{content:"";position:absolute;width:700px;height:700px;max-width:120vw;right:-200px;top:10%;background:radial-gradient(circle,rgba(139,107,255,.18),transparent 65%);pointer-events:none}
+.prices{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(16px,2vw,28px);position:relative}
+.plan{grid-column:span 2;position:relative;padding:34px 28px 32px;border-radius:6px;background:linear-gradient(180deg,rgba(20,32,64,.65),rgba(10,17,36,.65));border:1px solid var(--line)}
+.plan.wide{grid-column:span 3}
+.plan.hot{border-color:transparent;background:linear-gradient(var(--bg3),var(--bg3)) padding-box,linear-gradient(135deg,var(--cyan),var(--violet)) border-box;box-shadow:0 20px 60px rgba(79,227,255,.12)}
+.plan-name{font-family:var(--en);letter-spacing:.2em;font-size:12px;color:var(--cyan)}
+.plan h3{font-size:20px;font-weight:900;margin:6px 0 16px;line-height:1.5}
+.plan h3 small{font-size:14px;font-weight:700;color:var(--muted)}
+.plan-price{font-family:var(--en);font-weight:700;font-size:clamp(36px,3.8vw,50px);line-height:1;white-space:nowrap}
+.plan-price span{font-family:var(--jp);font-size:15px;font-weight:700;margin-left:2px}
+.plan-price .pre{margin:0 4px 0 0;font-size:16px;color:var(--muted)}
+.plan ul{list-style:none;margin-top:20px;border-top:1px solid var(--line);padding-top:16px}
+.plan li{position:relative;padding-left:20px;font-size:14px;color:#c2cdea;margin:8px 0}
+.plan li::before{content:"";position:absolute;left:0;top:.75em;width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+.price-note{margin-top:28px;font-size:15px;font-weight:700;color:#d4ddf5}
+
+/* ===== よくある質問 ===== */
+.faq{max-width:900px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq details:first-child{border-top:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;gap:18px;align-items:flex-start;padding:26px 44px 26px 0;position:relative;font-weight:700;font-size:clamp(16px,1.8vw,19px)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .q{font-family:var(--en);color:var(--cyan);font-size:20px;line-height:1.4}
+.faq summary::after{content:"";position:absolute;right:8px;top:34px;width:14px;height:14px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);transition:transform .3s}
+.faq details[open] summary::after{transform:rotate(225deg);top:40px}
+.faq .a{padding:0 0 28px 38px;color:#b9c4e2}
+
+/* ===== お問い合わせ ===== */
+.contact-sec{background:linear-gradient(180deg,var(--bg),#081127);overflow:hidden}
+.contact-bg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.9}
+.contact-bg .comet{stroke-width:2.5;animation-duration:9s;filter:none;stroke-dasharray:14 100}
+@media (max-width:860px){.art .comet{filter:none}}
+.contact{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,6vw,90px);align-items:start}
+.contact .sec-en{font-size:clamp(52px,7vw,104px)}
+.contact-big{font-size:clamp(34px,5.4vw,68px);font-weight:900;line-height:1.25}
+.contact-big .grad{background:linear-gradient(90deg,var(--cyan),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+.ways{display:grid;gap:18px}
+.way{display:flex;flex-direction:column;gap:4px;text-decoration:none;padding:26px 28px;border-radius:6px;border:1px solid var(--line);background:rgba(10,17,36,.75);transition:border-color .25s,transform .25s,box-shadow .25s}
+.way:hover{border-color:var(--cyan);transform:translateY(-3px);box-shadow:0 12px 40px rgba(79,227,255,.18)}
+.way.tel{border-color:transparent;background:linear-gradient(var(--bg3),var(--bg3)) padding-box,linear-gradient(135deg,var(--cyan),var(--violet)) border-box}
+.way-label{font-size:13px;font-weight:700;color:var(--cyan);letter-spacing:.1em}
+.way-main{font-family:var(--en);font-weight:700;font-size:clamp(26px,3.4vw,40px);line-height:1.25;word-break:break-all}
+.way-sub{font-size:13px;color:var(--muted)}
+.addr{font-style:normal;font-size:14px;color:#d4ddf5;line-height:2;padding:4px 4px 0}
+
+/* ===== フッター ===== */
+.ft{border-top:1px solid var(--line);padding:56px 0 40px;font-size:13px;color:var(--muted)}
+.ft-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:28px}
+.ft address{font-style:normal;line-height:2;margin-top:12px}
+.ft-links{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start}
+.ft-links a{text-decoration:none;color:var(--muted)}
+.ft-links a:hover{color:var(--text)}
+.copy{margin-top:32px;font-family:var(--en);font-size:11px;letter-spacing:.1em}
+
+/* ===== スマホ ===== */
+@media (max-width:960px){
+  .nav a:not(.btn){display:none}
+}
+@media (max-width:860px){
+  .svc{grid-template-columns:minmax(0,1fr)}
+  .svc:nth-child(even) .svc-img{order:0}
+  .lessons{grid-template-columns:minmax(0,1fr)}
+  .lesson+.lesson{border-left:0;border-top:1px solid var(--line)}
+  .prices{grid-template-columns:minmax(0,1fr);gap:20px}
+  .plan,.plan.wide{grid-column:auto}
+  .contact{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:520px){
+  .logo span{display:none}
+  .back{padding:6px 12px;font-size:12px}
+  .nav .btn{padding:9px 14px;font-size:12px}
+  .catch{font-size:clamp(34px,11vw,48px)}
+}
+
+/* ===== 動きを減らす設定 ===== */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}
+  .art .comet{display:none}
+}
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@800&amp;text=turtle%20ad&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/logo.css">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "トップ", "item": "https://www.turtle-ad.com/"}, {"@type": "ListItem", "position": 2, "name": "AI活用サポート", "item": "https://www.turtle-ad.com/ai/"}]}
+</script>
+</head>
+<body>
+
+<header class="hd" id="hd">
+  <div class="hd-left">
+    <a class="logo" href="../" aria-label="合同会社turtle ad トップページへ">
+      <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><polygon points="50,6 88.1,28 88.1,72 50,94 11.9,72 11.9,28" fill="#0D3A34" stroke="#3CD6F0" stroke-width="3" stroke-linejoin="round"/><polygon points="50,32 65.6,41 65.6,59 50,68 34.4,59 34.4,41" fill="none" stroke="#3CD6F0" stroke-width="2.5" stroke-linejoin="round"/><path d="M50 6 L50 32 M88.1 28 L65.6 41 M88.1 72 L65.6 59 M50 94 L50 68 M11.9 72 L34.4 59 M11.9 28 L34.4 41" stroke="#3CD6F0" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.8"/><circle class="lm-dot" cx="50" cy="32" r="3" fill="#fff"/><circle class="lm-dot" cx="65.6" cy="41" r="3" fill="#fff"/><circle class="lm-dot" cx="65.6" cy="59" r="3" fill="#fff"/><circle class="lm-dot" cx="50" cy="68" r="3" fill="#fff"/><circle class="lm-dot" cx="34.4" cy="59" r="3" fill="#fff"/><circle class="lm-dot" cx="34.4" cy="41" r="3" fill="#fff"/><circle cx="50" cy="50" r="5" fill="#3CD6F0"/></svg>
+      <span class="logo-word">turtle <b>ad</b></span>
+    </a>
+    <a class="back" href="../"><span aria-hidden="true">←</span>トップへ戻る</a>
+  </div>
+  <nav class="nav" aria-label="ページ内メニュー">
+    <a href="#service">できること</a>
+    <a href="#lesson">研修の内容</a>
+    <a href="#flow">ご相談の流れ</a>
+    <a href="#price">料金</a>
+    <a href="#faq">よくある質問</a>
+    <a class="btn" href="#contact">相談する</a>
+  </nav>
+</header>
+
+<main id="top">
+<!-- ===== トップ ===== -->
+<section class="hero" aria-label="トップ">
+  <canvas id="heroCanvas" aria-hidden="true"></canvas>
+  <div class="hero-in">
+    <p class="eyebrow">AI SUPPORT by turtle ad</p>
+    <h1 class="catch" id="catch" aria-label="AIで、仕事に余白を。">
+      <span class="ln" data-text="AIで、"></span>
+      <span class="ln grad-ln" data-text="仕事に余白を。"></span>
+    </h1>
+    <p class="lead">メールの返信、求人の文章、SNSの投稿。毎日の「書く仕事」を、ChatGPTやClaudeでラクにしませんか。鹿児島の合同会社turtle adが、はじめての方にもわかるように、使い方をお手伝いします。</p>
+    <p class="free">AI活用の初回相談は無料です</p>
+    <div class="hero-cta">
+      <a class="btn" href="#contact">無料で相談する <span aria-hidden="true">→</span></a>
+      <a class="ghost" href="#price">料金を見る</a>
+    </div>
+  </div>
+  <div class="scroll-ind" aria-hidden="true">SCROLL</div>
+</section>
+
+<!-- ===== 1. できること ===== -->
+<section class="sec" id="service">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-en" aria-hidden="true">SERVICE</span>
+      <h2 class="sec-title"><span class="num">01</span>できること</h2>
+      <p class="sec-desc">「AIが気になるけど、何から始めればいいかわからない」という段階から大丈夫です。</p>
+    </div>
+
+    <div class="svcs">
+      <article class="svc rv">
+        <div class="svc-img art" role="img" aria-label="点と線がつながるネットワークの図">
+          <svg viewBox="0 0 600 375" aria-hidden="true">
+            <g class="base">
+              <path d="M300 188L150 90M300 188L120 250M300 188L230 320M300 188L420 80M300 188L500 200M300 188L440 310M300 188L260 60M150 90L260 60M150 90L60 160M120 250L60 160M120 250L230 320M420 80L260 60M420 80L500 200M500 200L560 330M440 310L560 330M230 320L440 310M500 200L545 95M420 80L545 95"/>
+            </g>
+            <g>
+              <path class="comet" pathLength="100" d="M60 160L150 90L300 188"/>
+              <path class="comet" pathLength="100" d="M560 330L500 200L300 188" style="animation-delay:-1.2s"/>
+              <path class="comet" pathLength="100" d="M230 320L300 188L420 80" style="animation-delay:-2.4s"/>
+              <path class="comet v" pathLength="100" d="M120 250L230 320L440 310L560 330" style="animation-duration:5s;animation-delay:-.6s"/>
+            </g>
+            <g>
+              <circle class="node blink" cx="150" cy="90" r="6"/>
+              <circle class="node" cx="120" cy="250" r="6"/>
+              <circle class="node blink" cx="230" cy="320" r="6" style="animation-delay:-1s"/>
+              <circle class="node" cx="420" cy="80" r="6"/>
+              <circle class="node blink" cx="500" cy="200" r="6" style="animation-delay:-2s"/>
+              <circle class="node" cx="440" cy="310" r="6"/>
+              <circle class="node blink" cx="260" cy="60" r="5" style="animation-delay:-.5s"/>
+              <circle class="node" cx="60" cy="160" r="5"/>
+              <circle class="node blink" cx="560" cy="330" r="5" style="animation-delay:-1.5s"/>
+              <circle class="node" cx="545" cy="95" r="5"/>
+              <circle cx="300" cy="188" r="44" fill="none" stroke="rgba(79,227,255,.18)" stroke-width="1"/>
+              <circle class="blink" cx="300" cy="188" r="34" fill="rgba(79,227,255,.12)"/>
+              <circle cx="300" cy="188" r="24" fill="#0b1a36" stroke="#4fe3ff" stroke-width="2"/>
+              <text x="300" y="195" text-anchor="middle" font-size="18">AI</text>
+            </g>
+          </svg>
+        </div>
+        <div>
+          <div class="svc-no" aria-hidden="true">01</div>
+          <h3>AI活用の相談</h3>
+          <p>今のお仕事の流れやお困りごとをお聞きして、「AIを使うとラクになりそうなところ」を一緒に探します。初回のご相談は無料です。</p>
+          <div class="tags"><span>初回相談 無料</span><span>お困りごとの聞き取り</span><span>使い方のご提案</span></div>
+        </div>
+      </article>
+
+      <article class="svc rv">
+        <div class="svc-img art" role="img" aria-label="メモや条件がAIを通って、返信文や求人文に変わる図">
+          <svg viewBox="0 0 600 375" aria-hidden="true">
+            <g class="base">
+              <path d="M150 83C200 83 195 187 240 187M150 188H240M150 293C200 293 195 187 240 187"/>
+              <path d="M360 187C405 187 400 83 450 83M360 187H450M360 187C405 187 400 293 450 293"/>
+            </g>
+            <path class="comet" pathLength="100" d="M150 83C200 83 195 187 240 187"/>
+            <path class="comet" pathLength="100" d="M150 188H240" style="animation-delay:-1.2s"/>
+            <path class="comet" pathLength="100" d="M150 293C200 293 195 187 240 187" style="animation-delay:-2.4s"/>
+            <path class="comet" pathLength="100" d="M360 187C405 187 400 83 450 83" style="animation-delay:-1.8s"/>
+            <path class="comet" pathLength="100" d="M360 187H450" style="animation-delay:-3s"/>
+            <path class="comet" pathLength="100" d="M360 187C405 187 400 293 450 293" style="animation-delay:-.6s"/>
+            <g>
+              <rect class="box" x="30" y="60" width="120" height="46" rx="6"/>
+              <rect class="box" x="30" y="165" width="120" height="46" rx="6"/>
+              <rect class="box" x="30" y="270" width="120" height="46" rx="6"/>
+              <text x="90" y="89" text-anchor="middle" font-size="15">返事の要点</text>
+              <text x="90" y="194" text-anchor="middle" font-size="15">求人の条件</text>
+              <text x="90" y="299" text-anchor="middle" font-size="15">写真とひとこと</text>
+            </g>
+            <g>
+              <rect class="box acc" x="240" y="122" width="120" height="130" rx="10" style="filter:drop-shadow(0 0 10px rgba(139,107,255,.45))"/>
+              <text x="300" y="158" text-anchor="middle" font-size="20">AI</text>
+              <rect class="blink" x="262" y="176" width="76" height="6" rx="3" fill="#4fe3ff"/>
+              <rect class="blink" x="262" y="192" width="56" height="6" rx="3" fill="#4fe3ff" style="animation-delay:-1s"/>
+              <rect class="blink" x="262" y="208" width="66" height="6" rx="3" fill="#8b6bff" style="animation-delay:-2s"/>
+              <text x="300" y="238" text-anchor="middle" font-size="11" style="fill:#93a1c4">ChatGPT・Claude</text>
+            </g>
+            <g>
+              <rect class="box" x="450" y="60" width="120" height="46" rx="6"/>
+              <rect class="box" x="450" y="165" width="120" height="46" rx="6"/>
+              <rect class="box" x="450" y="270" width="120" height="46" rx="6"/>
+              <text x="510" y="89" text-anchor="middle" font-size="15">メール返信</text>
+              <text x="510" y="194" text-anchor="middle" font-size="15">求人文</text>
+              <text x="510" y="299" text-anchor="middle" font-size="15">SNS投稿</text>
+            </g>
+          </svg>
+        </div>
+        <div>
+          <div class="svc-no" aria-hidden="true">02</div>
+          <h3>AI活用 少人数研修（2時間）</h3>
+          <p>ChatGPTやClaudeを使って、メール返信・求人文・SNS投稿をラクにする実践講座です。説明を聞くだけでなく、実際に手を動かして練習します。</p>
+          <div class="tags"><span>少人数</span><span>2時間</span><span>ChatGPT・Claude</span><span>実践講座</span></div>
+        </div>
+      </article>
+
+      <article class="svc rv">
+        <div class="svc-img art" role="img" aria-label="ホームページの画面の線画">
+          <svg viewBox="0 0 600 375" aria-hidden="true">
+            <g fill="none" stroke="rgba(79,227,255,.5)" stroke-width="1.5">
+              <rect x="40" y="26" width="520" height="323" rx="10" fill="rgba(8,18,40,.85)"/>
+              <path d="M40 58H560"/>
+            </g>
+            <circle cx="60" cy="42" r="5" fill="rgba(79,227,255,.5)"/>
+            <circle cx="76" cy="42" r="5" fill="rgba(79,227,255,.3)"/>
+            <circle cx="92" cy="42" r="5" fill="rgba(79,227,255,.2)"/>
+            <rect x="120" y="34" width="300" height="16" rx="8" fill="none" stroke="rgba(140,180,255,.25)"/>
+            <g stroke-linecap="round" stroke-width="6">
+              <path d="M70 84H140" stroke="#4fe3ff"/>
+              <path d="M380 84H410M430 84H460M480 84H530" stroke="rgba(140,180,255,.3)"/>
+            </g>
+            <rect x="70" y="104" width="460" height="100" rx="6" fill="rgba(79,227,255,.07)" stroke="rgba(79,227,255,.35)"/>
+            <path d="M96 140H330M96 166H260" stroke="rgba(207,224,255,.55)" stroke-width="8" stroke-linecap="round"/>
+            <rect x="400" y="146" width="100" height="32" rx="16" fill="none" stroke="#8b6bff" stroke-width="1.5"/>
+            <g fill="none" stroke="rgba(79,227,255,.35)">
+              <rect x="70" y="222" width="140" height="100" rx="6"/>
+              <rect x="230" y="222" width="140" height="100" rx="6"/>
+              <rect x="390" y="222" width="140" height="100" rx="6"/>
+            </g>
+            <path d="M88 290H180M88 306H160M248 290H340M248 306H320M408 290H500M408 306H480" stroke="rgba(140,180,255,.25)" stroke-width="5" stroke-linecap="round"/>
+            <rect class="blink" x="226" y="218" width="148" height="108" rx="8" fill="none" stroke="#8b6bff" stroke-width="2" stroke-dasharray="6 6"/>
+            <text x="300" y="262" text-anchor="middle" font-size="14" style="fill:#c9b9ff">ここを修正</text>
+            <path class="scan" d="M44 104H556" stroke="rgba(79,227,255,.45)" stroke-width="2"/>
+          </svg>
+        </div>
+        <div>
+          <div class="svc-no" aria-hidden="true">03</div>
+          <h3>ホームページの制作・修正・管理</h3>
+          <p>新しいホームページづくりから、WordPressの「ここだけ直したい」という修正、毎月の管理まで。AIの相談とあわせてご依頼いただけます。</p>
+          <div class="tags"><span>ホームページ制作</span><span>WordPressの修正</span><span>ホームページ管理</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 2. 研修で練習すること ===== -->
+<section class="sec" id="lesson">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-en" aria-hidden="true">LESSON</span>
+      <h2 class="sec-title"><span class="num">02</span>研修で練習すること</h2>
+      <p class="sec-desc">毎日の仕事でよく出てくる「書く仕事」を題材に、AIへの頼み方を練習します。</p>
+    </div>
+
+    <div class="lessons rv">
+      <article class="lesson">
+        <div class="lesson-en" aria-hidden="true">MAIL</div>
+        <h3>メールの返信</h3>
+        <p class="bf">返事の文章を考えるのに時間がかかる</p>
+        <p class="af">伝えたい要点から、ていねいな返信文の下書きを作る</p>
+      </article>
+      <article class="lesson">
+        <div class="lesson-en" aria-hidden="true">JOB</div>
+        <h3>求人の文章</h3>
+        <p class="bf">仕事の良さがうまく文章にできない</p>
+        <p class="af">仕事内容や条件のメモから、伝わる求人文を作る</p>
+      </article>
+      <article class="lesson">
+        <div class="lesson-en" aria-hidden="true">SNS</div>
+        <h3>SNSの投稿</h3>
+        <p class="bf">投稿文を考えるのが大変で、更新が続かない</p>
+        <p class="af">写真とひとことから、投稿文とハッシュタグの案を作る</p>
+      </article>
+    </div>
+    <p class="note">※AIが作るのは「下書き」です。最後は必ず人が確認してから使います。</p>
+  </div>
+</section>
+
+<!-- ===== 3. ご相談の流れ ===== -->
+<section class="sec flow-sec" id="flow">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-en" aria-hidden="true">FLOW</span>
+      <h2 class="sec-title"><span class="num">03</span>ご相談の流れ</h2>
+      <p class="sec-desc">はじめての方でも安心して進められるよう、順番にご案内します。</p>
+    </div>
+
+    <div class="flow" id="flowList">
+      <div class="flow-track" aria-hidden="true"></div>
+      <div class="flow-fill" id="flowFill" aria-hidden="true"></div>
+      <div class="step">
+        <span class="step-dot" aria-hidden="true"></span>
+        <div class="step-k">STEP 01</div>
+        <h3>お問い合わせ</h3>
+        <p>お電話かメールで、お気軽にご連絡ください。「まだ何も決まっていない」段階で大丈夫です。</p>
+        <span class="term">電話・メール</span>
+      </div>
+      <div class="step">
+        <span class="step-dot" aria-hidden="true"></span>
+        <div class="step-k">STEP 02</div>
+        <h3>初回相談</h3>
+        <p>今のお困りごとや、AIでラクにしたいお仕事をお聞きします。</p>
+        <span class="term">無料</span>
+      </div>
+      <div class="step">
+        <span class="step-dot" aria-hidden="true"></span>
+        <div class="step-k">STEP 03</div>
+        <h3>ご提案・お見積もり</h3>
+        <p>研修の内容やホームページの作業の範囲を決めて、正式なお見積もりをお出しします。ご納得いただいてから進めます。</p>
+        <span class="term">正式なお見積もり</span>
+      </div>
+      <div class="step">
+        <span class="step-dot" aria-hidden="true"></span>
+        <div class="step-k">STEP 04</div>
+        <h3>研修・制作のスタート</h3>
+        <p>研修では、実際のお仕事に近い題材で練習します。ホームページは、内容を確認していただきながら進めます。</p>
+        <span class="term">研修・制作</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 4. 料金の目安 ===== -->
+<section class="sec price-sec" id="price">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-en" aria-hidden="true">PRICE</span>
+      <h2 class="sec-title"><span class="num">04</span>料金の目安</h2>
+      <p class="sec-desc">内容をお聞きしたうえで、正式なお見積もりをお出しします。</p>
+    </div>
+
+    <div class="prices">
+      <article class="plan wide rv">
+        <div class="plan-name">AI CONSULTING</div>
+        <h3>AI活用 初回相談</h3>
+        <div class="plan-price">無料</div>
+        <ul>
+          <li>お困りごとの聞き取り</li>
+          <li>AIでラクになりそうなところのご提案</li>
+        </ul>
+      </article>
+      <article class="plan wide hot rv">
+        <div class="plan-name">AI TRAINING</div>
+        <h3>AI活用 少人数研修 <small>（2時間）</small></h3>
+        <div class="plan-price">33,000<span>円〜</span></div>
+        <ul>
+          <li>ChatGPTやClaudeを使った実践講座</li>
+          <li>メール返信・求人文・SNS投稿をラクにする</li>
+        </ul>
+      </article>
+      <article class="plan rv">
+        <div class="plan-name">WEB SITE</div>
+        <h3>ホームページ制作</h3>
+        <div class="plan-price">55,000<span>円〜</span></div>
+      </article>
+      <article class="plan rv">
+        <div class="plan-name">WORDPRESS</div>
+        <h3>WordPressの修正</h3>
+        <div class="plan-price"><span class="pre">1か所</span>3,300<span>円〜</span></div>
+      </article>
+      <article class="plan rv">
+        <div class="plan-name">MAINTENANCE</div>
+        <h3>ホームページ管理</h3>
+        <div class="plan-price"><span class="pre">月</span>5,500<span>円〜</span></div>
+      </article>
+    </div>
+    <p class="price-note">※料金は目安（税込）です。正式なお見積もりをお出しします。</p>
+  </div>
+</section>
+
+<!-- ===== 5. よくある質問 ===== -->
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-en" aria-hidden="true">FAQ</span>
+      <h2 class="sec-title"><span class="num">05</span>よくある質問</h2>
+    </div>
+    <div class="faq rv">
+      <details>
+        <summary><span class="q">Q</span>ChatGPTもClaudeも、使ったことがなくても大丈夫ですか？</summary>
+        <p class="a">大丈夫です。はじめての方にもわかるように、基本の使い方からご説明します。</p>
+      </details>
+      <details>
+        <summary><span class="q">Q</span>AIの利用料は別にかかりますか？</summary>
+        <p class="a">ChatGPTやClaudeには、無料で使える範囲があります。有料のプランが必要かどうかは、使い方をお聞きしたうえでご案内します。</p>
+      </details>
+      <details>
+        <summary><span class="q">Q</span>会社の情報をAIに入れても大丈夫ですか？</summary>
+        <p class="a">入れてよい情報と、入れない方がよい情報の分け方もお伝えします。お客様の個人情報などの扱いは、ご相談のうえで決めましょう。</p>
+      </details>
+      <details>
+        <summary><span class="q">Q</span>ホームページだけの相談もできますか？</summary>
+        <p class="a">はい。ホームページの制作、WordPressの修正、毎月の管理だけのご相談も受け付けています。</p>
+      </details>
+      <details>
+        <summary><span class="q">Q</span>料金は、このページの金額で決まりですか？</summary>
+        <p class="a">このページの料金は目安（税込）です。内容をお聞きしたうえで、正式なお見積もりをお出しします。</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 6. お問い合わせ ===== -->
+<section class="sec contact-sec" id="contact">
+  <svg class="contact-bg art" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="cg" x1="0" x2="1">
+        <stop offset="0" stop-color="#4fe3ff" stop-opacity="0"/>
+        <stop offset=".4" stop-color="#4fe3ff" stop-opacity=".35"/>
+        <stop offset="1" stop-color="#8b6bff" stop-opacity=".25"/>
+      </linearGradient>
+    </defs>
+    <g fill="none" stroke="url(#cg)" stroke-width="2">
+      <path d="M-50 720C300 560 520 820 820 600S1250 300 1500 380"/>
+      <path d="M-50 780C320 640 560 880 860 680S1260 420 1500 470"/>
+      <path d="M-50 640C260 500 500 700 780 520S1230 200 1500 260"/>
+      <path d="M-50 220C300 120 600 320 900 180S1300 60 1500 120"/>
+    </g>
+    <path class="comet" pathLength="100" d="M-50 720C300 560 520 820 820 600S1250 300 1500 380"/>
+    <path class="comet" pathLength="100" d="M-50 780C320 640 560 880 860 680S1260 420 1500 470" style="animation-delay:-3s"/>
+    <path class="comet v" pathLength="100" d="M-50 640C260 500 500 700 780 520S1230 200 1500 260" style="animation-delay:-6s"/>
+    <path class="comet" pathLength="100" d="M-50 220C300 120 600 320 900 180S1300 60 1500 120" style="animation-delay:-4.5s"/>
+  </svg>
+  <div class="wrap contact">
+    <div class="rv">
+      <span class="sec-en" aria-hidden="true">CONTACT</span>
+      <h2 class="contact-big"><span class="grad">まずは、</span><br>話してみる。</h2>
+      <p class="sec-desc">「うちの仕事でもAIが使える？」という段階で大丈夫です。AI活用の初回相談は無料です。お電話かメールでご連絡ください。</p>
+    </div>
+
+    <div class="ways rv">
+      <a class="way tel" href="tel:0992103511">
+        <span class="way-label">お電話</span>
+        <span class="way-main">099-210-3511</span>
+        <span class="way-sub">受付時間 9:00〜18:00（土日祝休み）</span>
+      </a>
+      <a class="way" href="mailto:info@turtle-ad.com?subject=AI%E6%B4%BB%E7%94%A8%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">
+        <span class="way-label">メール</span>
+        <span class="way-main">info@turtle-ad.com</span>
+        <span class="way-sub">件名に「AI活用サポート」とお書きください</span>
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft-top">
+      <div>
+        <a class="logo" href="../"><svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><polygon points="50,6 88.1,28 88.1,72 50,94 11.9,72 11.9,28" fill="#0D3A34" stroke="#3CD6F0" stroke-width="3" stroke-linejoin="round"/><polygon points="50,32 65.6,41 65.6,59 50,68 34.4,59 34.4,41" fill="none" stroke="#3CD6F0" stroke-width="2.5" stroke-linejoin="round"/><path d="M50 6 L50 32 M88.1 28 L65.6 41 M88.1 72 L65.6 59 M50 94 L50 68 M11.9 72 L34.4 59 M11.9 28 L34.4 41" stroke="#3CD6F0" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.8"/><circle class="lm-dot" cx="50" cy="32" r="3" fill="#fff"/><circle class="lm-dot" cx="65.6" cy="41" r="3" fill="#fff"/><circle class="lm-dot" cx="65.6" cy="59" r="3" fill="#fff"/><circle class="lm-dot" cx="50" cy="68" r="3" fill="#fff"/><circle class="lm-dot" cx="34.4" cy="59" r="3" fill="#fff"/><circle class="lm-dot" cx="34.4" cy="41" r="3" fill="#fff"/><circle cx="50" cy="50" r="5" fill="#3CD6F0"/></svg><span class="logo-word">turtle <b>ad</b></span></a>
+        <address>
+          合同会社turtle ad（代表 見立 大作）<br>
+          〒891-0109 鹿児島県鹿児島市清和3-25-15<br>
+          電話 <a href="tel:0992103511">099-210-3511</a><br>受付時間 9:00〜18:00（土日祝休み）<br>
+          メール <a href="mailto:info@turtle-ad.com">info@turtle-ad.com</a>
+        </address>
+      </div>
+      <nav class="ft-links" aria-label="フッターメニュー">
+        <a href="../">トップページへ戻る</a>
+        <a href="#service">できること</a>
+        <a href="#lesson">研修の内容</a>
+        <a href="#flow">ご相談の流れ</a>
+        <a href="#price">料金</a>
+        <a href="#faq">よくある質問</a>
+      </nav>
+    </div>
+    <p class="copy">© 合同会社turtle ad</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var reduced = mq.matches;
+  var isSmall = window.matchMedia('(max-width: 860px)').matches;
+
+  /* ---------- ヘッダー ---------- */
+  var hd = document.getElementById('hd');
+  function onScrollHd(){ hd.classList.toggle('scrolled', window.scrollY > 40); }
+  window.addEventListener('scroll', onScrollHd, {passive:true}); onScrollHd();
+
+  /* ---------- キャッチコピー：0と1 → 日本語 ---------- */
+  var lines = document.querySelectorAll('#catch .ln');
+  var cells = [];
+  lines.forEach(function(ln, li){
+    var text = ln.getAttribute('data-text');
+    var n = text.length;
+    Array.prototype.forEach.call(text, function(c, ci){
+      var s = document.createElement('span');
+      s.className = 'ch' + (li === 1 ? ' grad' : '');
+      if (li === 1){ s.style.backgroundSize = n + 'em 100%'; s.style.backgroundPosition = (-ci) + 'em 0'; }
+      s.setAttribute('aria-hidden','true');
+      if (/[\x00-\x7f]/.test(c)) s.style.width = '.64em';
+      s.textContent = c;
+      s.dataset.c = c;
+      ln.appendChild(s);
+      cells.push(s);
+    });
+  });
+  function scramble(){
+    if (reduced) return; // 動きを減らす設定：最初から文字を表示
+    var start = performance.now();
+    var spin = 900, step = 110;
+    cells.forEach(function(s){ s.classList.add('bin'); s.textContent = Math.random() < .5 ? '0' : '1'; });
+    var timer = setInterval(function(){
+      var el = performance.now() - start, done = 0;
+      cells.forEach(function(s, i){
+        if (el > spin + i * step){
+          if (s.classList.contains('bin')){ s.classList.remove('bin'); s.textContent = s.dataset.c; s.classList.add('ok'); }
+          done++;
+        } else {
+          s.textContent = Math.random() < .5 ? '0' : '1';
+        }
+      });
+      if (done >= cells.length) clearInterval(timer);
+    }, 55);
+  }
+  scramble();
+
+  /* ---------- 背景：光る線と粒 ---------- */
+  var cv = document.getElementById('heroCanvas');
+  var ctx = cv.getContext('2d');
+  var W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, isSmall ? 1.5 : 2);
+  var parts = [], running = false, visible = true, raf = 0, t0 = performance.now();
+  var COUNT = isSmall ? 34 : 80;
+  var LINK = isSmall ? 0 : 130; // スマホは粒同士をつなぐ線を省いて軽くする
+
+  function resize(){
+    var r = cv.getBoundingClientRect();
+    W = r.width; H = r.height;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  function makeParts(){
+    parts = [];
+    for (var i = 0; i < COUNT; i++){
+      parts.push({x:Math.random()*W, y:Math.random()*H, vx:(Math.random()-.5)*.18, vy:(Math.random()-.5)*.18, r:Math.random()*1.6+.4, h:Math.random()<.7?190:255});
+    }
+  }
+  function waveY(x, k, t){
+    return H*(.58 + k*.09) + Math.sin(x*.0032 + t*.00022*(1+k*.3) + k*1.7)*H*.07 + Math.sin(x*.0011 - t*.00012 + k)*H*.05;
+  }
+  function draw(t){
+    ctx.clearRect(0,0,W,H);
+    for (var k = 0; k < 3; k++){
+      var g = ctx.createLinearGradient(0,0,W,0);
+      g.addColorStop(0,'rgba(79,227,255,0)');
+      g.addColorStop(.35,'rgba(79,227,255,'+(.32-k*.07)+')');
+      g.addColorStop(.75,'rgba(139,107,255,'+(.3-k*.06)+')');
+      g.addColorStop(1,'rgba(139,107,255,0)');
+      ctx.strokeStyle = g; ctx.lineWidth = 1.2 - k*.25;
+      ctx.beginPath();
+      for (var x = 0; x <= W; x += 14){ var y = waveY(x,k,t); x ? ctx.lineTo(x,y) : ctx.moveTo(x,y); }
+      ctx.stroke();
+      var px = ((t*.045*(1+k*.35) + k*W*.33) % (W+200)) - 100;
+      var py = waveY(px,k,t);
+      var rg = ctx.createRadialGradient(px,py,0,px,py,34);
+      rg.addColorStop(0,'rgba(200,245,255,.9)'); rg.addColorStop(.25,'rgba(79,227,255,.35)'); rg.addColorStop(1,'rgba(79,227,255,0)');
+      ctx.fillStyle = rg; ctx.beginPath(); ctx.arc(px,py,34,0,Math.PI*2); ctx.fill();
+    }
+    for (var i = 0; i < parts.length; i++){
+      var p = parts[i];
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < -10) p.x = W+10; if (p.x > W+10) p.x = -10;
+      if (p.y < -10) p.y = H+10; if (p.y > H+10) p.y = -10;
+      var tw = .55 + .45*Math.sin(t*.0012 + i);
+      ctx.fillStyle = 'hsla('+p.h+',100%,75%,'+(.35+.5*tw)+')';
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+      if (LINK){
+        for (var j = i+1; j < parts.length; j++){
+          var q = parts[j], dx = p.x-q.x, dy = p.y-q.y, d = dx*dx+dy*dy;
+          if (d < LINK*LINK){
+            ctx.strokeStyle = 'rgba(120,190,255,'+(.14*(1-Math.sqrt(d)/LINK))+')';
+            ctx.lineWidth = .6; ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y); ctx.stroke();
+          }
+        }
+      }
+    }
+  }
+  function loop(t){ draw(t - t0); raf = requestAnimationFrame(loop); }
+  function start(){ if (running || reduced || !visible || document.hidden) return; running = true; raf = requestAnimationFrame(loop); }
+  function stop(){ running = false; cancelAnimationFrame(raf); }
+  resize(); makeParts(); draw(4000); start();
+  var rT; window.addEventListener('resize', function(){ clearTimeout(rT); rT = setTimeout(function(){ stop(); resize(); makeParts(); draw(4000); start(); }, 200); });
+  // 画面外・別タブでは止めて電池を節約
+  if ('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){ visible = es[0].isIntersecting; visible ? start() : stop(); }).observe(cv);
+  }
+  document.addEventListener('visibilitychange', function(){ document.hidden ? stop() : start(); });
+
+  /* ---------- スクロールで出てくる ---------- */
+  var rvs = Array.prototype.slice.call(document.querySelectorAll('.rv'));
+  function checkReveal(){
+    var lim = window.innerHeight * .9;
+    rvs = rvs.filter(function(e){
+      if (reduced || e.getBoundingClientRect().top < lim){ e.classList.add('in'); return false; }
+      return true;
+    });
+  }
+
+  /* ---------- グラフィック：見えている間だけ動かす ---------- */
+  var arts = document.querySelectorAll('.art');
+  function checkArt(){
+    var h = window.innerHeight;
+    arts.forEach(function(a){
+      var r = a.getBoundingClientRect();
+      a.classList.toggle('live', !reduced && r.bottom > 0 && r.top < h);
+    });
+  }
+
+  /* ---------- ご相談の流れ：線が伸びる ---------- */
+  var flow = document.getElementById('flowList');
+  var fill = document.getElementById('flowFill');
+  var steps = flow.querySelectorAll('.step');
+  var track = flow.querySelector('.flow-track');
+  function updateFlow(){
+    var tr = track.getBoundingClientRect();
+    var total = tr.height;
+    var prog = reduced ? total : Math.max(0, Math.min(total, window.innerHeight*.6 - tr.top));
+    fill.style.height = prog + 'px';
+    steps.forEach(function(s){
+      var dot = s.querySelector('.step-dot').getBoundingClientRect();
+      s.classList.toggle('on', dot.top + dot.height/2 - tr.top <= prog + 1);
+    });
+  }
+
+  function onScroll(){ checkReveal(); checkArt(); updateFlow(); }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+  onScroll();
+
+  /* ---------- 途中で設定が変わったとき ---------- */
+  function onMq(){
+    reduced = mq.matches;
+    if (reduced){
+      stop(); draw(4000);
+      cells.forEach(function(s){ s.classList.remove('bin'); s.textContent = s.dataset.c; });
+    } else { start(); }
+    onScroll();
+  }
+  if (mq.addEventListener) mq.addEventListener('change', onMq); else if (mq.addListener) mq.addListener(onMq);
+})();
+</script>
+</body>
+</html>

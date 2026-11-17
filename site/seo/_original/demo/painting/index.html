@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>彩街塗装｜外壁塗装・屋根塗装・防水工事（制作実績用デモサイト）</title>
+<meta name="description" content="外壁塗装・屋根塗装・防水工事の彩街塗装（架空の会社）。※このサイトは制作実績用のデモサイトです。掲載の会社名・住所・電話番号などはすべて架空のものです。">
+<meta name="robots" content="noindex">
+<script>document.documentElement.className+=' js';</script>
+<link rel="preload" as="image" href="images/hero-painter.jpg" imagesrcset="images/hero-painter-960.jpg 960w, images/hero-painter.jpg 1920w" imagesizes="100vw">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+
+<!-- ローラーの柄・ロゴマーク（使い回し） -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="arm" viewBox="0 0 340 120">
+    <path d="M338 60H262Q248 60 244 72L236 92H176" fill="none" stroke="#a7b0ba" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="6" y="78" width="176" height="30" rx="15" fill="#2a3038"/>
+    <rect x="18" y="84" width="150" height="6" rx="3" fill="#ffffff" opacity=".12"/>
+  </symbol>
+  <symbol id="mark" viewBox="0 0 40 40">
+    <rect x="3" y="3" width="34" height="34" rx="9" fill="#e2702b"/>
+    <path d="M10 25c4-2 7-6 11-6s5 3 9 1" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>
+    <path d="M10 16c3-1 5-3 8-3" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" opacity=".6"/>
+  </symbol>
+</svg>
+
+<header id="siteHeader">
+  <div class="wrap head">
+    <a href="#top" class="logo" aria-label="彩街塗装 トップへ">
+      <svg class="logo-mark" width="38" height="38" aria-hidden="true"><use href="#mark"/></svg>
+      <span class="logo-txt"><b>彩街塗装</b><small>IROMACHI PAINT｜デモサイト</small></span>
+    </a>
+    <nav class="global" id="gnav" aria-label="メインメニュー">
+      <ul>
+        <li><a href="#service">事業内容</a></li>
+        <li><a href="sekou.html">施工事例</a></li>
+        <li><a href="#flow">工事の流れ</a></li>
+        <li><a href="news.html">お知らせ</a></li>
+        <li><a href="recruit.html">採用情報</a></li>
+        <li><a href="#company">会社概要</a></li>
+        <li><a href="#contact">お問合せ</a></li>
+      </ul>
+    </nav>
+    <a class="head-tel paint-btn" href="tel:0000000000">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/></svg>
+      000-000-0000
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-label="メニューを開く" aria-expanded="false" aria-controls="gnav"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ================= トップ ================= -->
+  <div class="hero">
+    <img class="hero-img" src="images/hero-painter.jpg" srcset="images/hero-painter-960.jpg 960w, images/hero-painter.jpg 1920w" sizes="100vw" width="1920" height="1280" alt="住宅の外壁を塗装する職人" fetchpriority="high">
+    <div class="wrap">
+      <span class="hero-kicker">外壁塗装・屋根塗装・防水工事</span>
+      <h1>塗り替えるのは、<br>暮らしの<span class="em">これから。</span></h1>
+      <svg class="hero-stroke" viewBox="0 0 600 40" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M8 18C60 8 140 10 220 12C320 9 420 8 520 11C560 12 590 14 596 20C590 28 560 30 520 29C420 33 300 30 200 32C120 33 50 32 10 28C2 25 2 20 8 18Z" fill="#e2702b"/>
+        <path d="M40 16C200 13 380 12 560 15M30 24C220 23 400 22 580 23" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="1.5"/>
+      </svg>
+      <p class="hero-lead">住まいの外壁・屋根から、アパートや店舗まで。<br>建物を雨や日差しから守る塗装を、ていねいにお届けします。</p>
+      <div class="btns">
+        <a class="btn btn-tel paint-btn" href="#contact">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/></svg>
+          無料診断・お見積り
+        </a>
+        <a class="btn btn-ghost" href="#works">施工事例を見る</a>
+      </div>
+      <ul class="hero-meta">
+        <li>診断・見積り無料</li>
+        <li>自社職人が施工</li>
+        <li>工事後の定期点検</li>
+      </ul>
+    </div>
+    <div class="scroll-cue" aria-hidden="true">SCROLL</div>
+
+    <!-- オープニング：ローラーが横切って写真を塗り出す -->
+    <div class="intro" aria-hidden="true">
+      <div class="intro-cover"></div>
+      <div class="roller">
+        <svg class="roller-arm"><use href="#arm"/></svg>
+        <div class="roller-cyl"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 私たちについて ================= -->
+  <section id="greeting" class="clip">
+    <span class="bgword" aria-hidden="true">ABOUT US</span>
+    <div class="wrap greet">
+      <figure class="greet-photo">
+        <img src="images/staff-portrait.jpg" width="960" height="1440" loading="lazy" decoding="async" alt="ヘルメットと安全ベストを着けたスタッフ（イメージ）">
+        <div class="since" aria-hidden="true"><small>SINCE</small>2008</div>
+      </figure>
+      <div>
+        <span class="eyebrow">About us</span><br>
+        <h2 class="big-h">私たちについて</h2>
+        <p class="greet-lead">塗装は、建物を守る<br>いちばん身近な<br>メンテナンスです。</p>
+        <p>外壁や屋根の塗膜は、毎日の雨や紫外線から建物を守っています。塗膜が傷んだままにしておくと、ひび割れから水がしみ込み、建物そのものの寿命を縮めてしまうことも。</p>
+        <p>私たちは、まず建物の状態をしっかり調べ、必要な工事だけをわかりやすくご提案します。仕上がりの美しさはもちろん、「頼んでよかった」と思っていただける工事をめざしています。</p>
+        <p class="sign"><small>代表取締役</small>青葉 拓真<small class="sign-note">（架空の人物）</small></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= チェック ================= -->
+  <section class="refresh on-dark" aria-labelledby="refreshTitle">
+    <div class="drip" style="--from:var(--white)" aria-hidden="true"></div>
+    <img class="refresh-bg" src="images/house-modern.jpg" width="1600" height="1068" loading="lazy" decoding="async" alt="">
+    <div class="wrap">
+      <span class="eyebrow">Check</span>
+      <h2 id="refreshTitle">その外壁、<br><span class="em">塗り替えどき</span><br>かもしれません。</h2>
+      <p class="q">こんなサインが出ていたら、点検のタイミングです。</p>
+      <ul class="symptoms">
+        <li><img src="images/jirei/peel-before.jpg" width="1200" height="800" loading="lazy" decoding="async" alt=""><span>塗装のはがれ</span></li>
+        <li><img src="images/jirei/crack-before.jpg" width="1200" height="800" loading="lazy" decoding="async" alt=""><span>ひび割れ</span></li>
+        <li><img src="images/jirei/stain-before.jpg" width="1200" height="712" loading="lazy" decoding="async" alt=""><span>汚れ・色あせ</span></li>
+      </ul>
+      <p class="body">一般的に、外壁や屋根の塗り替えの目安は10年前後といわれています。見た目の変化は、塗膜が弱ってきたサイン。早めに手を入れることで、大がかりな補修を防ぎ、結果的に費用をおさえることにつながります。</p>
+    </div>
+  </section>
+
+  <!-- ================= 事業内容（ローラーで紺色に塗る） ================= -->
+  <section id="service" class="paint-sec on-dark">
+    <div class="pfill" aria-hidden="true"><div class="pfill-in"><div class="roller"><svg class="roller-arm"><use href="#arm"/></svg><div class="roller-cyl"></div></div></div></div>
+    <span class="bgword" aria-hidden="true">SERVICE</span>
+    <div class="wrap">
+      <div class="svc-head">
+        <span class="eyebrow">Service</span><br>
+        <h2 class="big-h">事業内容</h2>
+      </div>
+
+      <article class="svc-row">
+        <figure class="svc-photo"><img src="images/svc-wall.jpg" width="1200" height="800" loading="lazy" decoding="async" alt="建物の壁を塗装する職人"></figure>
+        <div class="svc-txt">
+          <div class="svc-num" aria-hidden="true">01</div>
+          <h3>外壁塗装</h3>
+          <span class="svc-sub">戸建て住宅・アパート・店舗</span>
+          <p>高圧洗浄とひび割れの補修で下地を整え、下塗り・中塗り・上塗りの3工程で仕上げます。ご予算やご希望の耐久年数に合わせて、塗料の種類をご提案します。</p>
+          <ul class="tags"><li>シリコン塗料</li><li>フッ素塗料</li><li>無機塗料</li><li>遮熱塗料</li></ul>
+        </div>
+      </article>
+
+      <article class="svc-row rev">
+        <figure class="svc-photo"><img src="images/svc-roof.jpg" width="1200" height="800" loading="lazy" decoding="async" alt="塗り替えた瓦屋根"></figure>
+        <div class="svc-txt">
+          <div class="svc-num" aria-hidden="true">02</div>
+          <h3>屋根塗装</h3>
+          <span class="svc-sub">スレート・金属屋根・瓦</span>
+          <p>屋根は建物の中でいちばん日差しや雨を受ける場所です。コケや汚れを落とし、サビや割れを補修したうえで塗装。遮熱塗料を使えば、夏の室温上昇をやわらげる効果も期待できます。</p>
+        </div>
+      </article>
+
+      <article class="svc-row">
+        <figure class="svc-photo"><img src="images/svc-waterproof.jpg" width="1200" height="800" loading="lazy" decoding="async" alt="建物の上部で作業する職人"></figure>
+        <div class="svc-txt">
+          <div class="svc-num" aria-hidden="true">03</div>
+          <h3>防水工事</h3>
+          <span class="svc-sub">屋上・ベランダ・バルコニー</span>
+          <p>雨漏りの原因になりやすい屋上やベランダに、防水層をつくり直します。形の複雑な場所にも施工しやすい塗膜防水を中心に、建物に合った工法をお選びします。</p>
+        </div>
+      </article>
+
+      <div class="svc-more">
+        <div class="svc-txt">
+          <div class="svc-num" aria-hidden="true">04</div>
+          <h3>鉄部・木部の塗装</h3>
+          <span class="svc-sub">手すり・階段・門扉・破風板など</span>
+          <p>サビや腐食が進みやすい鉄部・木部は、外壁よりも早めのお手入れが必要です。ケレン（サビ落とし）や下地処理から行い、長持ちする仕上がりにします。</p>
+        </div>
+        <div class="svc-txt">
+          <div class="svc-num" aria-hidden="true">05</div>
+          <h3>建物まわりの各種塗装</h3>
+          <span class="svc-sub">店舗・事務所・倉庫・共用部</span>
+          <p>営業中の店舗や入居者のいる建物でも、作業時間や動線に配慮しながら工事を進めます。吹き付けによる仕上げにも対応しています。</p>
+          <ul class="tags"><li>吹き付け仕上げ</li><li>床の塗装</li><li>ライン引き</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 選ばれる理由 ================= -->
+  <section id="perks" class="clip">
+    <div class="drip" style="--from:var(--navy)" aria-hidden="true"></div>
+    <span class="bgword" aria-hidden="true">REASON</span>
+    <div class="wrap perks">
+      <figure class="perks-photo">
+        <img src="images/tools-tray.jpg" width="1000" height="1500" loading="lazy" decoding="async" alt="ローラーとハケ、色見本">
+        <figcaption>わたしたちの約束</figcaption>
+      </figure>
+      <div>
+        <span class="eyebrow">Reason</span><br>
+        <h2 class="big-h">選ばれる<br>3つの理由</h2>
+        <ul class="perk-list">
+          <li><span class="n">01</span><h3>自社の職人が責任施工</h3><p>調査からお見積り、施工、アフターフォローまで、同じチームが一貫して担当します。現場のことは、いつでも担当者に直接ご相談いただけます。</p></li>
+          <li><span class="n">02</span><h3>写真つきの診断レポート</h3><p>建物の状態を写真つきの報告書でご説明。「なぜこの工事が必要なのか」をご納得いただいてから、お見積りをお出しします。</p></li>
+          <li class="feature"><span class="n">03</span><h3>工事のあとも、ずっと安心。</h3><p>完成後も定期的に点検にお伺いします。気になることがあれば、小さなことでもお気軽にご連絡ください。</p></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ビフォー・アフター（ローラーで水色に塗る） ================= -->
+  <section id="works" class="paint-sec">
+    <div class="pfill" aria-hidden="true"><div class="pfill-in"><div class="roller"><svg class="roller-arm"><use href="#arm"/></svg><div class="roller-cyl" style="--rc1:#5fa3b8;--rc2:#3f8aa1"></div></div></div></div>
+    <div class="drip" style="--from:var(--paper)" aria-hidden="true"></div>
+    <span class="bgword" aria-hidden="true">WORKS</span>
+    <div class="wrap">
+      <div class="works-head">
+        <div>
+          <span class="eyebrow">Works</span><br>
+          <h2 class="big-h">塗り替えで、<br>ここまで変わる。</h2>
+        </div>
+        <p>最近の施工事例を3件ご紹介します。写真の上のつまみを左右に動かすと、塗り替え前と後を見比べられます。</p>
+      </div>
+
+      <div class="works" data-jirei-latest="3"></div>
+      <noscript><p>施工事例の表示にはJavaScriptが必要です。</p></noscript>
+      <div class="works-more">
+        <a class="btn btn-dark paint-btn" href="sekou.html">施工事例をもっと見る<span aria-hidden="true">→</span></a>
+      </div>
+      <p class="works-note">※ 掲載している事例はデモ用のサンプルで、写真はすべてイメージ写真です。</p>
+    </div>
+  </section>
+
+  <!-- ================= 工事の流れ ================= -->
+  <section id="flow">
+    <div class="flow-band">
+      <img src="images/scaffolding-crew.jpg" width="1200" height="1810" loading="lazy" decoding="async" alt="足場の上で作業する職人たち">
+      <div class="wrap">
+        <span class="eyebrow">Flow</span><br>
+        <h2 class="big-h">工事の流れ</h2>
+      </div>
+    </div>
+    <div class="wrap">
+      <ol class="steps">
+        <li>
+          <h3>お問合せ</h3>
+          <p>お電話またはメールでご連絡ください。気になっている箇所やご希望の時期などをお伺いします。</p>
+          <a class="tel-inline" href="tel:0000000000">tel. 000-000-0000</a>
+        </li>
+        <li>
+          <h3>現地調査・<br>診断</h3>
+          <p>担当者が建物を確認し、外壁・屋根・付帯部の状態を調べます。調査の時間はおおむね1時間ほどです。</p>
+        </li>
+        <li>
+          <h3>ご提案・<br>お見積り</h3>
+          <p>診断レポートとあわせて、工事内容と費用をご説明します。複数のプランから比べていただくこともできます。</p>
+        </li>
+        <li>
+          <h3>施工</h3>
+          <p>ご近所へのごあいさつ、足場の設置、洗浄、補修、塗装の順に進めます。毎日の作業内容もこまめにお伝えします。</p>
+        </li>
+        <li>
+          <h3>完成・<br>アフターフォロー</h3>
+          <p>お客様と一緒に仕上がりを確認してお引き渡し。その後も定期点検で、住まいの状態を見守ります。</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= お知らせ・採用 ================= -->
+  <section id="news" class="clip">
+    <div class="drip" style="--from:var(--white)" aria-hidden="true"></div>
+    <span class="bgword" aria-hidden="true">NEWS</span>
+    <div class="wrap news-top">
+      <div class="news-side">
+        <span class="eyebrow">News</span><br>
+        <h2 class="big-h">お知らせ</h2>
+        <a class="btn btn-dark paint-btn news-all" href="news.html">お知らせ一覧<span aria-hidden="true">→</span></a>
+      </div>
+      <ul class="news-list" data-news-latest="3"></ul>
+      <noscript><p>お知らせの表示にはJavaScriptが必要です。</p></noscript>
+    </div>
+    <div class="wrap">
+      <a class="recruit-banner" href="recruit.html">
+        <img src="images/recruit-team.jpg" width="1920" height="1280" loading="lazy" decoding="async" alt="ヘルメットをかぶって作業する現場スタッフ">
+        <span class="rb-txt">
+          <span class="eyebrow">Recruit</span>
+          <strong>いっしょに、<br>街を塗りかえよう。</strong>
+          <span class="rb-sub">塗装スタッフ募集中（未経験歓迎）</span>
+          <span class="rb-go">採用情報を見る<span aria-hidden="true">→</span></span>
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ================= 会社概要 ================= -->
+  <section id="company" class="clip">
+    <div class="drip" style="--from:var(--paper)" aria-hidden="true"></div>
+    <span class="bgword" aria-hidden="true">COMPANY</span>
+    <div class="wrap company">
+      <div class="co-side">
+        <span class="eyebrow">Company</span><br>
+        <h2 class="big-h">会社概要</h2>
+        <p class="co-name">彩街塗装</p>
+        <p class="co-en">IROMACHI PAINT</p>
+        <p>〒000-0000<br>〇〇県彩野市中央1丁目2-3</p>
+        <p class="hours">平日 9:00〜17:30（土日祝休み）</p>
+        <figure class="demo-map">
+          <svg viewBox="0 0 400 260" role="img" aria-labelledby="mapTitle">
+            <title id="mapTitle">所在地のイメージ地図（架空）</title>
+            <rect width="400" height="260" fill="#e8ece6"/>
+            <path d="M0 196C80 186 150 214 230 200S360 170 400 182V260H0Z" fill="#cfe3ea"/>
+            <path d="M-10 92H410M150 -10V270M300 -10L250 270" stroke="#fff" stroke-width="14"/>
+            <path d="M-10 92H410M150 -10V270M300 -10L250 270" stroke="#d6d9d0" stroke-width="1"/>
+            <path d="M40 30H120V70H40ZM180 20H270V70H180ZM40 112H120V170H40ZM180 112H262V160H180ZM320 110H390V160H320Z" fill="#dfe3da"/>
+            <circle cx="214" cy="136" r="34" fill="#e2702b" opacity=".14"/>
+            <path d="M214 92c-15 0-26 11-26 25 0 19 26 40 26 40s26-21 26-40c0-14-11-25-26-25z" fill="#e2702b"/>
+            <circle cx="214" cy="117" r="9" fill="#fff"/>
+            <text x="16" y="248" font-size="12" fill="#4c5868">イメージ地図（架空の場所です）</text>
+          </svg>
+        </figure>
+      </div>
+      <dl class="profile">
+        <dt>会社名</dt><dd>彩街塗装株式会社（いろまちとそう）</dd>
+        <dt>代表者</dt><dd>代表取締役　青葉 拓真</dd>
+        <dt>設立</dt><dd>2008年4月</dd>
+        <dt>所在地</dt><dd>〒000-0000 〇〇県彩野市中央1丁目2-3</dd>
+        <dt>TEL / FAX</dt><dd><a href="tel:0000000000">000-000-0000</a>　/　000-000-0001</dd>
+        <dt>営業時間</dt><dd>平日 9:00〜17:30（休業日：土・日・祝日）</dd>
+        <dt>e-mail</dt><dd><a href="mailto:info@example.com">info@example.com</a></dd>
+        <dt>従業員数</dt><dd>12名（うち塗装職人8名）</dd>
+        <dt>事業内容</dt><dd>外壁塗装、屋根塗装、防水工事、鉄部・木部塗装、建築塗装工事全般</dd>
+        <dt>許可・資格</dt><dd>建設業許可　〇〇県知事許可（般-00）第000000号<br>一級塗装技能士、二級建築施工管理技士 ほか</dd>
+        <dt>対応エリア</dt><dd>
+          <ul class="area">
+            <li>彩野市</li><li>あおば町</li><li>みなと市</li><li>かわせみ村</li><li>その他近隣地域</li>
+          </ul>
+        </dd>
+      </dl>
+    </div>
+    <p class="wrap co-note">※ 会社名・人物名・住所・電話番号・メールアドレス・許可番号などは、すべてデモ用の架空のものです。</p>
+  </section>
+
+  <!-- ================= お問合せ（ローラーでオレンジに塗る） ================= -->
+  <section id="contact" class="paint-sec on-orange">
+    <div class="pfill" aria-hidden="true"><div class="pfill-in"><div class="roller"><svg class="roller-arm"><use href="#arm"/></svg><div class="roller-cyl" style="--rc1:#f3a066;--rc2:#e2843f"></div></div></div></div>
+    <div class="drip" style="--from:var(--white)" aria-hidden="true"></div>
+    <span class="bgword" aria-hidden="true">CONTACT</span>
+    <div class="wrap">
+      <span class="eyebrow">Contact</span><br>
+      <h2 class="big-h">お問合せ</h2>
+      <p class="lead">塗り替えの時期や費用のこと、まずはお気軽にご相談ください。<br>建物の診断とお見積りは無料です。</p>
+      <span class="free">診断・見積り無料</span><br>
+      <a class="big-tel" href="tel:0000000000">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/></svg>
+        000-000-0000
+      </a>
+      <p class="c-hours">受付時間　平日 9:00〜17:30（土日祝休み）</p>
+      <div class="btns" style="justify-content:center;margin-top:30px">
+        <a class="btn btn-white paint-btn" href="mailto:info@example.com">メールで相談する</a>
+      </div>
+      <p class="c-mail">メール：<a href="mailto:info@example.com">info@example.com</a><br><small>※ デモサイトのため、電話番号・メールアドレスは架空のものです。</small></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="demo-note" role="note">※このサイトは制作実績用のデモサイトです。<span>掲載している会社名・人物・住所・電話番号・事例などはすべて架空のものです。</span></div>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <div class="logo"><svg class="logo-mark" width="34" height="34" aria-hidden="true"><use href="#mark"/></svg><span class="logo-txt"><b>彩街塗装</b><small>外壁塗装・屋根塗装・防水工事</small></span></div>
+        <address>
+          〒000-0000 〇〇県彩野市中央1丁目2-3<br>
+          tel. <a href="tel:0000000000">000-000-0000</a><br>
+          平日 9:00〜17:30（土日祝休み）
+        </address>
+      </div>
+      <nav aria-label="フッターメニュー">
+        <ul>
+          <li><a href="#top">ホーム</a></li>
+          <li><a href="#greeting">私たちについて</a></li>
+          <li><a href="#service">事業内容</a></li>
+          <li><a href="sekou.html">施工事例</a></li>
+          <li><a href="#flow">工事の流れ</a></li>
+          <li><a href="news.html">お知らせ</a></li>
+          <li><a href="recruit.html">採用情報</a></li>
+          <li><a href="#company">会社概要</a></li>
+          <li><a href="#contact">お問合せ</a></li>
+        </ul>
+      </nav>
+    </div>
+    <p class="copy">&copy; IROMACHI PAINT（デモサイト）</p>
+  </div>
+</footer>
+
+<div class="sp-bar">
+  <a class="t" href="tel:0000000000">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/></svg>
+    電話で相談
+  </a>
+  <a class="c" href="#contact">お問合せ</a>
+</div>
+<a href="#top" class="to-top" id="toTop" aria-label="ページの先頭へ戻る">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg>
+</a>
+
+<script src="js/jirei-data.js"></script>
+<script src="js/news-data.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>

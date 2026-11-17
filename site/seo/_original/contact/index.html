@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>お問い合わせ｜合同会社turtle ad</title>
+<meta name="description" content="広告・求人の掲載、ホームページ制作、AI活用・AI動画のご相談は、こちらのフォームからお気軽にどうぞ。全国オンライン対応。">
+<meta name="theme-color" content="#050913">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/sub.css">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+.form-wrap{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(24px,4vw,48px);align-items:start}
+@media (max-width:860px){.form-wrap{grid-template-columns:minmax(0,1fr)}}
+.cf{display:grid;gap:22px}
+.field{display:grid;gap:8px}
+.field label,.field .lbl{font-weight:700;font-size:16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.req,.opt{font-size:12px;font-weight:700;border-radius:4px;padding:1px 8px;line-height:1.7}
+.req{background:var(--cyan);color:#04101c}
+.opt{border:1px solid var(--line);color:var(--muted)}
+.hint{font-size:13px;color:var(--muted);line-height:1.6}
+.cf input[type=text],.cf input[type=email],.cf input[type=tel],.cf select,.cf textarea{
+  width:100%;font:inherit;font-size:16px;color:var(--text);background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:12px 14px;line-height:1.6}
+.cf textarea{min-height:180px;resize:vertical}
+.cf select{appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--cyan) 50%),linear-gradient(135deg,var(--cyan) 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 14px) 50%;background-size:6px 6px;background-repeat:no-repeat;padding-right:40px}
+.cf input:focus,.cf select:focus,.cf textarea:focus{outline:2px solid var(--cyan);outline-offset:1px;border-color:transparent}
+.cf [aria-invalid="true"]{border-color:#ff8a8a}
+.err{font-size:13px;color:#ffb0b0;min-height:0}
+.err:empty{display:none}
+.pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+@media (max-width:600px){.pair{grid-template-columns:minmax(0,1fr)}}
+.field .agree{display:flex;flex-wrap:nowrap;gap:10px;align-items:flex-start;font-size:15px;color:var(--sub);font-weight:500}
+.agree input{width:20px;height:20px;margin-top:5px;accent-color:var(--cyan);flex:0 0 auto}
+.agree a{color:var(--cyan)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.submit{border:0;cursor:pointer;font-family:inherit;justify-self:start;min-width:240px}
+.submit[disabled]{opacity:.6;cursor:wait;transform:none}
+.status{border-radius:10px;padding:18px 20px;font-size:15px;line-height:1.8}
+.status.ok{background:rgba(79,227,255,.12);border:1px solid rgba(79,227,255,.5)}
+.status.ng{background:rgba(255,138,138,.1);border:1px solid rgba(255,138,138,.5)}
+.status b{display:block;font-size:17px;margin-bottom:4px}
+.side{display:grid;gap:16px}
+.side .way-main{font-size:clamp(22px,2.6vw,30px)}
+.flow{list-style:none;display:grid;gap:10px;counter-reset:f}
+.flow li{counter-increment:f;display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;font-size:15px;color:var(--sub)}
+.flow li::before{content:counter(f);font-family:var(--en);font-weight:700;color:#04101c;background:var(--cyan);border-radius:50%;width:26px;height:26px;display:grid;place-items:center;font-size:14px;margin-top:3px}
+</style>
+<link rel="icon" href="../favicon.ico?v=2" sizes="16x16 32x32 48x48"><link rel="apple-touch-icon" href="../images/logo/apple-touch-icon.png?v=2"><link rel="manifest" href="../site.webmanifest">
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@800&amp;text=turtle%20ad&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/logo.css">
+</head>
+<body>
+<svg class="bg-lines" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
+  <defs><linearGradient id="bgl" x1="0" x2="1"><stop offset="0" stop-color="#4fe3ff" stop-opacity="0"/><stop offset=".5" stop-color="#4fe3ff" stop-opacity=".22"/><stop offset="1" stop-color="#4fe3ff" stop-opacity="0"/></linearGradient></defs>
+  <path stroke="url(#bgl)" d="M-50 760C320 640 560 860 860 680S1260 440 1500 500"/>
+  <path stroke="url(#bgl)" d="M-50 200C300 110 600 300 900 170S1300 70 1500 120"/>
+</svg>
+<header class="hd">
+  <a class="logo" href="../index.html" aria-label="合同会社turtle ad トップへ">
+    <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><polygon points="50,6 88.1,28 88.1,72 50,94 11.9,72 11.9,28" fill="#0D3A34" stroke="#3CD6F0" stroke-width="3" stroke-linejoin="round"/><polygon points="50,32 65.6,41 65.6,59 50,68 34.4,59 34.4,41" fill="none" stroke="#3CD6F0" stroke-width="2.5" stroke-linejoin="round"/><path d="M50 6 L50 32 M88.1 28 L65.6 41 M88.1 72 L65.6 59 M50 94 L50 68 M11.9 72 L34.4 59 M11.9 28 L34.4 41" stroke="#3CD6F0" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.8"/><circle class="lm-dot" cx="50" cy="32" r="3" fill="#fff"/><circle class="lm-dot" cx="65.6" cy="41" r="3" fill="#fff"/><circle class="lm-dot" cx="65.6" cy="59" r="3" fill="#fff"/><circle class="lm-dot" cx="50" cy="68" r="3" fill="#fff"/><circle class="lm-dot" cx="34.4" cy="59" r="3" fill="#fff"/><circle class="lm-dot" cx="34.4" cy="41" r="3" fill="#fff"/><circle cx="50" cy="50" r="5" fill="#3CD6F0"/></svg>
+    <span class="logo-word">turtle <b>ad</b></span>
+  </a>
+  <nav class="nav" aria-label="メニュー">
+    <a href="../index.html#business">事業紹介</a>
+    <a href="../index.html#web">ホームページ料金</a>
+    <a href="../index.html#company">会社概要</a>
+    <a class="btn" href="./">お問い合わせ</a>
+  </nav>
+</header>
+<main>
+<section class="page-hd"><div class="wrap">
+  <p class="crumb"><a href="../index.html">トップ</a> ／ お問い合わせ</p>
+  <p class="page-en">CONTACT</p>
+  <h1 class="page-title">お問い合わせ</h1>
+  <p class="page-lead">広告・求人の掲載、ホームページ制作、AI活用やAI動画のことなど、どんなことでもお気軽にご相談ください。全国どこからでもオンラインで対応します。</p>
+</div></section>
+
+<section class="sec"><div class="wrap form-wrap">
+  <div class="card">
+    <form class="cf" id="cf" novalidate>
+      <div class="field">
+        <label for="f-name">お名前<span class="req">必須</span></label>
+        <input type="text" id="f-name" name="name" autocomplete="name" maxlength="100" required>
+        <p class="err" id="e-name"></p>
+      </div>
+      <div class="field">
+        <label for="f-company">会社名・お店の名前<span class="opt">任意</span></label>
+        <input type="text" id="f-company" name="company" autocomplete="organization" maxlength="100">
+      </div>
+      <div class="pair">
+        <div class="field">
+          <label for="f-email">メールアドレス</label>
+          <input type="email" id="f-email" name="email" autocomplete="email" inputmode="email" maxlength="200">
+          <p class="err" id="e-email"></p>
+        </div>
+        <div class="field">
+          <label for="f-phone">電話番号</label>
+          <input type="tel" id="f-phone" name="phone" autocomplete="tel" inputmode="tel" maxlength="30">
+        </div>
+      </div>
+      <p class="hint">メールアドレスか電話番号の、どちらか一つは必ずご記入ください。</p>
+      <div class="field">
+        <label for="f-topic">ご相談の種類<span class="opt">任意</span></label>
+        <select id="f-topic" name="topic">
+          <option value="">選んでください</option>
+          <option>AI活用・AIの使い方</option>
+          <option>AI動画・リール制作</option>
+          <option>ホームページ制作</option>
+          <option>広告・求人の掲載（マイタウンガイド／マイタウンジョブ）</option>
+          <option>チラシ・印刷物</option>
+          <option>その他</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-message">ご相談の内容<span class="req">必須</span></label>
+        <textarea id="f-message" name="message" maxlength="3000" required placeholder="例：鹿児島の取引先でAIを使えないか相談したい／ホームページを新しく作りたい など"></textarea>
+        <p class="err" id="e-message"></p>
+      </div>
+      <div class="hp" aria-hidden="true">
+        <label for="f-website">ホームページURL（入力しないでください）</label>
+        <input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off">
+      </div>
+      <div class="field">
+        <label class="agree" for="f-agree"><input type="checkbox" id="f-agree" name="agree" required><span><a href="../reel/privacy.html" target="_blank" rel="noopener">プライバシーポリシー</a>に同意して送信します</span></label>
+        <p class="err" id="e-agree"></p>
+      </div>
+      <button class="btn submit" type="submit" id="f-submit">送信する</button>
+      <div id="f-status" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+
+  <aside class="side">
+    <div class="card">
+      <h2 class="h3" style="font-size:18px;font-weight:900;margin-bottom:10px">送信したあとの流れ</h2>
+      <ol class="flow">
+        <li>内容を確認し、担当から2営業日以内にご連絡します</li>
+        <li>オンラインか電話で、くわしくお話を伺います</li>
+        <li>お困りごとに合わせて、進め方とお見積もりをご提案します</li>
+      </ol>
+    </div>
+    <a class="way tel" href="tel:0992103511">
+      <span class="way-label">お電話でも</span>
+      <span class="way-main">099-210-3511</span>
+      <span class="way-sub">受付時間 9:00〜18:00（土日祝休み）</span>
+    </a>
+    <a class="way" href="mailto:info@turtle-ad.com?subject=%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B">
+      <span class="way-label">メールでも</span>
+      <span class="way-main">info@turtle-ad.com</span>
+    </a>
+  </aside>
+</div></section>
+</main>
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft-top">
+      <div>
+        <address>
+          合同会社turtle ad<br>
+          〒891-0109 鹿児島県鹿児島市清和3-25-15<br>
+          電話 <a href="tel:0992103511">099-210-3511</a>／メール <a href="mailto:info@turtle-ad.com">info@turtle-ad.com</a><br>
+          受付時間 9:00〜18:00（土日祝休み）
+        </address>
+      </div>
+      <nav class="ft-links" aria-label="フッターメニュー">
+        <a href="../index.html">トップページ</a>
+        <a href="../index.html#ai">AI活用サポート</a>
+        <a href="../index.html#web">ホームページ制作</a>
+        <a href="../index.html#guide">マイタウンガイド</a>
+        <a href="../index.html#job">マイタウンジョブ</a>
+        <a href="../index.html#company">会社概要</a>
+        <a href="./">お問い合わせ</a>
+      </nav>
+    </div>
+    <p class="copy">© 合同会社turtle ad</p>
+  </div>
+</footer>
+<script src="../assets/sub.js"></script>
+<script>
+(function(){
+  'use strict';
+  var ENDPOINT = 'https://turtlead.app.n8n.cloud/webhook/turtlead-contact';
+  var form = document.getElementById('cf');
+  var btn = document.getElementById('f-submit');
+  var box = document.getElementById('f-status');
+  function $(id){ return document.getElementById(id); }
+  function setErr(input, errId, msg){
+    if (input) input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+    $(errId).textContent = msg || '';
+  }
+  function validate(){
+    var ok = true, first = null;
+    var name = $('f-name'), email = $('f-email'), phone = $('f-phone'), msg = $('f-message'), agree = $('f-agree');
+    if (!name.value.trim()){ setErr(name,'e-name','お名前を入力してください。'); ok=false; first=first||name; } else setErr(name,'e-name','');
+    var em = email.value.trim(), ph = phone.value.trim();
+    if (!em && !ph){ setErr(email,'e-email','メールアドレスか電話番号のどちらかを入力してください。'); ok=false; first=first||email; }
+    else if (em && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){ setErr(email,'e-email','メールアドレスの形を確認してください。'); ok=false; first=first||email; }
+    else setErr(email,'e-email','');
+    if (!msg.value.trim()){ setErr(msg,'e-message','ご相談の内容を入力してください。'); ok=false; first=first||msg; } else setErr(msg,'e-message','');
+    if (!agree.checked){ setErr(agree,'e-agree','プライバシーポリシーへの同意にチェックを入れてください。'); ok=false; first=first||agree; } else setErr(agree,'e-agree','');
+    if (first) first.focus();
+    return ok;
+  }
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    box.className = ''; box.innerHTML = '';
+    if (!validate()) return;
+    btn.disabled = true; btn.textContent = '送信しています…';
+    var data = {
+      name: $('f-name').value.trim(),
+      company: $('f-company').value.trim(),
+      email: $('f-email').value.trim(),
+      phone: $('f-phone').value.trim(),
+      topic: $('f-topic').value,
+      message: $('f-message').value.trim(),
+      website: $('f-website').value,
+      page: location.href
+    };
+    fetch(ENDPOINT, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data) })
+      .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ return {ok:r.ok && j.ok !== false, j:j}; }); })
+      .then(function(res){
+        if (!res.ok) throw new Error((res.j && res.j.error) || 'send failed');
+        form.querySelectorAll('input,select,textarea').forEach(function(el){ if (el.type==='checkbox') el.checked=false; else el.value=''; });
+        box.className = 'status ok';
+        box.innerHTML = '<b>送信しました。ありがとうございます。</b>内容を確認して、担当から2営業日以内にご連絡します。お急ぎの場合はお電話（099-210-3511）でもどうぞ。';
+      })
+      .catch(function(){
+        box.className = 'status ng';
+        box.innerHTML = '<b>送信できませんでした。</b>お手数ですが、少し時間をおいてもう一度お試しいただくか、お電話（099-210-3511）またはメール（info@turtle-ad.com）でご連絡ください。';
+      })
+      .then(function(){ btn.disabled = false; btn.textContent = '送信する'; box.scrollIntoView({behavior:'smooth', block:'center'}); });
+  });
+})();
+</script>
+</body>
+</html>

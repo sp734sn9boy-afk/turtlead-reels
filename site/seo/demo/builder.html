@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>工務店のホームページ見本（デモ）｜鹿児島のホームページ制作 turtle ad</title>
+<meta name="description" content="建設業・工務店向けホームページのデモサイトです（架空の工務店・姶良市）。ライト・スタンダード・しっかりの3プランを切り替えて、ページの数・デザイン・機能の違いを確かめられます。合同会社turtle ad制作。">
+<link rel="canonical" href="https://www.turtle-ad.com/demo/builder.html">
+<meta property="og:title" content="工務店のホームページ見本（デモ）｜鹿児島のホームページ制作 turtle ad">
+<meta property="og:description" content="建設業・工務店向けホームページのデモサイトです（架空の工務店・姶良市）。ライト・スタンダード・しっかりの3プランを切り替えて、ページの数・デザイン・機能の違いを確かめられます。合同会社turtle ad制作。">
+<meta property="og:image" content="https://www.turtle-ad.com/images/logo/icon-512.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/images/logo/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/images/logo/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/images/logo/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:url" content="https://www.turtle-ad.com/demo/builder.html">
+<meta property="og:site_name" content="合同会社turtle ad">
+<meta property="og:type" content="website">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;500;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* 建築雑誌の誌面：白い紙に深緑と墨。大きな写真、細い罫線、仕様は数字で語る */
+:root{
+  --paper:#f7f7f4; --white:#ffffff; --ink:#151816; --green:#1f3d33; --green2:#2f5a4b; --moss:#8fa89a;
+  --sub:#5d655f; --line:#d9dcd6;
+  --latin:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --jp:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:60px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--jp);font-size:15.5px;line-height:1.95;letter-spacing:.02em}
+img{max-width:100%;display:block}
+a{color:inherit}
+p{margin:0}
+.w{max-width:1240px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{margin:0;line-height:1.35;text-wrap:balance;font-weight:900}
+.lat{font-family:var(--latin);letter-spacing:.02em}
+
+.hd{background:var(--paper);border-bottom:1px solid var(--ink)}
+.hd .w{display:flex;align-items:center;justify-content:space-between;gap:12px 28px;flex-wrap:wrap;padding-block:16px}
+.logo{display:flex;align-items:baseline;gap:12px;font-weight:900;font-size:19px;letter-spacing:.08em}
+.logo span{font-family:var(--latin);font-weight:300;font-size:12px;letter-spacing:.3em;color:var(--sub)}
+.gnav{display:flex;gap:4px 26px;flex-wrap:wrap;font-size:13.5px;font-weight:500}
+.gnav a{text-decoration:none;position:relative}
+.gnav a::before{content:"";position:absolute;left:0;bottom:-3px;width:0;height:2px;background:var(--green);transition:width .3s}
+.gnav a:hover::before,.gnav a:focus-visible::before{width:100%}
+.hcta{background:var(--green);color:#fff;text-decoration:none;font-size:13.5px;font-weight:700;padding:10px 18px}
+
+/* hero: cover spread */
+.hero{position:relative;background:var(--ink);color:#fff;overflow:hidden}
+.hero img{width:100%;height:min(86vh,820px);object-fit:cover;object-position:50% 40%;opacity:.9}
+.hero .over{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding-block:36px 40px;background:linear-gradient(180deg,rgba(21,24,22,.45) 0%,rgba(21,24,22,0) 35%,rgba(21,24,22,.7) 100%)}
+.hero .top{display:flex;justify-content:space-between;gap:12px;font-family:var(--latin);font-size:12px;letter-spacing:.3em;text-transform:uppercase}
+.hero h1{font-family:var(--jp);font-weight:900;font-size:clamp(40px,7.4vw,112px);line-height:1.12;letter-spacing:.02em}
+.hero .jp{display:grid;grid-template-columns:1fr auto;gap:20px 40px;align-items:end;margin-top:20px}
+.hero .jp p{font-size:clamp(18px,2vw,24px);font-weight:700;letter-spacing:.12em;max-width:22em}
+.hero .spec{font-family:var(--latin);font-size:12px;letter-spacing:.12em;border-left:1px solid rgba(255,255,255,.6);padding-left:16px;line-height:1.9}
+.hero .spec b{font-weight:500;color:var(--moss);margin-right:8px}
+
+.sec{padding-block:112px}
+.head{display:grid;grid-template-columns:200px 1fr;gap:24px;border-top:2px solid var(--ink);padding-top:18px;margin-bottom:56px}
+.head .no{font-family:var(--latin);font-weight:300;font-size:13px;letter-spacing:.24em;color:var(--sub)}
+.head .no b{display:block;font-weight:800;font-size:44px;letter-spacing:-.02em;color:var(--ink);line-height:1}
+.head h2{font-size:clamp(26px,3.4vw,40px);letter-spacing:.06em}
+.head p{color:var(--sub);margin-top:10px;max-width:40em}
+
+.svc{display:grid;grid-template-columns:repeat(4,1fr);border-left:1px solid var(--line)}
+.svc div{padding:6px 24px 10px;border-right:1px solid var(--line)}
+.svc .n{font-family:var(--latin);font-weight:800;font-size:15px;color:var(--green2)}
+.svc h3{font-size:19px;margin:14px 0 8px}
+.svc p{color:var(--sub);font-size:14.5px}
+.numbers{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:72px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.numbers div{padding:28px 24px}
+.numbers div+div{border-left:1px solid var(--line)}
+.numbers b{display:block;font-family:var(--latin);font-weight:800;font-size:clamp(40px,5vw,64px);line-height:1;letter-spacing:-.03em;color:var(--green)}
+.numbers b small{font-family:var(--jp);font-size:16px;font-weight:700;margin-left:4px;letter-spacing:0}
+.numbers span{color:var(--sub);font-size:14px}
+
+/* works: magazine spread */
+.works{background:var(--white)}
+.spread{display:grid;grid-template-columns:7fr 5fr;gap:28px;align-items:end}
+.spread figure,.duo figure{margin:0}
+.spread img,.duo img{width:100%;object-fit:cover;transition:transform 1s ease}
+.spread .main{overflow:hidden}
+.spread .main img{aspect-ratio:3/2}
+.spread .main:hover img,.duo figure:hover img{transform:scale(1.03)}
+.spread .txt h3{font-size:clamp(22px,2.4vw,30px);letter-spacing:.06em;margin-bottom:14px}
+.spread .txt p{color:var(--sub)}
+dl.spec{display:grid;grid-template-columns:auto 1fr;gap:0;margin:24px 0 0;border-top:1px solid var(--ink)}
+dl.spec dt,dl.spec dd{padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+dl.spec dt{color:var(--sub);padding-right:20px;font-family:var(--latin);letter-spacing:.1em;font-size:12px;text-transform:uppercase;align-self:center}
+dl.spec dd{margin:0;font-weight:700}
+.cap{font-size:12px;color:var(--sub);margin-top:10px;font-family:var(--latin);letter-spacing:.06em}
+.duo{display:grid;grid-template-columns:4fr 3fr 5fr;gap:28px;margin-top:64px;align-items:start}
+.duo figure{overflow:hidden}
+.duo .t{aspect-ratio:3/4}
+.duo .s{aspect-ratio:1/1;margin-top:80px}
+.duo .l{aspect-ratio:4/3;margin-top:24px}
+.fic{display:inline-block;border:1px solid var(--ink);font-size:12px;font-weight:700;padding:2px 10px;margin-bottom:14px}
+
+/* flow */
+.flow{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr);counter-reset:f}
+.flow li{counter-increment:f;padding:0 18px 0 0;position:relative}
+.flow li::before{content:"0" counter(f);display:block;font-family:var(--latin);font-weight:800;font-size:34px;color:var(--green);line-height:1;margin-bottom:14px}
+.flow li::after{content:"";position:absolute;top:16px;left:58px;right:12px;height:1px;background:var(--line)}
+.flow li:last-child::after{display:none}
+.flow b{display:block;font-size:16px;margin-bottom:4px}
+.flow span{color:var(--sub);font-size:13.5px;display:block}
+
+/* message */
+.msg{background:var(--green);color:#eef2ef}
+.msg .w{display:grid;grid-template-columns:5fr 7fr;gap:72px;align-items:center}
+.msg img{aspect-ratio:4/5;object-fit:cover;width:100%}
+.msg .head{border-top-color:#eef2ef;grid-template-columns:1fr}
+.msg .head .no,.msg .head .no b{color:#eef2ef}
+.msg blockquote{margin:0;font-size:clamp(20px,2.4vw,28px);font-weight:700;line-height:1.75;letter-spacing:.06em}
+.msg p{color:#c3d1c9;margin-top:22px}
+.msg .sig{margin-top:26px;font-size:14px;color:#c3d1c9}
+.msg .sig b{color:#fff;font-size:18px;margin-left:8px}
+
+/* blog + recruit */
+.posts{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.post{text-decoration:none;display:block}
+.post .ph{overflow:hidden;margin-bottom:14px}
+.post img{aspect-ratio:4/3;object-fit:cover;width:100%;transition:transform .8s}
+.post:hover img{transform:scale(1.05)}
+.post time{font-family:var(--latin);font-size:12px;letter-spacing:.14em;color:var(--sub)}
+.post h3{font-size:17px;margin-top:4px;line-height:1.6}
+.recruit{margin-top:96px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;border-top:2px solid var(--ink);padding-top:40px}
+.recruit h3{font-size:clamp(22px,2.6vw,30px);margin-bottom:12px}
+.recruit p{color:var(--sub)}
+.recruit ul{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.recruit li{display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);font-weight:700}
+.recruit li span{color:var(--sub);font-weight:400;font-size:14px}
+
+/* company + contact */
+.company .w>.grid>*{min-width:0}
+td{overflow-wrap:anywhere}
+.company .w>.grid{display:grid;grid-template-columns:1fr 1fr;gap:72px}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{text-align:left;vertical-align:top;padding:14px 0;border-bottom:1px solid var(--line)}
+th{width:8em;color:var(--sub);font-weight:500}
+.cbox{background:var(--ink);color:#fff;padding:44px}
+.cbox h3{font-size:24px;margin-bottom:10px}
+.cbox p{color:#b7beb9}
+.cbox .tel{font-family:var(--latin);font-weight:800;font-size:clamp(34px,4.4vw,52px);letter-spacing:-.01em;line-height:1.1;margin:22px 0 4px;user-select:all}
+.cbox small{color:#b7beb9}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.btn{display:inline-flex;align-items:center;gap:12px;text-decoration:none;font-weight:700;font-size:14px;padding:15px 24px;background:#fff;color:var(--ink);border:1px solid #fff;transition:background .3s,color .3s;cursor:pointer;font-family:inherit}
+.btn::after{content:"→";font-family:var(--latin);transition:transform .3s}
+.btn:hover::after{transform:translateX(4px)}
+.btn.o{background:transparent;color:#fff}
+.btn:focus-visible,.hcta:focus-visible{outline:2px solid var(--moss);outline-offset:3px}
+form{display:grid;gap:14px;margin-top:28px}
+label{display:grid;gap:4px;font-size:12.5px;color:#b7beb9}
+input,select,textarea{font:inherit;font-size:15px;background:#232825;color:#fff;border:1px solid #3a413c;padding:11px 12px;border-radius:0;width:100%}
+textarea{min-height:84px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--moss);outline-offset:0}
+
+.ft{background:var(--paper);border-top:2px solid var(--ink);font-size:12.5px;color:var(--sub)}
+.ft .w{padding-block:36px 48px;display:grid;gap:12px}
+.ft .logo{color:var(--ink)}
+.ft .demo{border:1px solid var(--line);padding:12px 16px;background:var(--white)}
+
+.mbar{display:none}
+@supports (animation-timeline: view()){@media (prefers-reduced-motion:no-preference){
+  .rv{animation:rv linear both;animation-timeline:view();animation-range:entry 0% entry 45%}
+}}
+@keyframes rv{from{transform:translateY(40px)}to{transform:none}}
+
+@media (max-width:980px){
+  .gnav{display:none}
+  .head{grid-template-columns:1fr;gap:8px}
+  .svc{grid-template-columns:1fr 1fr;border-left:0}
+  .svc div{border-right:0;border-top:1px solid var(--line);padding:18px 0 22px}
+  .flow{grid-template-columns:1fr 1fr 1fr;gap:28px 0}
+  .flow li::after{display:none}
+  .posts{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){
+  .hcta{display:none}
+  .hero img{height:82vh;min-height:520px}
+  .hero .jp{grid-template-columns:1fr}
+  .hero .spec{display:none}
+  .sec{padding-block:76px}
+  .numbers{grid-template-columns:1fr}
+  .numbers div+div{border-left:0;border-top:1px solid var(--line)}
+  .spread,.msg .w,.recruit,.company .w>.grid{grid-template-columns:1fr;gap:32px}
+  .duo{grid-template-columns:1fr 1fr;gap:14px}
+  .duo .l{grid-column:span 2;margin-top:0}
+  .duo .s{margin-top:40px}
+  .flow{grid-template-columns:1fr 1fr}
+  .posts{grid-template-columns:1fr}
+  .cbox{padding:28px}
+  .mbar{display:grid;grid-template-columns:1fr 1fr;position:fixed;left:0;right:0;bottom:0;z-index:900;background:var(--ink);padding:10px max(14px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px));gap:10px}
+  .mbar a{text-align:center;padding:12px 6px;font-weight:700;text-decoration:none;font-size:14px;border:1px solid #fff;color:#fff}
+  .mbar a+a{background:#fff;color:var(--ink)}
+  body{padding-bottom:72px}
+}
+
+/* ===== turtle ad demo layer v2 (separate from the client design) ===== */
+.tad-bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:1000;background:#0f1a16;color:#eaf2ed;font-family:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;font-size:13px;line-height:1.45;letter-spacing:0;box-shadow:0 5px 24px rgba(15,30,26,.14)}
+.tad-bar::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:#0f1a16;z-index:1001}
+.tad-in{max-width:1320px;margin:0 auto;display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap;padding-block:8px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.tad-tag{background:#3fa36b;color:#fff;font-weight:700;font-size:11.5px;padding:2px 9px;border-radius:3px;white-space:nowrap;text-decoration:none}
+.tad-ind{display:flex;gap:2px}
+.tad-ind a{color:#a9bdb2;text-decoration:none;padding:4px 9px;border-radius:4px;white-space:nowrap}
+.tad-ind a:hover{color:#fff;background:#1d2b25}
+.tad-ind a[aria-current="page"]{color:#fff;font-weight:700;box-shadow:inset 0 -2px 0 #3fa36b}
+.tad-indsel{display:none;width:auto!important;max-width:42vw;margin:0!important;font:inherit;font-size:13px;color:#eaf2ed;background:#1d2b25;border:1px solid #3a4b43;border-radius:4px;padding:5px 6px}
+.tad-plans{display:flex;background:#1d2b25;border-radius:10px;padding:3px;gap:3px}
+.tad-plans button{font:inherit;color:#cfe0d6;background:transparent;border:0;border-radius:8px;padding:4px 12px;cursor:pointer;display:grid;justify-items:center;line-height:1.25;min-width:96px;transition:background-color .2s,color .2s}
+.tad-plans button b{font-size:12.5px;font-weight:700}
+.tad-plans button small{font-size:11px;opacity:.85;font-variant-numeric:tabular-nums}
+.tad-plans button[aria-pressed="true"]{background:#eaf2ed;color:#0f1a16}
+.tad-plans button:hover{color:#fff}
+.tad-plans button[aria-pressed="true"]:hover{color:#0f1a16}
+.tad-open{font:inherit;font-size:12.5px;background:transparent;color:#eaf2ed;border:1px solid #4a5d54;border-radius:4px;padding:5px 10px;cursor:pointer;white-space:nowrap}
+.tad-open:hover{border-color:#eaf2ed}
+.tad-sp{flex:1}
+.tad-note{color:#a9bdb2;font-size:12px;white-space:nowrap}
+@media (max-width:1499px){.tad-note{display:none}}
+.tad-cta{background:#f07a2a;color:#fff;text-decoration:none;font-weight:700;padding:6px 14px;border-radius:4px;white-space:nowrap}
+.tad-bar button:focus-visible,.tad-bar a:focus-visible,.tad-bar select:focus-visible{outline:2px solid #8fe0b2;outline-offset:2px}
+.tad-panel{border-top:1px solid #24342d;background:#13211b;max-height:min(72vh,620px);overflow:auto}
+.tad-pin{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:20px 28px;padding-block:18px 22px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.tad-pin h4{margin:0 0 8px;font-size:13px;color:#8fe0b2;font-weight:700;letter-spacing:.04em}
+.tad-pin ul{margin:0;padding:0;list-style:none;display:grid;gap:4px}
+.tad-pin li{padding-left:16px;position:relative;color:#dfe9e3}
+.tad-pin li::before{content:"";position:absolute;left:2px;top:.62em;width:6px;height:6px;border-radius:50%;background:#3fa36b}
+.tad-pin li.new{color:#fff;font-weight:700}
+.tad-pin li.new::after{content:"このプランから";margin-left:6px;font-size:10.5px;font-weight:700;color:#0f1a16;background:#8fe0b2;border-radius:3px;padding:0 5px}
+.tad-pin .opt li::before{background:#f07a2a}
+.tad-pin .big{font-size:21px;font-weight:700;color:#fff}
+.tad-pin .price{font-size:30px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums;line-height:1.2;margin:2px 0 8px}
+.tad-pin .price small{font-size:13px;font-weight:400;color:#a9bdb2;margin-left:4px}
+.tad-pin p{margin:0 0 8px;color:#a9bdb2}
+.tad-pin label{display:flex;gap:8px;align-items:center;color:#cfe0d6;cursor:pointer;margin-top:10px}
+.tad-pin input{accent-color:#3fa36b;margin:0}
+@media (max-width:1100px){.tad-ind{display:none}.tad-indsel{display:block}.tad-pin{grid-template-columns:1fr 1fr}}
+@media (max-width:760px){
+  .tad-in{gap:6px 8px;padding-block:6px}
+  .tad-sp{display:none}
+  .tad-plans{order:5;width:100%}
+  .tad-plans button{flex:1;min-width:0;padding:4px 4px}
+  .tad-tag{display:none}
+  .tad-cta .tad-l{display:none}
+  .tad-open,.tad-cta{font-size:12px;padding:5px 8px}
+  .tad-pin{grid-template-columns:1fr}
+  .tad-lab{white-space:normal}
+}
+
+/* plan + option labels on the page */
+.tad-lab{display:inline-flex;align-items:center;gap:6px;font-family:"Zen Kaku Gothic New",sans-serif;font-size:11.5px;font-weight:700;line-height:1.3;letter-spacing:0;padding:4px 10px 4px 8px;border-radius:999px;background:#3fa36b;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.18);white-space:nowrap;text-transform:none;vertical-align:middle;margin-right:10px;writing-mode:horizontal-tb}
+.tad-lab.opt{background:#f07a2a}
+.tad-lab::before{content:"";width:6px;height:6px;border-radius:50%;background:#fff}
+html.tad-nolab .tad-lab{display:none}
+[data-plan].tad-off{display:none!important}
+
+/* news ticker (しっかり: お知らせ機能) */
+.tad-news{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:13px;line-height:1.5;padding-block:9px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));background:color-mix(in srgb,currentColor 7%,transparent);border-bottom:1px solid color-mix(in srgb,currentColor 14%,transparent)}
+.tad-news .lb{font-weight:700;letter-spacing:.12em;font-size:11px;border:1px solid currentColor;padding:1px 8px;border-radius:2px}
+.tad-news .tx{min-width:0;flex:1;opacity:.9;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:0}
+.tad-news{flex-wrap:nowrap}
+@media (max-width:760px){.tad-news .tad-lab{display:none}.tad-news .tx time{display:none}}
+.tad-news .tx time{opacity:.7;margin-right:10px;font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:no-preference){.tad-news .tx{animation:tadfade .6s ease}}
+@keyframes tadfade{from{opacity:0;transform:translateY(4px)}to{opacity:.9;transform:none}}
+
+/* plan-linked design */
+html.plan-1 .rv{animation:none!important;transform:none!important}
+html.plan-1 img{transition:none!important}
+html.plan-1 :is(a,figure,div):hover>img,html.plan-1 :is(a,figure,div):hover img{transform:none!important}
+@media (prefers-reduced-motion:no-preference){
+  html.plan-3 :is(.hero,.cover) img{animation:tadkb 12s ease-in-out infinite alternate;transform-origin:60% 40%}
+}
+@keyframes tadkb{from{transform:scale(1)}to{transform:scale(1.14)}}
+
+/* SNS link row (ライト: SNSへのリンク) */
+.tad-sns{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.tad-sns a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-size:12.5px;border:1px solid currentColor;border-radius:999px;padding:3px 12px;opacity:.85}
+.tad-sns a:hover{opacity:1}
+
+.tad-toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:1100;background:#0f1a16;color:#eaf2ed;font-family:"Zen Kaku Gothic New",sans-serif;font-size:14px;line-height:1.6;padding:12px 18px;border-radius:8px;box-shadow:0 12px 30px rgba(0,0,0,.3);max-width:min(92vw,520px)}
+.tad-toast b{color:#8fe0b2}
+@media (max-width:900px){.tad-toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}}
+
+/* turtle ad contact block (real contact, distinct from fictional buttons) */
+.tad-contact{background:#0f1a16;color:#eaf2ed;font-family:"Zen Kaku Gothic New","Hiragino Sans",sans-serif;letter-spacing:0;line-height:1.8;border-top:4px solid #3fa36b}
+.tad-cin{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.2fr .8fr;gap:24px 48px;align-items:center;padding-block:56px;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+.tad-ck{display:inline-block;background:#3fa36b;color:#fff;font-size:12px;font-weight:700;border-radius:3px;padding:2px 10px}
+.tad-contact h2{font-family:inherit;font-size:clamp(22px,2.8vw,30px);font-weight:700;margin:12px 0 10px;line-height:1.45;color:#fff;letter-spacing:0;text-transform:none;writing-mode:horizontal-tb;background:none;display:block;padding:0}
+.tad-contact p{color:#b9cbc1;font-size:14.5px;margin:0}
+.tad-cbox{background:#16251f;border:1px solid #2a3b33;border-radius:12px;padding:22px}
+.tad-mail{font-size:clamp(20px,2.4vw,26px);font-weight:700;color:#fff;user-select:all;overflow-wrap:anywhere}
+.tad-cbtn{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 10px}
+.tad-mbtn,.tad-copy{font:inherit;font-size:14px;font-weight:700;border-radius:6px;padding:10px 16px;cursor:pointer;text-decoration:none}
+.tad-mbtn{background:#f07a2a;color:#fff;border:0}
+.tad-copy{background:transparent;color:#eaf2ed;border:1px solid #4a5d54}
+.tad-mbtn:focus-visible,.tad-copy:focus-visible{outline:2px solid #8fe0b2;outline-offset:2px}
+.tad-contact small{color:#8fa79a;font-size:12px}
+@media (max-width:760px){.tad-cin{grid-template-columns:1fr;padding-block:40px}}
+
+/* FAQ for sites without their own FAQ style (inherits the site's fonts and colors) */
+.tad-faq{border-top:1px solid currentColor}
+.tad-faq details{border-bottom:1px solid color-mix(in srgb,currentColor 22%,transparent)}
+.tad-faq summary{list-style:none;cursor:pointer;display:flex;gap:14px;align-items:baseline;padding:16px 32px 16px 0;position:relative;font-weight:700}
+.tad-faq summary::-webkit-details-marker{display:none}
+.tad-faq summary::before{content:"Q";opacity:.6}
+.tad-faq summary::after{content:"+";position:absolute;right:6px;font-size:20px;line-height:1;opacity:.7}
+.tad-faq details[open] summary::after{content:"−"}
+.tad-faq details p{margin:0;padding:0 0 18px 28px;opacity:.8}
+
+/* しっかり：写真スライド（各サイトの色と文字を引き継ぐ） */
+.tad-slider{margin-top:72px}
+.tad-shead{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.tad-shead .tad-lab{margin-bottom:8px}
+.tad-sen{display:block;font-size:12px;letter-spacing:.22em;opacity:.7}
+.tad-shead h3{margin:2px 0 0;font-size:clamp(20px,2.4vw,26px)}
+.tad-sarrows{display:flex;gap:8px}
+.tad-sarrows button{width:46px;height:46px;border-radius:50%;border:1px solid currentColor;background:transparent;color:inherit;font-size:18px;cursor:pointer;transition:background .25s,color .25s}
+.tad-sarrows button:hover{background:color-mix(in srgb,currentColor 12%,transparent)}
+.tad-sarrows button:focus-visible,.tad-strack:focus-visible{outline:2px solid #3fa36b;outline-offset:3px}
+.tad-strack{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:4px;overscroll-behavior-x:contain}
+.tad-strack::-webkit-scrollbar{display:none}
+.tad-slide{flex:0 0 min(80%,560px);scroll-snap-align:start;margin:0;overflow:hidden;min-width:0}
+.tad-slide img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform 1.2s ease}
+.tad-slide:hover img{transform:scale(1.04)}
+.tad-slide figcaption{padding-top:10px;font-size:14px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.tad-slide figcaption small{opacity:.65}
+.tad-sdots{display:flex;gap:6px;justify-content:center;margin-top:16px}
+.tad-sdots i{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.25;transition:opacity .3s,width .3s}
+.tad-sdots i.on{opacity:.8;width:20px;border-radius:3px}
+
+/* しっかり：オープニング演出とより大きなスクロール演出 */
+@media (prefers-reduced-motion:no-preference){
+  html.plan-3.tad-op :is(.hero,.cover) :is(h1,.lead,.lines,.side,.tag,.jp,.mast,.btns,.cta,.today){animation:tadin 1.1s cubic-bezier(.2,.7,.2,1) both}
+  html.plan-3.tad-op :is(.hero,.cover) :is(.side,.tag,.mast){animation-delay:.1s}
+  html.plan-3.tad-op :is(.hero,.cover) :is(h1,.lines){animation-delay:.3s}
+  html.plan-3.tad-op :is(.hero,.cover) :is(.lead,.jp,.today){animation-delay:.6s}
+  html.plan-3.tad-op :is(.hero,.cover) :is(.btns,.cta){animation-delay:.85s}
+}
+@keyframes tadin{from{opacity:0;transform:translateY(22px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+@supports (animation-timeline: view()){@media (prefers-reduced-motion:no-preference){
+  html.plan-3 .rv{animation-name:tadrv3}
+}}
+@keyframes tadrv3{from{opacity:.2;transform:translateY(64px) scale(.98)}to{opacity:1;transform:none}}
+
+/* スクロール演出（全ブラウザ対応・JavaScriptで表示） */
+html.tad-io .rv{max-width:100%;min-width:0;animation:none!important;transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1),filter .9s ease}
+html.tad-io .rv:not(.tad-shown){opacity:0;transform:translateY(32px)}
+
+</style>
+<style id="tad-editorial-polish">
+/* Visual refinement without changing plan, option, or demo selectors. */
+html{scroll-behavior:smooth}body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+:where(h1,h2,h3){text-wrap:balance}:where(p,blockquote){overflow-wrap:anywhere}
+:where(.hero img,.sec img){object-position:center center}
+:where(.sec){scroll-margin-top:112px}
+:where(.tad-bar){box-shadow:0 5px 24px rgba(15,30,26,.11)}
+.tad-plans button{transition:background-color .2s,border-color .2s,transform .2s}
+.tad-plans button:active{transform:scale(.97)}
+:where(a,button,input,select,textarea):focus-visible{outline:3px solid #eeaa57!important;outline-offset:3px}
+:where(.rv){transition-duration:.6s}
+@media(max-width:760px){:where(.sec){scroll-margin-top:152px} :where(.hero h1){line-height:1.22} .tad-plans button{min-height:40px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style></head>
+<body>
+<div style="background:#fff3cd;color:#5a4500;font-size:13px;line-height:1.5;padding:6px 16px;text-align:center;font-family:sans-serif">これは架空のデモサイトです。店名・人物・電話番号・住所は実在しません。</div>
+<div class="tad-bar"><div class="tad-in"><a class="tad-tag" href="./">業種別デモ一覧</a><nav class="tad-ind" aria-label="業種の切り替え"><a data-tad-ind="restaurant.html" href="restaurant.html">飲食店</a><a data-tad-ind="clinic.html" href="clinic.html">クリニック</a><a data-tad-ind="builder.html" href="builder.html" aria-current="page">建設・工務店</a><a data-tad-ind="salon.html" href="salon.html">美容室</a></nav><select class="tad-indsel" aria-label="業種の切り替え"><option data-file="restaurant.html" value="restaurant.html">飲食店</option><option data-file="clinic.html" value="clinic.html">クリニック</option><option data-file="builder.html" value="builder.html" selected>建設・工務店</option><option data-file="salon.html" value="salon.html">美容室</option><option value="index.html">デモ一覧へ戻る</option></select><div class="tad-plans" role="group" aria-label="制作プランの切り替え（税込）"><button type="button" data-p="1"><b>ライト</b><small>55,000円</small></button><button type="button" data-p="2"><b>スタンダード</b><small>88,000円</small></button><button type="button" data-p="3"><b>しっかり</b><small>132,000円</small></button></div><button type="button" class="tad-open" aria-expanded="false" aria-controls="tad-panel">プランの違いを見る</button><span class="tad-sp"></span><span class="tad-note">会社名・施工事例・許可番号は架空です</span><a class="tad-cta" href="#tad-contact"><span class="tad-l">制作について</span>相談する</a></div><div id="tad-panel" class="tad-panel" hidden></div></div>
+<header class="hd"><div class="w">
+  <div class="logo">山並工務店<span>YAMANAMI</span></div>
+  <nav class="gnav" aria-label="メインメニュー">
+    <a href="#service" data-plan="1">事業内容</a><a href="#works" data-plan="2">施工事例</a><a href="#flow" data-plan="2">家づくりの流れ</a><a href="#message" data-plan="3">代表あいさつ</a><a href="#journal" data-plan="3">現場ブログ</a><a href="#company" data-plan="1">会社概要</a>
+  </nav>
+  <a class="hcta" href="#company">無料相談・見積り</a>
+</div></header>
+
+<main>
+<section class="hero" data-page="TOP" aria-label="トップ">
+  <img src="img/b-facade.jpg" alt="木の外壁と四角い窓のある住宅" fetchpriority="high">
+  <div class="over"><div class="w top"><span>Aira / Kirishima</span><span>Since 1988</span></div>
+    <div class="w">
+      <h1>暮らしを、<br>建てる。</h1>
+      <div class="jp"><p>暮らしに馴染み、年月とともに好きになる住まい。新築もリフォームも、対話から始めます。</p>
+        <div class="spec"><div><b>NEW</b>木造住宅</div><div><b>RENOVATION</b>リフォーム・修繕</div><div><b>AFTER</b>年1回の定期点検</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="service" data-plan="1" data-page="事業内容">
+  <div class="w">
+    <div class="head rv"><div class="no">SECTION<b>01</b></div><div data-lab-host><h2>事業内容</h2><p>理想の住まいを考えるところから、完成後の暮らしまで。顔の見える家づくりを大切にします。</p></div></div>
+    <div class="svc rv">
+      <div><span class="n">01</span><h3>新築</h3><p>平屋・二階建ての木造住宅。土地探しからご相談いただけます。</p></div>
+      <div><span class="n">02</span><h3>リフォーム</h3><p>キッチン、浴室、間取り変更、二世帯への改修。</p></div>
+      <div><span class="n">03</span><h3>屋根・外壁</h3><p>葺き替え、張り替え、雨漏りの調査と修理。</p></div>
+      <div><span class="n">04</span><h3>耐震・断熱</h3><p>耐震補強と、窓・床下の断熱改修。</p></div>
+    </div>
+    <div class="numbers rv" data-plan="2">
+      <div><b>38<small>年</small></b><span>1988年の創業から</span></div>
+      <div><b>6<small>名</small></b><span>自社で抱える大工</span></div>
+      <div><b>1<small>回/年</small></b><span>引き渡し後の定期点検</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec works" id="works" data-plan="2" data-page="施工事例">
+  <div class="w">
+    <div class="head rv"><div class="no">SECTION<b>02</b></div><div data-lab-host><h2>施工事例</h2><p>住まいの形も、家族の数だけ。間取りや素材選びのイメージをご紹介します。</p></div></div>
+    <div class="spread">
+      <figure class="main rv"><img src="img/b-living.jpg" alt="大きな窓のある明るいリビング" loading="lazy"><figcaption class="cap">Living — 姶良市 S邸（架空の施工事例）</figcaption></figure>
+      <div class="txt rv">
+        <span class="fic">架空の施工事例です</span>
+        <h3>庭とつながる、<br>窓の大きな平屋。</h3>
+        <p>南側に幅5.4mの窓を設け、暖房に頼りすぎない暮らしを目指した間取りにしました。</p>
+        <dl class="spec"><dt>Area</dt><dd>姶良市</dd><dt>Type</dt><dd>木造平屋 3LDK</dd><dt>Floor</dt><dd>延床 26.5坪</dd><dt>Term</dt><dd>工期 4.5か月</dd></dl>
+      </div>
+    </div>
+    <div class="duo">
+      <figure class="t rv"><img src="img/b-hero.jpg" alt="黒い外壁と木の格子の住宅" loading="lazy" style="height:100%"><figcaption class="cap">Exterior — 霧島市 K邸</figcaption></figure>
+      <figure class="s rv"><img src="img/b-louver.jpg" alt="木のルーバーの外壁" loading="lazy" style="height:100%"><figcaption class="cap">Detail — 杉ルーバー</figcaption></figure>
+      <figure class="l rv"><img src="img/b-interior.jpg" alt="天井の高いリビング" loading="lazy" style="height:100%"><figcaption class="cap">Renovation — 鹿児島市 M邸</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="flow" data-plan="2" data-page="家づくりの流れ">
+  <div class="w">
+    <div class="head rv"><div class="no">SECTION<b>03</b></div><div data-lab-host><h2>家づくりの流れ</h2><p>ご相談からお引き渡しまで、新築でおよそ8〜10か月です。</p></div></div>
+    <ol class="flow rv">
+      <li><b>ご相談</b><span>電話・来社どちらでも</span></li>
+      <li><b>現地調査</b><span>土地や建物を確認</span></li>
+      <li><b>プラン・見積</b><span>無料で作成します</span></li>
+      <li><b>ご契約</b><span>内容を書面で確認</span></li>
+      <li><b>着工</b><span>週1回、進み具合を報告</span></li>
+      <li><b>引き渡し</b><span>その後も年1回点検</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec msg" id="message" data-plan="3" data-page="代表あいさつ">
+  <div class="w">
+    <img class="rv" src="img/b-hero.jpg" alt="木の格子が印象的な住宅の外観" loading="lazy">
+    <div class="rv">
+      <div class="head"><div class="no" data-lab-host>MESSAGE<b>04</b></div></div>
+      <blockquote>建てて終わりではなく、<br>直しながら長く住める家を。</blockquote>
+      <p>家は、暮らしの変化に合わせて少しずつ手を入れていくものだと考えています。小さな修理のご相談も、遠慮なくお電話ください。</p>
+      <p class="sig">代表取締役<b>山並 健一</b>（架空の人物）</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="journal" data-plan="3" data-page="現場ブログ・採用情報">
+  <div class="w">
+    <div class="head rv"><div class="no">SECTION<b>05</b></div><div data-lab-host><h2>現場ブログ</h2><p>工事の進み具合や、家づくりのコツを更新しています。</p></div></div>
+    <div class="posts rv">
+      <a class="post" href="#" data-demo="ブログ記事の表示"><div class="ph"><img src="img/b-louver.jpg" alt="" loading="lazy"></div><time>2026.10.22</time><h3>杉のルーバーを張りました（霧島市 K邸）</h3></a>
+      <a class="post" href="#" data-demo="ブログ記事の表示"><div class="ph"><img src="img/b-interior.jpg" alt="" loading="lazy"></div><time>2026.10.08</time><h3>築30年の家、断熱改修で冬の室温が変わりました</h3></a>
+      <a class="post" href="#" data-demo="ブログ記事の表示"><div class="ph"><img src="img/b-facade.jpg" alt="" loading="lazy"></div><time>2026.09.25</time><h3>外壁材の選び方：木・ガルバ・塗り壁の違い</h3></a>
+    </div>
+    <div class="recruit rv">
+      <div><h3>一緒に家をつくる仲間を募集しています</h3><p>未経験から大工を目指す方も歓迎します。資格取得の費用は会社が負担します（デモ表記）。</p></div>
+      <ul><li>大工（正社員）<span>経験不問</span></li><li>現場監督（正社員）<span>施工管理技士 歓迎</span></li><li>設計補助（パート）<span>CAD経験者</span></li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec company" id="company" data-plan="1" data-page="会社概要・お問い合わせ" style="background:var(--white)">
+  <div class="w">
+    <div class="head rv"><div class="no">SECTION<b>06</b></div><div data-lab-host><h2>会社概要・お問い合わせ</h2></div></div>
+    <div class="grid">
+      <table class="rv">
+        <tr><th>会社名</th><td>株式会社 山並工務店（架空）</td></tr>
+        <tr><th>所在地</th><td>鹿児島県姶良市（架空の住所）</td></tr>
+        <tr><th>創業</th><td>1988年</td></tr>
+        <tr><th>建設業許可</th><td>鹿児島県知事許可（般-00）第00000号（デモ表記）</td></tr>
+        <tr><th>資格者</th><td>一級建築士 1名／二級建築施工管理技士 2名（架空）</td></tr>
+        <tr><th>対応エリア</th><td>姶良市・霧島市・鹿児島市ほか</td></tr>
+      </table>
+      <div class="cbox rv">
+        <h3>見積り・ご相談は無料です</h3>
+        <p>「どこに頼めばいいか分からない」小さな修理も承ります。</p>
+        <div class="tel">0995-00-0000</div><small>受付 8:00〜18:00（日曜・祝日休み）／架空の電話番号です</small>
+        <form data-demo-form aria-label="お問い合わせフォーム（デモ）">
+          <label for="b-kind">ご相談内容<select id="b-kind"><option>新築</option><option>リフォーム</option><option>屋根・外壁</option><option>その他の修理</option></select></label>
+          <label for="b-name">お名前<input id="b-name" type="text" autocomplete="off" placeholder="姶良 花子"></label>
+          <label for="b-msg">内容<textarea id="b-msg" placeholder="築25年の浴室を新しくしたい など"></textarea></label>
+          <div class="btns" style="margin-top:4px"><button class="btn" type="submit">送信内容を確認する</button><a class="btn o" href="#" data-demo="見積りシミュレーター" data-opt="見積りシミュレーター">概算見積りを試す</a></div>
+        </form>
+      </div>
+    </div>
+  </div>
+<div class="w rv" data-plan="2" data-labme style="display:block;margin-top:72px"><div class="head"><div class="no">Q&amp;A<b>FAQ</b></div><div data-lab-host><h2>よくある質問</h2></div></div><div class="tad-faq"><details><summary>小さな修理だけでも頼めますか？</summary><p>はい。雨どいや建具の調整など、1か所から伺います。</p></details><details><summary>見積りは無料ですか？</summary><p>現地調査とお見積りは無料です。</p></details><details><summary>補助金は使えますか？</summary><p>断熱・耐震の改修は、国や市の補助金の対象になる場合があります。申請もお手伝いします。</p></details></div></div>
+</section>
+</main>
+
+<footer class="ft"><div class="w">
+  <div class="logo">山並工務店<span>YAMANAMI</span></div>
+  <p class="demo">このサイトは合同会社turtle adが制作した「業種別デモサイト」です。会社名・人物・施工事例・許可番号・電話番号はすべて架空で、実在の会社ではありません。写真はPexelsの商用利用可能な素材で、掲載の建物は架空の施工事例のイメージです。</p>
+  <p>© 2026 turtle ad demo</p>
+</div></footer>
+<div class="mbar"><a href="#" data-demo="電話の発信">電話する</a><a href="#company">無料相談</a></div>
+
+<script>window.TAD={"slider": {"target": "#works > .w", "mode": "append", "en": "GALLERY", "title": "施工事例ギャラリー（架空の施工事例）", "items": [["img/b-living.jpg", "姶良市 S邸", "平屋・延床26.5坪"], ["img/b-hero.jpg", "霧島市 K邸", "木造二階建て"], ["img/b-interior.jpg", "鹿児島市 M邸", "リビング改修"], ["img/b-louver.jpg", "杉ルーバーの外壁", "ディテール"], ["img/b-facade.jpg", "板張りの外観", ""]]}, "opts": ["施工事例の写真撮影", "見積りシミュレーター", "採用エントリーフォームの追加"], "features": {"1": ["見積り相談フォーム", "電話ボタン", "SNSへのリンク"], "2": ["施工事例ページ（写真と仕様）", "家づくりの流れ", "Instagram投稿の表示（お客様のアカウントの接続条件の確認が必要です）", "よくある質問（開閉式・会社概要ページ内）"], "3": ["現場ブログ・お知らせ（納品後にWordPressからご自身で更新できます）", "代表あいさつ・採用情報のページ", "写真の横スライド（スワイプ・矢印で操作）"]}, "news": [["2026.10.22", "現場ブログ：杉のルーバーを張りました（霧島市 K邸）"], ["2026.10.08", "11月の住まいの相談会（予約制）を開きます"]]};
+(function(){
+  var PLANS={
+    1:{key:'light',name:'ライト',price:'55,000',pages:'TOP＋基本2ページ',inc:['TOP＋基本2ページ','スマホ対応（レスポンシブ）','お問い合わせフォーム','SNSへのリンク']},
+    2:{key:'standard',name:'スタンダード',price:'88,000',pages:'TOP＋基本4〜5ページ',inc:['TOP＋基本4〜5ページ','スマホ対応（レスポンシブ）','お問い合わせフォーム','SNS連携（投稿の表示など）','基本SEO設定']},
+    3:{key:'full',name:'しっかり',price:'132,000',pages:'TOP＋6〜8ページ',inc:['TOP＋6〜8ページ','スマホ対応（レスポンシブ）','お問い合わせフォーム','SNS連携','SEO設定','ブログ・お知らせ機能']}
+  };
+  var DESIGN={
+    1:['写真を大きく使った、シンプルで上質な構成','動きを抑えた、読みやすいページ'],
+    2:['スクロールに合わせて写真や文章が表れる演出','写真にカーソルを重ねると動く効果','よくある質問の開閉表示'],
+    3:['トップの文字が順番に現れるオープニング演出','トップ写真がゆっくり動く演出','写真を横にスワイプして見られるスライド','スクロール時の、より大きく印象的な演出','ページ上部のお知らせテロップ（WordPressの投稿から自動表示）']
+  };
+  var KEYS={light:1,standard:2,full:3};
+  var cfg=window.TAD||{};cfg.opts=cfg.opts||[];cfg.features=cfg.features||{1:[],2:[],3:[]};
+  var html=document.documentElement;
+  var panel=document.getElementById('tad-panel');
+  var openBtn=document.querySelector('.tad-open');
+  var cur=3;
+  function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v);}catch(e){return null;}}
+
+  function label(el){
+    if(el.querySelector(':scope > .tad-lab, :scope > * > .tad-lab'))return;
+    var p=+el.getAttribute('data-plan');var o=el.getAttribute('data-opt');
+    var s=document.createElement('span');
+    if(o!==null){s.className='tad-lab opt';s.textContent='オプション（別途お見積り）'+(o?'：'+o:'');}
+    else if(p===2){s.className='tad-lab';s.textContent='スタンダードプランから';}
+    else if(p===3){s.className='tad-lab';s.textContent='しっかりプランのみ';}
+    else return;
+    if(el.tagName!=='SECTION'&&(o!==null||el.tagName==='A'||el.tagName==='BUTTON')){el.parentNode.insertBefore(s,el);return;}
+    var host=el.querySelector('[data-lab-host]')||el;
+    host.insertBefore(s,host.firstChild);
+  }
+
+  /* お知らせテロップ（しっかりプランの機能） */
+  if(cfg.news&&cfg.news.length){
+    var hd=document.querySelector('header.hd')||document.querySelector('header');
+    var bar=document.createElement('div');
+    bar.className='tad-news';bar.setAttribute('data-plan','3');bar.setAttribute('aria-label','お知らせ');
+    bar.innerHTML='<span class="tad-lab">しっかりプランのみ</span><span class="lb">NEWS</span><span class="tx" aria-live="off"></span>';
+    if(hd&&hd.parentNode){if(getComputedStyle(hd).position==='absolute')hd.parentNode.insertBefore(bar,hd);else hd.parentNode.insertBefore(bar,hd.nextSibling);}
+    var tx=bar.querySelector('.tx'),ni=0;
+    function showNews(){var n=cfg.news[ni%cfg.news.length];tx.innerHTML='<time>'+n[0]+'</time>'+n[1];tx.style.animation='none';void tx.offsetWidth;tx.style.animation='';ni++;}
+    showNews();setInterval(function(){if(cur===3&&!document.hidden)showNews();},4500);
+  }
+  /* SNSへのリンク（全プラン共通） */
+  var ft=document.querySelector('footer .w')||document.querySelector('footer');
+  if(ft){var sns=document.createElement('div');sns.className='tad-sns';
+    sns.innerHTML='<a href="#" data-demo="Instagramへの移動">Instagram</a><a href="#" data-demo="LINEへの移動">LINE公式</a><a href="#" data-demo="Facebookへの移動">Facebook</a>';
+    ft.insertBefore(sns,ft.children[1]||null);}
+
+  /* しっかりプラン：写真の横スライド */
+  if(cfg.slider){
+    var S=cfg.slider,host=document.querySelector(S.target);
+    if(host){
+      var box=document.createElement('div');box.className='tad-slider';box.setAttribute('data-plan','3');box.setAttribute('data-labme','');
+      box.innerHTML='<div class="tad-shead"><div data-lab-host><span class="tad-sen">'+S.en+'</span><h3>'+S.title+'</h3></div>'+
+        '<div class="tad-sarrows"><button type="button" class="tad-sprev" aria-label="前の写真">←</button><button type="button" class="tad-snext" aria-label="次の写真">→</button></div></div>'+
+        '<div class="tad-strack" tabindex="0" aria-label="'+S.title+'（横にスワイプできます）">'+S.items.map(function(it){return '<figure class="tad-slide"><img src="'+it[0]+'" alt="'+it[1]+'" loading="lazy"><figcaption>'+it[1]+(it[2]?'<small>'+it[2]+'</small>':'')+'</figcaption></figure>';}).join('')+'</div>'+
+        '<div class="tad-sdots">'+S.items.map(function(_,i){return '<i'+(i===0?' class="on"':'')+'></i>';}).join('')+'</div>';
+      if(S.mode==='replace')host.parentNode.replaceChild(box,host);else host.appendChild(box);
+      var tr=box.querySelector('.tad-strack'),dots=box.querySelectorAll('.tad-sdots i');
+      function step(){var f=tr.querySelector('.tad-slide');return f?f.getBoundingClientRect().width+16:300;}
+      box.querySelector('.tad-sprev').addEventListener('click',function(){tr.scrollBy({left:-step(),behavior:'smooth'});});
+      box.querySelector('.tad-snext').addEventListener('click',function(){tr.scrollBy({left:step(),behavior:'smooth'});});
+      tr.addEventListener('scroll',function(){var i=Math.round(tr.scrollLeft/step());dots.forEach(function(d,ix){d.classList.toggle('on',ix===i);});},{passive:true});
+    }
+  }
+
+  /* turtle adへの相談（実際の問い合わせ先・架空店舗のボタンとは別） */
+  var MAIL='info@turtle-ad.com';
+  var foot=document.querySelector('footer');
+  var cta=document.createElement('section');cta.id='tad-contact';cta.className='tad-contact';cta.setAttribute('aria-label','turtle adへの制作相談');
+  cta.innerHTML='<div class="tad-cin"><div><span class="tad-ck">turtle adへのご相談（実際のお問い合わせ先）</span>'+
+    '<h2>このデザイン・<span class="tad-cp"></span>で相談する</h2>'+
+    '<p>ここまでの店舗・電話番号・予約ボタンはすべて架空のデモです。実際の制作のご相談は、下記のメールアドレスまでお送りください。件名に「<span class="tad-cs"></span>」とお書きいただくとスムーズです。</p></div>'+
+    '<div class="tad-cbox"><div class="tad-mail">'+MAIL+'</div><div class="tad-cbtn"><a class="tad-mbtn" href="#">メールを作成する</a><button type="button" class="tad-copy">アドレスをコピー</button></div>'+
+    '<small>受付 9:00〜18:00（土日祝休み）・合同会社turtle ad</small></div></div>';
+  if(foot&&foot.parentNode)foot.parentNode.insertBefore(cta,foot);
+  cta.querySelector('.tad-copy').addEventListener('click',function(e){
+    var b=e.currentTarget;
+    function done(ok){b.textContent=ok?'コピーしました':'選択してコピーしてください';if(!ok){var r=document.createRange();r.selectNodeContents(cta.querySelector('.tad-mail'));var sl=getSelection();sl.removeAllRanges();sl.addRange(r);}setTimeout(function(){b.textContent='アドレスをコピー';},2500);}
+    try{navigator.clipboard.writeText(MAIL).then(function(){done(true)},function(){done(false)});}catch(err){done(false);}
+  });
+
+  document.querySelectorAll('section[data-plan],[data-opt],[data-labme]').forEach(label);
+
+  function list(arr,cls){return '<ul'+(cls?' class="'+cls+'"':'')+'>'+arr.map(function(t){return typeof t==='string'?'<li>'+t+'</li>':'<li class="new">'+t[0]+'</li>';}).join('')+'</ul>';}
+  function render(){
+    var P=PLANS[cur];
+    html.classList.remove('plan-1','plan-2','plan-3');html.classList.add('plan-'+cur);
+    var shown=[];
+    document.querySelectorAll('[data-plan]').forEach(function(el){el.classList.toggle('tad-off',+el.getAttribute('data-plan')>cur);});var nn=0;document.querySelectorAll('section:not(.tad-off) .head .no b').forEach(function(b){nn++;b.textContent=(nn<10?'0':'')+nn;});
+    document.querySelectorAll('section[data-page]').forEach(function(el){if(+(el.getAttribute('data-plan')||1)<=cur)shown.push(el.getAttribute('data-page'));});
+    document.querySelectorAll('.tad-plans button').forEach(function(b){b.setAttribute('aria-pressed',String(+b.dataset.p===cur));});
+    document.querySelectorAll('[data-tad-ind]').forEach(function(a){a.setAttribute('href',a.getAttribute('data-tad-ind')+'#'+P.key);});
+    document.querySelectorAll('.tad-indsel option[data-file]').forEach(function(o){o.value=o.getAttribute('data-file')+'#'+P.key;});
+    var feats=[];for(var i=1;i<=cur;i++){(cfg.features[i]||[]).forEach(function(f){feats.push(i===cur&&cur>1?[f]:f);});}
+    var des=[];for(var j=1;j<=cur;j++){DESIGN[j].forEach(function(d){des.push(j===cur&&cur>1?[d]:d);});}
+    var IND=document.querySelector('.tad-ind a[aria-current]');var indName=IND?IND.textContent:'';
+    var subj='デモサイトの相談（'+indName+'・'+P.name+'プラン）';
+    var cp=document.querySelector('.tad-cp');if(cp)cp.textContent=P.name+'プラン（'+P.price+'円・税込）';
+    var cs=document.querySelector('.tad-cs');if(cs)cs.textContent=subj;
+    var mb=document.querySelector('.tad-mbtn');if(mb)mb.setAttribute('href','mailto:info@turtle-ad.com?subject='+encodeURIComponent(subj));
+    if(panel){
+      panel.innerHTML='<div class="tad-pin">'+
+        '<div><div class="big">'+P.name+'プラン</div><div class="price">'+P.price+'円<small>（税込）</small></div>'+
+        '<h4>このプランのページ構成</h4>'+list(shown)+'<p style="margin-top:10px">デモは1ページにまとめていますが、実際のサイトではページを分けて作ります。</p></div>'+
+        '<div><h4>デザイン</h4>'+list(des)+'<h4 style="margin-top:16px">プランに含まれるもの</h4>'+list(P.inc)+'</div>'+
+        '<div><h4>このデモで動く機能</h4>'+list(feats)+(cur===3?'<p style="margin-top:10px">お知らせ・ブログは、納品後にWordPressの管理画面からお客様ご自身で更新でき、テロップにも自動で表示されます。</p>':'')+'<p style="margin-top:10px">Instagram投稿の表示には、お客様のアカウントの接続条件の確認が必要です。</p></div>'+
+        '<div class="opt"><h4>別途お見積りになるもの（オレンジのラベル）</h4>'+list(cfg.opts.concat(['写真撮影','原稿（文章）作成']))+
+        '<p style="margin-top:12px">公開後の更新は、月額管理プラン 5,500円（税込）／月（任意）で承ります。サーバー・ドメイン費用は別途実費です。</p>'+
+        '<label><input type="checkbox" id="tad-hide"'+(html.classList.contains('tad-nolab')?' checked':'')+'> ページ上のラベルを隠す</label></div>'+
+      '</div>';
+      document.getElementById('tad-hide').addEventListener('change',function(e){html.classList.toggle('tad-nolab',e.target.checked);});
+    }
+  }
+  var RM=false;try{RM=matchMedia('(prefers-reduced-motion: reduce)').matches;}catch(e){}
+  function opening(){html.classList.remove('tad-op');void html.offsetWidth;html.classList.add('tad-op');}
+  var rmWarned=false;
+  function setPlan(p,push){
+    if(p===3)opening();
+    if(RM&&p>1&&push&&!rmWarned){rmWarned=true;setTimeout(function(){toast('<b>この端末は「動きを減らす」設定になっています。</b>そのため演出を止めて表示しています。設定を解除すると、スクロール演出やスライドの動きを確認できます。');},50);}
+    cur=p;store('tad-plan',String(p));render();
+    if(push){try{history.replaceState(null,'','#'+PLANS[p].key);}catch(e){location.hash=PLANS[p].key;}}
+  }
+  document.querySelectorAll('.tad-plans button').forEach(function(b){b.addEventListener('click',function(){setPlan(+b.dataset.p,true);});});
+  var sel=document.querySelector('.tad-indsel');
+  if(sel)sel.addEventListener('change',function(){if(sel.value)location.href=sel.value;});
+  if(openBtn)openBtn.addEventListener('click',function(){
+    var open=panel.hidden;panel.hidden=!open;openBtn.setAttribute('aria-expanded',String(open));openBtn.textContent=open?'閉じる':'プランの違いを見る';
+  });
+  var h=(location.hash||'').slice(1);
+  setPlan(KEYS[h]||+(store('tad-plan')||0)||3,false);
+  if(!RM&&'IntersectionObserver' in window){
+    html.classList.add('tad-io');
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('tad-shown');io.unobserve(e.target);}});},{rootMargin:'0px 0px -6% 0px',threshold:0.06});
+    document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+  }
+  window.addEventListener('hashchange',function(){var k=KEYS[(location.hash||'').slice(1)];if(k)setPlan(k,false);});
+
+  var toastEl,toastT;
+  function toast(msg){
+    if(!toastEl){toastEl=document.createElement('div');toastEl.className='tad-toast';toastEl.setAttribute('role','status');document.body.appendChild(toastEl);}
+    toastEl.innerHTML=msg;toastEl.hidden=false;clearTimeout(toastT);toastT=setTimeout(function(){toastEl.hidden=true;},4200);
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('[data-demo]');if(!a)return;
+    e.preventDefault();
+    toast('<b>デモサイトです。</b>'+(a.getAttribute('data-demo')||'この操作')+'は実際には行われません。実際のサイトでは、お店の電話・予約システム・フォーム・SNSにつながります。');
+  });
+  document.querySelectorAll('form[data-demo-form]').forEach(function(f){
+    f.addEventListener('submit',function(e){e.preventDefault();toast('<b>デモサイトです。</b>フォームの内容は送信されません。実際のサイトでは、お店のメールに届きます。');});
+  });
+})();
+</script>
+</body>
+</html>

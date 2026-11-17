@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>業種別ホームページデモ｜合同会社turtle ad</title>
+<meta name="description" content="4業種×3プランのホームページデモサイトのご案内です。">
+<meta name="theme-color" content="#050913">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/sub.css">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+.howto{list-style:none;counter-reset:h;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:24px}
+.howto li{counter-increment:h;display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;font-weight:700}
+.howto li::before{content:counter(h);flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--cyan);color:#04101c;font-family:var(--en);font-weight:700}
+.plan3 .card h3{margin-bottom:2px}
+.plan3 .price{font-family:var(--en);font-weight:700;font-size:clamp(30px,3.2vw,40px);line-height:1.2}
+.plan3 .price span{font-family:var(--jp);font-size:15px}
+.plan3 ul{list-style:none;margin:14px 0;padding-top:12px;border-top:1px solid var(--line);display:grid;gap:5px}
+.plan3 li{position:relative;padding-left:18px;font-size:15px}
+.plan3 li::before{content:"";position:absolute;left:0;top:.72em;width:7px;height:7px;border-radius:50%;background:var(--cyan)}
+.demos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:24px}
+.swatch{height:90px;border-radius:8px;margin-bottom:16px;border:1px solid var(--line)}
+.demo .kind{font-size:14px;color:var(--cyan);font-weight:700}
+.plans{display:grid;gap:8px;margin-top:16px}
+.plans .lk{justify-content:space-between}
+.plans .lk b{font-family:var(--en);margin-left:auto}
+.extra-list{list-style:none;display:grid;gap:6px;margin-top:12px}
+.extra-list li{position:relative;padding-left:18px}
+.extra-list li::before{content:"";position:absolute;left:0;top:.75em;width:7px;height:7px;border-radius:50%;background:var(--muted)}
+@media (max-width:860px){.howto,.demos{grid-template-columns:minmax(0,1fr)}}
+</style>
+
+<link rel="icon" href="../favicon.ico?v=2" sizes="16x16 32x32 48x48"><link rel="apple-touch-icon" href="../images/logo/apple-touch-icon.png?v=2"><link rel="manifest" href="../site.webmanifest">
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@800&amp;text=turtle%20ad&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/logo.css">
+</head>
+<body>
+<svg class="bg-lines" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
+  <defs><linearGradient id="bgl" x1="0" x2="1"><stop offset="0" stop-color="#4fe3ff" stop-opacity="0"/><stop offset=".5" stop-color="#4fe3ff" stop-opacity=".22"/><stop offset="1" stop-color="#4fe3ff" stop-opacity="0"/></linearGradient></defs>
+  <path stroke="url(#bgl)" d="M-50 760C320 640 560 860 860 680S1260 440 1500 500"/>
+  <path stroke="url(#bgl)" d="M-50 200C300 110 600 300 900 170S1300 70 1500 120"/>
+</svg>
+<header class="hd">
+  <a class="logo" href="../index.html" aria-label="合同会社turtle ad トップへ">
+    <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><polygon points="50,6 88.1,28 88.1,72 50,94 11.9,72 11.9,28" fill="#0D3A34" stroke="#3CD6F0" stroke-width="3" stroke-linejoin="round"/><polygon points="50,32 65.6,41 65.6,59 50,68 34.4,59 34.4,41" fill="none" stroke="#3CD6F0" stroke-width="2.5" stroke-linejoin="round"/><path d="M50 6 L50 32 M88.1 28 L65.6 41 M88.1 72 L65.6 59 M50 94 L50 68 M11.9 72 L34.4 59 M11.9 28 L34.4 41" stroke="#3CD6F0" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.8"/><circle class="lm-dot" cx="50" cy="32" r="3" fill="#fff"/><circle class="lm-dot" cx="65.6" cy="41" r="3" fill="#fff"/><circle class="lm-dot" cx="65.6" cy="59" r="3" fill="#fff"/><circle class="lm-dot" cx="50" cy="68" r="3" fill="#fff"/><circle class="lm-dot" cx="34.4" cy="59" r="3" fill="#fff"/><circle class="lm-dot" cx="34.4" cy="41" r="3" fill="#fff"/><circle cx="50" cy="50" r="5" fill="#3CD6F0"/></svg>
+    <span class="logo-word">turtle <b>ad</b></span>
+  </a>
+  <nav class="nav" aria-label="メニュー">
+    <a href="../index.html#business">事業紹介</a>
+    <a href="../index.html#web">ホームページ料金</a>
+    <a href="../index.html#company">会社概要</a>
+    <a class="btn" href="../index.html#contact">お問い合わせ</a>
+  </nav>
+</header>
+<main>
+<section class="page-hd"><div class="wrap">
+  <p class="crumb"><a href="../index.html">トップ</a> ／ 業種別デモサイト</p>
+  <p class="page-en">DEMO SITES / 4 INDUSTRIES × 3 PLANS</p>
+  <h1 class="page-title">業種別デモサイト（4業種×3プラン）</h1>
+  <p class="page-lead">業種に合わせたホームページを、<br>3つのプランから。</p>
+</div></section>
+
+<section class="sec"><div class="wrap rv">
+  <p class="txt">デザインと機能の違いを実際に体験して、あなたのお店・会社に合うホームページをお選びください。各デモの上部で「ライト／スタンダード／しっかり」を切り替えると、ページの数・デザイン・機能が変わります。</p>
+  <ol class="howto"><li>業種とプランを選ぶ</li><li>サイト上部でプランや業種を切り替える</li><li>緑＝プラン別の内容／橙＝追加料金</li></ol>
+</div></section>
+
+<section class="sec plan3"><div class="wrap">
+  <h2 class="h2 rv">3つの制作プラン</h2>
+  <div class="grid3 rv">
+    <div class="card"><h3 class="h3">ライト</h3><p class="price">55,000<span>円（税込）</span></p>
+      <ul><li>TOP＋基本2ページ</li><li>スマホ対応（レスポンシブ）</li><li>お問い合わせフォーム</li><li>SNSへのリンク</li></ul>
+      <p class="txt">写真を大きく使った、シンプルで上質な構成。まずはお店の基本情報をきちんと伝えたい方に。</p></div>
+    <div class="card"><h3 class="h3">スタンダード</h3><p class="price">88,000<span>円（税込）</span></p>
+      <ul><li>TOP＋基本4〜5ページ</li><li>ライトの内容すべて</li><li>こだわり・特徴を伝えるページ</li><li>SNS連携（Instagram投稿の表示は、お客様のアカウントの接続条件の確認が必要です）</li><li>基本SEO設定</li><li>よくある質問（開閉式）</li><li>スクロール演出・写真の動き</li></ul>
+      <p class="txt">お店の魅力や選ばれる理由まで伝え、問い合わせにつなげたい方に。</p></div>
+    <div class="card"><h3 class="h3">しっかり</h3><p class="price">132,000<span>円（税込）</span></p>
+      <ul><li>TOP＋6〜8ページ</li><li>スタンダードの内容すべて</li><li>ブログ・お知らせ機能（納品後にWordPressからご自身で更新できます）</li><li>お知らせのテロップ表示</li><li>トップの文字が順番に現れるオープニング演出</li><li>トップ写真がゆっくり動く演出</li><li>写真を横にスワイプして見られるスライド</li><li>SEO設定</li></ul>
+      <p class="txt">情報発信を続けて、検索やSNSからの集客を育てたい方に。</p></div>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <h2 class="h2 rv">4業種のデモサイト</h2>
+  <div class="demos">
+<article class="card demo rv">
+      <div class="swatch" style="background:linear-gradient(135deg,#0d0f14 0%,#1d2a4a 55%,#b8933e 100%)" aria-hidden="true"></div>
+      <p class="kind">飲食店</p>
+      <h3 class="h3">炭火割烹 ひなた</h3>
+      <p class="txt">黒・藍・金の高級和モダン。料理写真が主役。</p>
+      <div class="plans">
+        <a class="lk" href="https://www.turtle-ad.com/demo/restaurant.html#light" target="_blank" rel="noopener"><span>ライト</span><b>55,000円〜</b><i aria-hidden="true">↗</i></a>
+        <a class="lk" href="https://www.turtle-ad.com/demo/restaurant.html#standard" target="_blank" rel="noopener"><span>スタンダード</span><b>88,000円〜</b><i aria-hidden="true">↗</i></a>
+        <a class="lk" href="https://www.turtle-ad.com/demo/restaurant.html#full" target="_blank" rel="noopener"><span>しっかり</span><b>132,000円〜</b><i aria-hidden="true">↗</i></a>
+      </div>
+    </article>
+<article class="card demo rv">
+      <div class="swatch" style="background:linear-gradient(135deg,#ffffff 0%,#bfeee0 50%,#bcd8f2 100%)" aria-hidden="true"></div>
+      <p class="kind">クリニック</p>
+      <h3 class="h3">はるかぜ内科クリニック</h3>
+      <p class="txt">白・ミント・淡いブルー。迷わない情報設計。</p>
+      <div class="plans">
+        <a class="lk" href="https://www.turtle-ad.com/demo/clinic.html#light" target="_blank" rel="noopener"><span>ライト</span><b>55,000円〜</b><i aria-hidden="true">↗</i></a>
+        <a class="lk" href="https://www.turtle-ad.com/demo/clinic.html#standard" target="_blank" rel="noopener"><span>スタンダード</span><b>88,000円〜</b><i aria-hidden="true">↗</i></a>
+        <a class="lk" href="https://www.turtle-ad.com/demo/clinic.html#full" target="_blank" rel="noopener"><span>しっかり</span><b>132,000円〜</b><i aria-hidden="true">↗</i></a>
+      </div>
+    </article>
+<article class="card demo rv">
+      <div class="swatch" style="background:linear-gradient(135deg,#1f3a2c 0%,#0f1110 55%,#f2f2ee 100%)" aria-hidden="true"></div>
+      <p class="kind">建設・工務店</p>
+      <h3 class="h3">山並工務店</h3>
+      <p class="txt">深緑・黒・白の建築雑誌風。施工事例を写真と数字で。</p>
+      <div class="plans">
+        <a class="lk" href="https://www.turtle-ad.com/demo/builder.html#light" target="_blank" rel="noopener"><span>ライト</span><b>55,000円〜</b><i aria-hidden="true">↗</i></a>
+        <a class="lk" href="https://www.turtle-ad.com/demo/builder.html#standard" target="_blank" rel="noopener"><span>スタンダード</span><b>88,000円〜</b><i aria-hidden="true">↗</i></a>
+        <a class="lk" href="https://www.turtle-ad.com/demo/builder.html#full" target="_blank" rel="noopener"><span>しっかり</span><b>132,000円〜</b><i aria-hidden="true">↗</i></a>
+      </div>
+    </article>
+<article class="card demo rv">
+      <div class="swatch" style="background:linear-gradient(135deg,#b7aa9c 0%,#d8cfc4 50%,#f7f2e8 100%)" aria-hidden="true"></div>
+      <p class="kind">美容室</p>
+      <h3 class="h3">hair salon moku</h3>
+      <p class="txt">グレージュ・アイボリーのファッション誌風。</p>
+      <div class="plans">
+        <a class="lk" href="https://www.turtle-ad.com/demo/salon.html#light" target="_blank" rel="noopener"><span>ライト</span><b>55,000円〜</b><i aria-hidden="true">↗</i></a>
+        <a class="lk" href="https://www.turtle-ad.com/demo/salon.html#standard" target="_blank" rel="noopener"><span>スタンダード</span><b>88,000円〜</b><i aria-hidden="true">↗</i></a>
+        <a class="lk" href="https://www.turtle-ad.com/demo/salon.html#full" target="_blank" rel="noopener"><span>しっかり</span><b>132,000円〜</b><i aria-hidden="true">↗</i></a>
+      </div>
+    </article>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="grid2 rv">
+    <div class="card"><h3 class="h3">料金に含まれないもの（別途お見積り）</h3>
+      <ul class="extra-list"><li>予約システム・順番受付システムとの連携</li><li>クリニックの「本日の診療状況」の自動表示</li><li>写真撮影・原稿（文章）作成</li><li>多言語ページ、見積りシミュレーターなどの追加機能</li></ul></div>
+    <div class="card"><h3 class="h3">公開後の費用</h3>
+      <ul class="extra-list"><li>月額管理プラン 5,500円（税込）／月（任意）：更新・バックアップ・文章修正など</li><li>サーバー・ドメイン費用は別途実費</li></ul></div>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap rv">
+  <h2 class="h2">制作のご相談はメールで</h2>
+  <p class="txt">件名に「デモサイトの相談（業種・プラン名）」とお書きください。合同会社turtle ad　受付 9:00〜18:00（土日祝休み）</p>
+  <div class="links"><a class="lk main" href="mailto:info@turtle-ad.com?subject=%E3%83%87%E3%83%A2%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AE%E7%9B%B8%E8%AB%87">メールを作成する<i aria-hidden="true">→</i></a></div>
+  <p class="txt" style="margin-top:10px;font-family:var(--en);font-weight:700">info@turtle-ad.com</p>
+  <p class="note">デモサイトに掲載している店舗・企業・人物・施工事例・料金・連絡先はすべて架空です（turtle adの連絡先を除く）。写真はPexelsの商用利用可能な素材を使用しています。</p>
+</div></section>
+</main>
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft-top">
+      <div>
+        <address>
+          合同会社turtle ad<br>
+          〒891-0109 鹿児島県鹿児島市清和3-25-15<br>
+          電話 <a href="tel:0992103511">099-210-3511</a>／メール <a href="mailto:info@turtle-ad.com">info@turtle-ad.com</a><br>
+          受付時間 9:00〜18:00（土日祝休み）
+        </address>
+      </div>
+      <nav class="ft-links" aria-label="フッターメニュー">
+        <a href="../index.html">トップページ</a>
+        <a href="../index.html#ai">AI活用サポート</a>
+        <a href="../index.html#web">ホームページ制作</a>
+        <a href="../index.html#guide">マイタウンガイド</a>
+        <a href="../index.html#job">マイタウンジョブ</a>
+        <a href="../index.html#company">会社概要</a>
+        <a href="../index.html#contact">お問い合わせ</a>
+      </nav>
+    </div>
+    <p class="copy">© 合同会社turtle ad</p>
+  </div>
+</footer>
+<script src="../assets/sub.js"></script>
+</body>
+</html>
