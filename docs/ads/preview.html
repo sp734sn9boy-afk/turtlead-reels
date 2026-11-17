@@ -1,0 +1,161 @@
+<title>リスティング広告の見え方</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap">
+<style>
+/* Layout: 上に「検索したときの見え方（イメージ）」を3パターン、下に入力する文の一覧 */
+:root{
+  --bg:#f3f5f7; --surface:#ffffff; --ink:#1d2329; --muted:#5f6b76; --line:#dde3e8;
+  --link:#1a3fb0; --url:#20633a; --accent:#0f766e; --soft:#e3f1ef; --warn:#fff4d6;
+  --font:"Noto Sans JP","Hiragino Sans",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111518; --surface:#1a2025; --ink:#e6ebef; --muted:#9aa7b2; --line:#2b343b;
+  --link:#9db4ff; --url:#7fd19c; --accent:#4fc1b4; --soft:#173532; --warn:#3a3218; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111518; --surface:#1a2025; --ink:#e6ebef; --muted:#9aa7b2; --line:#2b343b;
+  --link:#9db4ff; --url:#7fd19c; --accent:#4fc1b4; --soft:#173532; --warn:#3a3218; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.7;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px}
+.wrap{max-width:760px;margin:0 auto;display:grid;gap:28px}
+h1{font-size:24px;margin:0;line-height:1.4;text-wrap:balance}
+h2{font-size:18px;margin:0 0 10px}
+p{margin:0}
+.lead{color:var(--muted)}
+.note{background:var(--warn);border-radius:8px;padding:10px 14px;font-size:13px}
+.query{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:14px;color:var(--muted)}
+.query b{color:var(--ink);font-weight:500}
+.ads{display:grid;gap:14px}
+.ad{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:4px;min-width:0}
+.ad .tag{font-size:12px;font-weight:700;color:var(--ink)}
+.ad .site{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.ad .ico{width:22px;height:22px;border-radius:50%;background:#0D3A34;display:grid;place-items:center;color:#3CD6F0;font-size:11px;font-weight:700;flex:0 0 auto}
+.ad .site span b{display:block;color:var(--ink);font-weight:500;font-size:13px;line-height:1.3}
+.ad .h{color:var(--link);font-size:18px;line-height:1.4;font-weight:500}
+.ad .d{color:var(--muted);font-size:14px}
+.ad .co{font-size:13px;color:var(--muted)}
+.ad .links{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:4px}
+.ad .links span{color:var(--link);font-size:14px}
+.ad .tel{font-size:13px;color:var(--muted)}
+.ad .tel b{color:var(--link);font-weight:500}
+.cap{font-size:12px;color:var(--muted)}
+table{border-collapse:collapse;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:14px}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--soft);font-weight:700;font-size:13px}
+td.n{color:var(--muted);width:2.5em;font-variant-numeric:tabular-nums}
+td.c{color:var(--muted);width:4.5em;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tw{overflow-x:auto}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:13px}
+.chips.ng span{color:var(--muted)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.facts div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px;min-width:0}
+.facts b{display:block;font-size:13px;color:var(--muted);font-weight:500}
+.facts span{font-size:16px;font-weight:700}
+</style>
+
+<div class="wrap">
+  <header style="display:grid;gap:8px">
+    <h1>リスティング広告（ホームページ制作・鹿児島）</h1>
+    <p class="lead">鹿児島県内の人が「鹿児島 ホームページ制作」などと検索したときに、検索結果の上のほうに出る広告です。下はスマホでの見え方のイメージです。</p>
+    <p class="note">見出しと説明文は、用意した15本・4本の中から、検索した人に合わせて自動で組み合わされます。実際の見た目は検索サイトの画面によって少し変わります。</p>
+  </header>
+
+  <section class="facts" aria-label="設定の要点">
+    <div><b>出す地域</b><span>鹿児島県内にいる人</span></div>
+    <div><b>予算</b><span>1日330円（月1万円）</span></div>
+    <div><b>1クリックの上限</b><span>200円</span></div>
+    <div><b>飛び先</b><span>turtle-ad.com/hp/</span></div>
+  </section>
+
+  <section>
+    <h2>検索したときの見え方（イメージ）</h2>
+    <div class="ads">
+      <div class="query">検索：<b>鹿児島 ホームページ制作</b></div>
+      <article class="ad">
+        <span class="tag">スポンサー</span>
+        <div class="site"><span class="ico">t</span><span><b>合同会社turtle ad</b>www.turtle-ad.com/hp/kagoshima</span></div>
+        <div class="h">鹿児島のホームページ制作 | ホームページ55,000円〜 | 鹿児島市の広告会社が制作</div>
+        <p class="d">鹿児島市のturtle adです。地域情報誌を発行する広告会社が、集客を考えたサイトを作ります。ライトプラン55,000円〜（税込）。TOP＋基本2ページ、スマホ対応、お問い合わせフォーム付き。</p>
+        <p class="co">スマホ対応 · お問い合わせフォーム付き · 鹿児島市の会社です · 公開後の更新代行あり</p>
+        <div class="links"><span>制作実績を見る</span><span>料金プラン</span><span>お問い合わせ</span><span>会社概要</span></div>
+        <p class="tel">電話 <b>099-210-3511</b>（平日9時〜18時だけ表示）</p>
+      </article>
+      <p class="cap">パターン1：いちばん基本の組み合わせ</p>
+
+      <div class="query">検索：<b>鹿児島市 ホームページ作成 料金</b></div>
+      <article class="ad">
+        <span class="tag">スポンサー</span>
+        <div class="site"><span class="ico">t</span><span><b>合同会社turtle ad</b>www.turtle-ad.com/hp/kagoshima</span></div>
+        <div class="h">ホームページ55,000円〜 | 月額5,500円で更新・管理 | 料金はすべて税込で表示</div>
+        <p class="d">公開後の更新・文章修正・画像差し替えは月額5,500円（税込）でおまかせ。管理は希望制です。</p>
+        <div class="links"><span>料金プラン</span><span>お問い合わせ</span></div>
+      </article>
+      <p class="cap">パターン2：料金で探している人に</p>
+
+      <div class="query">検索：<b>ホームページ制作 鹿児島 おすすめ</b></div>
+      <article class="ad">
+        <span class="tag">スポンサー</span>
+        <div class="site"><span class="ico">t</span><span><b>合同会社turtle ad</b>www.turtle-ad.com/hp/kagoshima</span></div>
+        <div class="h">地域情報誌の発行会社が制作 | 業種別の制作実績があります | まずはお気軽にご相談を</div>
+        <p class="d">塗装会社・鰹節店・板金会社など業種別の制作実績をご覧ください。お電話は平日9時〜18時。</p>
+      </article>
+      <p class="cap">パターン3：実績や会社の強みで選びたい人に</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>見出し（15本）</h2>
+    <div class="tw"><table>
+      <thead><tr><th>#</th><th>見出し</th><th style="text-align:right">文字数</th></tr></thead>
+      <tbody>
+        <tr><td class="n">1</td><td>鹿児島のホームページ制作</td><td class="c">12</td></tr>
+        <tr><td class="n">2</td><td>鹿児島市の広告会社が制作</td><td class="c">12</td></tr>
+        <tr><td class="n">3</td><td>ホームページ55,000円〜</td><td class="c">11</td></tr>
+        <tr><td class="n">4</td><td>スマホ対応で見やすいサイト</td><td class="c">13</td></tr>
+        <tr><td class="n">5</td><td>公開後の更新もおまかせ</td><td class="c">11</td></tr>
+        <tr><td class="n">6</td><td>月額5,500円で更新・管理</td><td class="c">11.5</td></tr>
+        <tr><td class="n">7</td><td>地域情報誌の発行会社が制作</td><td class="c">13</td></tr>
+        <tr><td class="n">8</td><td>集客を考えたホームページ</td><td class="c">12</td></tr>
+        <tr><td class="n">9</td><td>業種別の制作実績があります</td><td class="c">13</td></tr>
+        <tr><td class="n">10</td><td>お問い合わせフォーム付き</td><td class="c">12</td></tr>
+        <tr><td class="n">11</td><td>写真撮影・原稿作成も対応</td><td class="c">12</td></tr>
+        <tr><td class="n">12</td><td>まずはお気軽にご相談を</td><td class="c">11</td></tr>
+        <tr><td class="n">13</td><td>料金はすべて税込で表示</td><td class="c">11</td></tr>
+        <tr><td class="n">14</td><td>Googleマップ登録も支援</td><td class="c">11</td></tr>
+        <tr><td class="n">15</td><td>地元の広告を作ってきた会社</td><td class="c">13</td></tr>
+      </tbody>
+    </table></div>
+    <p class="cap" style="margin-top:6px">文字数は全角換算。上限は15文字です。</p>
+  </section>
+
+  <section>
+    <h2>説明文（4本）</h2>
+    <div class="tw"><table>
+      <thead><tr><th>#</th><th>説明文</th><th style="text-align:right">文字数</th></tr></thead>
+      <tbody>
+        <tr><td class="n">1</td><td>鹿児島市のturtle adです。地域情報誌を発行する広告会社が、集客を考えたサイトを作ります。</td><td class="c">43.5</td></tr>
+        <tr><td class="n">2</td><td>ライトプラン55,000円〜（税込）。TOP＋基本2ページ、スマホ対応、お問い合わせフォーム付き。</td><td class="c">44</td></tr>
+        <tr><td class="n">3</td><td>公開後の更新・文章修正・画像差し替えは月額5,500円（税込）でおまかせ。管理は希望制です。</td><td class="c">43.5</td></tr>
+        <tr><td class="n">4</td><td>塗装会社・鰹節店・板金会社など業種別の制作実績をご覧ください。お電話は平日9時〜18時。</td><td class="c">42.5</td></tr>
+      </tbody>
+    </table></div>
+    <p class="cap" style="margin-top:6px">上限は45文字です。</p>
+  </section>
+
+  <section>
+    <h2>広告を出す検索の言葉（一部）</h2>
+    <div class="chips">
+      <span>鹿児島 ホームページ制作</span><span>鹿児島 ホームページ作成</span><span>鹿児島市 ホームページ制作</span><span>鹿児島市 ホームページ作成</span><span>ホームページ制作 安い 鹿児島</span><span>ホームページ 料金 鹿児島</span><span>霧島 ホームページ制作</span><span>鹿屋 ホームページ制作</span><span>薩摩川内 ホームページ制作</span><span>姶良 ホームページ制作</span>
+    </div>
+    <p class="cap" style="margin-top:6px">全部で23個。</p>
+  </section>
+
+  <section>
+    <h2>広告を出さない言葉（一部）</h2>
+    <div class="chips ng">
+      <span>無料</span><span>自作</span><span>作り方</span><span>求人</span><span>バイト</span><span>スクール</span><span>テンプレート</span><span>wix</span><span>jimdo</span><span>独学</span>
+    </div>
+    <p class="cap" style="margin-top:6px">全部で40個。問い合わせにならない検索で、お金を使わないようにします。</p>
+  </section>
+</div>
