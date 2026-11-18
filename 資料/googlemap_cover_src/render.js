@@ -12,8 +12,8 @@ const path = require('path');
   await p.screenshot({ path: path.join(out, 'googlemap_cover.png') });
   const r = await p.evaluate(() => {
     const s = document.querySelector('.safe').getBoundingClientRect();
-    return [...document.querySelectorAll('.logo,.corp,.catch .s,.catch .m,.pill')].map(e => {
-      const q = e.getBoundingClientRect();
+    return [...document.querySelectorAll('.logo,.corp,.catch .s,.catch .m,.catch .l,.pill .a,.pill .b,.pill')].map(e => {
+      const rg=document.createRange(); rg.selectNodeContents(e); const q = (e.classList.contains('pill')||e.classList.contains('logo'))? e.getBoundingClientRect() : rg.getBoundingClientRect();
       return { cls: e.className, l: Math.round(q.left), r: Math.round(q.right), t: Math.round(q.top), b: Math.round(q.bottom),
         inside: q.left >= s.left && q.right <= s.right && q.top >= s.top && q.bottom <= s.bottom };
     }).concat([{fonts:[...document.fonts].filter(f=>f.status==='loaded').map(f=>f.family).filter((v,i,a)=>a.indexOf(v)===i)}]);
@@ -21,5 +21,8 @@ const path = require('path');
   console.log(JSON.stringify(r, null, 1));
   await p.evaluate(() => document.body.classList.add('guide'));
   await p.screenshot({ path: path.join(__dirname, 'check_safe70.png') });
+  // スマホの写真表示（中央 約860×1080）を想定した切り出し
+  await p.evaluate(() => document.body.classList.remove('guide'));
+  await p.screenshot({ path: path.join(__dirname, 'check_portrait.png'), clip: { x: 530, y: 0, width: 860, height: 1080 } });
   await b.close();
 })();

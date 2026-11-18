@@ -2,7 +2,8 @@ googlemap_cover.png（Googleビジネスプロフィール用カバー写真 192
 - ロゴマーク：自社素材。https://www.turtle-ad.com/ のヘッダーにあるインラインSVG（assets/logo.css と同じ形・色）をそのまま使用。
 - ロゴ文字「turtle ad」：M PLUS Rounded 1c 800（Google Fonts / SIL Open Font License）。サイトと同じ指定。
 - 本文：Noto Sans JP 700/900（Google Fonts / SIL Open Font License）。
-- 背景の亀甲模様・点：cover.html 内でSVGで描いたもの（自作）。
+- 背景の亀甲模様・左右の大きな六角形・点：cover.html 内でSVGで描いたもの（自作。ロゴの形をもとにした）。
 - 写真・人物・他社ロゴ・ストック素材：使用なし。
 - 色：サイトのCSS変数に合わせた（--bg #060b18、--cyan #4fe3ff、ロゴ #3CD6F0、紫 #b9a6ff、背景グラデ #14245a→#081024→#04070f）。
-書き出し：render.js（playwright-core + Chrome）。check_*.png は確認用（中央70%の枠／スマホ縮小）。
+書き出し：render.js（playwright-core + Chrome）。check_*.png は確認用（safe70=中央800px赤枠と860px黄枠／portrait=中央860×1080切り出し／phone400=横400px縮小）。
+改訂 2026-11-18：スマホの写真表示で中央約860×1080に切られるため、文字を中央幅800px以内に収めて作り直し。
