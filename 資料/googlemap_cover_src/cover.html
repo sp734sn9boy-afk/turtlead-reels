@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<title>Googleマップ カバー写真</title>
+<!-- フォント：turtle-ad.com と同じ Google Fonts（Noto Sans JP / M PLUS Rounded 1c / Outfit。いずれもSIL OFL） -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;900&family=M+PLUS+Rounded+1c:wght@800&family=Outfit:wght@500;700&display=block" rel="stylesheet">
+<style>
+:root{--bg:#060b18;--cyan:#4fe3ff;--logo:#3CD6F0;--violet:#b9a6ff;--text:#f2f6ff;--sub:#c9d4f0;--shell:#0D3A34}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1920px;height:1080px;overflow:hidden}
+body{background:radial-gradient(120% 90% at 50% 30%,#14245a 0%,#081024 50%,#04070f 100%);color:var(--text);
+  font-family:'Noto Sans JP',sans-serif;font-feature-settings:"palt";position:relative}
+/* 背景の亀甲ネットワーク（ロゴのモチーフ。端は切れてもよい飾り） */
+.bg{position:absolute;inset:0}
+/* 中央70%（1344×756）。この中に文字とロゴをすべて収める */
+.safe{position:absolute;left:288px;top:162px;width:1344px;height:756px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.guide .safe{outline:3px dashed #ff5a5a}
+.logo{display:flex;align-items:center;gap:26px;font-family:'M PLUS Rounded 1c',sans-serif;font-weight:800;font-size:112px;line-height:1;letter-spacing:.02em;color:#fff}
+.logo svg{width:150px;height:150px;overflow:visible;filter:drop-shadow(0 0 14px rgba(60,214,240,.75))}
+.logo b{color:var(--logo);text-shadow:0 0 22px rgba(60,214,240,.6)}
+.corp{margin-top:18px;font-size:38px;font-weight:700;letter-spacing:.08em;color:var(--sub)}
+.rule{width:120px;height:4px;border-radius:2px;margin:40px 0 34px;background:linear-gradient(90deg,var(--cyan),var(--violet))}
+.catch{font-weight:900;line-height:1.15;letter-spacing:.02em}
+.catch .s{display:block;font-size:66px;color:var(--cyan)}
+.catch .m{display:block;font-size:104px;margin-top:8px;background:linear-gradient(90deg,#fff 0%,#fff 45%,var(--cyan) 75%,var(--violet) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.pill{margin-top:46px;padding:20px 48px;border-radius:999px;font-size:44px;font-weight:700;letter-spacing:.02em;color:#fff;
+  background:rgba(79,227,255,.10);border:2px solid rgba(79,227,255,.55);box-shadow:0 0 28px rgba(79,227,255,.25)}
+.pill em{font-style:normal;color:var(--cyan)}
+</style></head>
+<body>
+<svg class="bg" viewBox="0 0 1920 1080" aria-hidden="true">
+  <defs>
+    <pattern id="hex" width="120" height="207.84" patternUnits="userSpaceOnUse">
+      <path d="M60 0 L120 34.64 L120 103.92 L60 138.56 L0 103.92 L0 34.64 Z M60 138.56 L60 207.84" fill="none" stroke="#3CD6F0" stroke-width="1.4"/>
+    </pattern>
+    <radialGradient id="fade" cx="50%" cy="50%" r="62%">
+      <stop offset="45%" stop-color="#000"/><stop offset="100%" stop-color="#fff"/>
+    </radialGradient>
+    <mask id="m"><rect width="1920" height="1080" fill="url(#fade)"/></mask>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#hex)" opacity=".22" mask="url(#m)"/>
+  <g fill="#fff" opacity=".55">
+    <circle cx="120" cy="173" r="5"/><circle cx="1800" cy="173" r="5"/><circle cx="180" cy="900" r="5"/><circle cx="1740" cy="900" r="5"/>
+    <circle cx="60" cy="520" r="4"/><circle cx="1860" cy="520" r="4"/>
+  </g>
+</svg>
+
+<div class="safe">
+  <div class="logo">
+    <!-- ロゴマーク：turtle-ad.com のヘッダーで使っている自社SVGをそのまま使用 -->
+    <svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,6 88.1,28 88.1,72 50,94 11.9,72 11.9,28" fill="#0D3A34" stroke="#3CD6F0" stroke-width="3" stroke-linejoin="round"/><polygon points="50,32 65.6,41 65.6,59 50,68 34.4,59 34.4,41" fill="none" stroke="#3CD6F0" stroke-width="2.5" stroke-linejoin="round"/><path d="M50 6 L50 32 M88.1 28 L65.6 41 M88.1 72 L65.6 59 M50 94 L50 68 M11.9 72 L34.4 59 M11.9 28 L34.4 41" stroke="#3CD6F0" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.8"/><g fill="#fff"><circle cx="50" cy="32" r="3"/><circle cx="65.6" cy="41" r="3"/><circle cx="65.6" cy="59" r="3"/><circle cx="50" cy="68" r="3"/><circle cx="34.4" cy="59" r="3"/><circle cx="34.4" cy="41" r="3"/></g><circle cx="50" cy="50" r="5" fill="#3CD6F0"/></svg>
+    <span>turtle <b>ad</b></span>
+  </div>
+  <p class="corp">合同会社turtle ad（タートルアド）</p>
+  <div class="rule"></div>
+  <h1 class="catch"><span class="s">鹿児島の</span><span class="m">ホームページ制作・AI動画</span></h1>
+  <p class="pill">作る前に、<em>トップページの見本</em>を無料でお作りします</p>
+</div>
+</body></html>
