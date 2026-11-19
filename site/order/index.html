@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>原稿の添削・チラシ制作のお申し込み｜合同会社turtle ad</title>
+<meta name="description" content="チラシや広告の原稿のしっかり添削（1枚5,500円・税込）、チラシ制作（片面20,000円・両面30,000円・税込）のお申し込みページです。全国どこからでもオンラインで承ります。">
+<meta name="theme-color" content="#050913">
+<link rel="canonical" href="https://www.turtle-ad.com/order/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="その原稿、出す前に一度見せてください｜合同会社turtle ad">
+<meta property="og:description" content="原稿のしっかり添削 1枚5,500円／チラシ制作 片面20,000円・両面30,000円（すべて税込）。全国オンライン対応。">
+<meta property="og:url" content="https://www.turtle-ad.com/order/">
+<meta property="og:image" content="https://www.turtle-ad.com/order/img/og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/sub.css">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+/* ===== 申し込みページ（/order/） noteの記事から来た方向け 2026-11-19 ===== */
+
+/* 1. 一番上：大きな見出し＋写真 */
+.hero{padding:112px 0 56px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#060b18 0%,#0b1430 55%,var(--bg) 100%)}
+.hero-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(24px,4vw,56px);align-items:center}
+.hero-kicker{display:inline-block;font-size:14px;font-weight:700;color:var(--cyan);border:1px solid rgba(79,227,255,.5);border-radius:999px;padding:2px 14px}
+.hero-title{font-size:clamp(32px,5.4vw,58px);font-weight:900;line-height:1.3;margin-top:14px;letter-spacing:.01em}
+.hero-title em{font-style:normal;color:var(--cyan)}
+.hero-lead{margin-top:16px;color:var(--sub);font-size:clamp(16px,1.7vw,18px);line-height:1.85}
+.chips{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:24px}
+.chip{display:flex;flex-direction:column;gap:2px;text-decoration:none;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:10px;padding:12px 12px 10px;transition:border-color .2s,background .2s}
+.chip:hover{border-color:var(--cyan);background:rgba(79,227,255,.08)}
+.chip .k{font-size:13px;font-weight:700;color:var(--sub);line-height:1.4}
+.chip .p{font-family:var(--en);font-weight:700;font-size:clamp(22px,2.6vw,28px);line-height:1.15;color:var(--cyan);white-space:nowrap}
+.chip .p small{font-family:var(--jp);font-size:12px;font-weight:700;color:var(--muted);margin-left:2px}
+.hero .btn{margin-top:22px;min-width:260px;font-size:18px;font-weight:900}
+.hero-pic{position:relative}
+.hero-pic img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:12px;border:1px solid var(--line);box-shadow:0 28px 70px rgba(0,0,0,.45)}
+.hero-pic figcaption{font-size:12px;color:var(--muted);margin-top:8px;text-align:right}
+@media (max-width:860px){
+  .hero{padding:88px 0 40px}
+  .hero-in{grid-template-columns:minmax(0,1fr);gap:22px}
+  .hero-pic{order:-1}
+  .hero-pic img{aspect-ratio:16/10;object-position:50% 30%}
+  .hero .btn{width:100%;min-width:0}
+}
+@media (max-width:420px){
+  .chips{gap:6px}
+  .chip{padding:10px 6px 8px;text-align:center}
+  .chip .k{font-size:12px}
+  .chip .p{font-size:20px}
+}
+
+/* 2. 中ほどの写真帯 */
+.band{position:relative;overflow:hidden;border-bottom:1px solid var(--line);background:#1b1e23}
+.band-in{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:stretch}
+.band-pic img{width:100%;height:100%;object-fit:cover;min-height:320px}
+.band-txt{padding:clamp(32px,5vw,64px) var(--gut);display:flex;flex-direction:column;justify-content:center;gap:14px}
+.band-big{font-size:clamp(26px,3.6vw,40px);font-weight:900;line-height:1.4}
+.band-big em{font-style:normal;color:var(--cyan)}
+.band-txt .txt{font-size:16px;line-height:1.85}
+.band-cap{font-size:12px;color:var(--muted)}
+@media (max-width:860px){
+  .band-in{grid-template-columns:minmax(0,1fr)}
+  .band-pic img{min-height:0;aspect-ratio:1200/630;height:auto}
+}
+
+/* 3. フォーム */
+.form-wrap{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(24px,4vw,48px);align-items:start;margin-top:8px}
+@media (max-width:860px){.form-wrap{grid-template-columns:minmax(0,1fr)}}
+.cf{display:grid;gap:24px}
+.step-h{display:flex;align-items:center;gap:10px;font-size:19px;font-weight:900;line-height:1.4}
+.step-h i{font-style:normal;font-family:var(--en);font-weight:700;font-size:14px;color:#04101c;background:var(--cyan);border-radius:50%;width:28px;height:28px;display:grid;place-items:center;flex:none}
+.field{display:grid;gap:8px}
+.field label,.field .lbl{font-weight:700;font-size:16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.req,.opt,.rec{white-space:nowrap;flex:none;font-size:12px;font-weight:700;border-radius:4px;padding:1px 8px;line-height:1.7}
+.req{background:var(--cyan);color:#04101c}
+.opt{border:1px solid var(--line);color:var(--muted)}
+.rec{background:#ffd36b;color:#2a1d00}
+.hint{font-size:13px;color:var(--muted);line-height:1.7}
+.cf input[type=text],.cf input[type=email],.cf input[type=tel],.cf textarea{
+  width:100%;font:inherit;font-size:16px;color:var(--text);background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:12px 14px;line-height:1.6}
+.cf textarea{min-height:170px;resize:vertical}
+.cf input:focus,.cf textarea:focus{outline:2px solid var(--cyan);outline-offset:1px;border-color:transparent}
+.cf [aria-invalid="true"]{border-color:#ff8a8a}
+.err{font-size:13px;color:#ffb0b0}
+.err:empty{display:none}
+.pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+@media (max-width:600px){.pair{grid-template-columns:minmax(0,1fr)}}
+
+/* 選択カード */
+.svc{border:0;display:grid;gap:12px;min-width:0}
+.svc legend{margin-bottom:12px}
+.svc-list{display:grid;gap:12px}
+.svc-card{position:relative;display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:4px 14px;align-items:center;cursor:pointer;background:var(--bg2);border:2px solid var(--line);border-radius:12px;padding:18px 18px;transition:border-color .2s,background .2s,box-shadow .2s}
+.svc-card:hover{border-color:rgba(79,227,255,.55)}
+.svc-card input{position:absolute;opacity:0;width:1px;height:1px}
+.svc-card .dot{grid-row:1/3;width:24px;height:24px;border-radius:50%;border:2px solid var(--muted);display:grid;place-items:center;transition:border-color .2s}
+.svc-card .dot::after{content:"";width:12px;height:12px;border-radius:50%;background:var(--cyan);transform:scale(0);transition:transform .2s}
+.svc-card .nm{font-size:clamp(17px,2vw,20px);font-weight:900;line-height:1.4}
+.svc-card .pr{grid-row:1/3;grid-column:3;text-align:right;font-family:var(--en);font-weight:700;font-size:clamp(28px,3.4vw,38px);line-height:1;white-space:nowrap}
+.svc-card .pr span{display:block;font-family:var(--jp);font-size:12px;font-weight:700;color:var(--muted);margin-top:6px}
+.svc-card .ds{grid-column:2;font-size:14px;color:var(--sub);line-height:1.7}
+.svc-card:has(input:checked),.svc-card.on{border-color:var(--cyan);background:rgba(79,227,255,.09);box-shadow:0 14px 40px rgba(79,227,255,.12)}
+.svc-card:has(input:checked) .dot,.svc-card.on .dot{border-color:var(--cyan)}
+.svc-card:has(input:checked) .dot::after,.svc-card.on .dot::after{transform:scale(1)}
+.svc-card:has(input:checked) .pr,.svc-card.on .pr{color:var(--cyan)}
+.svc-card:has(input:focus-visible){outline:2px solid var(--cyan);outline-offset:3px}
+@media (max-width:520px){
+  .svc-card{grid-template-columns:24px minmax(0,1fr);padding:16px 14px;gap:4px 12px}
+  .svc-card .dot{grid-row:1}
+  .svc-card .pr{grid-row:2;grid-column:2;text-align:left;font-size:30px;display:flex;align-items:baseline;gap:6px}
+  .svc-card .pr span{display:inline;margin:0}
+  .svc-card .ds{grid-column:2}
+}
+
+/* 添付 */
+.att{border:1px dashed var(--line);border-radius:12px;padding:16px;transition:border-color .2s,background .2s}
+.att.hot{border:2px solid #ffd36b;background:rgba(255,211,107,.07)}
+.att .rec{display:none}
+.att.hot .rec{display:inline-block}
+.att.hot .opt{display:none}
+.drop{display:flex;align-items:center;justify-content:center;gap:10px;min-height:64px;border-radius:10px;background:var(--bg2);border:1.5px solid rgba(79,227,255,.5);cursor:pointer;font-weight:700;font-size:16px;text-align:center;padding:10px 14px;transition:background .2s}
+.drop:hover{background:rgba(79,227,255,.1)}
+.drop svg{width:22px;height:22px;flex:none}
+.att input[type=file]{position:absolute;opacity:0;width:1px;height:1px}
+.att input[type=file]:focus-visible + .drop{outline:2px solid var(--cyan);outline-offset:2px}
+.flist{list-style:none;display:grid;gap:6px}
+.flist:empty{display:none}
+.flist li{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:14px;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:8px;padding:6px 6px 6px 12px;min-width:0}
+.flist .fn{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.flist .fs{color:var(--muted);font-family:var(--en);margin-left:6px}
+.flist button{flex:none;font:inherit;font-size:13px;font-weight:700;color:var(--text);background:transparent;border:1px solid var(--line);border-radius:6px;padding:2px 10px;cursor:pointer;min-height:32px}
+.flist button:hover{border-color:#ff8a8a}
+
+.privacy{font-size:15px;color:var(--sub);line-height:1.8}
+.privacy a{color:var(--cyan)}
+.field .agree{display:flex;flex-wrap:nowrap;gap:10px;align-items:flex-start;font-size:15px;color:var(--sub);font-weight:500}
+.agree input{width:20px;height:20px;margin-top:5px;accent-color:var(--cyan);flex:0 0 auto}
+.agree a{color:var(--cyan)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.submit{border:0;cursor:pointer;font-family:inherit;font-size:18px;font-weight:900;width:100%;max-width:420px;min-height:60px}
+.submit[disabled]{opacity:.6;cursor:wait;transform:none}
+.status{border-radius:10px;padding:18px 20px;font-size:15px;line-height:1.8}
+.status.ng{background:rgba(255,138,138,.1);border:1px solid rgba(255,138,138,.5)}
+.status b{display:block;font-size:17px;margin-bottom:4px}
+.thanks{text-align:center;padding:clamp(36px,6vw,64px) clamp(16px,4vw,40px);border:2px solid var(--cyan);border-radius:14px;background:rgba(79,227,255,.08)}
+#form,.svc{scroll-margin-top:84px}
+.thanks[hidden]{display:none}
+.thanks .ic{width:64px;height:64px;margin:0 auto 14px;border-radius:50%;background:var(--cyan);display:grid;place-items:center}
+.thanks .ic svg{width:32px;height:32px}
+.thanks h2{font-size:clamp(24px,3.6vw,34px);font-weight:900;line-height:1.45}
+.thanks p{margin-top:12px;font-size:clamp(17px,2vw,20px);color:var(--sub);line-height:1.8}
+.thanks .small{margin-top:16px}
+
+.side{display:grid;gap:16px}
+.side .way-main{font-size:clamp(22px,2.6vw,30px)}
+.flow{list-style:none;display:grid;gap:10px;counter-reset:f}
+.flow li{counter-increment:f;display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;font-size:15px;color:var(--sub)}
+.flow li::before{content:counter(f);font-family:var(--en);font-weight:700;color:#04101c;background:var(--cyan);border-radius:50%;width:26px;height:26px;display:grid;place-items:center;font-size:14px;margin-top:3px}
+</style>
+<link rel="icon" href="../favicon.ico?v=2" sizes="16x16 32x32 48x48"><link rel="apple-touch-icon" href="../images/logo/apple-touch-icon.png?v=2"><link rel="manifest" href="../site.webmanifest">
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@800&amp;text=turtle%20ad&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/logo.css">
+</head>
+<body>
+<svg class="bg-lines" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
+  <defs><linearGradient id="bgl" x1="0" x2="1"><stop offset="0" stop-color="#4fe3ff" stop-opacity="0"/><stop offset=".5" stop-color="#4fe3ff" stop-opacity=".22"/><stop offset="1" stop-color="#4fe3ff" stop-opacity="0"/></linearGradient></defs>
+  <path stroke="url(#bgl)" d="M-50 760C320 640 560 860 860 680S1260 440 1500 500"/>
+  <path stroke="url(#bgl)" d="M-50 200C300 110 600 300 900 170S1300 70 1500 120"/>
+</svg>
+<header class="hd">
+  <a class="logo" href="../index.html" aria-label="合同会社turtle ad トップへ">
+    <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><polygon points="50,6 88.1,28 88.1,72 50,94 11.9,72 11.9,28" fill="#0D3A34" stroke="#3CD6F0" stroke-width="3" stroke-linejoin="round"/><polygon points="50,32 65.6,41 65.6,59 50,68 34.4,59 34.4,41" fill="none" stroke="#3CD6F0" stroke-width="2.5" stroke-linejoin="round"/><path d="M50 6 L50 32 M88.1 28 L65.6 41 M88.1 72 L65.6 59 M50 94 L50 68 M11.9 72 L34.4 59 M11.9 28 L34.4 41" stroke="#3CD6F0" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.8"/><circle class="lm-dot" cx="50" cy="32" r="3" fill="#fff"/><circle class="lm-dot" cx="65.6" cy="41" r="3" fill="#fff"/><circle class="lm-dot" cx="65.6" cy="59" r="3" fill="#fff"/><circle class="lm-dot" cx="50" cy="68" r="3" fill="#fff"/><circle class="lm-dot" cx="34.4" cy="59" r="3" fill="#fff"/><circle class="lm-dot" cx="34.4" cy="41" r="3" fill="#fff"/><circle cx="50" cy="50" r="5" fill="#3CD6F0"/></svg>
+    <span class="logo-word">turtle <b>ad</b></span>
+  </a>
+  <nav class="nav" aria-label="メニュー">
+    <a href="../index.html#business">事業紹介</a>
+    <a href="../index.html#web">ホームページ料金</a>
+    <a href="../index.html#company">会社概要</a>
+    <a class="btn" href="#form">申し込む</a>
+  </nav>
+</header>
+<main>
+
+<section class="hero"><div class="wrap hero-in">
+  <div>
+    <span class="hero-kicker">noteを読んでくださった方へ</span>
+    <h1 class="hero-title">その原稿、<br><em>出す前に</em>一度<br>見せてください。</h1>
+    <p class="hero-lead">チラシや広告の原稿の添削と、チラシ制作のお申し込みページです。全国どこからでも、オンラインで承ります。</p>
+    <div class="chips">
+      <a class="chip" href="#form" data-s="tensaku"><span class="k">原稿の添削</span><span class="p">5,500<small>円</small></span></a>
+      <a class="chip" href="#form" data-s="katamen"><span class="k">チラシ 片面</span><span class="p">20,000<small>円</small></span></a>
+      <a class="chip" href="#form" data-s="ryomen"><span class="k">チラシ 両面</span><span class="p">30,000<small>円</small></span></a>
+    </div>
+    <p class="hint" style="margin-top:8px">金額はすべて税込です。添削は原稿1枚あたりの金額です。</p>
+    <a class="btn" href="#form">申し込みフォームへ</a>
+  </div>
+  <figure class="hero-pic">
+    <img src="img/hero.webp" width="1200" height="800" alt="赤ペンで直しを入れたチラシの原稿のイメージ" fetchpriority="high">
+    <figcaption>添削のイメージ（見本の原稿です）</figcaption>
+  </figure>
+</div></section>
+
+<section class="band"><div class="band-in">
+  <div class="band-pic"><img src="img/sample-flyers.webp" width="1200" height="630" alt="美容室・飲食店・工務店のチラシの作例イメージ" loading="lazy" decoding="async"></div>
+  <div class="band-txt rv">
+    <p class="sec-no">FOR SMALL SHOPS</p>
+    <p class="band-big">お店の言葉を、<br><em>伝わる形</em>に。</p>
+    <p class="txt">鹿児島で地域情報誌をつくってきた私たちが、読む人の目線で原稿を見て、チラシに仕上げます。小さなお店・会社のご相談を歓迎しています。</p>
+    <p class="band-cap">※ 画像は作例のイメージです。</p>
+  </div>
+</div></section>
+
+<section class="sec" id="form"><div class="wrap">
+  <p class="sec-no">ORDER</p>
+  <h2 class="h2">お申し込みフォーム</h2>
+  <div class="form-wrap">
+    <div>
+      <div class="card" id="form-card">
+        <form class="cf" id="of" novalidate>
+          <fieldset class="svc" id="svc">
+            <legend class="step-h"><i>1</i>内容を選んでください<span class="req">必須</span></legend>
+            <div class="svc-list">
+              <label class="svc-card" data-s="tensaku">
+                <input type="radio" name="service" value="原稿のしっかり添削（1枚5,500円・税込）">
+                <span class="dot" aria-hidden="true"></span>
+                <span class="nm">原稿のしっかり添削</span>
+                <span class="pr">5,500円<span>1枚・税込</span></span>
+                <span class="ds">お手元のチラシや広告の原稿を、読む人の目線で見直して、直したほうがよいところをお伝えします。</span>
+              </label>
+              <label class="svc-card" data-s="katamen">
+                <input type="radio" name="service" value="チラシ制作 片面（20,000円・税込）">
+                <span class="dot" aria-hidden="true"></span>
+                <span class="nm">チラシ制作 片面</span>
+                <span class="pr">20,000円<span>税込</span></span>
+                <span class="ds">お話を伺って、片面のチラシをつくります。</span>
+              </label>
+              <label class="svc-card" data-s="ryomen">
+                <input type="radio" name="service" value="チラシ制作 両面（30,000円・税込）">
+                <span class="dot" aria-hidden="true"></span>
+                <span class="nm">チラシ制作 両面</span>
+                <span class="pr">30,000円<span>税込</span></span>
+                <span class="ds">お話を伺って、表と裏の両面のチラシをつくります。</span>
+              </label>
+            </div>
+            <p class="err" id="e-service"></p>
+          </fieldset>
+
+          <p class="step-h"><i>2</i>お客さまのことを教えてください</p>
+          <div class="field">
+            <label for="f-name">お名前<span class="req">必須</span></label>
+            <input type="text" id="f-name" name="name" autocomplete="name" maxlength="100" required>
+            <p class="err" id="e-name"></p>
+          </div>
+          <div class="field">
+            <label for="f-company">会社名・店名<span class="opt">任意</span></label>
+            <input type="text" id="f-company" name="company" autocomplete="organization" maxlength="100">
+          </div>
+          <div class="pair">
+            <div class="field">
+              <label for="f-email">メールアドレス<span class="req">必須</span></label>
+              <input type="email" id="f-email" name="email" autocomplete="email" inputmode="email" maxlength="200" required>
+              <p class="err" id="e-email"></p>
+            </div>
+            <div class="field">
+              <label for="f-phone">電話番号<span class="opt">任意</span></label>
+              <input type="tel" id="f-phone" name="phone" autocomplete="tel" inputmode="tel" maxlength="30">
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-industry">業種<span class="req">必須</span></label>
+            <input type="text" id="f-industry" name="industry" maxlength="100" required placeholder="例：美容室／飲食店／工務店">
+            <p class="err" id="e-industry"></p>
+          </div>
+          <div class="field">
+            <label for="f-message">ご相談内容<span class="req">必須</span></label>
+            <textarea id="f-message" name="message" maxlength="3000" required placeholder="例：新メニューのチラシを近所に配りたい／今の原稿で伝わるか見てほしい など"></textarea>
+            <p class="err" id="e-message"></p>
+          </div>
+
+          <div class="field att" id="att">
+            <span class="lbl" id="att-lbl"><span id="att-title">参考資料の画像・ファイル</span><span class="rec">添削の方はこちら</span><span class="opt">任意</span></span>
+            <p class="hint" id="att-hint">参考にしてほしいチラシや写真などがあれば付けてください。</p>
+            <input type="file" id="f-files" multiple accept=".jpg,.jpeg,.png,.heic,.heif,.webp,.pdf,.doc,.docx,.xls,.xlsx,.ai,.psd,image/jpeg,image/png,image/heic,image/webp,application/pdf" aria-describedby="att-hint att-rule">
+            <label class="drop" for="f-files"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.4 11.1l-9.2 9.2a6 6 0 0 1-8.5-8.5l9.2-9.2a4 4 0 0 1 5.7 5.7l-9.2 9.2a2 2 0 0 1-2.8-2.8l8.5-8.5"/></svg><span>ファイルを選ぶ</span></label>
+            <ul class="flist" id="flist"></ul>
+            <p class="err" id="e-files" role="alert"></p>
+            <p class="hint" id="att-rule">3つまで・1つ5MBまで・合計10MBまで。jpg／png／heic／webp／pdf／Word／Excel／ai／psd に対応しています。</p>
+            <p class="hint">うまく付けられない場合は、送信後に届くご連絡メールへの返信で送っていただいてもかまいません。</p>
+          </div>
+
+          <div class="hp" aria-hidden="true">
+            <label for="f-website">ホームページURL（入力しないでください）</label>
+            <input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <p class="privacy">いただいた個人情報は、このお申し込みへの対応以外には使いません。くわしくは<a href="../reel/privacy.html" target="_blank" rel="noopener">プライバシーポリシー</a>をご覧ください。</p>
+          <div class="field">
+            <label class="agree" for="f-agree"><input type="checkbox" id="f-agree" name="agree" required><span><a href="../reel/privacy.html" target="_blank" rel="noopener">プライバシーポリシー</a>に同意して申し込みます</span></label>
+            <p class="err" id="e-agree"></p>
+          </div>
+          <button class="btn submit" type="submit" id="f-submit">この内容で申し込む</button>
+          <div id="f-status" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+      <div class="thanks" id="thanks" hidden tabindex="-1">
+        <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#04101c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div>
+        <h2>お申し込み<br>ありがとうございます。</h2>
+        <p>内容を確認して、メールでご連絡します。</p>
+        <p class="small">メールが届かない場合は、お手数ですがお電話（099-210-3511）でお知らせください。</p>
+      </div>
+    </div>
+
+    <aside class="side">
+      <div class="card">
+        <h3 class="h3" style="font-size:18px;font-weight:900;margin-bottom:10px">お申し込みのあとの流れ</h3>
+        <ol class="flow">
+          <li>フォームからお申し込み</li>
+          <li>内容を確認して、メールでご連絡します</li>
+          <li>くわしい進め方は、そのメールでご案内します</li>
+        </ol>
+      </div>
+      <a class="way tel" href="tel:0992103511">
+        <span class="way-label">お電話でも</span>
+        <span class="way-main">099-210-3511</span>
+        <span class="way-sub">受付時間 9:00〜18:00（土日祝休み）</span>
+      </a>
+      <a class="way" href="mailto:info@turtle-ad.com?subject=%E3%81%8A%E7%94%B3%E3%81%97%E8%BE%BC%E3%81%BF">
+        <span class="way-label">メールでも</span>
+        <span class="way-main">info@turtle-ad.com</span>
+      </a>
+    </aside>
+  </div>
+</div></section>
+</main>
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft-top">
+      <div>
+        <address>
+          合同会社turtle ad<br>
+          〒891-0109 鹿児島県鹿児島市清和3-25-15<br>
+          電話 <a href="tel:0992103511">099-210-3511</a>／メール <a href="mailto:info@turtle-ad.com">info@turtle-ad.com</a><br>
+          受付時間 9:00〜18:00（土日祝休み）
+        </address>
+      </div>
+      <nav class="ft-links" aria-label="フッターメニュー">
+        <a href="../index.html">トップページ</a>
+        <a href="../index.html#ai">AI活用サポート</a>
+        <a href="../index.html#web">ホームページ制作</a>
+        <a href="../index.html#guide">マイタウンガイド</a>
+        <a href="../index.html#job">マイタウンジョブ</a>
+        <a href="../index.html#company">会社概要</a>
+        <a href="../contact/">お問い合わせ</a>
+      </nav>
+    </div>
+    <p class="copy">© 合同会社turtle ad</p>
+  </div>
+</footer>
+<script src="../assets/sub.js"></script>
+<script>
+(function(){
+  'use strict';
+  var ENDPOINT = 'https://turtlead.app.n8n.cloud/webhook/turtlead-order';
+  var T0 = Date.now();
+  var MAX_FILES = 3, MAX_ONE = 5 * 1024 * 1024, MAX_TOTAL = 10 * 1024 * 1024;
+  var EXT = ['jpg','jpeg','png','heic','heif','webp','pdf','doc','docx','xls','xlsx','ai','psd'];
+  function $(id){ return document.getElementById(id); }
+  var form = $('of'), btn = $('f-submit'), box = $('f-status');
+  var radios = form.querySelectorAll('input[name="service"]');
+  var files = [];
+
+  /* ---- サービス選択 ---- */
+  function selected(){ var c = form.querySelector('input[name="service"]:checked'); return c ? c.closest('.svc-card').getAttribute('data-s') : ''; }
+  function refresh(){
+    var s = selected();
+    form.querySelectorAll('.svc-card').forEach(function(c){ c.classList.toggle('on', c.querySelector('input').checked); });
+    var hot = s === 'tensaku';
+    $('att').classList.toggle('hot', hot);
+    $('att-title').textContent = hot ? '添削する原稿の画像・ファイル' : '参考資料の画像・ファイル';
+    $('att-hint').textContent = hot
+      ? '添削してほしい原稿を、写真やファイルで付けてください（スマホで撮った写真でも大丈夫です）。'
+      : '参考にしてほしいチラシや写真などがあれば付けてください。';
+  }
+  function choose(key){
+    var card = form.querySelector('.svc-card[data-s="' + key + '"]');
+    if (!card) return;
+    card.querySelector('input').checked = true;
+    $('e-service').textContent = '';
+    refresh();
+  }
+  radios.forEach(function(r){ r.addEventListener('change', function(){ $('e-service').textContent=''; refresh(); }); });
+  document.querySelectorAll('.chip[data-s]').forEach(function(a){
+    a.addEventListener('click', function(){ choose(a.getAttribute('data-s')); });
+  });
+  try { var q = new URLSearchParams(location.search).get('s'); if (q) choose(q); } catch(e){}
+  refresh();
+
+  /* ---- 添付 ---- */
+  function fmt(n){ return n >= 1048576 ? (n/1048576).toFixed(1) + 'MB' : Math.max(1, Math.round(n/1024)) + 'KB'; }
+  function ext(name){ var m = /\.([^.]+)$/.exec(name || ''); return m ? m[1].toLowerCase() : ''; }
+  function total(){ return files.reduce(function(s,f){ return s + f.size; }, 0); }
+  function render(){
+    var ul = $('flist'); ul.innerHTML = '';
+    files.forEach(function(f, i){
+      var li = document.createElement('li');
+      var sp = document.createElement('span'); sp.className = 'fn'; sp.textContent = f.name;
+      var sz = document.createElement('span'); sz.className = 'fs'; sz.textContent = fmt(f.size); sp.appendChild(sz);
+      var b = document.createElement('button'); b.type = 'button'; b.textContent = '外す';
+      b.setAttribute('aria-label', f.name + ' を外す');
+      b.addEventListener('click', function(){ files.splice(i,1); $('e-files').textContent=''; render(); });
+      li.appendChild(sp); li.appendChild(b); ul.appendChild(li);
+    });
+  }
+  $('f-files').addEventListener('change', function(ev){
+    var msgs = [];
+    Array.prototype.forEach.call(ev.target.files || [], function(f){
+      if (files.some(function(x){ return x.name === f.name && x.size === f.size; })) return;
+      if (EXT.indexOf(ext(f.name)) < 0){ msgs.push('「' + f.name + '」は付けられない種類のファイルです。'); return; }
+      if (f.size > MAX_ONE){ msgs.push('「' + f.name + '」は5MBをこえているため付けられません。'); return; }
+      if (files.length >= MAX_FILES){ msgs.push('付けられるのは3つまでです。「' + f.name + '」は付けていません。'); return; }
+      if (total() + f.size > MAX_TOTAL){ msgs.push('合計が10MBをこえるため「' + f.name + '」は付けていません。'); return; }
+      files.push(f);
+    });
+    ev.target.value = '';
+    $('e-files').textContent = msgs.join(' ');
+    render();
+  });
+
+  /* ---- 入力チェック ---- */
+  function setErr(input, errId, msg){
+    if (input) input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+    $(errId).textContent = msg || '';
+  }
+  function validate(){
+    var ok = true, first = null;
+    if (!selected()){ $('e-service').textContent = 'お申し込みの内容を1つ選んでください。'; ok=false; first = first || radios[0]; } else $('e-service').textContent = '';
+    var name = $('f-name'), email = $('f-email'), ind = $('f-industry'), msg = $('f-message'), agree = $('f-agree');
+    if (!name.value.trim()){ setErr(name,'e-name','お名前を入力してください。'); ok=false; first=first||name; } else setErr(name,'e-name','');
+    var em = email.value.trim();
+    if (!em){ setErr(email,'e-email','メールアドレスを入力してください。'); ok=false; first=first||email; }
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){ setErr(email,'e-email','メールアドレスの形を確認してください。'); ok=false; first=first||email; }
+    else setErr(email,'e-email','');
+    if (!ind.value.trim()){ setErr(ind,'e-industry','業種を入力してください（例：美容室）。'); ok=false; first=first||ind; } else setErr(ind,'e-industry','');
+    if (!msg.value.trim()){ setErr(msg,'e-message','ご相談内容を入力してください。'); ok=false; first=first||msg; } else setErr(msg,'e-message','');
+    if (files.length > MAX_FILES || total() > MAX_TOTAL){ $('e-files').textContent = '添付は3つまで・合計10MBまでです。'; ok=false; first=first||$('f-files'); }
+    if (!agree.checked){ setErr(agree,'e-agree','プライバシーポリシーへの同意にチェックを入れてください。'); ok=false; first=first||agree; } else setErr(agree,'e-agree','');
+    if (first){ first.focus(); if (first.type === 'radio') $('svc').scrollIntoView({behavior:'smooth', block:'start'}); }
+    return ok;
+  }
+
+  /* ---- 送信 ---- */
+  var sending = false;
+  function fail(){
+    box.className = 'status ng';
+    box.innerHTML = '<b>送信できませんでした。</b>お手数ですが、少し時間をおいてもう一度お試しいただくか、お電話（099-210-3511）またはメール（info@turtle-ad.com）でご連絡ください。';
+  }
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    if (sending) return;
+    box.className = ''; box.innerHTML = '';
+    if (!validate()) return;
+    var elapsed = Date.now() - T0;
+    if (elapsed < 3000){
+      box.className = 'status ng';
+      box.innerHTML = '<b>もう一度お試しください。</b>入力内容をご確認のうえ、少し待ってから送信してください。';
+      return;
+    }
+    sending = true; btn.disabled = true; btn.textContent = '送信しています…';
+    var fd = new FormData();
+    fd.append('service', form.querySelector('input[name="service"]:checked').value);
+    fd.append('name', $('f-name').value.trim());
+    fd.append('company', $('f-company').value.trim());
+    fd.append('email', $('f-email').value.trim());
+    fd.append('phone', $('f-phone').value.trim());
+    fd.append('industry', $('f-industry').value.trim());
+    fd.append('message', $('f-message').value.trim());
+    fd.append('website', $('f-website').value);
+    fd.append('elapsed', String(elapsed));
+    fd.append('page', location.href);
+    files.forEach(function(f){ fd.append('files', f, f.name); });
+    fetch(ENDPOINT, { method:'POST', body: fd })
+      .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ return { ok: r.ok && j && j.ok === true, j: j }; }); })
+      .then(function(res){
+        if (!res.ok) throw new Error((res.j && res.j.error) || 'send failed');
+        $('form-card').hidden = true;
+        var t = $('thanks'); t.hidden = false;
+        t.scrollIntoView({behavior:'smooth', block:'center'});
+        try { t.focus({preventScroll:true}); } catch(e){}
+      })
+      .catch(function(){
+        fail();
+        sending = false; btn.disabled = false; btn.textContent = 'この内容で申し込む';
+        box.scrollIntoView({behavior:'smooth', block:'center'});
+      });
+  });
+})();
+</script>
+</body>
+</html>
