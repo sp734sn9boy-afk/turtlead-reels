@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>note見出し pro_2 20261119</title>
+<!--
+  note無料記事 見出し画像 最終候補2（案Cのスポットライトを磨いた版）
+  サイズ: 1280x670 px
+  雰囲気: 「閉店後の売り場に、ひと筋だけ灯りが落ちている」映画ポスター／上質な雑誌の見開きのような静けさ。
+  色: あたたかい墨色の地 × 生成りの白 × 差し色は灯りの琥珀色1色。
+  文字組み: 小さめの極太ゴシック（Noto Sans JP 900）で前振り → 大きな明朝（Shippori Mincho B1 800）で言い切る。左揃え。
+  図: 棚に並ぶ5つの商品のうち、灯りの当たる1つだけが見える。光の筋・床の明かり・影はSVG/CSSで自作。
+  素材の出どころ: すべて自作（写真・人物・他社ロゴなし）。フォントはGoogle Fonts（SIL Open Font License）。
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;900&family=Shippori+Mincho+B1:wght@600;800&display=block" rel="stylesheet">
+<style>
+  :root{
+    --night:#121110; --night2:#1b1916;
+    --cream:#f4ecdc; --dim:#9d968a; --amber:#e9b867;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1280px;height:670px;overflow:hidden}
+  body{
+    background:
+      radial-gradient(700px 520px at 78% 78%, #24201b 0%, rgba(36,32,27,0) 70%),
+      linear-gradient(180deg, var(--night2) 0%, var(--night) 100%);
+    color:var(--cream);position:relative;
+    font-family:"Noto Sans JP","IPAPGothic",sans-serif;
+    font-feature-settings:"palt";
+  }
+  .grain{position:absolute;inset:0;opacity:.5;mix-blend-mode:screen;pointer-events:none}
+  .scene{position:absolute;left:0;top:0}
+
+  .copy{position:absolute;left:84px;top:136px}
+  .lead{
+    font-weight:900;font-size:60px;letter-spacing:.02em;line-height:1;color:var(--dim);
+  }
+  .lead .ten{letter-spacing:-.3em}
+  .main{
+    margin-top:30px;margin-left:-8px;
+    font-family:"Shippori Mincho B1","Noto Serif JP",serif;font-weight:800;
+    font-size:150px;line-height:1;letter-spacing:-.02em;color:var(--cream);
+    text-shadow:0 0 40px rgba(233,184,103,.08);
+  }
+  .main .maru{letter-spacing:-.3em}
+  .rule{width:64px;height:3px;background:var(--amber);margin:44px 0 22px}
+  .sub{
+    font-family:"Shippori Mincho B1",serif;font-weight:600;font-size:24px;letter-spacing:.12em;color:var(--dim);
+  }
+  .brand{
+    position:absolute;right:64px;bottom:36px;
+    font-weight:500;font-size:18px;letter-spacing:.34em;color:#7d776d;
+  }
+</style>
+</head>
+<body>
+  <svg class="scene" width="1280" height="670" viewBox="0 0 1280 670">
+    <defs>
+      <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#f6d9a2" stop-opacity=".30"/>
+        <stop offset=".6" stop-color="#f1cf92" stop-opacity=".16"/>
+        <stop offset="1" stop-color="#e9b867" stop-opacity=".10"/>
+      </linearGradient>
+      <radialGradient id="pool" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#f3d39a" stop-opacity=".55"/>
+        <stop offset=".45" stop-color="#e9b867" stop-opacity=".22"/>
+        <stop offset="1" stop-color="#e9b867" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#ffe2ad" stop-opacity=".35"/>
+        <stop offset="1" stop-color="#ffe2ad" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="shelfTop" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#2a2621"/>
+        <stop offset="1" stop-color="#1a1815"/>
+      </linearGradient>
+      <!-- 灯りの当たる瓶 -->
+      <linearGradient id="jarBody" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#7a4a1f"/>
+        <stop offset=".22" stop-color="#c98a3e"/>
+        <stop offset=".42" stop-color="#e8b064"/>
+        <stop offset=".7" stop-color="#b8732d"/>
+        <stop offset="1" stop-color="#5a3415"/>
+      </linearGradient>
+      <linearGradient id="lidG" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#3a3530"/>
+        <stop offset=".35" stop-color="#8a8279"/>
+        <stop offset=".55" stop-color="#5a544d"/>
+        <stop offset="1" stop-color="#26221e"/>
+      </linearGradient>
+      <linearGradient id="label" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#cfc3ad"/>
+        <stop offset=".4" stop-color="#f8f0e0"/>
+        <stop offset="1" stop-color="#bdb09a"/>
+      </linearGradient>
+      <!-- 暗がりの商品 -->
+      <linearGradient id="darkG" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#1d1b18"/>
+        <stop offset=".5" stop-color="#262320"/>
+        <stop offset="1" stop-color="#191714"/>
+      </linearGradient>
+      <linearGradient id="fadeG" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+        <stop offset=".55" stop-color="#fff" stop-opacity=".9"/>
+        <stop offset="1" stop-color="#fff" stop-opacity="1"/>
+      </linearGradient>
+      <mask id="fadeL"><rect width="1280" height="670" fill="url(#fadeG)"/></mask>
+      <filter id="b30" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="30"/></filter>
+      <filter id="b8" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+      <filter id="b3" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter>
+      <filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 1  0 0 0 0 .95  0 0 0 0 .85  0 0 0 .05 0"/></filter>
+    </defs>
+
+    <!-- 光の筋（上から） -->
+    <g filter="url(#b8)">
+      <polygon points="964,-20 1052,-20 1172,560 846,560" fill="url(#beam)"/>
+    </g>
+    <polygon points="990,-20 1028,-20 1090,560 930,560" fill="#f6dcaa" opacity=".05" filter="url(#b3)"/>
+
+    <!-- 棚 -->
+    <g mask="url(#fadeL)">
+      <rect x="0" y="546" width="1280" height="16" fill="url(#shelfTop)"/>
+      <rect x="0" y="562" width="1280" height="108" fill="#141210"/>
+      <rect x="0" y="546" width="1280" height="1.5" fill="#3a352e"/>
+    </g>
+    <!-- 棚の上の光だまり -->
+    <ellipse cx="1009" cy="552" rx="200" ry="26" fill="url(#pool)"/>
+    <ellipse cx="1009" cy="600" rx="210" ry="40" fill="#e9b867" opacity=".05" filter="url(#b30)"/>
+    <!-- 棚の前の縁に落ちる光 -->
+    <rect x="850" y="546" width="318" height="2" fill="#f2d39c" opacity=".55" filter="url(#b3)"/>
+
+    <!-- 暗がりの商品（左から：箱・瓶・袋 ／ 右：缶） -->
+    <g transform="translate(30 0)">
+      <!-- 箱 -->
+      <rect x="664" y="412" width="88" height="134" rx="3" fill="url(#darkG)"/>
+      <rect x="664" y="412" width="88" height="1.5" fill="#34302a"/>
+      <!-- 細い瓶 -->
+      <path d="M786 546 V470 Q786 454 800 446 V424 H822 V446 Q836 454 836 470 V546 Z" fill="url(#darkG)"/>
+      <rect x="798" y="414" width="26" height="12" rx="2" fill="#22201c"/>
+      <!-- 袋 -->
+      <path d="M872 546 L878 438 Q880 426 892 428 L924 432 Q934 434 932 446 L928 546 Z" fill="url(#darkG)" opacity=".9"/>
+      <!-- 缶（右） -->
+      <rect x="1114" y="462" width="70" height="84" rx="6" fill="url(#darkG)"/>
+      <rect x="1114" y="462" width="70" height="8" rx="4" fill="#2a2723"/>
+      <!-- 光がわずかに縁を照らす -->
+      <path d="M928 446 L924 546" stroke="#e9b867" stroke-opacity=".22" stroke-width="2"/>
+      <path d="M1114 470 V546" stroke="#e9b867" stroke-opacity=".18" stroke-width="2"/>
+    </g>
+
+    <!-- 灯りの当たる瓶（主役） -->
+    <g transform="translate(1009 546) scale(1.14) translate(-1009 -546)">
+      <ellipse cx="1009" cy="546" rx="72" ry="7" fill="#000" opacity=".55" filter="url(#b3)"/>
+      <!-- 後光 -->
+      <ellipse cx="1009" cy="470" rx="120" ry="110" fill="url(#halo)"/>
+      <!-- 本体（ジャムの瓶） -->
+      <path d="M948 462 Q948 444 966 440 H1052 Q1070 444 1070 462 V532 Q1070 546 1056 546 H962 Q948 546 948 532 Z" fill="url(#jarBody)"/>
+      <!-- 首 -->
+      <rect x="962" y="428" width="94" height="14" rx="3" fill="#6b4019"/>
+      <!-- ふた -->
+      <rect x="956" y="406" width="106" height="26" rx="4" fill="url(#lidG)"/>
+      <g stroke="#1e1b18" stroke-opacity=".4" stroke-width="1">
+        <line x1="966" y1="410" x2="966" y2="429"/><line x1="978" y1="410" x2="978" y2="429"/><line x1="990" y1="410" x2="990" y2="429"/><line x1="1002" y1="410" x2="1002" y2="429"/>
+        <line x1="1014" y1="410" x2="1014" y2="429"/><line x1="1026" y1="410" x2="1026" y2="429"/><line x1="1038" y1="410" x2="1038" y2="429"/><line x1="1050" y1="410" x2="1050" y2="429"/>
+      </g>
+      <rect x="956" y="406" width="106" height="4" rx="2" fill="#d6cdc0" opacity=".75"/>
+      <!-- ラベル（無地・ロゴなし） -->
+      <rect x="948" y="466" width="122" height="54" fill="url(#label)"/>
+      <rect x="948" y="466" width="122" height="2" fill="#a8977a"/>
+      <rect x="948" y="518" width="122" height="2" fill="#a8977a"/>
+      <rect x="988" y="482" width="42" height="3" rx="1.5" fill="#3b2c1d" opacity=".7"/>
+      <rect x="980" y="492" width="58" height="2" rx="1" fill="#3b2c1d" opacity=".35"/>
+      <rect x="997" y="503" width="24" height="7" rx="1" fill="#b5652a" opacity=".85"/>
+      <!-- ガラスの照り -->
+      <path d="M962 452 Q959 496 963 534" stroke="#fff6e4" stroke-width="5" stroke-linecap="round" opacity=".55" fill="none"/>
+      <path d="M974 450 Q972 456 973 461" stroke="#fff6e4" stroke-width="2.5" stroke-linecap="round" opacity=".5" fill="none"/>
+      <path d="M1059 456 Q1061 496 1057 532" stroke="#fff6e4" stroke-width="1.5" opacity=".25" fill="none"/>
+    </g>
+
+    <rect width="1280" height="670" filter="url(#n)" opacity="1"/>
+  </svg>
+
+  <div class="copy">
+    <div class="lead">見えない商品は<span class="ten">、</span></div>
+    <div class="main">選ばれない<span class="maru">。</span></div>
+    <div class="rule"></div>
+    <div class="sub">いい商品でも、見てもらえなければ売れない。</div>
+  </div>
+
+  <div class="brand">turtle ad</div>
+</body>
+</html>
