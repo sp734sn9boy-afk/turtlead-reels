@@ -1,0 +1,16 @@
+Googleマップ用写真 01〜06（1200x1200 JPG）素材の出典  2026-11-19
+作り方: python3 gen.py → NODE_PATH=/opt/node-tools/node_modules node render.js（見本の撮り直しは shoot_demos.js）
+check/ は確認用（*_guide.png = 中央80%の赤枠つき）
+
+01 鰹節工場の見本 : https://www.turtle-ad.com/demo/kanetamaru/ を Playwright で撮影（PC 1440x900 / スマホ 390x844）→ shots/kanetamaru_*.png
+02 建築板金会社の見本 : https://www.turtle-ad.com/demo/motowaki/ を同様に撮影 → shots/motowaki_*.png
+   ※撮影時に、ページ内の会社名（カネタマル／元脇板金工業／エイセイ）と電話番号の文字をぼかし処理（shoot_demos.js）。
+   ※見本内の写真（鰹節・屋根）はサイトに入っている素材のまま。手は写るが顔は写らない。
+03 AIリール : https://www.turtle-ad.com/reel/ のサンプル動画（izakaya-sample-v8-web.mp4 / biyoshitsu-sample-v10-web.mp4 / koumuten-sample-v9-web.mp4）の2秒目を ffmpeg で切り出し → frames/*_sel.png
+   ※動画内の「※イメージ（AI生成の架空のお店）」「VOICEVOX:冥鳴ひまり／玄野武宏」表記はそのまま残している。人物の写るコマは使っていない。
+04 マイタウンガイド : https://www.turtle-ad.com/mytown-advertising/ の表紙画像 images/ebooks/{ichikikushikino,kanoya,kirishima,minamikyushu,satsuma}-2026-cover.webp（自社発行物）→ dl/
+   ※霧島市の表紙写真は表紙内に「写真提供：霧島市…」の表記あり（表紙ごと縮小掲載）。マイタウンジョブの表紙・誌面画像はサイトに見つからず未使用。
+05 AI活用サポート : 画像素材なし。チャット画面風の図を HTML/CSS で自作。文面は架空の例（/ai/ の「求人の文章」の内容に合わせた）。
+06 ロゴ : ロゴマークは turtle-ad.com ヘッダーの自社SVG（googlemap_cover_src と同じ）。
+共通 : フォント Noto Sans JP / M PLUS Rounded 1c（Google Fonts・SIL OFL）。背景の亀甲模様は自作SVG。色は cover.html と同じ。
+       ストック写真・他社ロゴ・実在人物の顔：使用なし。

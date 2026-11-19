@@ -15,6 +15,15 @@ const demos = ['eisei', 'kanetamaru', 'motowaki'];
       // 出てくる動き（フェードイン）を全部表示状態にする
       await p.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 400) { window.scrollTo(0, y); await new Promise(r => setTimeout(r, 60)); } window.scrollTo(0, 0); });
       await p.waitForTimeout(1500);
+      // 会社名と電話番号はぼかす（見本のモデルになった会社の名前・番号をGoogleマップに載せないため）
+      const n = await p.evaluate(() => {
+        const re = /((株式会社|有限会社|㈱)\s*)?(元脇板金工業|カネタマル|エイセイ)|0\d{1,4}[-‐ー]\d{1,4}[-‐ー]\d{3,4}/;
+        const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+        const hits = []; let t; while ((t = w.nextNode())) if (re.test(t.nodeValue)) hits.push(t);
+        for (const t of hits) { const e = t.parentElement; if (e) e.style.filter = 'blur(7px)'; }
+        return hits.length;
+      });
+      console.log(d, kind, 'blurred', n);
       await p.screenshot({ path: path.join(__dirname, 'shots', `${d}_${kind}.png`) });
       await p.screenshot({ path: path.join(__dirname, 'shots', `${d}_${kind}_full.png`), fullPage: true });
       if (kind === 'pc') console.log(d, await p.title());

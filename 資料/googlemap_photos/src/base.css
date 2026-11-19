@@ -1,0 +1,20 @@
+/* Googleマップ写真 共通（1200x1200）。色・フォントは googlemap_cover_src/cover.html と同じ */
+:root{--bg:#060b18;--cyan:#4fe3ff;--logo:#3CD6F0;--violet:#b9a6ff;--text:#f2f6ff;--sub:#c9d4f0}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1200px;height:1200px;overflow:hidden}
+body{background:radial-gradient(70% 70% at 50% 45%,#14245a 0%,#081024 60%,#04070f 100%);color:var(--text);
+  font-family:'Noto Sans JP',sans-serif;font-feature-settings:"palt";position:relative}
+/* 薄い亀甲模様 */
+body::before{content:"";position:absolute;inset:0;opacity:.18;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='207.84'%3E%3Cpath d='M60 0 L120 34.64 L120 103.92 L60 138.56 L0 103.92 L0 34.64 Z M60 138.56 L60 207.84' fill='none' stroke='%233CD6F0' stroke-width='1.6'/%3E%3C/svg%3E");
+  -webkit-mask-image:radial-gradient(80% 80% at 50% 50%,transparent 35%,#000 100%);mask-image:radial-gradient(80% 80% at 50% 50%,transparent 35%,#000 100%)}
+/* 大事なものはすべて中央の80%（x,y=120〜1080）に入れる。確認用の枠 */
+.guide body::after,body.guide::after{content:"";position:absolute;left:120px;top:120px;width:960px;height:960px;outline:3px dashed #ff5a5a;z-index:99}
+.head{position:absolute;left:120px;right:120px;top:128px;text-align:center}
+.kicker{font-size:30px;font-weight:700;letter-spacing:.08em;color:var(--cyan)}
+.title{margin-top:6px;font-size:58px;font-weight:900;line-height:1.2;letter-spacing:.02em}
+.foot{position:absolute;left:120px;right:120px;bottom:132px;display:flex;align-items:center;justify-content:center;gap:14px;font-size:24px;color:var(--sub);font-weight:500}
+.mark{display:inline-flex;align-items:center;gap:10px;font-family:'M PLUS Rounded 1c',sans-serif;font-weight:800;font-size:30px;color:#fff}
+.mark svg{width:40px;height:40px}
+.mark b{color:var(--logo)}
+.sep{width:2px;height:24px;background:rgba(201,212,240,.4)}
