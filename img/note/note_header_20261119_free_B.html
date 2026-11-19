@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>note見出し 案B 20261119</title>
+<!--
+  note無料記事「広告の反応がないのは、中身より『見せ方と場所』かもしれない」見出し画像 案B。
+  サイズ: 1280x670 px。フォント: IPAゴシック（システム内蔵）。
+  方針: お惣菜ケースの図（上段に1つ／下段に3つ）で「置き方で売れ方が変わる」を見せる。
+  生成りの地 × 紺 × 差し色1色（朱）。図はSVGで自作。写真・人物・他社ロゴなし（素材の出どころ：自作）。
+-->
+<style>
+  :root{ --bg:#f8f4ea; --ink:#13284a; --muted:#4a5a74; --accent:#d9573b; }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1280px;height:670px;overflow:hidden}
+  body{background:var(--bg);font-family:"IPAPGothic","IPAGothic",sans-serif;color:var(--ink);position:relative}
+  .head{position:absolute;top:44px;left:0;right:0;text-align:center;font-weight:700}
+  .h1{font-size:50px;color:var(--muted);letter-spacing:.06em}
+  .h2{font-size:80px;margin-top:6px;letter-spacing:.02em}
+  .h2 em{font-style:normal;color:var(--accent)}
+  svg{position:absolute;left:50%;top:248px;transform:translateX(-50%)}
+  .brand{position:absolute;right:48px;bottom:30px;font-family:"DejaVu Sans",sans-serif;font-size:22px;font-weight:700;color:var(--ink);letter-spacing:.2em}
+</style>
+</head>
+<body>
+  <div class="head">
+    <div class="h1">同じ商品。</div>
+    <div class="h2">置き方で、<em>売れ方</em>が変わる。</div>
+  </div>
+  <svg width="1000" height="380" viewBox="0 0 1000 380" font-family="IPAPGothic, IPAGothic, sans-serif">
+    <defs>
+      <g id="pack">
+        <!-- お惣菜パック：トレー＋中身＋ふた -->
+        <rect x="0" y="22" width="150" height="62" rx="10" fill="#13284a"/>
+        <rect x="12" y="10" width="126" height="44" rx="16" fill="#e9a23b"/>
+        <circle cx="48" cy="30" r="12" fill="#c9762a"/>
+        <circle cx="96" cy="34" r="14" fill="#c9762a"/>
+        <rect x="-4" y="0" width="158" height="62" rx="18" fill="none" stroke="#13284a" stroke-width="4"/>
+      </g>
+    </defs>
+    <!-- ケース本体 -->
+    <rect x="200" y="6" width="600" height="352" rx="18" fill="#ffffff" stroke="#13284a" stroke-width="8"/>
+    <!-- 上段・下段の棚 -->
+    <line x1="204" y1="176" x2="796" y2="176" stroke="#13284a" stroke-width="8"/>
+    <line x1="204" y1="340" x2="796" y2="340" stroke="#13284a" stroke-width="8"/>
+    <!-- 上段：1つだけ -->
+    <use href="#pack" x="425" y="88"/>
+    <!-- 下段：3つ並べる -->
+    <use href="#pack" x="245" y="252"/>
+    <use href="#pack" x="425" y="252"/>
+    <use href="#pack" x="605" y="252"/>
+    <!-- 左ラベル -->
+    <text x="180" y="122" text-anchor="end" font-size="36" font-weight="700" fill="#4a5a74">上段</text>
+    <text x="180" y="164" text-anchor="end" font-size="30" font-weight="700" fill="#4a5a74">1列</text>
+    <text x="180" y="286" text-anchor="end" font-size="36" font-weight="700" fill="#13284a">下段</text>
+    <text x="180" y="328" text-anchor="end" font-size="30" font-weight="700" fill="#13284a">3列</text>
+    <!-- 右：結果 -->
+    <rect x="822" y="262" width="168" height="66" rx="33" fill="#d9573b"/>
+    <text x="906" y="307" text-anchor="middle" font-size="32" font-weight="700" fill="#ffffff" stroke="#ffffff" stroke-width="1">よく売れた</text>
+  </svg>
+  <div class="brand">turtle ad</div>
+</body>
+</html>

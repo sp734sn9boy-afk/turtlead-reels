@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>note見出し 案A 20261119</title>
+<!--
+  note無料記事「広告の反応がないのは、中身より『見せ方と場所』かもしれない」見出し画像 案A。
+  サイズ: 1280x670 px。フォント: IPAゴシック（システム内蔵）。
+  方針: 濃い紺の地 × 白の極太文字 × 差し色1色（からし色）。主文を画面いっぱいに。
+  外部画像・写真・人物・他社ロゴなし。装飾はCSSのみ（素材の出どころ：自作）。
+-->
+<style>
+  :root{ --bg:#0f2142; --ink:#ffffff; --muted:#b9c4d8; --accent:#f2b134; }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1280px;height:670px;overflow:hidden}
+  body{background:var(--bg);font-family:"IPAPGothic","IPAGothic",sans-serif;color:var(--ink);position:relative}
+  .wrap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-bottom:20px}
+  .main{font-weight:700;line-height:1.18;-webkit-text-stroke:3px currentColor;letter-spacing:.01em}
+  .l1{font-size:96px}
+  .l2{font-size:128px;color:var(--accent)}
+  .l3{font-size:128px}
+  .bar{width:120px;height:8px;background:var(--accent);margin:0 auto 34px}
+  .brand{position:absolute;right:48px;bottom:34px;font-family:"DejaVu Sans",sans-serif;font-size:22px;font-weight:700;color:var(--muted);letter-spacing:.2em}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="bar"></div>
+    <div class="main">
+      <div class="l1">いい商品でも、</div>
+      <div class="l2">見てもらえなければ</div>
+      <div class="l3">売れない。</div>
+    </div>
+  </div>
+  <div class="brand">turtle ad</div>
+</body>
+</html>
