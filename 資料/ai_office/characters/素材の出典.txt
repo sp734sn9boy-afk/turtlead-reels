@@ -1,0 +1,9 @@
+AI社員キャラクター デザイン案 素材の出典 2026-11-20
+- キャラクター6体・ポーズ3種：すべて自作のドット絵（64x64格子）。src/characters.js と src/pixel.js のプログラムで1ドットずつ描いたもの。写真・人物・ストック素材・他社キャラクターは使用なし。
+- 体の形：自社ロゴ（六角形＝亀の甲羅、内側のノードと線）をもとに描いた。胸の甲羅＝ロゴの形。
+- 一覧画像の左上ロゴ：自社素材 資料/googlemap_logo.png（https://www.turtle-ad.com/images/logo/icon-512.png と同じ）。
+- フォント：Noto Sans JP / M PLUS Rounded 1c / Outfit（Google Fonts、SIL Open Font License）。
+- 色：ブランド色（紺 #14245a・#081024・#04070f、水色 #3CD6F0、紫 #b9a6ff）＋担当ごとの差し色
+  リーダー #ffcc4d／デザイン #ff8fd0／営業 #ff5468／出品・発信 #5ee38f／仕組み #ff9a3d／調べもの #b9a6ff
+- 書き出し：src/ で `node build.js`（playwright-core + Chrome）。HTMLは src/html/ に残る。
+- 単体PNGの寸法：512x512・背景透明。1ドット=7px（448px）で、まわりに32pxの余白。
