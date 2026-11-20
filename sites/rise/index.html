@@ -23,7 +23,7 @@ a{color:inherit}
 .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
 section{padding:80px 0}
 .en{display:block;font-family:"Noto Serif JP",serif;color:var(--wine);letter-spacing:.2em;font-size:13px;text-transform:uppercase;margin-bottom:6px}
-h2{font-family:"Noto Serif JP",serif;font-size:clamp(22px,4.6vw,32px);line-height:1.5;margin-bottom:28px;font-weight:600}
+h2{text-wrap:balance;font-family:"Noto Serif JP",serif;font-size:clamp(22px,4.6vw,32px);line-height:1.5;margin-bottom:28px;font-weight:600}
 .center{text-align:center}
 .lead{color:var(--sub);max-width:720px;margin:0 auto 40px}
 
@@ -261,6 +261,25 @@ footer a{color:#fff}
 .rsv-c{background:rgba(255,255,255,.08);border:1px solid rgba(232,194,122,.45);border-radius:18px;padding:22px 18px;display:flex;flex-direction:column;gap:10px}
 .rsv-c h3{font-family:"Noto Serif JP",serif;color:#f3dca8;font-size:20px}
 @media(max-width:700px){.rsv{grid-template-columns:1fr}}
+
+.insta{background:#fff}
+.ig-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:860px;margin:0 auto}
+.ig-card{display:block;text-decoration:none;border-radius:20px;overflow:hidden;border:1px solid var(--bd);background:var(--bg);transition:transform .25s,box-shadow .25s}
+.ig-card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(74,44,34,.14)}
+.ig-ph{aspect-ratio:4/3;overflow:hidden}
+.ig-ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.ig-card:hover .ig-ph img{transform:scale(1.05)}
+.ig-body{display:flex;align-items:center;gap:12px;padding:16px 18px}
+.ig-body b{display:block;font-family:"Noto Serif JP",serif;font-size:18px}
+.ig-body small{color:var(--sub);font-size:13px}
+.ig-ico{width:42px;height:42px;border-radius:12px;background:radial-gradient(circle at 30% 110%,#fdd36b 0%,#f77d3a 30%,#d62976 60%,#7b3fbf 100%);display:grid;place-items:center;flex:none}
+.ig-ico svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:2}
+.ig-ico svg .dot{fill:#fff;stroke:none}
+.ig-go{margin-left:auto;font-size:13px;font-weight:700;color:#fff;background:linear-gradient(90deg,#d62976,#7b3fbf);padding:7px 14px;border-radius:999px;white-space:nowrap}
+.hd-ig{display:inline-flex;gap:6px;margin-left:14px}
+.hd-ig a{width:30px;height:30px;border-radius:9px;background:radial-gradient(circle at 30% 110%,#fdd36b 0%,#f77d3a 30%,#d62976 60%,#7b3fbf 100%);display:grid;place-items:center}
+.hd-ig svg{width:17px;height:17px;fill:none;stroke:#fff;stroke-width:2}.hd-ig svg .dot{fill:#fff;stroke:none}
+@media(max-width:700px){.ig-grid{grid-template-columns:1fr}}
 /* scroll reveal */
 .rv{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
 .rv.on{opacity:1;transform:none}
@@ -287,6 +306,7 @@ footer a{color:#fff}
       <li><a href="#menu">料金</a></li>
       <li><a href="#faq">よくある質問</a></li>
       <li><a href="#access">アクセス</a></li>
+      <li><a href="#instagram">Instagram</a></li>
     </ul></nav>
     <a class="hd-tel" href="tel:08042792503">☎ 080-4279-2503</a>
   </div>
@@ -547,6 +567,33 @@ footer a{color:#fff}
   </div>
 </section>
 
+<!-- INSTAGRAM -->
+<section class="insta" id="instagram">
+  <div class="wrap">
+    <span class="en center">Instagram</span>
+    <h2 class="center">Instagramで、日々の様子を発信中</h2>
+    <p class="lead center">お客様の変化や施術の様子、体にいい食事のヒントなどを投稿しています。<br>InstagramのDMからもご予約・ご相談いただけます。</p>
+    <div class="ig-grid">
+      <a class="ig-card" href="https://www.instagram.com/wada.ibusuki/" target="_blank" rel="noopener">
+        <div class="ig-ph"><img src="img/r-treat2.jpg" alt="指宿院の施術の様子" loading="lazy"></div>
+        <div class="ig-body">
+          <span class="ig-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" class="dot"/></svg></span>
+          <div><b>指宿院</b><small>@wada.ibusuki</small></div>
+          <span class="ig-go">フォローする</span>
+        </div>
+      </a>
+      <a class="ig-card" href="https://www.instagram.com/taniyama.diet/" target="_blank" rel="noopener">
+        <div class="ig-ph"><img src="img/r-counsel.jpg" alt="谷山院のカウンセリングの様子" loading="lazy"></div>
+        <div class="ig-body">
+          <span class="ig-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" class="dot"/></svg></span>
+          <div><b>谷山院</b><small>@taniyama.diet</small></div>
+          <span class="ig-go">フォローする</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="cta" id="yoyaku">
   <div class="wrap">
@@ -563,6 +610,7 @@ footer a{color:#fff}
 
 <footer>
   <p>Body Salon RISE（腰痛・ダイエット専門整体サロン）<br>指宿院：鹿児島県指宿市大牟礼3丁目25-23-1　TEL 080-4279-2503<br>谷山院：鹿児島市小松原1丁目48-11 SEA GREEN 小松原102号　TEL 070-2376-8715</p>
+  <p>Instagram：<a href="https://www.instagram.com/wada.ibusuki/" target="_blank" rel="noopener">指宿院 @wada.ibusuki</a>　／　<a href="https://www.instagram.com/taniyama.diet/" target="_blank" rel="noopener">谷山院 @taniyama.diet</a></p>
   <p>&copy; Body Salon RISE</p>
 </footer>
 
@@ -605,7 +653,7 @@ footer a{color:#fff}
   hs.addEventListener('touchend',function(e){if(sx===null)return;var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)go(now+(dx<0?1:-1));sx=null});
   if(!reduce)tm=setTimeout(function(){go(1)},6000);
   /* scroll reveal */
-  var els=document.querySelectorAll('main section:not(.hs) h2, main section:not(.hs) .en, .lead, .wgrid > div, .answer, .rcard, .num .wrap, .results .photo, .svc article, .pf > *, .mcard, .flow li, .faq details, .shop, .cta .wrap');
+  var els=document.querySelectorAll('main section:not(.hs) h2, main section:not(.hs) .en, .lead, .wgrid > div, .answer, .rcard, .num .wrap, .results .photo, .svc article, .pf > *, .mcard, .flow li, .faq details, .shop, .ig-card, .cta .wrap');
   if(!reduce&&'IntersectionObserver' in window){
     els.forEach(function(e,i){e.classList.add('rv');e.style.transitionDelay=((i%4)*90)+'ms'});
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{threshold:.15});
