@@ -1,0 +1,35 @@
+<template>
+  <style>
+    @font-face { font-family: "NotoJP"; src: url("assets/fonts/NotoSansJP-Bold.ttf"); font-weight: 700; }
+    @font-face { font-family: "RoundM"; src: url("assets/fonts/RoundedMplus1c-ExtraBold.ttf"); font-weight: 800; }
+    #root { position:absolute; inset:0; --navy:#08101f; --cyan:#3cd6f0; --yellow:#ffcc4d; --ink:#08101f; --white:#ffffff; --dim:#b9c8e6; --card:rgba(4,7,15,0.86); --line:#06c755; font-family:"NotoJP"; color:#fff; }
+    .card { position:absolute; left:100px; right:100px; background:var(--card); border:3px solid var(--cyan); border-radius:34px; }
+    .center { display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+    .num { position:absolute; left:28px; top:22px; width:92px; height:92px; border-radius:50%; background:var(--cyan); color:var(--ink);
+      font-family:"RoundM"; font-size:52px; line-height:92px; text-align:center; }
+    .htitle { position:absolute; left:142px; right:20px; top:20px; line-height:1.3; white-space:nowrap; }
+    .hmeta { position:absolute; left:142px; right:20px; top:76px; font-size:28px; color:var(--dim); white-space:nowrap; }
+    .big { line-height:1.3; white-space:nowrap; }
+    .tag { display:inline-block; background:var(--yellow); color:var(--ink); font-size:34px; padding:6px 26px; border-radius:40px; }
+    .hl { color:var(--yellow); }
+    .c { color:var(--cyan); }
+    .row { line-height:1.25; margin:8px 0; white-space:nowrap; }
+    .small { font-size:28px; color:var(--dim); }
+    .mem { display:flex; flex-direction:column; align-items:center; width:200px; }
+    .ntag { margin-top:-6px; padding:2px 16px; border-radius:16px; color:#08101f; font-size:28px; line-height:1.35; white-space:nowrap; }
+    .wbar { position:absolute; left:0; top:-400px; width:900px; height:2720px; }
+  </style>
+  <div id="root" data-composition-id="wipes" data-width="1080" data-height="1920">
+    <div id="wipe0-a" class="wbar" style="background:var(--cyan);" data-layout-ignore></div><div id="wipe0-b" class="wbar" style="background:var(--navy);" data-layout-ignore></div>
+    <div id="wipe1-a" class="wbar" style="background:var(--cyan);" data-layout-ignore></div><div id="wipe1-b" class="wbar" style="background:var(--navy);" data-layout-ignore></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.set(".wbar", {x:-2600, rotation:18}, 0);
+    tl.fromTo("#wipe0-a", {x:-2400, rotation:18}, {x:2400, rotation:18, duration:0.62, ease:"power2.inOut", immediateRender:false}, 4.469);
+    tl.fromTo("#wipe0-b", {x:-2600, rotation:18}, {x:2200, rotation:18, duration:0.62, ease:"power2.inOut", immediateRender:false}, 4.509);
+    tl.fromTo("#wipe1-a", {x:-2400, rotation:18}, {x:2400, rotation:18, duration:0.62, ease:"power2.inOut", immediateRender:false}, 30.953);
+    tl.fromTo("#wipe1-b", {x:-2600, rotation:18}, {x:2200, rotation:18, duration:0.62, ease:"power2.inOut", immediateRender:false}, 30.993);
+    window.__timelines["wipes"] = tl;
+  </script>
+</template>

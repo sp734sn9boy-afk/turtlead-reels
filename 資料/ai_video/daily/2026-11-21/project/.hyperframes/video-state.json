@@ -235,8 +235,8 @@
   },
   "checks": {
     "latest": {
-      "revision": "b75584c6-1d5d-4a83-a471-909cd92df27d",
-      "id": "4a1d27b9-b548-4578-b08a-80f2e2e1a350"
+      "revision": "6290e345-1b04-4741-9d3d-6b57c08cd542",
+      "id": "701d68c0-1ece-4546-8c6a-a68273e9dbbc"
     },
     "revisions": {
       "b75584c6-1d5d-4a83-a471-909cd92df27d": [
@@ -272,6 +272,43 @@
           "contentHash": "c8415bf57e29793f0238187fd0570f54b525b11c0d93f9af986c2e8409697d17",
           "revision": "b75584c6-1d5d-4a83-a471-909cd92df27d",
           "inputFingerprint": "8b44e923384431b0d44dd1ce40bdb4a80b873ee4dc142358d67b3154089d9a8f",
+          "inputScope": "local-project-files",
+          "attribution": "recorded-revision"
+        }
+      ],
+      "6290e345-1b04-4741-9d3d-6b57c08cd542": [
+        {
+          "id": "701d68c0-1ece-4546-8c6a-a68273e9dbbc",
+          "scope": "project",
+          "report": "/home/user/turtlead-reels/資料/ai_video/daily/2026-11-21/project/.hyperframes/artifacts/checks/701d68c0-1ece-4546-8c6a-a68273e9dbbc.json",
+          "metadata": {
+            "ok": true,
+            "browserSkipped": false,
+            "options": {
+              "samples": 9,
+              "atTransitions": false,
+              "maxIssues": 80,
+              "collapseStatic": true,
+              "tolerance": 2,
+              "timeout": 45000,
+              "cache": true,
+              "contrast": true,
+              "craft": true,
+              "strict": false,
+              "snapshots": false,
+              "safeZones": [
+                "tiktok",
+                "reels",
+                "shorts"
+              ],
+              "browserGpuMode": "auto",
+              "includeUnmounted": false
+            }
+          },
+          "createdAt": 1795186672150,
+          "contentHash": "c017346ec32e5363efb80b4b7038f6be90df5df83b9ec07ae402e3b2a9c3bbe3",
+          "revision": "6290e345-1b04-4741-9d3d-6b57c08cd542",
+          "inputFingerprint": "5ee84177d0c670ef5e8cfaee4d16a4cf571f142232d224663c4554c9d392be39",
           "inputScope": "local-project-files",
           "attribution": "recorded-revision"
         }

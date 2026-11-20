@@ -1,0 +1,47 @@
+<template>
+  <style>
+    @font-face { font-family: "NotoJP"; src: url("assets/fonts/NotoSansJP-Bold.ttf"); font-weight: 700; }
+    @font-face { font-family: "RoundM"; src: url("assets/fonts/RoundedMplus1c-ExtraBold.ttf"); font-weight: 800; }
+    #root { position:absolute; inset:0; --navy:#08101f; --cyan:#3cd6f0; --yellow:#ffcc4d; --ink:#08101f; --white:#ffffff; --dim:#b9c8e6; --card:rgba(4,7,15,0.86); --line:#06c755; font-family:"NotoJP"; color:#fff; }
+    .card { position:absolute; left:100px; right:100px; background:var(--card); border:3px solid var(--cyan); border-radius:34px; }
+    .center { display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+    .num { position:absolute; left:28px; top:22px; width:92px; height:92px; border-radius:50%; background:var(--cyan); color:var(--ink);
+      font-family:"RoundM"; font-size:52px; line-height:92px; text-align:center; }
+    .htitle { position:absolute; left:142px; right:20px; top:20px; line-height:1.3; white-space:nowrap; }
+    .hmeta { position:absolute; left:142px; right:20px; top:76px; font-size:28px; color:var(--dim); white-space:nowrap; }
+    .big { line-height:1.3; white-space:nowrap; }
+    .tag { display:inline-block; background:var(--yellow); color:var(--ink); font-size:34px; padding:6px 26px; border-radius:40px; }
+    .hl { color:var(--yellow); }
+    .c { color:var(--cyan); }
+    .row { line-height:1.25; margin:8px 0; white-space:nowrap; }
+    .small { font-size:28px; color:var(--dim); }
+    .mem { display:flex; flex-direction:column; align-items:center; width:200px; }
+    .ntag { margin-top:-6px; padding:2px 16px; border-radius:16px; color:#08101f; font-size:28px; line-height:1.35; white-space:nowrap; }
+
+  </style>
+  <div id="root" data-composition-id="cta" data-width="1080" data-height="1920">
+    <div id="cta-card" class="clip" data-start="0.05" data-duration="5.357" data-track-index="0" style="position:absolute;left:0;top:385px;width:1080px;height:520px;">
+      <div id="cta-in" class="card center" style="top:0;height:520px;padding:0 30px;">
+        <div id="cta-h" style="font-size:46px;line-height:1.32;white-space:nowrap;">このキャラクターのような<span class="hl">AI動画</span>を、<br/><span class="hl">御社のロゴ</span>から作ります</div>
+        <div id="cta-tag" class="tag" style="font-size:36px;margin-top:16px;">キャラクターAI動画のご相談はこちら</div>
+        <div id="cta-line" style="margin-top:18px;display:flex;align-items:center;gap:16px;">
+          <span style="display:inline-block;background:var(--line);color:#fff;font-family:RoundM;font-size:30px;padding:2px 18px;border-radius:14px;">LINE公式</span>
+          <span style="font-size:48px;letter-spacing:0.02em;">@486zunqz</span>
+        </div>
+        <div id="cta-site" style="margin-top:6px;font-size:44px;" class="c">turtle-ad.com</div>
+        <div id="cta-disc" style="margin-top:12px;font-size:28px;line-height:1.45;color:#dfe8fb;">この動画は、タートルアドのAIチームが<br/>情報収集から台本・音声・映像まで作っています<br/><span style="color:var(--cyan);">音声：VOICEVOX:猫使ビィ</span></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#cta-in", {opacity:0, scale:0.85}, {opacity:1, scale:1, duration:0.45, ease:"back.out(1.6)"}, 0.05);
+    tl.fromTo("#cta-h", {opacity:0, y:24}, {opacity:1, y:0, duration:0.35, ease:"power3.out"}, 0.2);
+    tl.fromTo("#cta-tag", {opacity:0, y:24}, {opacity:1, y:0, duration:0.35, ease:"power3.out"}, 0.55);
+    tl.fromTo("#cta-tag", {scale:1}, {scale:1.06, duration:0.4, yoyo:true, repeat:3, ease:"sine.inOut", immediateRender:false}, 1.4);
+    tl.fromTo("#cta-line", {opacity:0, x:-50}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 0.85);
+    tl.fromTo("#cta-site", {opacity:0, x:50}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 1.05);
+    tl.fromTo("#cta-disc", {opacity:0}, {opacity:1, duration:0.35}, 1.3);
+    window.__timelines["cta"] = tl;
+  </script>
+</template>
