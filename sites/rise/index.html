@@ -10,9 +10,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#fffaf7; --bg2:#f8ece8; --ink:#3a2e2c; --sub:#7a6a66;
-  --wine:#b23a52; --wine-d:#8e2a40; --rose:#e9b8c0; --line:#06c755;
-  --card:#ffffff; --bd:#eedcd7;
+  --bg:#fbf6ef; --bg2:#f3e8da; --ink:#3b2a22; --sub:#77665b;
+  --wine:#b3262f; --wine-d:#4a2c22; --rose:#d9bf8c; --line:#06c755;
+  --card:#ffffff; --bd:#eadcc8; --gold:#a8823a;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -33,7 +33,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,250,247,.94);backdro
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
 .logo b{font-family:"Noto Serif JP",serif;font-size:20px;letter-spacing:.06em}
 .logo small{display:block;font-size:11px;color:var(--sub);line-height:1.2}
-.mark{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--wine),#e47a8c);display:grid;place-items:center;color:#fff;font-family:"Noto Serif JP",serif;font-size:17px}
+.mark{width:34px;height:34px;border-radius:50%;background:var(--wine-d);display:grid;place-items:center;color:#fff;font-family:"Noto Serif JP",serif;font-size:17px}
 nav ul{display:flex;gap:22px;list-style:none;font-size:14px}
 nav a{text-decoration:none}
 nav a:hover{color:var(--wine)}
@@ -48,7 +48,7 @@ nav a:hover{color:var(--wine)}
 .btn-ghost:hover{background:var(--wine);color:#fff}
 
 /* hero */
-.hero{padding:0;background:linear-gradient(180deg,#fbeee9 0%,var(--bg) 100%);overflow:hidden}
+.hero{padding:0;background:linear-gradient(180deg,#f6ebdc 0%,var(--bg) 100%);overflow:hidden}
 .hero-in{display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:40px;min-height:560px;padding:60px 20px}
 .hero .tag{display:inline-block;background:#fff;border:1px solid var(--rose);color:var(--wine);padding:4px 14px;border-radius:999px;font-size:13px;margin-bottom:18px}
 .hero h1{font-family:"Noto Serif JP",serif;font-size:clamp(30px,6vw,50px);line-height:1.4;font-weight:600;margin-bottom:18px}
@@ -58,11 +58,12 @@ nav a:hover{color:var(--wine)}
 .checks li{background:#fff;border:1px solid var(--bd);border-radius:8px;padding:6px 12px;font-size:14px;font-weight:500}
 .checks li::before{content:"✓";color:var(--wine);margin-right:6px;font-weight:700}
 .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
-.hero-ph{aspect-ratio:4/5;border-radius:200px 200px 24px 24px}
-@media(max-width:860px){.hero-in{grid-template-columns:1fr;padding:40px 20px 56px;min-height:auto}.hero-ph{aspect-ratio:4/3;border-radius:24px;order:-1}}
+.hero-ph{aspect-ratio:3/2;border-radius:24px;object-fit:cover;width:100%;background:#f5e9da;box-shadow:0 16px 40px rgba(74,44,34,.15)}
+@media(max-width:860px){.hero-in{grid-template-columns:1fr;padding:40px 20px 56px;min-height:auto}.hero-in>.photo{order:-1}}
 
 /* photo placeholder */
-.ph{background:linear-gradient(135deg,#f3dcd8,#f9eeea 60%,#efd3d0);display:grid;place-items:center;color:#a98480;font-size:13px;text-align:center;padding:12px;position:relative;overflow:hidden}
+.photo{position:relative}.photo img{width:100%;height:100%;object-fit:cover}.kari{position:absolute;right:10px;bottom:10px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;padding:2px 8px;border-radius:6px}
+.ph{background:linear-gradient(135deg,#efe1cc,#f8f0e4 60%,#ead8bf);display:grid;place-items:center;color:#a98480;font-size:13px;text-align:center;padding:12px;position:relative;overflow:hidden}
 .ph::after{content:"写真が入ります";position:absolute;bottom:10px;right:12px;font-size:11px;opacity:.7}
 
 /* worries */
@@ -71,7 +72,7 @@ nav a:hover{color:var(--wine)}
 .wgrid div{background:var(--bg);border-radius:12px;padding:16px 18px;font-weight:500}
 .wgrid div::before{content:"□";color:var(--wine);margin-right:8px}
 .answer{margin:40px auto 0;max-width:760px;text-align:center;font-family:"Noto Serif JP",serif;font-size:clamp(18px,3.6vw,22px);line-height:1.8}
-.answer b{color:var(--wine);background:linear-gradient(transparent 65%,#f6d3d9 65%)}
+.answer b{color:var(--wine);background:linear-gradient(transparent 65%,#f1dcb0 65%)}
 
 /* reasons */
 .rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
@@ -91,7 +92,7 @@ nav a:hover{color:var(--wine)}
 /* services */
 .svc{display:grid;grid-template-columns:1fr 1fr;gap:28px}
 .svc article{background:#fff;border-radius:20px;overflow:hidden;border:1px solid var(--bd);display:flex;flex-direction:column}
-.svc .ph{aspect-ratio:16/9}
+.svc .photo{aspect-ratio:16/9;overflow:hidden}
 .svc .body{padding:26px 26px 30px}
 .svc h3{font-family:"Noto Serif JP",serif;font-size:21px;margin-bottom:10px}
 .svc p{font-size:15px;color:var(--sub);margin-bottom:14px}
@@ -102,13 +103,19 @@ nav a:hover{color:var(--wine)}
 /* profile */
 .profile{background:var(--bg2)}
 .pf{display:grid;grid-template-columns:320px 1fr;gap:44px;align-items:center}
-.pf .ph{aspect-ratio:3/4;border-radius:20px}
+.pf .photo{aspect-ratio:3/4;border-radius:20px;overflow:hidden;background:#f5e9da}
 .pf .name{font-family:"Noto Serif JP",serif;font-size:26px;margin:4px 0 2px}
 .pf .role{color:var(--sub);font-size:14px;margin-bottom:16px}
 .quals{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;list-style:none}
 .quals li{background:#fff;border:1px solid var(--rose);border-radius:8px;padding:4px 12px;font-size:13px;font-weight:500}
 .pf p{margin-bottom:12px;font-size:15.5px}
-@media(max-width:860px){.pf{grid-template-columns:1fr}.pf .ph{max-width:300px;margin:0 auto}}
+@media(max-width:860px){.pf{grid-template-columns:1fr}.pf .photo{max-width:300px;margin:0 auto;width:100%}}
+.results img{border-radius:16px;margin:0 auto;max-width:860px;width:100%;box-shadow:0 10px 30px rgba(74,44,34,.12)}
+.rnote{max-width:860px;margin:14px auto 0;font-size:13px;color:var(--sub);text-align:center}
+.shops{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.shop h3{font-family:'Noto Serif JP',serif;font-size:20px;margin-bottom:8px;color:var(--wine-d)}
+.shop .map{margin-top:14px;min-height:260px}.shop .map iframe{min-height:260px}
+@media(max-width:860px){.shops{grid-template-columns:1fr}}
 
 /* menu */
 .mgrid{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:860px;margin:0 auto}
@@ -142,15 +149,15 @@ nav a:hover{color:var(--wine)}
 
 /* access */
 .acc{display:grid;grid-template-columns:1fr 1fr;gap:32px}
-.acc table{width:100%;border-collapse:collapse;font-size:15px}
-.acc th,.acc td{text-align:left;padding:12px 6px;border-bottom:1px solid var(--bd);vertical-align:top}
-.acc th{width:96px;color:var(--wine);font-weight:500}
+.acc table,.acc-t{width:100%;border-collapse:collapse;font-size:15px}
+.acc th,.acc td,.acc-t th,.acc-t td{text-align:left;padding:12px 6px;border-bottom:1px solid var(--bd);vertical-align:top}
+.acc th,.acc-t th{width:96px;color:var(--wine);font-weight:500}
 .map{border-radius:18px;overflow:hidden;min-height:340px;border:1px solid var(--bd)}
 .map iframe{width:100%;height:100%;min-height:340px;border:0}
 @media(max-width:860px){.acc{grid-template-columns:1fr}}
 
 /* cta */
-.cta{background:linear-gradient(135deg,var(--wine-d),var(--wine));color:#fff;text-align:center}
+.cta{background:linear-gradient(135deg,#3b2219,var(--wine-d));color:#fff;text-align:center}
 .cta h2{margin-bottom:12px}
 .cta p{opacity:.92;margin-bottom:28px}
 .cta .row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
@@ -175,7 +182,7 @@ footer a{color:#fff}
 
 <header>
   <div class="wrap hd">
-    <a href="#top" class="logo"><span class="mark">R</span><span><b>Body Salon RISE</b><small>指宿のダイエット・美容整体</small></span></a>
+    <a href="#top" class="logo"><span class="mark">R</span><span><b>Body Salon RISE</b><small>腰痛・ダイエット専門整体サロン</small></span></a>
     <nav><ul>
       <li><a href="#reason">選ばれる理由</a></li>
       <li><a href="#service">施術内容</a></li>
@@ -194,9 +201,9 @@ footer a{color:#fff}
 <section class="hero">
   <div class="wrap hero-in">
     <div>
-      <span class="tag">指宿駅から車で3分｜完全予約制の個室サロン</span>
+      <span class="tag">国家資格者による本格的な施術｜指宿院・谷山院</span>
       <h1>これを、<br><em>人生最後の</em><br>ダイエットに。</h1>
-      <p class="sub">指宿市のダイエット・美容専門整体サロン。<br>柔道整復師が、体質と生活習慣から根本的に変えるお手伝いをします。</p>
+      <p class="sub">腰痛・ダイエット専門の「根本改善」整体サロン。<br>柔道整復師が、体質と生活習慣から根本的に変えるお手伝いをします。</p>
       <ul class="checks">
         <li>運動なし</li><li>カロリー計算なし</li><li>リバウンドしにくい</li>
       </ul>
@@ -205,7 +212,7 @@ footer a{color:#fff}
         <a class="btn btn-ghost" href="#menu">初回 2,980円 を見る</a>
       </div>
     </div>
-    <div class="ph hero-ph">サロン内観、または<br>施術風景の写真</div>
+    <div class="photo"><img class="hero-ph" src="img/duo.jpg" alt="指宿院 院長 和田諒真と谷山院 院長 和田一真"><span class="kari">仮：広告の写真</span></div>
   </div>
 </section>
 
@@ -263,6 +270,17 @@ footer a{color:#fff}
   </div>
 </div>
 
+<!-- RESULTS -->
+<section class="results" style="padding-bottom:40px">
+  <div class="wrap">
+    <span class="en center">Voice</span>
+    <h2 class="center">お客様の結果</h2>
+    <p class="lead center">3ヶ月コースで −7.4kg、−9.1kg、−10.9kg……。<br>「首の痛みで日常生活に支障→今では楽しく過ごせている」（70代男性）という声も。</p>
+    <div class="photo"><img src="img/results.jpg" alt="3ヶ月コースを終えたお客様と院長の写真" loading="lazy"><span class="kari">仮：広告の写真</span></div>
+    <p class="rnote">※効果には個人差があります。</p>
+  </div>
+</section>
+
 <!-- SERVICE -->
 <section id="service">
   <div class="wrap">
@@ -271,7 +289,7 @@ footer a{color:#fff}
     <p class="lead center">「痩せたい」も「痛みをなんとかしたい」も、まずはお気軽にご相談ください。<br>丁寧なカウンセリングで、目標やお体の状態に合わせた内容をご提案します。</p>
     <div class="svc">
       <article>
-        <div class="ph">食事指導・カウンセリングの写真</div>
+        <div class="photo"><img src="img/c-room.jpg" alt="カウンセリングルーム（イメージ）" loading="lazy"><span class="kari">仮の写真</span></div>
         <div class="body">
           <h3>3ヶ月 減量プログラム</h3>
           <p>DNA遺伝子検査・分子栄養学にもとづく食事指導・美容整体を組み合わせ、マンツーマンで目標達成まで伴走します。通っている間だけでなく、その後もずっと体形をキープできる知識と習慣が身につきます。</p>
@@ -279,11 +297,11 @@ footer a{color:#fff}
         </div>
       </article>
       <article>
-        <div class="ph">整体・骨盤矯正の施術写真</div>
+        <div class="photo"><img src="img/c-reception.jpg" alt="サロン（イメージ）" loading="lazy"><span class="kari">仮の写真</span></div>
         <div class="body">
           <h3>整体・美容整体</h3>
           <p>肩こり・腰痛・膝痛など、原因がはっきりしない慢性的な痛みに。検査とコンディションチェックで原因を洗い出し、体の内側から改善を目指します。美容メニューも好評です。</p>
-          <ul class="pills"><li>肩こり・腰痛・膝痛</li><li>骨盤矯正</li><li>肩甲骨はがし</li><li>姿勢矯正</li><li>小顔矯正</li><li>ブライダル整体</li></ul>
+          <ul class="pills"><li>腰痛・肩こり・膝痛</li><li>不調の根本改善</li><li>骨盤矯正</li><li>肩甲骨はがし</li><li>姿勢矯正</li><li>小顔矯正</li><li>ブライダルエステ（整体）</li></ul>
         </div>
       </article>
     </div>
@@ -293,14 +311,15 @@ footer a{color:#fff}
 <!-- PROFILE -->
 <section class="profile" id="profile">
   <div class="wrap pf">
-    <div class="ph">代表 和田さんの写真</div>
+    <div class="photo"><img src="img/ryoma.jpg" alt="指宿院 院長 和田諒真" loading="lazy"><span class="kari">仮：広告の写真</span></div>
     <div>
       <span class="en">Profile</span>
       <p class="name">和田 諒真</p>
-      <p class="role">Body Salon RISE 代表</p>
+      <p class="role">Body Salon RISE 指宿院 院長</p>
       <ul class="quals"><li>柔道整復師（国家資格）</li><li>ダイエットエキスパート</li><li>DNA遺伝子革命インストラクター</li></ul>
       <p>整骨院に勤めていた頃、肩こりや腰痛の施術をしても、すぐに再発してしまう方を多く見てきました。「痩せていた頃はこんな痛みはなかった」――そんな声を何度も耳にし、「本当の改善とは何だろう」と考えるようになりました。</p>
       <p>たどり着いた答えは、その場しのぎの施術ではなく、生活習慣と体質を変えること。独立した今、これまで学んできた知識と技術のすべてで、本気で変わりたい方を全力でサポートします。</p>
+      <p>鹿児島市の谷山院では、院長・和田一真が同じ想いで皆さまをお迎えしています。</p>
       <p class="serif" style="color:var(--wine)">「もう失敗したくない」「これで最後にしたい」――その想いに、真剣にお応えします。</p>
     </div>
   </div>
@@ -361,20 +380,31 @@ footer a{color:#fff}
 <section id="access">
   <div class="wrap">
     <span class="en center">Access</span>
-    <h2 class="center">サロン情報・アクセス</h2>
-    <div class="acc">
-      <table>
-        <tr><th>店名</th><td>Body Salon RISE（ボディサロン ライズ）</td></tr>
-        <tr><th>住所</th><td>〒891-0401<br>鹿児島県指宿市大牟礼3丁目25-23-1</td></tr>
-        <tr><th>アクセス</th><td>指宿駅から車で約3分／駐車場3台</td></tr>
-        <tr><th>営業時間</th><td>平日 10:00〜19:00<br>土曜 10:00〜18:00</td></tr>
-        <tr><th>定休日</th><td>日曜・祝日</td></tr>
-        <tr><th>電話</th><td><a href="tel:08042792503">080-4279-2503</a></td></tr>
-        <tr><th>代表</th><td>和田 諒真</td></tr>
-        <tr><th>SNS</th><td><a href="https://www.instagram.com/wada.ibusuki/" target="_blank" rel="noopener">Instagram @wada.ibusuki</a></td></tr>
-      </table>
-      <div class="map">
-        <iframe loading="lazy" title="Body Salon RISEの地図" src="https://www.google.com/maps?q=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E6%8C%87%E5%AE%BF%E5%B8%82%E5%A4%A7%E7%89%9F%E7%A4%BC3%E4%B8%81%E7%9B%AE25-23-1&output=embed"></iframe>
+    <h2 class="center">店舗情報・アクセス</h2>
+    <div class="shops">
+      <div class="shop">
+        <h3>指宿院</h3>
+        <table class="acc-t">
+          <tr><th>住所</th><td>〒891-0401<br>鹿児島県指宿市大牟礼3丁目25-23-1</td></tr>
+          <tr><th>アクセス</th><td>指宿駅から車で約3分／駐車場3台</td></tr>
+          <tr><th>営業時間</th><td>平日 10:00〜19:00<br>土曜 10:00〜18:00</td></tr>
+          <tr><th>定休日</th><td>日曜・祝日</td></tr>
+          <tr><th>電話</th><td><a href="tel:08042792503">080-4279-2503</a></td></tr>
+          <tr><th>院長</th><td>和田 諒真</td></tr>
+          <tr><th>SNS</th><td><a href="https://www.instagram.com/wada.ibusuki/" target="_blank" rel="noopener">Instagram @wada.ibusuki</a></td></tr>
+        </table>
+        <div class="map"><iframe loading="lazy" title="指宿院の地図" src="https://www.google.com/maps?q=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E6%8C%87%E5%AE%BF%E5%B8%82%E5%A4%A7%E7%89%9F%E7%A4%BC3%E4%B8%81%E7%9B%AE25-23-1&output=embed"></iframe></div>
+      </div>
+      <div class="shop">
+        <h3>谷山院（鹿児島市）</h3>
+        <table class="acc-t">
+          <tr><th>住所</th><td>鹿児島県鹿児島市小松原1-48-11<br>SEAGREEN小松原 102号</td></tr>
+          <tr><th>営業時間</th><td>平日 9:30〜19:00<br>土曜 9:30〜18:00</td></tr>
+          <tr><th>定休日</th><td>日曜・祝日</td></tr>
+          <tr><th>予約</th><td>完全予約制（LINEから）</td></tr>
+          <tr><th>院長</th><td>和田 一真</td></tr>
+        </table>
+        <div class="map"><iframe loading="lazy" title="谷山院の地図" src="https://www.google.com/maps?q=%E9%B9%BF%E5%85%90%E5%B3%B6%E5%B8%82%E5%B0%8F%E6%9D%BE%E5%8E%9F1-48-11&output=embed"></iframe></div>
       </div>
     </div>
   </div>
@@ -395,7 +425,7 @@ footer a{color:#fff}
 </main>
 
 <footer>
-  <p>Body Salon RISE｜鹿児島県指宿市大牟礼3丁目25-23-1</p>
+  <p>Body Salon RISE（腰痛・ダイエット専門整体サロン）<br>指宿院：鹿児島県指宿市大牟礼3丁目25-23-1／谷山院：鹿児島市小松原1-48-11</p>
   <p>&copy; Body Salon RISE</p>
 </footer>
 
