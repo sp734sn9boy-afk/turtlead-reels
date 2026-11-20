@@ -406,13 +406,15 @@
   },
   "renders": {
     "latest": {
-      "id": "05cda6ee-1420-41bf-a9a3-dd8f5a239c98",
-      "completedAt": 1795185446189,
+      "id": "1bbc78df-ea07-4cca-aa63-2e0477dc0e5c",
+      "completedAt": 1795185800806,
       "output": "/home/user/turtlead-reels/資料/ai_video/daily/2026-11-21/turtle_ai_2026-11-21.mp4",
       "status": "completed",
-      "revision": null
+      "revision": "b75584c6-1d5d-4a83-a471-909cd92df27d"
     },
-    "retainedRevisions": []
+    "retainedRevisions": [
+      "b75584c6-1d5d-4a83-a471-909cd92df27d"
+    ]
   },
   "pendingArtifactCleanup": []
 }
