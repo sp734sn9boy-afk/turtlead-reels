@@ -1,0 +1,110 @@
+{
+  "date": "2026-11-20",
+  "type": "weekday",
+  "speed": 1.22,
+  "hook": {
+    "headline": "Claudeに 新しいAIが登場",
+    "say": [
+      {
+        "sub": "Claudeに、新しいAIが出ました。",
+        "read": "クロードに、新しいエーアイが出ました。"
+      }
+    ]
+  },
+  "items": [
+    {
+      "headline": "新しいAI「Claude Fable 5.2」",
+      "date_label": "発表 11月9日",
+      "source_label": "出典：Anthropic公式",
+      "source_url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+      "beats": [
+        {
+          "card": {
+            "type": "title",
+            "text": "新しいAI/**「Claude Fable 5.2」**"
+          },
+          "say": [
+            {
+              "sub": "Anthropicが、新しいAI/「Claude Fable 5.2」を出しました。",
+              "read": "アンソロピックが、新しいエーアイ、くろーどふぇいぶるごーてんにを出しました。"
+            }
+          ]
+        },
+        {
+          "card": {
+            "type": "number",
+            "top": "答えが出るのが",
+            "prefix": "最大",
+            "value": 30,
+            "suffix": "%",
+            "after": "速く",
+            "note": "前の型（Fable 5.1）と比べて"
+          },
+          "say": [
+            {
+              "sub": "前の型より、答えが出るのが/最大3割ほど速くなったそうです。"
+            }
+          ]
+        },
+        {
+          "card": {
+            "type": "stamp",
+            "stamp": "最大2.5倍",
+            "text": "追加料金の「ファストモード」"
+          },
+          "say": [
+            {
+              "sub": "追加料金を払うと、最大2.5倍速くなる/「ファストモード」もあります。",
+              "read": "追加料金を払うと、最大2.5倍速くなる、ファストモードもあります。"
+            }
+          ]
+        },
+        {
+          "card": {
+            "type": "points",
+            "items": [
+              "得意なのは **プログラミング**",
+              "**金融**や**科学**の むずかしい作業"
+            ]
+          },
+          "say": [
+            {
+              "sub": "得意なのは、プログラミングや、",
+              "read": "得意なのは、プログラミングや、"
+            },
+            {
+              "sub": "金融、科学などの/むずかしい作業です。"
+            }
+          ]
+        },
+        {
+          "card": {
+            "type": "tip",
+            "items": [
+              "ふだんの仕事 → 今のAI",
+              "むずかしい作業 → **新しいAI**"
+            ]
+          },
+          "say": [
+            {
+              "sub": "ふだんの仕事は、今のAIで十分。"
+            },
+            {
+              "sub": "むずかしい作業のときに/試すのがおすすめです。"
+            },
+            {
+              "sub": "Anthropicも、まずは今のAIから/始めるのをすすめています。"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "highlight": [
+    "Claude Fable 5.2",
+    "最大3割",
+    "十分",
+    "むずかしい作業"
+  ],
+  "description_extra": "Anthropicが発表した新しいAI「Claude Fable 5.2」を、30秒で紹介します。"
+}

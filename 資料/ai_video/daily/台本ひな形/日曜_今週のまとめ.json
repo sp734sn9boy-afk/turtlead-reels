@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-22",
+  "type": "sunday",
+  "speed": 1.22,
+  "hook": {
+    "headline": "今週のAIニュース 3本",
+    "say": [
+      {"sub": "今週のAIニュースを、/3つにまとめました。", "read": "今週のエーアイニュースを、みっつにまとめました。"}
+    ]
+  },
+  "items": [
+    {
+      "headline": "新しいAI「Claude Fable 5.2」",
+      "date_label": "発表 11月9日",
+      "source_label": "出典：Anthropic公式",
+      "source_url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+      "beats": [
+        {"card": {"type": "title", "text": "新しいAI/**「Claude Fable 5.2」**"},
+         "say": [{"sub": "ひとつめ。Anthropicが、/新しいAIを出しました。", "read": "ひとつめ。アンソロピックが、新しいエーアイを出しました。"}]},
+        {"card": {"type": "tip", "items": ["ふだんの仕事 → 今のAI", "むずかしい作業 → **新しいAI**"]},
+         "say": [{"sub": "むずかしい作業のときに/試すのがおすすめです。"}]}
+      ]
+    },
+    {
+      "headline": "ChatGPTで 自分の会社の情報を管理",
+      "date_label": "発表 11月10日",
+      "source_label": "出典：OpenAI公式X",
+      "source_url": "https://x.com/OpenAI/status/2120216592395174382",
+      "beats": [
+        {"card": {"type": "stamp", "stamp": "ベータ", "text": "まだ試験中の機能です"},
+         "say": [{"sub": "ふたつめ。ChatGPTで、/会社の情報を管理できる仕組みが、"}, {"sub": "試験的に始まりました。"}]},
+        {"card": {"type": "icon", "icon": "pin", "text": "AIの中の/**自社の紹介**も確認を"},
+         "say": [{"sub": "AIの中で、自分の会社が/どう紹介されているか、確かめましょう。"}]}
+      ]
+    },
+    {
+      "headline": "Geminiの「タスク」が日本で無料に",
+      "date_label": "発表 11月17日",
+      "source_label": "出典：Android Authorityほか",
+      "source_url": "https://androidauthority.com/google-gemini-tasks-update-3736266",
+      "beats": [
+        {"card": {"type": "title", "text": "**Gemini**の「タスク」が/日本で無料に", "chip": "日本を含む6か国"},
+         "say": [{"sub": "みっつめ。Geminiの「タスク」機能が、/日本でも無料になりました。"}]},
+        {"card": {"type": "icon", "icon": "clock", "text": "営業時間・料金は/いつも**最新**に"},
+         "say": [{"sub": "営業時間や料金は、/いつも最新にしておきましょう。"}]}
+      ]
+    }
+  ],
+  "highlight": ["無料", "最新", "試験的"],
+  "description_extra": "今週のAIニュースを3つ、1分でまとめました。"
+}

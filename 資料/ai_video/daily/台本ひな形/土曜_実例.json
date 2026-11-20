@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-21",
+  "type": "saturday",
+  "speed": 1.22,
+  "hook": {
+    "headline": "見積もり作りが 10分に",
+    "say": [
+      {"sub": "見積もり作りが、/AIで10分になりました。", "read": "見積もり作りが、エーアイで、じっぷんになりました。"}
+    ]
+  },
+  "items": [
+    {
+      "headline": "【ここに実例の見出し】",
+      "date_label": "実例",
+      "source_label": "出典：【出典名】",
+      "source_url": "【出典URL。自社の実例なら https://turtle-ad.com/ など】",
+      "beats": [
+        {"card": {"type": "title", "text": "【困っていたこと】/**【一言で】**"},
+         "say": [{"sub": "【困っていたことを1文で】"}]},
+        {"card": {"type": "points", "title": "やったこと", "items": ["【手順1】", "【手順2】", "【手順3】"]},
+         "say": [{"sub": "【手順1の説明】"}, {"sub": "【手順2の説明】"}, {"sub": "【手順3の説明】"}]},
+        {"card": {"type": "number", "top": "かかる時間が", "prefix": "", "value": 10, "suffix": "分", "after": "に", "note": "【前は何分だったか】"},
+         "say": [{"sub": "【結果を数字で】"}]},
+        {"card": {"type": "tip", "items": ["【こう使える1】", "【こう使える2】"]},
+         "say": [{"sub": "【中小企業ならこう使える、を1〜2文で】"}]}
+      ]
+    }
+  ],
+  "highlight": [],
+  "description_extra": "【概要欄の1行目】"
+}

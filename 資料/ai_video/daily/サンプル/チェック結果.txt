@@ -1,0 +1,5 @@
+hyperframes check: ok=True エラー 0 / 注意 10（中身は check.json）
+注意: なし
+MP4の長さ 33.80 秒（予定 33.77 秒）
+音声トラック: aac
+所要時間: voice 0秒 / build 0秒 / check 8秒 / render 108秒 / verify 4秒 / 合計 120秒

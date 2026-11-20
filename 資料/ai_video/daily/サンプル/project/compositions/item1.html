@@ -1,0 +1,79 @@
+<template>
+  <style>
+    @font-face { font-family: "NotoJP"; src: url("assets/fonts/NotoSansJP-Bold.ttf"); font-weight: 700; }
+    @font-face { font-family: "RoundM"; src: url("assets/fonts/RoundedMplus1c-ExtraBold.ttf"); font-weight: 800; }
+    #root { position:absolute; inset:0; --navy:#08101f; --cyan:#3cd6f0; --yellow:#ffcc4d; --ink:#08101f; --white:#ffffff; --dim:#b9c8e6; --card:rgba(4,7,15,0.86); --line:#06c755; font-family:"NotoJP"; color:#fff; }
+    .card { position:absolute; left:100px; right:100px; background:var(--card); border:3px solid var(--cyan); border-radius:34px; }
+    .center { display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+    .num { position:absolute; left:28px; top:22px; width:92px; height:92px; border-radius:50%; background:var(--cyan); color:var(--ink);
+      font-family:"RoundM"; font-size:52px; line-height:92px; text-align:center; }
+    .htitle { position:absolute; left:142px; right:20px; top:20px; line-height:1.3; white-space:nowrap; }
+    .hmeta { position:absolute; left:142px; right:20px; top:76px; font-size:28px; color:var(--dim); white-space:nowrap; }
+    .big { line-height:1.3; white-space:nowrap; }
+    .tag { display:inline-block; background:var(--yellow); color:var(--ink); font-size:34px; padding:6px 26px; border-radius:40px; }
+    .hl { color:var(--yellow); }
+    .c { color:var(--cyan); }
+    .row { line-height:1.25; margin:8px 0; white-space:nowrap; }
+    .small { font-size:28px; color:var(--dim); }
+
+  </style>
+  <div id="root" data-composition-id="item1" data-width="1080" data-height="1920">
+    <div id="item1-head" class="clip" data-start="0" data-duration="26.590" data-track-index="0" style="position:absolute;left:0;top:385px;width:1080px;height:120px;">
+      <div id="item1-headin" class="card" style="top:0;height:120px;">
+        <div id="item1-num" class="num" style="font-size:44px;">AI</div>
+        <div id="item1-ht" class="htitle" style="font-size:40px;">新しいAI「Claude Fable 5.2」</div>
+        <div id="item1-hm" class="hmeta">発表 11月9日　｜　出典：Anthropic公式</div>
+      </div>
+    </div>
+    <div id="item1-b0" class="clip" data-start="0.200" data-duration="4.224" data-track-index="1" style="position:absolute;left:0;top:520px;width:1080px;height:260px;">
+      <div id="item1-b0-in" class="card center" style="top:0;height:260px;">
+        <div class="big" style="font-size:72px;">新しいAI<br/><span class="hl">「Claude Fable 5.2」</span></div>
+      </div>
+    </div>
+    <div id="item1-b1" class="clip" data-start="4.424" data-duration="3.994" data-track-index="1" style="position:absolute;left:0;top:520px;width:1080px;height:260px;">
+      <div id="item1-b1-in" class="card center" style="top:0;height:260px;">
+        <div style="font-size:40px;">答えが出るのが</div><div style="font-size:112px;line-height:1.1;white-space:nowrap;" class="hl">最大<span id="item1-b1-count">30</span>%<span style="font-size:71px;color:#fff;">速く</span></div><div class="small">前の型（Fable 5.1）と比べて</div>
+      </div>
+    </div>
+    <div id="item1-b2" class="clip" data-start="8.418" data-duration="4.677" data-track-index="1" style="position:absolute;left:0;top:520px;width:1080px;height:260px;">
+      <div id="item1-b2-in" class="card center" style="top:0;height:260px;">
+        <div id="item1-b2-stamp" style="font-family:RoundM;font-size:96px;color:#ff6b6b;border:10px solid #ff6b6b;border-radius:26px;padding:0 40px;line-height:1.3;">最大2.5倍</div><div style="font-size:40px;margin-top:14px;">追加料金の「ファストモード」</div>
+      </div>
+    </div>
+    <div id="item1-b3" class="clip" data-start="13.095" data-duration="4.807" data-track-index="1" style="position:absolute;left:0;top:520px;width:1080px;height:260px;">
+      <div id="item1-b3-in" class="card center" style="top:0;height:260px;">
+        <div id="item1-b3-r0" class="row" style="font-size:46px;"><span style="display:inline-block;vertical-align:middle;margin-right:14px;"><svg width="56" height="56" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#3cd6f0"/><path d="M28 52l15 15 30-32" fill="none" stroke="#08101f" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg></span>得意なのは <span class="hl">プログラミング</span></div><div id="item1-b3-r1" class="row" style="font-size:46px;"><span style="display:inline-block;vertical-align:middle;margin-right:14px;"><svg width="56" height="56" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#3cd6f0"/><path d="M28 52l15 15 30-32" fill="none" stroke="#08101f" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="hl">金融</span>や<span class="hl">科学</span>の <span class="hl">むずかしい作業</span></div>
+      </div>
+    </div>
+    <div id="item1-b4" class="clip" data-start="17.902" data-duration="8.688" data-track-index="1" style="position:absolute;left:0;top:520px;width:1080px;height:260px;">
+      <div id="item1-b4-in" class="card center" style="top:0;height:260px;">
+        <div class="tag" style="margin-bottom:10px;font-size:32px;">中小企業ならこう使える</div><div id="item1-b4-r0" class="row" style="font-size:46px;">ふだんの仕事 <span class="c">→</span> 今のAI</div><div id="item1-b4-r1" class="row" style="font-size:46px;"><span class="hl">むずかしい作業</span> <span class="c">→</span> <span class="hl">新しいAI</span></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#item1-headin", {x:900, opacity:0}, {x:0, opacity:1, duration:0.45, ease:"expo.out"}, 0.05);
+    tl.fromTo("#item1-num", {scale:0, rotation:-90}, {scale:1, rotation:0, duration:0.5, ease:"back.out(2.4)"}, 0.2);
+    tl.fromTo("#item1-hm", {opacity:0}, {opacity:1, duration:0.3}, 0.5);
+    tl.to("#item1-headin", {opacity:0, duration:0.2, ease:"power2.in"}, 26.370);
+    tl.fromTo("#item1-b0-in", {opacity:0, y:60}, {opacity:1, y:0, duration:0.38, ease:"power3.out"}, 0.200);
+    tl.to("#item1-b0-in", {opacity:0, y:-30, duration:0.18, ease:"power2.in"}, 4.224);
+    tl.fromTo("#item1-b1-in", {opacity:0, scale:0.8}, {opacity:1, scale:1, duration:0.34, ease:"back.out(1.8)"}, 4.424);
+    tl.to("#item1-b1-in", {opacity:0, y:-30, duration:0.18, ease:"power2.in"}, 8.218);
+    const item1_b1c = {v:0};
+    tl.fromTo(item1_b1c, {v:0}, {v:30, duration:0.7, ease:"power2.out", onUpdate:()=>{ document.querySelector("#item1-b1-count").textContent = item1_b1c.v.toFixed(0); }}, 4.724);
+    tl.fromTo("#item1-b2-in", {opacity:0, scale:0.8}, {opacity:1, scale:1, duration:0.34, ease:"back.out(1.8)"}, 8.418);
+    tl.to("#item1-b2-in", {opacity:0, y:-30, duration:0.18, ease:"power2.in"}, 12.895);
+    tl.fromTo("#item1-b2-stamp", {scale:2.6, rotation:-20, opacity:0}, {scale:1, rotation:-8, opacity:1, duration:0.22, ease:"power4.in"}, 8.538);
+    tl.fromTo("#item1-b3-in", {opacity:0, y:60}, {opacity:1, y:0, duration:0.38, ease:"power3.out"}, 13.095);
+    tl.to("#item1-b3-in", {opacity:0, y:-30, duration:0.18, ease:"power2.in"}, 17.702);
+    tl.fromTo("#item1-b3-r0", {opacity:0, x:-60}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 13.495);
+    tl.fromTo("#item1-b3-r1", {opacity:0, x:-60}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 15.224);
+    tl.fromTo("#item1-b4-in", {opacity:0, y:60}, {opacity:1, y:0, duration:0.38, ease:"power3.out"}, 17.902);
+    tl.to("#item1-b4-in", {opacity:0, y:-30, duration:0.18, ease:"power2.in"}, 26.390);
+    tl.fromTo("#item1-b4-r0", {opacity:0, x:-60}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 18.302);
+    tl.fromTo("#item1-b4-r1", {opacity:0, x:-60}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 20.319);
+    window.__timelines["item1"] = tl;
+  </script>
+</template>
