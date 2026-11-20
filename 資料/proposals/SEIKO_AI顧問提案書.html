@@ -55,44 +55,47 @@ th,td{ border:0.3mm solid var(--line); padding:1.6mm 2.4mm; vertical-align:top; 
 .we{ margin-top:3mm; border:0.5mm solid var(--aqua); border-radius:2mm; padding:2.6mm 4mm; display:flex; gap:4mm; align-items:flex-start; }
 .we .tag{ flex:none; background:var(--navy); color:#fff; font-weight:700; font-size:8.6pt; padding:1mm 2.4mm; border-radius:1mm; margin-top:.4mm; }
 .we ul{ flex:1; }
+.we p{ flex:1; margin:0; font-size:9pt; }
+.we.next{ border-color:var(--line); background:#f7f9fc; margin-top:2mm; }
+.we.next .tag{ background:var(--aqua); color:var(--navy); }
 
 .safe li{ margin-bottom:1.3mm; }
 
 .foot{ margin-top:auto; padding-top:2.5mm; border-top:0.3mm solid var(--line); display:flex; justify-content:space-between; font-size:7.8pt; color:var(--sub); }
 
 /* page 2 */
-.diag{ background:var(--navy); color:#fff; border-radius:2.4mm; padding:4mm 5mm; margin-top:1mm; }
-.diag .row{ display:flex; justify-content:space-between; align-items:baseline; gap:4mm; border-bottom:0.3mm solid rgba(255,255,255,.25); padding-bottom:2mm; margin-bottom:2mm; }
+.diag{ background:var(--navy); color:#fff; border-radius:2.4mm; padding:3.2mm 5mm; margin-top:1mm; }
+.diag .row{ display:flex; justify-content:space-between; align-items:baseline; gap:4mm; border-bottom:0.3mm solid rgba(255,255,255,.25); padding-bottom:1.4mm; margin-bottom:1.6mm; }
 .diag .ttl{ font-size:12.5pt; font-weight:900; }
 .diag .ttl span{ color:var(--aqua); font-size:9pt; font-weight:700; margin-right:2mm; }
 .diag .price{ font-size:16pt; font-weight:900; color:var(--aqua); white-space:nowrap; }
 .diag .price small{ font-size:8.6pt; color:#fff; font-weight:500; margin-left:1mm; }
-.diag p{ font-size:9pt; }
+.diag p{ font-size:8.9pt; margin-bottom:1mm; }
 .diag strong{ color:var(--aqua); }
 .diag .note{ font-size:8.2pt; opacity:.85; margin:0; }
 
-.plans th, .plans td{ text-align:center; vertical-align:middle; padding:1.7mm 1.6mm; }
+.plans th, .plans td{ text-align:center; vertical-align:middle; padding:1.1mm 1.6mm; line-height:1.45; }
 .plans thead th{ background:#f4f6fa; color:var(--navy); font-size:10pt; font-weight:900; }
-.plans tbody th{ background:#f4f6fa; color:var(--navy); text-align:left; font-weight:700; width:34mm; font-size:8.6pt; }
+.plans tbody th{ background:#f4f6fa; color:var(--navy); text-align:left; font-weight:700; width:40mm; font-size:8.6pt; white-space:nowrap; }
 .plans .rec{ background:var(--aqua-soft); }
 .plans thead th.rec{ background:var(--navy); color:#fff; position:relative; }
 .plans thead th.rec .badge{ display:block; font-size:7.6pt; color:var(--navy); background:var(--aqua); border-radius:.8mm; margin:0 auto .8mm; width:max-content; padding:0 2mm; }
 .plans .yen td{ font-size:12pt; font-weight:900; color:var(--navy); }
 .plans .yen td small{ font-size:7.8pt; font-weight:500; color:var(--sub); }
-.notes{ margin-top:2mm; font-size:8.4pt; color:var(--ink); }
+.notes{ margin-top:1.6mm; font-size:8.2pt; color:var(--ink); display:grid; grid-template-columns:1fr 1fr; column-gap:4mm; }
 .notes li{ margin-bottom:.6mm; }
 
 .reco{ display:grid; grid-template-columns:1fr 1fr; gap:3mm; }
-.reco div{ border:0.3mm solid var(--line); border-radius:1.6mm; padding:2.6mm 3.2mm; }
+.reco div{ border:0.3mm solid var(--line); border-radius:1.6mm; padding:2.2mm 3.2mm; }
 .reco b{ display:block; color:var(--navy); font-size:10pt; font-weight:900; margin-bottom:.8mm; }
 .reco b span{ display:inline-flex; width:5mm; height:5mm; border-radius:50%; background:var(--aqua); align-items:center; justify-content:center; font-size:8.6pt; margin-right:1.4mm; }
 .reco p{ font-size:8.7pt; margin:0; }
 
-.contact{ margin-top:4mm; background:var(--navy); color:#fff; border-radius:2.4mm; padding:4mm 5mm; position:relative; overflow:hidden; }
+.contact{ margin-top:3.4mm; background:var(--navy); color:#fff; border-radius:2.4mm; padding:4mm 5mm; position:relative; overflow:hidden; }
 .contact::before{ content:""; position:absolute; left:0; top:0; bottom:0; width:1.8mm; background:var(--aqua); }
 .contact .co{ font-size:11pt; font-weight:900; }
 .contact .co small{ font-size:8.6pt; font-weight:500; opacity:.85; margin-left:2mm; }
-.contact .lines{ display:grid; grid-template-columns:auto 1fr; gap:.6mm 4mm; margin-top:2mm; font-size:9pt; }
+.contact .lines{ display:grid; grid-template-columns:auto 1fr auto 1fr; gap:.6mm 4mm; margin-top:2mm; font-size:9pt; }
 .contact .lines dt{ color:var(--aqua); font-weight:700; }
 .contact .lines dd{ word-break:break-all; }
 .contact .msg{ margin-top:2.2mm; font-size:8.8pt; }
@@ -105,16 +108,16 @@ th,td{ border:0.3mm solid var(--line); padding:1.6mm 2.4mm; vertical-align:top; 
   <header class="hd">
     <div class="to">株式会社SEIKO　代表取締役<b>永吉 亮 様</b></div>
     <div class="kicker">AI顧問のご提案</div>
-    <h1>御社のClaude Codeを、<br><em>“話しかけるだけで仕事が進む”</em>相棒に。</h1>
+    <h1>いまお使いのChatGPTから、<br>御社の仕事を<em>“すぐ楽に”</em>。</h1>
     <div class="meta">2026年11月20日　合同会社turtle ad（タートルアド）</div>
   </header>
 
   <h2>ご提案の考え方</h2>
   <div class="lead">
     <ul class="dot">
-      <li>御社はすでに<strong>Claude Code（AIに仕事を頼める道具）</strong>と、それを動かすパソコンをお持ちです。</li>
-      <li>講座で習われたのは道具の「基本の操作」。私たちがお手伝いするのは、その道具を<strong>御社の仕事に合わせて仕上げる</strong>ことです。</li>
-      <li>「使い方を覚える」のではなく、<strong>ERBEN／SEIKO不動産さま専用に設定して、話しかけるだけで仕事が進む状態</strong>にし、毎月いっしょに育てます。</li>
+      <li><strong>道具にはこだわりません。</strong>まずは、ふだんお使いの<strong>ChatGPT</strong>から始めます。</li>
+      <li><strong>どのAIを使うかは、永吉様が使いやすいものでかまいません。</strong>ChatGPTでもClaudeでも、使い方は私たちが合わせます。</li>
+      <li>新しい操作をたくさん覚えていただくのではなく、<strong>ERBEN／SEIKO不動産さまの仕事に合わせた形を用意してお渡しし</strong>、毎月いっしょに育てます。</li>
       <li>今の講座はそのまま続けていただいて大丈夫です。基本は講座で、御社の仕事への当てはめは私たちで。<strong>目的に合わせて使い分けましょう。</strong></li>
     </ul>
   </div>
@@ -122,27 +125,26 @@ th,td{ border:0.3mm solid var(--line); padding:1.6mm 2.4mm; vertical-align:top; 
   <h2>進め方は3つの段階</h2>
   <div class="steps">
     <div class="step">
-      <h3><span class="n">1</span>覚えさせる</h3>
-      <p>会社の情報、物件紹介文の書き方の決まり、不動産広告のルール（使ってはいけない言葉など）を最初にAIへ覚えさせます。毎回説明しなくても、御社のやり方で書くようになります。</p>
+      <h3><span class="n">1</span>専用の相談相手をつくる</h3>
+      <p>ChatGPT（またはClaude）に、会社の情報、物件紹介文の書き方の決まり、不動産広告のルール（使ってはいけない言葉など）を覚えさせます。毎回説明しなくても御社のやり方で書くようになります。設定はいっしょに行います。</p>
     </div>
     <div class="step">
-      <h3><span class="n">2</span>ボタンを用意する</h3>
-      <p>「物件紹介文を作って」とひと言頼むだけで動く、決まった頼み方のひな形（ボタンのようなもの）を、よく使う仕事ごとに用意します。</p>
+      <h3><span class="n">2</span>頼み方のひな形を渡す</h3>
+      <p>「この物件の紹介文を作って」など、よく使う仕事ごとに、そのまま使える頼み方のひな形をお渡しします。</p>
     </div>
     <div class="step">
       <h3><span class="n">3</span>毎月育てる</h3>
-      <p>使ってみて困ったところを直し、ボタンを増やします。毎月「どの仕事が何時間減ったか」をいっしょに確かめます。</p>
+      <p>使ってみて困ったところを直し、ひな形を増やします。毎月「どの仕事が何時間減ったか」をいっしょに確かめます。</p>
     </div>
   </div>
 
-  <h2>たとえば、こんなことができるようになります</h2>
+  <h2>たとえば、こんなことが楽になります</h2>
   <table class="ex">
-    <tr><th>物件紹介文</th><td>写真とメモを渡して「紹介文を作って」と頼むと、<strong>ポータルサイト用・SNS用・チラシ用</strong>の文章の下書きが出てきます</td></tr>
+    <tr><th>物件紹介文</th><td>写真とメモを渡して頼むと、<strong>ポータルサイト用・SNS用・チラシ用</strong>の文章の下書きが出てきます</td></tr>
     <tr><th>反響への返信</th><td>メールやLINEでのお問い合わせへの返信文の下書き</td></tr>
     <tr><th>追客</th><td>内見後のお礼メール、その後のご連絡メールの下書き</td></tr>
     <tr><th>求人</th><td>求人文の下書き</td></tr>
-    <tr><th>物件一覧の整理</th><td>Excelの物件一覧の整理や集計（件数・価格帯など）</td></tr>
-    <tr><th>外出先から</th><td>必要に応じて、スマホから話しかけて事務所のパソコンのClaude Codeに作業を頼む使い方も設定します</td></tr>
+    <tr><th>物件一覧の整理</th><td>Excelの物件一覧をAIに渡して、整理や集計（件数・価格帯など）を手伝ってもらう</td></tr>
   </table>
 
   <div class="we">
@@ -152,26 +154,29 @@ th,td{ border:0.3mm solid var(--line); padding:1.6mm 2.4mm; vertical-align:top; 
       <li><strong>Google検索広告の設定と運用</strong>（「鹿児島市 中古住宅」などで調べている方に広告を出す）</li>
     </ul>
   </div>
-
-  <h2>安心して使うためのきまり</h2>
-  <ul class="dot safe">
-    <li><strong>お客さまの個人情報の扱い方は、最初にいっしょに決めます。</strong>（AIに入れてよい情報・入れない情報など）</li>
-    <li><strong>AIが作った文章は、最後に人が確認してから使います。</strong>宅地建物取引業者として広告や文章に責任を持つのは御社です。確認の手順づくりもお手伝いします。</li>
-    <li>Claudeの利用料は御社のご負担です。すでにご契約中のプランの範囲で進めることを基本とし、上のプランが必要になりそうなときは事前にご相談します。</li>
-  </ul>
+  <div class="we next">
+    <div class="tag">次の段階</div>
+    <p>パソコンに入っている<strong>Claude Code</strong>は、慣れてきたら、パソコンの中のExcelやファイルの整理など、もう一歩進んだ作業にも使えます。そのときは私たちがいっしょに設定します。</p>
+  </div>
 
   <div class="foot"><span>合同会社turtle ad（タートルアド）</span><span>1 / 2</span></div>
 </section>
 
 <!-- ===== 2枚目 ===== -->
 <section class="page">
-  <h2 style="margin-top:0">最初の一歩</h2>
+  <h2 style="margin-top:0">安心して使うためのきまり</h2>
+  <ul class="dot safe">
+    <li><strong>お客さまの個人情報の扱い方は、最初にいっしょに決めます。</strong>（AIに入れてよい情報・入れない情報など）</li>
+    <li><strong>AIが作った文章は、最後に人が確認してから使います。</strong>宅地建物取引業者として広告や文章に責任を持つのは御社です。確認の手順づくりもお手伝いします。</li>
+  </ul>
+
+  <h2>最初の一歩</h2>
   <div class="diag">
     <div class="row">
       <div class="ttl"><span>STEP 1</span>業務の見直し診断</div>
       <div class="price">33,000円<small>（税込）</small></div>
     </div>
-    <p>御社にうかがい、1日の仕事の流れや、いまお使いのパソコン・Excel・Claude Codeの状態を見せていただきます（約90分）。</p>
+    <p>御社にうかがい、1日の仕事の流れや、いまのパソコン・Excel・ChatGPTの使い方を見せていただきます（約90分）。</p>
     <p>後日、「AIに任せられる仕事」と「人がやるべき仕事」を分けて、<strong>「すぐにできること3つ」と「減らせる時間の目安」</strong>を紙1〜2枚にまとめてご説明します。その場で1つ、実際にいっしょにやってみます（例：物件の写真とメモから紹介文を作る）。</p>
     <p class="note">※診断は顧問契約とは別のメニューです。診断だけのお申し込みもできます。</p>
   </div>
@@ -185,7 +190,7 @@ th,td{ border:0.3mm solid var(--line); padding:1.6mm 2.4mm; vertical-align:top; 
       <tr class="yen"><th>月額</th><td>22,000<small>円</small></td><td class="rec">55,000<small>円</small></td><td>110,000<small>円</small></td></tr>
       <tr><th>ご相談</th><td>オンライン 月1回</td><td class="rec">訪問 月1回<br>＋オンライン 月1回</td><td>訪問 月2回<br>＋オンライン 月1回</td></tr>
       <tr><th>LINE相談</th><td>月10件まで</td><td class="rec">回数制限なし</td><td>回数制限なし</td></tr>
-      <tr><th>Claude Codeの<br>設定・ボタンづくり</th><td>ご相談の中で</td><td class="rec">○</td><td>○</td></tr>
+      <tr><th>御社専用の設定・ひな形づくり</th><td>ご相談の中で</td><td class="rec">○</td><td>○</td></tr>
       <tr><th>物件の紹介動画</th><td>―</td><td class="rec">月2本</td><td>月4本</td></tr>
       <tr><th>Google検索広告の運用</th><td>―</td><td class="rec">○</td><td>○＋毎月のご報告</td></tr>
       <tr><th>社員さん向け講習</th><td>―</td><td class="rec">3か月に1回</td><td>毎月</td></tr>
@@ -195,7 +200,8 @@ th,td{ border:0.3mm solid var(--line); padding:1.6mm 2.4mm; vertical-align:top; 
   <ul class="dot notes">
     <li>訪問は鹿児島県内（離島を除く）です。それ以外はZoomで対応します。</li>
     <li>LINE相談は受付時間（平日9:00〜18:00）内に、順にお返事します。</li>
-    <li>Google検索広告の広告費、Claudeの利用料は、別途御社のご負担です。</li>
+    <li>Google検索広告の広告費は別途、御社のご負担です。</li>
+    <li>ChatGPT・Claudeなどの利用料は御社のご負担です（すでにお使いのものをそのまま使えます）。</li>
   </ul>
 
   <h2>永吉様へのおすすめの進め方</h2>
