@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Body Salon RISE｜指宿のダイエット・美容整体サロン</title>
+<meta name="description" content="鹿児島県指宿市のダイエット・美容整体サロン Body Salon RISE（ボディサロンライズ）。運動なし・カロリー計算なしの3ヶ月減量プログラムと、柔道整復師による整体・骨盤矯正。指宿駅から車で3分、完全予約制の個室サロンです。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fffaf7; --bg2:#f8ece8; --ink:#3a2e2c; --sub:#7a6a66;
+  --wine:#b23a52; --wine-d:#8e2a40; --rose:#e9b8c0; --line:#06c755;
+  --card:#ffffff; --bd:#eedcd7;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Noto Sans JP",sans-serif;line-height:1.9;font-size:16px;-webkit-text-size-adjust:100%}
+img{max-width:100%;display:block}
+a{color:inherit}
+.serif{font-family:"Noto Serif JP",serif}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+section{padding:80px 0}
+.en{display:block;font-family:"Noto Serif JP",serif;color:var(--wine);letter-spacing:.2em;font-size:13px;text-transform:uppercase;margin-bottom:6px}
+h2{font-family:"Noto Serif JP",serif;font-size:clamp(22px,4.6vw,32px);line-height:1.5;margin-bottom:28px;font-weight:600}
+.center{text-align:center}
+.lead{color:var(--sub);max-width:720px;margin:0 auto 40px}
+
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(255,250,247,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--bd)}
+.hd{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo b{font-family:"Noto Serif JP",serif;font-size:20px;letter-spacing:.06em}
+.logo small{display:block;font-size:11px;color:var(--sub);line-height:1.2}
+.mark{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--wine),#e47a8c);display:grid;place-items:center;color:#fff;font-family:"Noto Serif JP",serif;font-size:17px}
+nav ul{display:flex;gap:22px;list-style:none;font-size:14px}
+nav a{text-decoration:none}
+nav a:hover{color:var(--wine)}
+.hd-tel{font-size:14px;text-decoration:none;font-weight:700;color:var(--wine)}
+@media(max-width:860px){nav,.hd-tel{display:none}}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 28px;border-radius:999px;font-weight:700;text-decoration:none;font-size:16px;transition:.2s}
+.btn-line{background:var(--line);color:#fff;box-shadow:0 6px 16px rgba(6,199,85,.25)}
+.btn-line:hover{filter:brightness(1.05);transform:translateY(-1px)}
+.btn-ghost{border:1.5px solid var(--wine);color:var(--wine);background:#fff}
+.btn-ghost:hover{background:var(--wine);color:#fff}
+
+/* hero */
+.hero{padding:0;background:linear-gradient(180deg,#fbeee9 0%,var(--bg) 100%);overflow:hidden}
+.hero-in{display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:40px;min-height:560px;padding:60px 20px}
+.hero .tag{display:inline-block;background:#fff;border:1px solid var(--rose);color:var(--wine);padding:4px 14px;border-radius:999px;font-size:13px;margin-bottom:18px}
+.hero h1{font-family:"Noto Serif JP",serif;font-size:clamp(30px,6vw,50px);line-height:1.4;font-weight:600;margin-bottom:18px}
+.hero h1 em{font-style:normal;color:var(--wine)}
+.hero p.sub{color:var(--sub);margin-bottom:22px}
+.checks{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;list-style:none}
+.checks li{background:#fff;border:1px solid var(--bd);border-radius:8px;padding:6px 12px;font-size:14px;font-weight:500}
+.checks li::before{content:"✓";color:var(--wine);margin-right:6px;font-weight:700}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero-ph{aspect-ratio:4/5;border-radius:200px 200px 24px 24px}
+@media(max-width:860px){.hero-in{grid-template-columns:1fr;padding:40px 20px 56px;min-height:auto}.hero-ph{aspect-ratio:4/3;border-radius:24px;order:-1}}
+
+/* photo placeholder */
+.ph{background:linear-gradient(135deg,#f3dcd8,#f9eeea 60%,#efd3d0);display:grid;place-items:center;color:#a98480;font-size:13px;text-align:center;padding:12px;position:relative;overflow:hidden}
+.ph::after{content:"写真が入ります";position:absolute;bottom:10px;right:12px;font-size:11px;opacity:.7}
+
+/* worries */
+.worries{background:#fff}
+.wgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;max-width:900px;margin:0 auto}
+.wgrid div{background:var(--bg);border-radius:12px;padding:16px 18px;font-weight:500}
+.wgrid div::before{content:"□";color:var(--wine);margin-right:8px}
+.answer{margin:40px auto 0;max-width:760px;text-align:center;font-family:"Noto Serif JP",serif;font-size:clamp(18px,3.6vw,22px);line-height:1.8}
+.answer b{color:var(--wine);background:linear-gradient(transparent 65%,#f6d3d9 65%)}
+
+/* reasons */
+.rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.rcard{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:30px 24px}
+.rcard .no{font-family:"Noto Serif JP",serif;color:var(--wine);font-size:34px;line-height:1}
+.rcard h3{font-family:"Noto Serif JP",serif;font-size:19px;margin:12px 0 10px;line-height:1.6}
+.rcard p{font-size:15px;color:var(--sub)}
+@media(max-width:860px){.rgrid{grid-template-columns:1fr}}
+
+/* number */
+.num{background:var(--wine);color:#fff;text-align:center;padding:56px 0}
+.num .big{font-family:"Noto Serif JP",serif;font-size:clamp(46px,10vw,72px);line-height:1.1}
+.num .big small{font-size:.4em}
+.num p{opacity:.92}
+.num .note{font-size:12px;opacity:.75;margin-top:8px}
+
+/* services */
+.svc{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.svc article{background:#fff;border-radius:20px;overflow:hidden;border:1px solid var(--bd);display:flex;flex-direction:column}
+.svc .ph{aspect-ratio:16/9}
+.svc .body{padding:26px 26px 30px}
+.svc h3{font-family:"Noto Serif JP",serif;font-size:21px;margin-bottom:10px}
+.svc p{font-size:15px;color:var(--sub);margin-bottom:14px}
+.pills{display:flex;flex-wrap:wrap;gap:6px;list-style:none}
+.pills li{font-size:13px;background:var(--bg2);color:var(--wine-d);padding:3px 11px;border-radius:999px}
+@media(max-width:860px){.svc{grid-template-columns:1fr}}
+
+/* profile */
+.profile{background:var(--bg2)}
+.pf{display:grid;grid-template-columns:320px 1fr;gap:44px;align-items:center}
+.pf .ph{aspect-ratio:3/4;border-radius:20px}
+.pf .name{font-family:"Noto Serif JP",serif;font-size:26px;margin:4px 0 2px}
+.pf .role{color:var(--sub);font-size:14px;margin-bottom:16px}
+.quals{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;list-style:none}
+.quals li{background:#fff;border:1px solid var(--rose);border-radius:8px;padding:4px 12px;font-size:13px;font-weight:500}
+.pf p{margin-bottom:12px;font-size:15.5px}
+@media(max-width:860px){.pf{grid-template-columns:1fr}.pf .ph{max-width:300px;margin:0 auto}}
+
+/* menu */
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:860px;margin:0 auto}
+.mcard{background:#fff;border:2px solid var(--rose);border-radius:20px;padding:30px 26px;text-align:center;position:relative}
+.mcard .badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--wine);color:#fff;font-size:12px;padding:3px 14px;border-radius:999px;white-space:nowrap}
+.mcard h3{font-family:"Noto Serif JP",serif;font-size:20px;margin:6px 0 6px}
+.mcard .price{font-family:"Noto Serif JP",serif;font-size:40px;color:var(--wine);line-height:1.3}
+.mcard .price small{font-size:15px;color:var(--ink)}
+.mcard p{font-size:14px;color:var(--sub);margin-top:8px;text-align:left}
+.mnote{max-width:860px;margin:18px auto 0;font-size:13px;color:var(--sub)}
+@media(max-width:700px){.mgrid{grid-template-columns:1fr}}
+
+/* flow */
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:f}
+.flow li{list-style:none;background:#fff;border-radius:16px;padding:22px 18px;border:1px solid var(--bd);position:relative}
+.flow li::before{counter-increment:f;content:"STEP " counter(f);font-family:"Noto Serif JP",serif;color:var(--wine);font-size:13px;letter-spacing:.1em}
+.flow h3{font-size:17px;margin:4px 0 6px}
+.flow p{font-size:14px;color:var(--sub)}
+@media(max-width:860px){.flow{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.flow{grid-template-columns:1fr}}
+
+/* faq */
+.faq{background:#fff}
+.faq details{max-width:800px;margin:0 auto 12px;border:1px solid var(--bd);border-radius:14px;background:var(--bg)}
+.faq summary{cursor:pointer;padding:18px 48px 18px 20px;font-weight:700;list-style:none;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:"Q.";color:var(--wine);font-family:"Noto Serif JP",serif;margin-right:8px}
+.faq summary::after{content:"+";position:absolute;right:20px;top:14px;font-size:22px;color:var(--wine)}
+.faq details[open] summary::after{content:"−"}
+.faq .a{padding:0 20px 18px 20px;color:var(--sub);font-size:15px}
+
+/* access */
+.acc{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.acc table{width:100%;border-collapse:collapse;font-size:15px}
+.acc th,.acc td{text-align:left;padding:12px 6px;border-bottom:1px solid var(--bd);vertical-align:top}
+.acc th{width:96px;color:var(--wine);font-weight:500}
+.map{border-radius:18px;overflow:hidden;min-height:340px;border:1px solid var(--bd)}
+.map iframe{width:100%;height:100%;min-height:340px;border:0}
+@media(max-width:860px){.acc{grid-template-columns:1fr}}
+
+/* cta */
+.cta{background:linear-gradient(135deg,var(--wine-d),var(--wine));color:#fff;text-align:center}
+.cta h2{margin-bottom:12px}
+.cta p{opacity:.92;margin-bottom:28px}
+.cta .row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.cta .btn-ghost{background:transparent;border-color:#fff;color:#fff}
+.cta .btn-ghost:hover{background:#fff;color:var(--wine)}
+
+footer{background:#2f2523;color:#d9c9c5;padding:36px 0 96px;font-size:13px;text-align:center}
+footer a{color:#fff}
+
+/* sp fixed bar */
+.spbar{display:none}
+@media(max-width:860px){
+  .spbar{display:grid;grid-template-columns:1fr 1fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);border-top:1px solid var(--bd)}
+  .spbar a{padding:12px 6px;border-radius:999px;text-align:center;font-weight:700;text-decoration:none;font-size:15px}
+  .spbar .l{background:var(--line);color:#fff}
+  .spbar .t{border:1.5px solid var(--wine);color:var(--wine)}
+  section{padding:60px 0}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap hd">
+    <a href="#top" class="logo"><span class="mark">R</span><span><b>Body Salon RISE</b><small>指宿のダイエット・美容整体</small></span></a>
+    <nav><ul>
+      <li><a href="#reason">選ばれる理由</a></li>
+      <li><a href="#service">施術内容</a></li>
+      <li><a href="#profile">代表紹介</a></li>
+      <li><a href="#menu">料金</a></li>
+      <li><a href="#faq">よくある質問</a></li>
+      <li><a href="#access">アクセス</a></li>
+    </ul></nav>
+    <a class="hd-tel" href="tel:08042792503">☎ 080-4279-2503</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-in">
+    <div>
+      <span class="tag">指宿駅から車で3分｜完全予約制の個室サロン</span>
+      <h1>これを、<br><em>人生最後の</em><br>ダイエットに。</h1>
+      <p class="sub">指宿市のダイエット・美容専門整体サロン。<br>柔道整復師が、体質と生活習慣から根本的に変えるお手伝いをします。</p>
+      <ul class="checks">
+        <li>運動なし</li><li>カロリー計算なし</li><li>リバウンドしにくい</li>
+      </ul>
+      <div class="hero-cta">
+        <a class="btn btn-line" href="https://page.line.me/822zjpdb" target="_blank" rel="noopener">LINEで予約・相談する</a>
+        <a class="btn btn-ghost" href="#menu">初回 2,980円 を見る</a>
+      </div>
+    </div>
+    <div class="ph hero-ph">サロン内観、または<br>施術風景の写真</div>
+  </div>
+</section>
+
+<!-- WORRIES -->
+<section class="worries">
+  <div class="wrap">
+    <span class="en center">Worries</span>
+    <h2 class="center">こんなお悩み、ありませんか？</h2>
+    <div class="wgrid">
+      <div>少しずつ体重が増えていく</div>
+      <div>着たい服が着られなくなった</div>
+      <div>色々試しても痩せない</div>
+      <div>リバウンドが怖い</div>
+      <div>肩こり・腰痛・膝痛がつらい</div>
+      <div>病院では「異常なし」と言われた</div>
+      <div>猫背・巻き肩・ストレートネック</div>
+      <div>ぽっこりお腹・下半身太り</div>
+    </div>
+    <p class="answer">痩せられないのは、意志が弱いからではありません。<br><b>「自分に合った痩せ方」を知らないだけ</b>なんです。</p>
+  </div>
+</section>
+
+<!-- REASON -->
+<section id="reason">
+  <div class="wrap">
+    <span class="en center">Reason</span>
+    <h2 class="center">RISEが選ばれる3つの理由</h2>
+    <div class="rgrid">
+      <div class="rcard">
+        <div class="no">01</div>
+        <h3>運動なし・カロリー計算なし</h3>
+        <p>1kgの脂肪を燃やすには約7,200kcal、フルマラソン3回分の運動が必要といわれます。RISEは、きつい運動や我慢の食事制限に頼らず、生活習慣の見直しで無理なく痩せる方法をご提案します。</p>
+      </div>
+      <div class="rcard">
+        <div class="no">02</div>
+        <h3>遺伝子検査と分子栄養学で<br>あなた専用のプラン</h3>
+        <p>肥満遺伝子（DNA）検査で体質を知り、分子栄養学にもとづいて食事をアドバイス。マニュアル通りではない、一人ひとりのオーダーメイドプログラムです。</p>
+      </div>
+      <div class="rcard">
+        <div class="no">03</div>
+        <h3>国家資格・柔道整復師の<br>美容整体</h3>
+        <p>整骨院での経験を活かし、骨盤矯正や肩甲骨はがしで姿勢と骨格のゆがみを整えます。痩せやすく、太りにくい体の土台づくりから始めます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBER -->
+<div class="num">
+  <div class="wrap">
+    <p>3ヶ月の減量プログラムで</p>
+    <div class="big">平均 −7.5<small>kg</small></div>
+    <p>これまでにサポートした方々の実績です</p>
+    <p class="note">※効果には個人差があります。</p>
+  </div>
+</div>
+
+<!-- SERVICE -->
+<section id="service">
+  <div class="wrap">
+    <span class="en center">Service</span>
+    <h2 class="center">施術・プログラム</h2>
+    <p class="lead center">「痩せたい」も「痛みをなんとかしたい」も、まずはお気軽にご相談ください。<br>丁寧なカウンセリングで、目標やお体の状態に合わせた内容をご提案します。</p>
+    <div class="svc">
+      <article>
+        <div class="ph">食事指導・カウンセリングの写真</div>
+        <div class="body">
+          <h3>3ヶ月 減量プログラム</h3>
+          <p>DNA遺伝子検査・分子栄養学にもとづく食事指導・美容整体を組み合わせ、マンツーマンで目標達成まで伴走します。通っている間だけでなく、その後もずっと体形をキープできる知識と習慣が身につきます。</p>
+          <ul class="pills"><li>肥満遺伝子検査</li><li>食事指導</li><li>生活習慣の改善</li><li>痩身美容整体</li><li>ツボ</li></ul>
+        </div>
+      </article>
+      <article>
+        <div class="ph">整体・骨盤矯正の施術写真</div>
+        <div class="body">
+          <h3>整体・美容整体</h3>
+          <p>肩こり・腰痛・膝痛など、原因がはっきりしない慢性的な痛みに。検査とコンディションチェックで原因を洗い出し、体の内側から改善を目指します。美容メニューも好評です。</p>
+          <ul class="pills"><li>肩こり・腰痛・膝痛</li><li>骨盤矯正</li><li>肩甲骨はがし</li><li>姿勢矯正</li><li>小顔矯正</li><li>ブライダル整体</li></ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PROFILE -->
+<section class="profile" id="profile">
+  <div class="wrap pf">
+    <div class="ph">代表 和田さんの写真</div>
+    <div>
+      <span class="en">Profile</span>
+      <p class="name">和田 諒真</p>
+      <p class="role">Body Salon RISE 代表</p>
+      <ul class="quals"><li>柔道整復師（国家資格）</li><li>ダイエットエキスパート</li><li>DNA遺伝子革命インストラクター</li></ul>
+      <p>整骨院に勤めていた頃、肩こりや腰痛の施術をしても、すぐに再発してしまう方を多く見てきました。「痩せていた頃はこんな痛みはなかった」――そんな声を何度も耳にし、「本当の改善とは何だろう」と考えるようになりました。</p>
+      <p>たどり着いた答えは、その場しのぎの施術ではなく、生活習慣と体質を変えること。独立した今、これまで学んできた知識と技術のすべてで、本気で変わりたい方を全力でサポートします。</p>
+      <p class="serif" style="color:var(--wine)">「もう失敗したくない」「これで最後にしたい」――その想いに、真剣にお応えします。</p>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="wrap">
+    <span class="en center">Menu</span>
+    <h2 class="center">はじめての方へ</h2>
+    <p class="lead center">まずは体験から。お悩みに合わせてお選びください。</p>
+    <div class="mgrid">
+      <div class="mcard">
+        <span class="badge">痩せたい方に</span>
+        <h3>初回ダイエットカウンセリング</h3>
+        <div class="price">2,980<small>円</small></div>
+        <p>今のお体の状態を測定し、生活習慣や食事のお悩みを伺います。目標に向けた進め方をご提案します。</p>
+      </div>
+      <div class="mcard">
+        <span class="badge">痛み・姿勢が気になる方に</span>
+        <h3>初回整体体験</h3>
+        <div class="price">2,980<small>円</small></div>
+        <p>カウンセリングと検査で原因を確かめ、お体に合わせた施術を行います。</p>
+      </div>
+    </div>
+    <p class="mnote">※2回目以降の料金・3ヶ月プログラムの料金は、カウンセリング時にご案内します。お支払いは現金・クレジットカードがご利用いただけます。</p>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section style="background:var(--bg2)">
+  <div class="wrap">
+    <span class="en center">Flow</span>
+    <h2 class="center">ご来店の流れ</h2>
+    <ol class="flow">
+      <li><h3>LINEでご予約</h3><p>施術中は電話に出られないことが多いため、LINEかInstagramが確実です。</p></li>
+      <li><h3>カウンセリング</h3><p>お悩みや「こうなりたい」というご希望をじっくり伺います。</p></li>
+      <li><h3>測定・検査</h3><p>体の状態や姿勢のゆがみを確認し、原因を探ります。</p></li>
+      <li><h3>施術・プランのご提案</h3><p>お体に合わせた施術と、今後の進め方をご提案します。</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <span class="en center">Q&amp;A</span>
+    <h2 class="center">よくあるご質問</h2>
+    <details open><summary>予約は必要ですか？</summary><div class="a">完全予約制です。予約時間ちょうど、または5分前にお越しください。はじめての方は、10分前にお越しください。</div></details>
+    <details><summary>予約・問い合わせの方法は？</summary><div class="a">施術中はお電話に出られないことが多いため、公式LINEかInstagramからのご連絡がスムーズです。</div></details>
+    <details><summary>支払い方法は何がありますか？</summary><div class="a">現金・クレジットカードがご利用いただけます。</div></details>
+    <details><summary>駐車場はありますか？</summary><div class="a">3台分ご用意しています。</div></details>
+    <details><summary>本当に運動しなくても痩せますか？</summary><div class="a">ハードな運動や無理な食事制限は行いません。体質に合わせた食事の見直しと美容整体で、無理なく健康的に痩せる方法をご提案します（効果には個人差があります）。</div></details>
+  </div>
+</section>
+
+<!-- ACCESS -->
+<section id="access">
+  <div class="wrap">
+    <span class="en center">Access</span>
+    <h2 class="center">サロン情報・アクセス</h2>
+    <div class="acc">
+      <table>
+        <tr><th>店名</th><td>Body Salon RISE（ボディサロン ライズ）</td></tr>
+        <tr><th>住所</th><td>〒891-0401<br>鹿児島県指宿市大牟礼3丁目25-23-1</td></tr>
+        <tr><th>アクセス</th><td>指宿駅から車で約3分／駐車場3台</td></tr>
+        <tr><th>営業時間</th><td>平日 10:00〜19:00<br>土曜 10:00〜18:00</td></tr>
+        <tr><th>定休日</th><td>日曜・祝日</td></tr>
+        <tr><th>電話</th><td><a href="tel:08042792503">080-4279-2503</a></td></tr>
+        <tr><th>代表</th><td>和田 諒真</td></tr>
+        <tr><th>SNS</th><td><a href="https://www.instagram.com/wada.ibusuki/" target="_blank" rel="noopener">Instagram @wada.ibusuki</a></td></tr>
+      </table>
+      <div class="map">
+        <iframe loading="lazy" title="Body Salon RISEの地図" src="https://www.google.com/maps?q=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E6%8C%87%E5%AE%BF%E5%B8%82%E5%A4%A7%E7%89%9F%E7%A4%BC3%E4%B8%81%E7%9B%AE25-23-1&output=embed"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="wrap">
+    <h2>「今度こそ」を、一緒に。</h2>
+    <p>ご予約・ご相談はLINEから。お気軽にメッセージください。</p>
+    <div class="row">
+      <a class="btn btn-line" href="https://page.line.me/822zjpdb" target="_blank" rel="noopener">LINEで予約・相談する</a>
+      <a class="btn btn-ghost" href="tel:08042792503">電話する 080-4279-2503</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>Body Salon RISE｜鹿児島県指宿市大牟礼3丁目25-23-1</p>
+  <p>&copy; Body Salon RISE</p>
+</footer>
+
+<div class="spbar">
+  <a class="l" href="https://page.line.me/822zjpdb" target="_blank" rel="noopener">LINEで予約</a>
+  <a class="t" href="tel:08042792503">電話する</a>
+</div>
+
+</body>
+</html>
