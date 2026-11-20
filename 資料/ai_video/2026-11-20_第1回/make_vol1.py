@@ -137,8 +137,8 @@ def build_layers(voice):
 
     # 冒頭：タイトル＋「この動画は…」を大きめに
     im = canvas(); d = ImageDraw.Draw(im)
-    d.text((PW/2 - 70, 70), "今週のAIニュース", font=fB(76), fill=WHITE, anchor="mm")
-    pill(d, PW/2 + 330, 70, "11/20号", size=40)
+    d.text((PW/2 - 100, 70), "今週のAIニュース", font=fB(76), fill=WHITE, anchor="mm")
+    pill(d, PW/2 + 345, 72, "11/20号", size=38)
     disclosure_box(d, 150, 470, size=46)
     L["intro"] = im
 
@@ -163,10 +163,10 @@ def build_layers(voice):
     pill(d, PW/2, 400, "ベータ", size=46, fill=(255, 140, 66), color=INK, padx=40)
     L["n2_beta"] = im
     im, d = body_canvas(); tip_header(d)
-    icon_pin(d, PW/2 - 170, 315, 120); d.text((PW/2 - 170, 405), "Googleマップ", font=fB(30), fill=DIM, anchor="mm")
-    d.text((PW/2, 300), "＋", font=fB(60), fill=WHITE, anchor="mm")
-    icon_bubble(d, PW/2 + 170, 315, 120); d.text((PW/2 + 170, 405), "AIの中", font=fB(30), fill=DIM, anchor="mm")
-    d.text((PW/2, 458), "AIの中の自社の紹介も確認を", font=fB(40), fill=YELLOW, anchor="mm")
+    icon_pin(d, PW/2 - 170, 300, 116); d.text((PW/2 - 170, 385), "Googleマップ", font=fB(30), fill=DIM, anchor="mm")
+    d.text((PW/2, 290), "＋", font=fB(60), fill=WHITE, anchor="mm")
+    icon_bubble(d, PW/2 + 170, 300, 116); d.text((PW/2 + 170, 385), "AIの中", font=fB(30), fill=DIM, anchor="mm")
+    d.text((PW/2, 448), "AIの中の自社の紹介も確認を", font=fB(40), fill=YELLOW, anchor="mm")
     L["n2_tip"] = im
 
     im, d = body_canvas()

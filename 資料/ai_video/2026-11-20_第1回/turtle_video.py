@@ -174,7 +174,7 @@ def make_faces(scale_px=585):
 
 
 # ---------------------------------------------------------------- 背景・共通の表示
-def make_background(credit):
+def make_background(credit, credit_size=32):
     px = np.zeros((H, W, 3), np.uint8)
     for i in range(3): px[..., i] = np.linspace(NAVY_TOP[i], NAVY_BOT[i], H)[:, None]
     bg = Image.fromarray(px); d = ImageDraw.Draw(bg, "RGBA")
@@ -193,7 +193,7 @@ def make_background(credit):
     d.text((W/2, 246), "今週のAIニュース", font=fB(70), fill=WHITE, anchor="mm")
     d.rounded_rectangle((90, 330, W-90, 400), 35, fill=(255, 204, 77, 235))
     d.text((W/2, 365), "AIが情報収集から動画まで作っています", font=fB(38), fill=INK, anchor="mm")
-    d.text((W/2, H-78), credit, font=fB(32), fill=DIM, anchor="mm")
+    text_fit(d, (W/2, H-78), credit, credit_size, W - 80, fill=DIM if credit_size <= 32 else WHITE, anchor="mm")
     return bg.convert("RGB")
 
 

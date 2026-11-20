@@ -29,11 +29,12 @@ const dk = c => { // 少し暗く
   return '#' + [r, g, b].map(v => Math.round(v).toString(16).padStart(2, '0')).join('');
 };
 
-// pose: 'stand' | 'type'（待機：パソコンを打つ） | 'work'（仕事中：画面が光る） | 'talk'（話す）
-function build(role, pose = 'stand') {
+// pose: 'stand' | 'type'（待機：パソコンを打つ） | 'work'（仕事中：画面が光る） | 'talk'（話す） | 'stretch'（席で伸び）
+// opt.tap: 1|2 打つ手を1ドット上げる（キーを打つコマ） / opt.step: 1|2 片足を上げる（歩くコマ）
+function build(role, pose = 'stand', opt = {}) {
   const g = new Grid();
   const A = role.accent, AD = role.accentDark;
-  const atDesk = pose === 'type' || pose === 'work';
+  const atDesk = pose === 'type' || pose === 'work' || pose === 'stretch';
   const glow = pose === 'work';
   const metal = shade(C.mLight, C.mBase, C.mDark);
 
@@ -49,12 +50,14 @@ function build(role, pose = 'stand') {
 
   // ---- 2. 足（ずんぐり＋指）----
   if (!atDesk) {
-    g.part(ellipse(25, 59.6, 5.2, 3.4), metal); g.dot([[22, 62], [24, 62], [26, 62]], C.mDark);
-    g.part(ellipse(41, 59.6, 5.2, 3.4), metal); g.dot([[39, 62], [41, 62], [43, 62]], C.mMid);
+    const f1 = opt.step === 1 ? 1.4 : 0, f2 = opt.step === 2 ? 1.4 : 0;
+    g.part(ellipse(25, 59.6 - f1, 5.2, 3.4), metal); g.dot([[22, 62], [24, 62], [26, 62]].map(([x, y]) => [x, y - Math.round(f1)]), C.mDark);
+    g.part(ellipse(41, 59.6 - f2, 5.2, 3.4), metal); g.dot([[39, 62], [41, 62], [43, 62]].map(([x, y]) => [x, y - Math.round(f2)]), C.mMid);
   }
 
   // ---- 3. 奥の腕（向かって左）：甲羅の下から出るヒレのような手 ----
-  const armL = atDesk ? ellipse(19, 51, 4.2, 4) : ellipse(12.5, 47, 3.6, 5.6);
+  const armL = pose === 'stretch' ? union(ellipse(13, 31, 3.4, 4.2), ellipse(15.5, 38, 3, 4))
+    : atDesk ? ellipse(19, 51 - (opt.tap === 1 ? 1 : 0), 4.2, 4) : ellipse(12.5, 47, 3.6, 5.6);
   g.part(armL, shade(C.mBase, C.mMid, C.mDark, { side: .45 }));
 
   // ---- 4. 胸の甲羅（ロゴの六角形）----
@@ -73,7 +76,8 @@ function build(role, pose = 'stand') {
 
   // ---- 5. 手前の腕（向かって右）----
   let armR;
-  if (atDesk) armR = ellipse(46, 51, 4.2, 4);
+  if (pose === 'stretch') armR = union(ellipse(51, 38, 3, 4), ellipse(53, 31, 3.4, 4.2));
+  else if (atDesk) armR = ellipse(46, 51 - (opt.tap === 2 ? 1 : 0), 4.2, 4);
   else if (pose === 'talk') armR = union(ellipse(50.5, 39, 3.4, 4.5), ellipse(53, 32, 3.6, 3.8));
   else armR = ellipse(49.5, 45, 3.8, 6);
   g.part(armR, metal);
@@ -90,6 +94,9 @@ function build(role, pose = 'stand') {
 
   // 目と口
   const eye = (x, y) => {
+    if (pose === 'stretch') { // 気持ちよさそうな目（＾＾）
+      g.dot([[x, y + 3], [x + 1, y + 2], [x + 2, y + 3]], C.cyan); return;
+    }
     if (pose === 'type') { // 手元を見る（下向きの目）
       g.dot(rect(x, y + 2, x + 2, y + 3), C.cyan); return;
     }
@@ -109,12 +116,12 @@ function build(role, pose = 'stand') {
   if (glow) g.dot([[30, 1], [39, 1], [31, 4], [38, 4]], A);
 
   // ---- 8. 担当の小物 ----
-  ITEMS[role.id](g, role, pose, { A, AD, armR });
+  if (ITEMS[role.id]) ITEMS[role.id](g, role, pose, { A, AD, armR }); // 知らない id は小物なし（オフィス用の係は別に描き足す）
 
   // ---- 9. 机とノートパソコン（待機・仕事中）----
   if (atDesk) laptop(g, glow);
   // ---- 10. 吹き出し（話す）----
-  if (pose === 'talk') {
+  if (pose === 'talk' && !opt.noBubble) {
     g.part(union(roundRect(49, 2, 62, 11, 3), [[51, 12], [52, 12], [51, 13]]), '#ffffff');
     g.dot([[52, 7], [53, 7], [55, 7], [56, 7], [58, 7], [59, 7]], role.accentDark);
   }
@@ -248,4 +255,4 @@ function ellipseRing(cx, cy, rx, ry) {
   const a = ellipse(cx, cy, rx, ry), b = ellipse(cx, cy, rx - 1, ry - 1); return minus(a, b);
 }
 
-module.exports = { ROLES, C, build };
+module.exports = { ROLES, C, build, laptop };

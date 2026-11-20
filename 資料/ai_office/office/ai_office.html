@@ -1,0 +1,1088 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>タートルアドのAIオフィス</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;900&family=M+PLUS+Rounded+1c:wght@800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#14245a;--navy2:#081024;--navy3:#04070f;--cyan:#3CD6F0;--violet:#b9a6ff;
+  --text:#f2f6ff;--sub:#b9c6e8;--dim:#7f8fb8;
+  --s:64px;      /* キャラ1体の大きさ（64ドット×1） */
+  --cell:80px;   /* 机1つ分の幅 */
+}
+@media (min-width:1000px){:root{--s:96px;--cell:116px}}
+*{margin:0;padding:0;box-sizing:border-box}
+html{background:#04070f}
+body{font-family:'Noto Sans JP',sans-serif;font-feature-settings:"palt";color:var(--text);min-height:100vh;
+  background:radial-gradient(120% 60% at 50% 0%,#14245a 0%,#081024 55%,#04070f 100%) fixed;overflow-x:hidden}
+.wrap{max-width:1240px;margin:0 auto;padding:16px 16px 96px}
+
+/* ---- 見出し ---- */
+.head{display:flex;align-items:center;gap:10px}
+.head img{width:34px;height:34px;border-radius:9px}
+.brand{font-family:'M PLUS Rounded 1c',sans-serif;font-weight:800;font-size:17px;letter-spacing:.02em}
+.brand b{color:var(--cyan)}
+h1{margin:8px 0 8px;font-weight:900;font-size:26px;line-height:1.2;letter-spacing:.02em}
+h1 span{background:linear-gradient(90deg,#4fe3ff,#b9a6ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stats{display:flex;flex-wrap:wrap;gap:6px}
+.pill{font-size:13px;font-weight:700;padding:5px 11px;border-radius:999px;background:rgba(60,214,240,.10);border:1.5px solid rgba(60,214,240,.45);white-space:nowrap}
+.pill b{color:#4fe3ff;font-size:16px;font-weight:900}
+.pill.m{border-color:rgba(185,166,255,.5);background:rgba(185,166,255,.10)}
+.pill.m b{color:var(--violet)}
+.how{margin-top:8px;font-size:12px;color:var(--sub);line-height:1.6}
+.note{margin-top:2px;font-size:11px;color:var(--dim)}
+@media (min-width:1000px){h1{font-size:38px}.brand{font-size:20px}.head img{width:40px;height:40px}.pill{font-size:15px}.pill b{font-size:19px}.how{font-size:14px}.note{font-size:12px}}
+
+/* ---- 床と島 ---- */
+.floor{position:relative;margin-top:14px;padding:12px 0 14px;border-radius:16px;
+  display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-content:flex-start;
+  background-color:#0b1634;
+  background-image:linear-gradient(rgba(60,214,240,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(60,214,240,.06) 1px,transparent 1px);
+  background-size:16px 16px;border:2px solid rgba(60,214,240,.18)}
+.island{position:relative;padding:24px 6px 4px;border-radius:12px;
+  background:color-mix(in srgb,var(--dc) 9%,#0e1b40);border:2px solid color-mix(in srgb,var(--dc) 55%,transparent);
+  box-shadow:0 4px 0 rgba(0,0,0,.35)}
+.island .lbl{position:absolute;left:8px;top:4px;display:flex;align-items:center;gap:5px;font-size:12px;font-weight:900;white-space:nowrap}
+.island .lbl i{width:10px;height:10px;background:var(--dc);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+.island .lbl em{font-style:normal;font-weight:700;color:var(--sub);font-size:11px}
+.desks{display:grid;grid-template-columns:repeat(var(--cols),var(--cell));justify-content:center}
+.slot{width:var(--cell);display:flex;flex-direction:column;align-items:center;padding-bottom:4px}
+.slot canvas{width:var(--s);height:var(--s);image-rendering:pixelated;display:block}
+.tag{margin-top:1px;max-width:calc(var(--cell) - 2px);font-size:10px;font-weight:700;line-height:1.25;text-align:center;
+  padding:1px 5px;border-radius:5px;background:rgba(4,7,15,.72);border-bottom:2px solid var(--dc);white-space:nowrap}
+.tag small{display:block;font-size:8.5px;font-weight:500;color:var(--sub)}
+@media (min-width:1000px){.island{padding-top:28px}.island .lbl{font-size:14px}.island .lbl em{font-size:13px}.tag{font-size:12.5px}.tag small{font-size:10px}}
+.mach .slot{width:calc(var(--cell) + 26px)}
+.mach .tag{white-space:normal;max-width:none}
+.room .tag{white-space:normal}
+.lamp{position:absolute;width:6px;height:6px;border-radius:2px}
+
+/* ---- キャラ（床の上を動く） ---- */
+.actors{position:absolute;inset:0;pointer-events:none}
+.actor{position:absolute;left:0;top:0;width:var(--s);height:var(--s);will-change:transform}
+.actor canvas{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated}
+.actor.flip canvas{transform:scaleX(-1)}
+.actor.walking{z-index:30}
+.actor.away{z-index:25}
+.actor.walking canvas{animation:bob .36s steps(2) infinite}
+@keyframes bob{50%{translate:0 -2px}}
+.actor .glow{position:absolute;left:12%;right:12%;bottom:4%;height:44%;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(60,214,240,.55),transparent);opacity:0;pointer-events:none}
+.actor.working .glow{animation:pico 1s steps(2) infinite}
+@keyframes pico{0%{opacity:.25}50%{opacity:.85}}
+.actor .ring{position:absolute;left:4%;right:4%;bottom:-6%;height:24%;border-radius:50%;border:2px solid #ffe27a;opacity:0;transition:opacity .3s}
+.actor.focus .ring{opacity:.9;animation:ring 1.2s ease-in-out infinite}
+@keyframes ring{50%{transform:scale(1.12)}}
+
+.bub{position:absolute;left:50%;bottom:calc(100% - 6px);transform:translateX(calc(-50% + var(--dx,0px)));
+  font-size:11px;font-weight:700;line-height:1.35;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .2s;z-index:40}
+.bub.on{opacity:1}
+.bub.say{background:#fff;color:#0b1634;padding:4px 8px;border-radius:9px;box-shadow:0 2px 0 rgba(0,0,0,.35);white-space:normal;width:max-content;max-width:150px;text-align:center}
+.bub.say::after{content:"";position:absolute;left:calc(50% - var(--dx,0px) - 5px);bottom:-5px;border:5px solid transparent;border-bottom:0;border-top-color:#fff}
+.bub.chip{background:rgba(8,16,36,.92);color:#e9f2ff;padding:2px 7px;border-radius:999px;border:1.5px solid var(--dc);font-size:10px}
+.bub.chip::before{content:"";display:inline-block;width:6px;height:6px;margin-right:4px;border-radius:50%;background:var(--cyan);animation:pico .8s steps(2) infinite;vertical-align:1px}
+.bub.no{background:#fff;color:#d0203a}
+@media (min-width:1000px){.bub{font-size:13px}.bub.say{max-width:190px}.bub.chip{font-size:12px}}
+
+.pop{position:absolute;z-index:45;font-size:11px;font-weight:900;padding:4px 9px;border-radius:8px;white-space:nowrap;pointer-events:none;
+  background:#e9fff2;color:#0b4a2a;box-shadow:0 2px 0 rgba(0,0,0,.4);animation:popup 2.6s ease-out forwards}
+.pop.ph{background:#fff6d6;color:#6a4700}
+@keyframes popup{0%{opacity:0;transform:translate(-50%,6px) scale(.9)}12%{opacity:1;transform:translate(-50%,0) scale(1)}80%{opacity:1}100%{opacity:0;transform:translate(-50%,-14px)}}
+@media (min-width:1000px){.pop{font-size:13px}}
+
+/* ---- 下の1行（いま起きていること） ---- */
+.ticker{position:fixed;left:0;right:0;bottom:0;z-index:100;padding:8px 12px calc(8px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg,rgba(8,16,36,.86),rgba(4,7,15,.97));border-top:2px solid rgba(60,214,240,.5);backdrop-filter:blur(4px);cursor:pointer}
+.ticker .in{max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:8px}
+.ticker .now{flex:none;font-size:11px;font-weight:900;color:#081024;background:var(--cyan);padding:3px 8px;border-radius:999px;display:flex;align-items:center;gap:5px}
+.ticker .now::before{content:"";width:7px;height:7px;border-radius:50%;background:#ff4060;animation:pico 1s steps(2) infinite}
+.ticker .msg{font-size:13px;font-weight:700;line-height:1.4;transition:opacity .25s}
+.ticker .msg.fade{opacity:0}
+@media (min-width:1000px){.ticker .msg{font-size:17px}.ticker .now{font-size:13px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="head"><img src="data:image/png;base64,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" alt=""><div class="brand">turtle <b>ad</b></div></div>
+    <h1>タートルアドの<span>AIオフィス</span></h1>
+    <div class="stats">
+      <div class="pill">いま働いているAI社員：<b id="nStaff">0</b>人</div>
+      <div class="pill m">24時間動く機械：<b id="nMach">3</b>台</div>
+    </div>
+    <p class="how">アンテナの色＝部署、手に持つ小物＝係。頭の上の吹き出しが「いまやっていること」です。</p>
+    <p class="note">※表示は実際の仕事の流れをもとにした再現です</p>
+  </header>
+  <main class="floor" id="floor"><div class="actors" id="actors"></div></main>
+</div>
+<div class="ticker" id="ticker" title="タップで場所へ移動"><div class="in"><span class="now">いま</span><span class="msg" id="msg">オフィスを準備しています…</span></div></div>
+
+<script>
+'use strict';
+// ---- ドット絵エンジン（資料/ai_office/characters/src から自動で取り込み）----
+const P = (function () {
+// タートルアド AI社員 キャラクター：ドット絵エンジン（64x64格子）
+// 自作。外部素材なし。ロゴ（六角形＝亀の甲羅、ノードと線）をもとに描く。
+'use strict';
+const W = 64, H = 64;
+const OUT = '#060b18'; // 輪郭線（ブランドの最暗色に近い紺黒）
+
+class Grid {
+  constructor() { this.px = new Array(W * H).fill(null); }
+  get(x, y) { return (x < 0 || y < 0 || x >= W || y >= H) ? null : this.px[y * W + x]; }
+  set(x, y, c) { if (x >= 0 && y >= 0 && x < W && y < H && c) this.px[y * W + x] = c; }
+  // mask: [[x,y],...] / color: (x,y,box)=>色 / outline: 外側1pxの輪郭を先に塗る
+  part(mask, color, { outline = true, outColor = OUT } = {}) {
+    if (!mask.length) return;
+    const key = new Set(mask.map(([x, y]) => y * W + x));
+    if (outline) {
+      for (const [x, y] of mask) for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+        const k = (y + dy) * W + (x + dx);
+        if (!key.has(k)) this.set(x + dx, y + dy, outColor);
+      }
+    }
+    const xs = mask.map(p => p[0]), ys = mask.map(p => p[1]);
+    const box = { x0: Math.min(...xs), x1: Math.max(...xs), y0: Math.min(...ys), y1: Math.max(...ys) };
+    box.w = box.x1 - box.x0 + 1; box.h = box.y1 - box.y0 + 1;
+    for (const [x, y] of mask) this.set(x, y, typeof color === 'function' ? color(x, y, box, key) : color);
+  }
+  dot(pts, c) { for (const [x, y] of pts) this.set(x, y, c); }
+}
+
+// ---- 形（ピクセル中心で判定） ----
+const all = f => { const r = []; for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) if (f(x + .5, y + .5)) r.push([x, y]); return r; };
+const ellipse = (cx, cy, rx, ry) => all((x, y) => ((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2 <= 1);
+const rect = (x0, y0, x1, y1) => { const r = []; for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) r.push([x, y]); return r; };
+const roundRect = (x0, y0, x1, y1, rad) => all((x, y) => {
+  if (x < x0 || x > x1 + 1 || y < y0 || y > y1 + 1) return false;
+  const cx = Math.min(Math.max(x, x0 + rad), x1 + 1 - rad), cy = Math.min(Math.max(y, y0 + rad), y1 + 1 - rad);
+  return (x - cx) ** 2 + (y - cy) ** 2 <= rad * rad;
+});
+const polygon = pts => all((x, y) => {
+  let inside = false;
+  for (let i = 0, j = pts.length - 1; i < pts.length; j = i++) {
+    const [xi, yi] = pts[i], [xj, yj] = pts[j];
+    if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) inside = !inside;
+  }
+  return inside;
+});
+// とがった頂点が上の六角形（ロゴと同じ向き）
+const hexPts = (cx, cy, r) => [0, 1, 2, 3, 4, 5].map(i => { const a = Math.PI / 180 * (-90 + 60 * i); return [cx + r * Math.cos(a), cy + r * Math.sin(a)]; });
+const hex = (cx, cy, r) => polygon(hexPts(cx, cy, r));
+const line = (x0, y0, x1, y1) => { // ブレゼンハム
+  const r = []; x0 = Math.round(x0); y0 = Math.round(y0); x1 = Math.round(x1); y1 = Math.round(y1);
+  const dx = Math.abs(x1 - x0), dy = -Math.abs(y1 - y0), sx = x0 < x1 ? 1 : -1, sy = y0 < y1 ? 1 : -1; let e = dx + dy;
+  for (;;) { r.push([x0, y0]); if (x0 === x1 && y0 === y1) break; const e2 = 2 * e; if (e2 >= dy) { e += dy; x0 += sx; } if (e2 <= dx) { e += dx; y0 += sy; } }
+  return r;
+};
+const thick = (pts, w = 2) => { const s = new Map(); for (const [x, y] of pts) for (let i = 0; i < w; i++) for (let j = 0; j < w; j++) s.set((y + j) * W + x + i, [x + i, y + j]); return [...s.values()]; };
+const minus = (a, b) => { const k = new Set(b.map(([x, y]) => y * W + x)); return a.filter(([x, y]) => !k.has(y * W + x)); };
+const union = (...ms) => { const s = new Map(); for (const m of ms) for (const [x, y] of m) s.set(y * W + x, [x, y]); return [...s.values()]; };
+
+// 立体感：左が奥（側面）＝暗く、右上が明るい（少し右を向いている）
+const shade = (light, base, dark, { side = .22, top = .3 } = {}) => (x, y, b) => {
+  const u = (x - b.x0) / Math.max(1, b.w - 1), v = (y - b.y0) / Math.max(1, b.h - 1);
+  if (u < side) return dark;
+  if (v < top && u > .5) return light;
+  return base;
+};
+
+// ---- SVG化（横に並んだ同じ色をまとめる） ----
+function toSVG(g, { scale = 8, pad = 0 } = {}) {
+  let s = '';
+  for (let y = 0; y < H; y++) {
+    let x = 0;
+    while (x < W) {
+      const c = g.get(x, y); if (!c) { x++; continue; }
+      let n = 1; while (x + n < W && g.get(x + n, y) === c) n++;
+      s += `<rect x="${x}" y="${y}" width="${n}" height="1" fill="${c}"/>`;
+      x += n;
+    }
+  }
+  const size = (W + pad * 2) * scale;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${-pad} ${-pad} ${W + pad * 2} ${H + pad * 2}" width="${size}" height="${size}" shape-rendering="crispEdges">${s}</svg>`;
+}
+
+return { W, H, OUT, Grid, ellipse, rect, roundRect, polygon, hex, hexPts, line, thick, minus, union, shade, toSVG };
+
+})();
+const CH = (function (P) {
+// タートルアド AI社員：6体の定義とポーズ
+// 体は全員共通（ロゴの六角形＝亀の甲羅の胴体、画面の顔、アンテナ）。担当ごとに差し色と小物を変える。
+'use strict';
+
+const { Grid, ellipse, rect, roundRect, hex, hexPts, line, thick, minus, union, shade, OUT } = P;
+
+// ブランド色
+const C = {
+  navy: '#14245a', navy2: '#081024', navy3: '#04070f', cyan: '#3CD6F0', violet: '#b9a6ff',
+  // 頭と手足（水色がかった金属）
+  mLight: '#e6fff8', mBase: '#a2efdf', mMid: '#62cfbf', mDark: '#2b8d93',
+  // 胸の甲羅（ロゴの中の濃い青緑）
+  plate: '#0f3c46', plateDark: '#0a2a34', spoke: '#2bb4cf', rimLight: '#b4f5ff',
+  white: '#ffffff', blush: '#ff9fc4',
+};
+
+// 担当（差し色は1体1色）
+const ROLES = [
+  { id: 'leader', ja: 'リーダー', en: 'LEADER', job: '全体の舵取り・担当へのふり分け', accent: '#ffcc4d', accentDark: '#c98a12', item: 'ヘッドセット・腕章' },
+  { id: 'design', ja: 'デザイン担当', en: 'DESIGN', job: '画像・チラシ・見た目をそろえる', accent: '#ff8fd0', accentDark: '#c9479a', item: 'ベレー帽・ペン' },
+  { id: 'sales', ja: '営業担当', en: 'SALES', job: '案件の見極め・見積もり', accent: '#ff5468', accentDark: '#b51f36', item: 'ネクタイ・名刺' },
+  { id: 'listing', ja: '出品・発信担当', en: 'POST', job: '出品ページ・SNSの投稿', accent: '#5ee38f', accentDark: '#1f9a54', item: 'メガホン' },
+  { id: 'automation', ja: '仕組み担当', en: 'SYSTEM', job: '自動化・ホームページ公開', accent: '#ff9a3d', accentDark: '#b85b0e', item: 'ヘルメット・スパナ・ケーブル' },
+  { id: 'research', ja: '調べもの担当', en: 'RESEARCH', job: '調べて裏付けをとる', accent: '#b9a6ff', accentDark: '#6f58d6', item: '虫めがね・丸めがね' },
+];
+
+const dk = c => { // 少し暗く
+  const n = parseInt(c.slice(1), 16), f = .62; const r = (n >> 16) * f, g = ((n >> 8) & 255) * f, b = (n & 255) * f;
+  return '#' + [r, g, b].map(v => Math.round(v).toString(16).padStart(2, '0')).join('');
+};
+
+// pose: 'stand' | 'type'（待機：パソコンを打つ） | 'work'（仕事中：画面が光る） | 'talk'（話す） | 'stretch'（席で伸び）
+// opt.tap: 1|2 打つ手を1ドット上げる（キーを打つコマ） / opt.step: 1|2 片足を上げる（歩くコマ）
+function build(role, pose = 'stand', opt = {}) {
+  const g = new Grid();
+  const A = role.accent, AD = role.accentDark;
+  const atDesk = pose === 'type' || pose === 'work' || pose === 'stretch';
+  const glow = pose === 'work';
+  const metal = shade(C.mLight, C.mBase, C.mDark);
+
+  // ---- 1. 背中の甲羅（胴より大きく、左右にはみ出す＝亀のシルエット）----
+  const shellPts = hexPts(31, 43.5, 21.5).map(([x, y]) => [x, 43.5 + (y - 43.5) * .78]);
+  g.part(P.polygon(shellPts), (x, y) => (x < 20 ? '#1a2f70' : '#20398a'));
+  // 甲羅のふち（水色）と、甲羅の模様（六角形のすじ）
+  g.dot(P.minus(P.polygon(shellPts), P.polygon(hexPts(31, 43.5, 19.8).map(([x, y]) => [x, 43.5 + (y - 43.5) * .78]))), '#3CD6F0');
+  g.dot([[14, 38], [15, 38], [13, 46], [14, 46], [15, 54], [16, 54], [17, 31], [18, 31], [17, 32], [13, 39], [12, 45], [14, 53]], '#24407f');
+  g.dot([[16, 39], [16, 40], [16, 41], [16, 42], [16, 43], [16, 44], [16, 45], [17, 46], [17, 47], [17, 48], [17, 49], [17, 50], [17, 51], [17, 52], [17, 53]], '#24407f');
+  // しっぽ（左下に少し）
+  if (!atDesk) g.part([[11, 56], [12, 56], [10, 57], [11, 57], [12, 57]], C.mMid);
+
+  // ---- 2. 足（ずんぐり＋指）----
+  if (!atDesk) {
+    const f1 = opt.step === 1 ? 1.4 : 0, f2 = opt.step === 2 ? 1.4 : 0;
+    g.part(ellipse(25, 59.6 - f1, 5.2, 3.4), metal); g.dot([[22, 62], [24, 62], [26, 62]].map(([x, y]) => [x, y - Math.round(f1)]), C.mDark);
+    g.part(ellipse(41, 59.6 - f2, 5.2, 3.4), metal); g.dot([[39, 62], [41, 62], [43, 62]].map(([x, y]) => [x, y - Math.round(f2)]), C.mMid);
+  }
+
+  // ---- 3. 奥の腕（向かって左）：甲羅の下から出るヒレのような手 ----
+  const armL = pose === 'stretch' ? union(ellipse(13, 31, 3.4, 4.2), ellipse(15.5, 38, 3, 4))
+    : atDesk ? ellipse(19, 51 - (opt.tap === 1 ? 1 : 0), 4.2, 4) : ellipse(12.5, 47, 3.6, 5.6);
+  g.part(armL, shade(C.mBase, C.mMid, C.mDark, { side: .45 }));
+
+  // ---- 4. 胸の甲羅（ロゴの六角形）----
+  const cx = 33, cy = 44, R = 15;
+  g.part(hex(cx, cy, R), (x, y) => (x > cx + 2 && y < cy - 4) ? C.rimLight : C.cyan);
+  g.part(hex(cx, cy, R - 2.2), (x, y) => x < cx - 7 ? C.plateDark : C.plate, { outline: false });
+  // 内側の六角形・線・ノード（ロゴの模様）
+  const ic = [cx + 1, cy], ir = 6.2;
+  const inner = hexPts(ic[0], ic[1], ir), outer = hexPts(cx, cy, R - 2.6);
+  for (let i = 0; i < 6; i++) g.dot(line(...inner[i], ...outer[i]), C.spoke);
+  for (let i = 0; i < 6; i++) g.dot(line(...inner[i], ...inner[(i + 1) % 6]), C.cyan);
+  const coreOn = glow ? C.white : C.cyan;
+  g.dot(rect(ic[0] - 1, ic[1] - 1, ic[0] + 1, ic[1] + 1), coreOn);
+  if (glow) g.dot([[ic[0], ic[1] - 2], [ic[0], ic[1] + 2], [ic[0] - 2, ic[1]], [ic[0] + 2, ic[1]]], C.cyan);
+  for (const [x, y] of inner) g.dot(rect(Math.round(x) - 1, Math.round(y) - 1, Math.round(x), Math.round(y)), C.white);
+
+  // ---- 5. 手前の腕（向かって右）----
+  let armR;
+  if (pose === 'stretch') armR = union(ellipse(51, 38, 3, 4), ellipse(53, 31, 3.4, 4.2));
+  else if (atDesk) armR = ellipse(46, 51 - (opt.tap === 2 ? 1 : 0), 4.2, 4);
+  else if (pose === 'talk') armR = union(ellipse(50.5, 39, 3.4, 4.5), ellipse(53, 32, 3.6, 3.8));
+  else armR = ellipse(49.5, 45, 3.8, 6);
+  g.part(armR, metal);
+
+  // ---- 6. 頭 ----
+  g.part(roundRect(15, 8, 44, 30, 10), C.mDark);                       // 頭の側面（奥行き）
+  g.part(roundRect(18, 8, 47, 30, 10), shade(C.mLight, C.mBase, C.mMid, { side: .12, top: .25 }));
+  // 頭のてっぺんに小さな甲羅模様（六角形の点）
+  g.dot([[29, 10], [30, 10], [36, 10], [37, 10]], C.mLight);
+  // 顔の画面
+  const screen = roundRect(22, 13, 44, 26, 4);
+  g.part(screen, glow ? '#0d2a52' : C.navy2, { outColor: '#1b3d7a' });
+  g.dot([[24, 14], [25, 14], [23, 15]], glow ? '#2c5fa0' : '#1b2f63'); // 画面の反射
+
+  // 目と口
+  const eye = (x, y) => {
+    if (pose === 'stretch') { // 気持ちよさそうな目（＾＾）
+      g.dot([[x, y + 3], [x + 1, y + 2], [x + 2, y + 3]], C.cyan); return;
+    }
+    if (pose === 'type') { // 手元を見る（下向きの目）
+      g.dot(rect(x, y + 2, x + 2, y + 3), C.cyan); return;
+    }
+    if (glow) { // 光る画面を見つめる（キラッとした目）
+      g.dot(rect(x, y, x + 2, y + 4), C.cyan); g.dot([[x, y], [x + 1, y]], C.white); g.dot([[x + 2, y + 4]], C.white); return;
+    }
+    g.dot(rect(x, y, x + 2, y + 4), C.cyan); g.dot([[x, y]], C.white);
+  };
+  eye(28, 16); eye(37, 16);
+  g.dot([[26, 22], [27, 22]], C.blush); g.dot([[41, 22], [42, 22]], C.blush);
+  if (pose === 'talk') { g.dot(rect(33, 22, 36, 22), C.cyan); g.dot(rect(34, 23, 35, 23), C.cyan); g.dot([[34, 22], [35, 22]], C.blush); }
+  else g.dot([[33, 22], [34, 23], [35, 23], [36, 22]], C.cyan);
+
+  // ---- 7. アンテナ（先は担当の差し色の六角形）----
+  g.part(rect(34, 4, 34, 7), C.mDark, { outline: true });
+  g.part(hex(34.5, 2.6, 2.6), (x, y) => (x >= 35 && y <= 2) ? '#ffffff' : A);
+  if (glow) g.dot([[30, 1], [39, 1], [31, 4], [38, 4]], A);
+
+  // ---- 8. 担当の小物 ----
+  if (ITEMS[role.id]) ITEMS[role.id](g, role, pose, { A, AD, armR }); // 知らない id は小物なし（オフィス用の係は別に描き足す）
+
+  // ---- 9. 机とノートパソコン（待機・仕事中）----
+  if (atDesk) laptop(g, glow);
+  // ---- 10. 吹き出し（話す）----
+  if (pose === 'talk' && !opt.noBubble) {
+    g.part(union(roundRect(49, 2, 62, 11, 3), [[51, 12], [52, 12], [51, 13]]), '#ffffff');
+    g.dot([[52, 7], [53, 7], [55, 7], [56, 7], [58, 7], [59, 7]], role.accentDark);
+  }
+  // ---- 11. 仕事中：画面の光が顔に当たる ----
+  if (glow) {
+    g.dot(rect(23, 25, 43, 25), 'rgba(60,214,240,0.55)');
+    g.dot([[46, 26], [47, 25], [19, 26], [18, 25]], 'rgba(60,214,240,0.5)');
+  }
+  return g;
+}
+
+function laptop(g, glow) {
+  // 机の天板
+  g.part(rect(6, 57, 59, 59), (x, y) => y === 57 ? '#3a5aa8' : C.navy, { outColor: OUT });
+  g.part(rect(9, 60, 11, 63), C.navy); g.part(rect(54, 60, 56, 63), C.navy);
+  // パソコン（ふたの裏側がこちらを向く。ロゴの六角形入り）
+  const lid = [[22, 43], [44, 43], [46, 56], [20, 56]];
+  g.part(P.polygon(lid), (x, y) => x < 25 ? '#8aa0c8' : '#c3d2ec');
+  g.part(hex(33, 49.5, 3.6), glow ? C.white : C.cyan, { outline: false });
+  g.dot(hexPts(33, 49.5, 1.4).length ? [[33, 49], [33, 50]] : [], glow ? C.cyan : '#1b4e8a');
+  g.part(rect(18, 56, 48, 56), '#7186b5', { outline: false });
+  if (glow) {
+    // ふたのふちから漏れる光と、きらめき
+    const L = 'rgba(60,214,240,0.55)';
+    g.dot(line(21, 42, 45, 42), '#c8f8ff'); g.dot(line(19, 41, 47, 41), L);
+    g.dot([[19, 44], [47, 44], [18, 47], [48, 47]], L);
+    g.dot(P.polygon([[22, 43], [44, 43], [44.6, 46], [21.4, 46]]).filter(([x]) => x >= 25), '#e6fbff');
+    const spark = (x, y, c) => g.dot([[x, y - 2], [x, y - 1], [x - 2, y], [x - 1, y], [x, y], [x + 1, y], [x + 2, y], [x, y + 1], [x, y + 2]], c);
+    spark(10, 38, '#b9a6ff'); spark(55, 36, '#3CD6F0'); spark(8, 50, '#3CD6F0'); spark(58, 49, '#ffffff');
+  }
+}
+
+// ---- 担当ごとの小物 ----
+const ITEMS = {
+  leader(g, role, pose, { A, AD }) {
+    // ヘッドセット：頭の上を通るバンド＋耳当て＋マイク
+    g.part(union(thick(line(16, 13, 20, 7), 2), thick(line(20, 6, 41, 6), 2), thick(line(41, 6, 46, 11), 2)), '#33405e');
+    g.part(roundRect(44, 13, 49, 22, 2), (x, y) => y < 15 ? '#ffe39a' : A); // 手前の耳当て
+    g.part(roundRect(13, 14, 16, 22, 2), AD);                             // 奥の耳当て
+    if (pose !== 'type' && pose !== 'work') {
+      g.part(union(thick(line(45, 22, 42, 27), 1), [[41, 27], [40, 27]]), '#33405e', { outline: false });
+      g.part(roundRect(37, 26, 40, 28, 1), A);                            // マイク
+    } else {
+      g.part(thick(line(45, 22, 43, 27), 1), '#33405e', { outline: false });
+      g.part(roundRect(40, 26, 43, 28, 1), A);
+    }
+    // 腕章（奥の腕に金の帯）＋胸の星バッジ
+    if (pose === 'stand' || pose === 'talk') {
+      g.dot(rect(9, 45, 16, 46), A); g.dot([[9, 46], [16, 46]], AD);
+    }
+    star(g, 23, 34, A, AD);
+  },
+  design(g, role, pose, { A, AD }) {
+    // ベレー帽（ななめにかぶる）
+    g.part(ellipse(30, 9, 13, 4.8), (x, y) => y <= 6 && x > 30 ? '#ffc4e6' : (x < 22 ? AD : A));
+    g.part(rect(31, 3, 32, 4), AD);
+    // ペン（手前の手で持つ、大きめ）
+    if (pose === 'stand' || pose === 'talk') {
+      const pen = thick(line(50, 52, 59, 30), 3);
+      g.part(pen, (x, y) => y < 35 ? A : (y > 48 ? '#ffffff' : '#ffe4f3'));
+      g.part(polyTip(49, 52), '#33405e', { outline: false });
+      g.dot(rect(47, 43, 52, 47), C.mBase); g.dot([[52, 43], [52, 47]], C.mDark);
+    }
+    // 胸に小さなパレット色
+    g.dot([[22, 36], [23, 36]], A); g.dot([[22, 37], [23, 37]], C.cyan);
+  },
+  sales(g, role, pose, { A, AD }) {
+    // ネクタイ（胸の甲羅の上）
+    g.part(union(rect(32, 31, 35, 33), P.polygon([[32, 34], [36, 34], [37.5, 46], [34, 50], [30.5, 46]])),
+      (x, y) => y <= 33 ? AD : (x < 33 ? AD : A));
+    g.dot([[33, 37], [34, 39], [35, 41], [33, 43]], '#ff97a3');
+    // 名刺（手前の手で持ち上げる）
+    if (pose === 'stand' || pose === 'talk') {
+      g.part(rect(49, 34, 60, 41), '#ffffff');
+      g.dot(rect(51, 36, 54, 36), A); g.dot(rect(51, 38, 58, 38), '#9aa7c7'); g.dot(rect(51, 40, 56, 40), '#9aa7c7');
+      g.dot(hexPts(57.5, 36.2, 1).map(p => [Math.round(p[0]), Math.round(p[1])]), C.cyan);
+      g.part(ellipse(50, 42, 3.4, 3.4), shade(C.mLight, C.mBase, C.mDark));
+    }
+  },
+  listing(g, role, pose, { A, AD }) {
+    // メガホン（手前の手で前に向ける）
+    if (pose === 'stand' || pose === 'talk') {
+      const cone = P.polygon([[47, 36], [60, 29], [60, 45], [47, 40]]);
+      g.part(cone, (x, y) => x > 57 ? '#c9ffe0' : (y < 36 ? '#a6f5c6' : A));
+      g.part(rect(44, 36, 47, 40), AD);
+      g.part(rect(48, 41, 50, 47), '#33405e');
+      // 音の線
+      g.dot([[62, 32], [63, 31], [62, 42], [63, 43], [62, 37], [63, 37]], A);
+    }
+    // 胸にスマホ（ポケットから少し出る）
+    g.part(roundRect(20, 34, 24, 41, 1), '#33405e');
+    g.dot(rect(21, 35, 23, 39), A); g.dot([[22, 40]], '#9aa7c7');
+  },
+  automation(g, role, pose, { A, AD }) {
+    // 安全ヘルメット
+    g.part(union(ellipse(31.5, 11, 13.5, 8).filter(([x, y]) => y <= 11), rect(14, 11, 49, 12)),
+      (x, y) => y >= 11 ? AD : (x > 33 && y < 7 ? '#ffd2a3' : A));
+    g.dot([[31, 4], [31, 5], [31, 6], [31, 7], [31, 8], [31, 9], [31, 10]], AD);
+    g.part(rect(34, 1, 34, 3), C.mDark, { outline: false });
+    // スパナ（手前の手）
+    if (pose === 'stand' || pose === 'talk') {
+      g.part(thick(line(50, 48, 57, 33), 3), '#b8c4dc');
+      g.part(minus(ellipse(58.5, 30.5, 4, 4), union(rect(57, 26, 60, 30))), '#b8c4dc');
+      g.dot(thick(line(51, 46, 53, 42), 3), A);
+    }
+    // ケーブル（甲羅の横から出て、足元でプラグ）
+    g.part(union(line(19, 50, 13, 54), line(13, 54, 10, 58), line(10, 58, 11, 61)), A, { outline: true });
+    g.part(rect(10, 61, 13, 63), '#33405e');
+    g.dot([[11, 63]], '#b8c4dc');
+  },
+  research(g, role, pose, { A, AD }) {
+    // 丸めがね（顔の画面の上）
+    for (const ex of [29, 38]) g.dot(ellipseRing(ex, 18.2, 3.6, 3.8), A);
+    g.dot([[33, 18], [34, 18]], A);
+    // 虫めがね（手前の手で持ち上げる）
+    if (pose === 'stand' || pose === 'talk') {
+      g.part(thick(line(50, 50, 52, 41), 3), AD);
+      g.part(ellipse(55.5, 34, 7, 7), A);
+      g.part(ellipse(55.5, 34, 5, 5), (x, y) => (x - y > 19 && x - y < 23) ? '#ffffff' : 'rgba(210,240,255,0.55)', { outline: false });
+    }
+    // 胸にメモ
+    g.part(rect(20, 35, 24, 40), '#ffffff'); g.dot([[21, 37], [22, 37], [23, 37], [21, 39], [22, 39]], A);
+  },
+};
+
+function star(g, x, y, c, cd) {
+  g.dot([[x, y - 1], [x - 1, y], [x, y], [x + 1, y], [x, y + 1]], c);
+}
+function polyTip(x, y) { return [[x, y], [x + 1, y], [x, y + 1], [x - 1, y + 2]]; }
+function ellipseRing(cx, cy, rx, ry) {
+  const a = ellipse(cx, cy, rx, ry), b = ellipse(cx, cy, rx - 1, ry - 1); return minus(a, b);
+}
+
+return { ROLES, C, build, laptop };
+
+})(P);
+
+// =====================================================================
+// オフィスの設定：部署・社員・小物
+// =====================================================================
+const { Grid, ellipse, rect, roundRect, polygon, hex, hexPts, line, thick, minus, union, shade, OUT } = P;
+const { C, build, laptop } = CH;
+
+const DEPTS = {
+  ceo:  { name: '社長室',           color: '#ffcc4d', dark: '#c98a12' },
+  eigyo:{ name: '営業・発信部',     color: '#ff5468', dark: '#b51f36' },
+  design:{name: 'デザイン部',       color: '#ff8fd0', dark: '#c9479a' },
+  shu:  { name: '集客部',           color: '#b9a6ff', dark: '#6f58d6' },
+  ops:  { name: '運用部',           color: '#ff9a3d', dark: '#b85b0e' },
+  hp:   { name: 'ホームページ制作部', color: '#4fb0ff', dark: '#1f6fc0' },
+  neo:  { name: '新規事業部',       color: '#5ee38f', dark: '#1f9a54' },
+};
+// base = 元の6体の小物（頭・手）をそのまま使う係 / prop = 係の小物（机の上・手）
+const STAFF = [
+  { id: 'ceo',     dept: 'ceo',   name: '社長',       sub: 'パソコンのClaude', prop: 'ceo' },
+  { id: 'leader',  dept: 'ceo',   name: 'リーダー',   sub: 'スマホ窓口', base: 'leader', prop: 'phone' },
+  { id: 'sales',   dept: 'eigyo', name: '営業担当',   base: 'sales', prop: 'card' },
+  { id: 'listing', dept: 'eigyo', name: '出品発信担当', base: 'listing', prop: 'mega' },
+  { id: 'd_chief', dept: 'design',name: 'デザイン主任', base: 'design', prop: 'pen' },
+  { id: 'd_res',   dept: 'design',name: 'デザイン調査係', prop: 'lens' },
+  { id: 'd_make',  dept: 'design',name: 'デザイン制作係', prop: 'pen' },
+  { id: 'd_check', dept: 'design',name: 'デザイン検査係', prop: 'check' },
+  { id: 's_info',  dept: 'shu',   name: '情報収集係', base: 'research', prop: 'lens' },
+  { id: 's_res',   dept: 'shu',   name: '集客調査係', prop: 'lens' },
+  { id: 's_impl',  dept: 'shu',   name: '集客実装係', prop: 'wrench' },
+  { id: 'o_chief', dept: 'ops',   name: '運用主任',   prop: 'band' },
+  { id: 'o_watch', dept: 'ops',   name: '見張り係',   prop: 'binoc' },
+  { id: 'o_sys',   dept: 'ops',   name: '仕組み担当', base: 'automation', prop: 'wrench' },
+  { id: 'h_res',   dept: 'hp',    name: '調査係',     prop: 'lens' },
+  { id: 'h_make',  dept: 'hp',    name: '制作係',     prop: 'pen' },
+  { id: 'h_check', dept: 'hp',    name: '検査係',     prop: 'check' },
+  { id: 'n_res',   dept: 'neo',   name: '調査係',     prop: 'lens' },
+  { id: 'n_plan',  dept: 'neo',   name: '企画係',     prop: 'bulb' },
+  { id: 'n_no',    dept: 'neo',   name: '否定係',     prop: 'nope' },
+  { id: 'n_make',  dept: 'neo',   name: '制作係',     prop: 'pen' },
+  { id: 'n_mkt',   dept: 'neo',   name: 'マーケティング係', prop: 'mega' },
+  { id: 'n_ana',   dept: 'neo',   name: '分析改善係', prop: 'graph' },
+  { id: 'n_scout', dept: 'neo',   name: '情報収集・分析係', prop: 'globe' },
+];
+const MACHINES = [
+  { id: 'm_insta', name: 'Instagram<br>自動投稿', color: '#ff8fd0', icon: 'photo' },
+  { id: 'm_line',  name: 'LINE通知',            color: '#5ee38f', icon: 'chat' },
+  { id: 'm_folder',name: '新刊フォルダ<br>の見張り', color: '#3CD6F0', icon: 'folder' },
+];
+const ISLAND_ORDER = ['ceo', 'eigyo', 'design', 'shu', 'ops', 'hp', 'neo', 'room', 'mach'];
+
+// ---------------------------------------------------------------------
+// 係の小物（ドット絵）。desk＝机の右はし / hand＝立っているとき手に持つ
+// ---------------------------------------------------------------------
+const LIGHT = '#ffffff', GRAY = '#33405e', SILVER = '#b8c4dc', PAPER = '#f4f7ff', LINEC = '#9aa7c7';
+const DESK = {
+  lens(g, A, AD) { g.part(thick(line(51, 56, 54, 52), 2), AD); g.part(ellipse(56.5, 48.5, 3.6, 3.6), A); g.part(ellipse(56.5, 48.5, 2.2, 2.2), 'rgba(220,245,255,.85)', { outline: false }); },
+  pen(g, A, AD) { g.part(thick(line(53, 50, 52, 43), 1), LIGHT); g.part(thick(line(56, 50, 58, 44), 1), A); g.part(rect(51, 50, 58, 56), AD); g.dot(rect(52, 51, 57, 51), A); },
+  check(g, A) { g.part(rect(50, 44, 59, 56), '#c9a26a'); g.part(rect(51, 46, 58, 56), PAPER, { outline: false }); g.dot(rect(53, 44, 56, 45), GRAY);
+    for (const y of [48, 51, 54]) { g.dot([[52, y], [53, y + 1], [54, y]], '#1fb36a'); g.dot(rect(55, y, 57, y), LINEC); } },
+  bulb(g, A) { g.part(ellipse(55, 48, 4.2, 4.4), (x, y) => (x > 55 && y < 47) ? LIGHT : '#ffe86b'); g.part(rect(53, 52, 57, 55), SILVER); g.dot([[54, 53], [56, 54]], GRAY); },
+  nope(g) { g.part(rect(54, 52, 55, 56), '#8a6a3c'); g.part(rect(49, 43, 60, 52), LIGHT); g.dot(union(thick(line(51, 45, 57, 50), 2), thick(line(57, 45, 51, 50), 2)), '#e8344e'); },
+  mega(g, A, AD) { g.part(polygon([[50, 50], [58, 45], [58, 56], [50, 53]]), A); g.part(rect(49, 50, 50, 53), AD); g.dot([[60, 47], [60, 51], [60, 54]], A); },
+  graph(g, A) { g.part(rect(50, 44, 60, 55), '#0f1f4a'); g.dot(rect(52, 51, 53, 54), A); g.dot(rect(55, 48, 56, 54), A); g.dot(rect(58, 46, 59, 54), C.cyan); g.dot([[52, 49], [54, 47], [56, 46], [57, 45]], '#ffffff'); g.part(rect(54, 56, 56, 56), GRAY, { outline: false }); },
+  binoc(g) { g.part(ellipse(52.5, 52, 2.8, 3.2), GRAY); g.part(ellipse(57.5, 52, 2.8, 3.2), GRAY); g.dot([[52, 51], [57, 51]], C.cyan); g.dot(rect(54, 50, 55, 51), GRAY); },
+  globe(g, A) { g.part(rect(54, 54, 56, 56), GRAY); g.part(ellipse(55, 49, 4.6, 4.6), C.cyan); g.dot([[53, 46], [54, 46], [53, 47], [52, 48], [56, 50], [57, 50], [57, 51], [56, 52]], '#1f9a54'); g.dot(rect(51, 49, 59, 49).filter(([x]) => x % 2), 'rgba(255,255,255,.6)'); },
+  wrench(g, A) { g.part(thick(line(50, 55, 56, 50), 2), SILVER); g.part(minus(ellipse(58, 48.5, 3, 3), rect(58, 46, 61, 48)), SILVER); g.dot([[51, 54], [52, 53]], A); },
+  card(g, A) { g.part(rect(50, 50, 59, 56), LIGHT); g.dot(rect(51, 51, 54, 51), A); g.dot(rect(51, 53, 58, 53), LINEC); g.dot(rect(51, 55, 56, 55), LINEC); },
+  phone(g, A) { g.part(roundRect(52, 44, 57, 55, 1), GRAY); g.dot(rect(53, 45, 56, 53), C.cyan); g.dot([[54, 47], [55, 47], [54, 49], [55, 49], [54, 51]], '#ffffff'); g.dot([[54, 54], [55, 54]], LINEC); },
+  band(g, A) { g.part(rect(50, 45, 59, 56), LIGHT); g.dot(rect(50, 45, 59, 47), A); for (let y = 49; y <= 55; y += 2) for (let x = 51; x <= 58; x += 2) g.dot([[x, y]], LINEC); g.dot([[53, 51], [55, 53]], A); },
+  ceo(g, A, AD) { g.part(rect(49, 51, 60, 56), AD); g.dot(rect(50, 52, 59, 52), '#ffe39a'); g.dot(rect(51, 54, 58, 54), '#fff4cf'); },
+};
+const HAND = {
+  lens(g, A, AD) { g.part(thick(line(50, 50, 52, 41), 3), AD); g.part(ellipse(55.5, 34, 6.5, 6.5), A); g.part(ellipse(55.5, 34, 4.5, 4.5), (x, y) => (x - y > 19 && x - y < 23) ? '#ffffff' : 'rgba(210,240,255,0.55)', { outline: false }); },
+  pen(g, A) { g.part(thick(line(50, 52, 59, 30), 3), (x, y) => y < 35 ? A : (y > 48 ? '#ffffff' : '#ffe4f3')); g.part([[49, 52], [50, 52], [49, 53], [48, 54]], GRAY, { outline: false }); g.dot(rect(47, 43, 52, 47), C.mBase); },
+  check(g, A) { g.part(rect(47, 32, 60, 49), '#c9a26a'); g.part(rect(48, 34, 59, 49), PAPER, { outline: false }); g.dot(rect(51, 32, 56, 33), GRAY);
+    for (const y of [37, 41, 45]) { g.dot([[50, y], [51, y + 1], [52, y], [53, y - 1]], '#1fb36a'); g.dot(rect(55, y, 58, y), LINEC); } },
+  bulb(g) { g.part(ellipse(55, 31, 5, 5.4), (x, y) => (x > 55 && y < 30) ? LIGHT : '#ffe86b'); g.part(rect(53, 36, 57, 40), SILVER); g.dot([[49, 25], [61, 25], [55, 23], [48, 31], [62, 31]], '#ffe86b'); },
+  nope(g) { g.part(rect(51, 37, 52, 50), '#8a6a3c'); g.part(rect(45, 24, 59, 37), LIGHT); g.dot(union(thick(line(48, 27, 55, 33), 2), thick(line(55, 27, 48, 33), 2)), '#e8344e'); },
+  mega(g, A, AD) { g.part(polygon([[47, 36], [60, 29], [60, 45], [47, 40]]), (x, y) => x > 57 ? '#ffe0e6' : A); g.part(rect(44, 36, 47, 40), AD); g.part(rect(48, 41, 50, 47), GRAY); g.dot([[62, 32], [63, 31], [62, 42], [63, 43], [62, 37], [63, 37]], A); },
+  graph(g, A) { g.part(rect(46, 30, 61, 45), '#0f1f4a'); g.dot(rect(48, 40, 50, 43), A); g.dot(rect(52, 37, 54, 43), A); g.dot(rect(56, 33, 58, 43), C.cyan); g.dot([[48, 37], [50, 35], [52, 34], [54, 32], [55, 31]], '#ffffff'); },
+  binoc(g) { g.part(ellipse(28.5, 18.5, 4.2, 4.4), GRAY); g.part(ellipse(38.5, 18.5, 4.2, 4.4), GRAY); g.dot(ellipse(28.5, 18.5, 2.2, 2.2), '#2bb4cf'); g.dot(ellipse(38.5, 18.5, 2.2, 2.2), '#2bb4cf'); g.dot([[27, 17], [37, 17]], '#ffffff'); g.dot(rect(33, 17, 34, 19), GRAY); },
+  globe(g) { g.part(ellipse(55, 35, 6, 6), C.cyan); g.dot([[52, 31], [53, 31], [52, 32], [51, 33], [53, 33], [57, 36], [58, 36], [58, 37], [57, 38], [56, 38]], '#1f9a54'); g.dot([[57, 31], [58, 32]], '#ffffff'); },
+  wrench(g, A) { g.part(thick(line(50, 48, 57, 33), 3), SILVER); g.part(minus(ellipse(58.5, 30.5, 4, 4), rect(57, 26, 60, 30)), SILVER); g.dot(thick(line(51, 46, 53, 42), 3), A); },
+};
+// 頭や体につくもの（いつも描く）
+function wear(g, s, pose, A, AD) {
+  const atDesk = pose === 'type' || pose === 'work' || pose === 'stretch' || pose === 'read';
+  if (s.prop === 'ceo') {
+    // 王冠っぽいアンテナ（いつものアンテナを消して描き直す）
+    for (let y = 0; y <= 6; y++) for (let x = 27; x <= 42; x++) g.px[y * 64 + x] = null;
+    g.part(polygon([[28.5, 7.6], [28.5, 1.2], [31.6, 4.2], [34.5, 0.2], [37.4, 4.2], [40.5, 1.2], [40.5, 7.6]]), (x, y) => y >= 6 ? AD : (x > 35 && y < 4 ? '#fff3c4' : A));
+    g.dot([[34, 5], [35, 5], [30, 6], [39, 6]], '#ff5468');
+    // ネクタイ
+    g.part(union(rect(32, 31, 35, 33), polygon([[32, 34], [36, 34], [37.5, 46], [34, 50], [30.5, 46]])), (x, y) => y <= 33 ? '#0f1f4a' : (x < 33 ? '#14245a' : '#2a3f8a'));
+    g.dot([[33, 37], [35, 40], [33, 43]], A);
+  }
+  if (s.prop === 'band') { // 腕章（奥の腕）
+    if (atDesk) { if (pose !== 'stretch') g.dot(rect(15, 50, 19, 51), A); else g.dot(rect(13, 37, 18, 38), A); }
+    else g.dot(rect(9, 45, 16, 46), A);
+  }
+}
+// pose: type/work/stretch/read（席）・stand/carry/talk（立ち）
+function drawStaff(s, pose, opt = {}) {
+  const d = DEPTS[s.dept], A = d.color, AD = d.dark;
+  const role = { id: s.base || 'none', accent: A, accentDark: AD };
+  const basePose = pose === 'read' ? 'type' : pose;
+  const g = build(role, basePose, { ...opt, noBubble: true });
+  wear(g, s, pose, A, AD);
+  const atDesk = basePose === 'type' || basePose === 'work' || basePose === 'stretch';
+  if (atDesk) DESK[s.prop](g, A, AD);
+  if (pose === 'read') { // 本を開いて読む
+    g.part(polygon([[19, 45], [33, 47.5], [33, 57], [19, 55]]), (x) => x < 22 ? '#d9e4ff' : PAPER);
+    g.part(polygon([[33, 47.5], [47, 45], [47, 55], [33, 57]]), PAPER);
+    for (const y of [49, 51, 53]) { g.dot(line(22, y - 1, 30, y), LINEC); g.dot(line(36, y, 44, y - 1), LINEC); }
+    g.dot(rect(33, 47, 33, 57), A);
+  }
+  if (pose === 'stand' && !s.base && HAND[s.prop]) HAND[s.prop](g, A, AD);
+  if (pose === 'carry') { // 書類を持つ
+    g.part(rect(43, 35, 56, 50), PAPER); g.dot(rect(45, 37, 50, 37), A);
+    for (const y of [40, 43, 46]) g.dot(rect(45, y, 54, y), LINEC);
+    g.part(ellipse(47, 49, 3.2, 3), shade(C.mLight, C.mBase, C.mDark));
+  }
+  return g;
+}
+function drawEmptyDesk() {
+  const g = new Grid();
+  g.part(roundRect(21, 33, 45, 52, 5), (x) => x < 26 ? '#1d2f66' : '#2a428a'); // いすの背もたれ
+  g.dot(rect(25, 37, 41, 37), '#3a5aa8');
+  laptop(g, false);
+  return g;
+}
+function drawMachine(m, frame) {
+  const g = new Grid(), A = m.color;
+  g.part(roundRect(12, 4, 51, 61, 3), (x, y) => x < 17 ? '#16255a' : (y < 9 ? '#3a5aa8' : '#22397e'));
+  g.part(roundRect(17, 10, 46, 28, 2), '#061026', { outColor: '#0b1a3e' });   // 画面
+  // 画面のアイコン（会社のロゴではなく、ふつうの記号）
+  if (m.icon === 'photo') { g.part(rect(24, 13, 39, 25), PAPER); g.dot(polygon([[25, 25], [30, 18], [34, 23], [36, 20], [39, 25]]), A); g.dot(ellipse(35.5, 16.5, 1.6, 1.6), '#ffcc4d'); }
+  if (m.icon === 'chat') { g.part(roundRect(22, 13, 41, 23, 4), PAPER); g.part([[26, 24], [27, 24], [26, 25]], PAPER, { outline: false }); g.dot([[27, 18], [28, 18], [31, 18], [32, 18], [35, 18], [36, 18]], A); }
+  if (m.icon === 'folder') { g.part(union(rect(23, 15, 40, 25), rect(23, 13, 29, 15)), '#ffcc4d'); g.dot(rect(24, 17, 39, 17), '#fff3c4'); if (frame) g.dot(rect(30, 20, 33, 22), A); }
+  // ランプ（点滅）とスリット
+  const on = frame % 2 === 0;
+  const lamps = [[19, 34, on ? A : '#2a3560'], [25, 34, on ? '#2a3560' : '#5ee38f'], [31, 34, on ? '#ffcc4d' : '#2a3560'], [37, 34, '#5ee38f'], [43, 34, on ? '#2a3560' : A]];
+  for (const [x, y, c] of lamps) g.part(rect(x, y, x + 2, y + 2), c, { outColor: '#0b1a3e' });
+  for (let y = 41; y <= 57; y += 4) g.dot(rect(18, y, 45, y), '#132457');
+  g.dot(rect(18, 41 + ((frame * 4) % 20), 30, 41 + ((frame * 4) % 20)), A);
+  return g;
+}
+function drawShelf() {
+  const g = new Grid();
+  g.part(rect(8, 4, 55, 61), (x) => x < 12 ? '#5a3b22' : '#7a5232');
+  const cols = ['#ff8fd0', '#3CD6F0', '#ffcc4d', '#b9a6ff', '#5ee38f', '#ff9a3d', '#4fb0ff', '#ff5468'];
+  let k = 0;
+  for (const y0 of [7, 21, 35, 49]) {
+    g.dot(rect(11, y0, 52, y0 + 11), '#3b2414');
+    let x = 12;
+    while (x < 51) { const w = 2 + (k % 3 === 0 ? 2 : 1), h = 8 + (k % 4 === 1 ? 2 : (k % 5 === 2 ? -1 : 1)); g.dot(rect(x, y0 + 11 - h, Math.min(x + w - 1, 51), y0 + 10), cols[k % cols.length]); g.dot([[x, y0 + 11 - h + 1]], 'rgba(255,255,255,.5)'); x += w + 1; k++; }
+    g.dot(rect(11, y0 + 11, 52, y0 + 12), '#a8743f');
+  }
+  return g;
+}
+function drawWindow(frame) {
+  const g = new Grid();
+  g.part(rect(6, 6, 57, 50), '#c3d2ec');
+  g.part(rect(9, 9, 54, 47), (x, y) => y < 22 ? '#1d4fa8' : (y < 36 ? '#1a3f8e' : '#14306e'), { outColor: '#8aa0c8' });
+  // インターネットのつながり（六角形の点と線）
+  const nodes = [[16, 16], [30, 13], [45, 18], [22, 30], [38, 28], [50, 36], [14, 41], [31, 42]];
+  const links = [[0, 1], [1, 2], [0, 3], [1, 4], [2, 4], [3, 4], [4, 5], [3, 6], [3, 7], [4, 7], [5, 7]];
+  for (const [a, b] of links) g.dot(line(...nodes[a], ...nodes[b]), 'rgba(60,214,240,.55)');
+  nodes.forEach(([x, y], i) => g.dot(rect(x - 1, y - 1, x + 1, y + 1), (i + frame) % 3 === 0 ? '#ffffff' : '#3CD6F0'));
+  g.dot(rect(31, 9, 32, 47), '#c3d2ec'); g.dot(rect(9, 27, 54, 28), '#c3d2ec');
+  g.part(rect(4, 51, 59, 54), '#8aa0c8');
+  return g;
+}
+
+// =====================================================================
+// 画面づくり
+// =====================================================================
+const $ = (q, el = document) => el.querySelector(q);
+const floor = $('#floor'), actorsLayer = $('#actors');
+const FRAMES = new Map();
+function toCanvas(g) {
+  const c = document.createElement('canvas'); c.width = 64; c.height = 64;
+  const x = c.getContext('2d');
+  for (let i = 0; i < 4096; i++) { const col = g.px[i]; if (col) { x.fillStyle = col; x.fillRect(i % 64, (i / 64) | 0, 1, 1); } }
+  return c;
+}
+function frame(s, key) { // key: 'type1' 'work2' 'stand1' 'carry2' 'talk' 'stretch' 'read' ...
+  const k = s.id + '|' + key;
+  if (!FRAMES.has(k)) {
+    const m = key.match(/^([a-z]+)(\d?)$/), pose = m[1], n = +m[2] || 0;
+    const opt = (pose === 'type' || pose === 'work') ? { tap: n } : { step: n };
+    FRAMES.set(k, toCanvas(drawStaff(s, pose, opt)));
+  }
+  return FRAMES.get(k);
+}
+function paint(canvas, src) { const x = canvas.getContext('2d'); x.clearRect(0, 0, 64, 64); x.drawImage(src, 0, 0); }
+function mkCanvas() { const c = document.createElement('canvas'); c.width = 64; c.height = 64; return c; }
+
+const SLOTS = {};   // id → 机のcanvas（場所の目印）
+const PLACES = {};  // 'shelf' 'window' 'm_insta' … → 要素
+function buildFloor() {
+  const groups = {};
+  for (const s of STAFF) (groups[s.dept] ||= []).push(s);
+  for (const key of ISLAND_ORDER) {
+    const isl = document.createElement('section'); isl.className = 'island';
+    if (key === 'room') {
+      isl.classList.add('room'); isl.style.setProperty('--dc', '#8aa0c8'); isl.style.setProperty('--cols', 2);
+      isl.innerHTML = `<div class="lbl"><i></i>資料コーナー</div><div class="desks"></div>`;
+      for (const [id, name, g] of [['shelf', '本棚', drawShelf()], ['window', 'インターネットの窓', drawWindow(0)]]) {
+        const sl = document.createElement('div'); sl.className = 'slot';
+        const c = mkCanvas(); paint(c, toCanvas(g)); sl.append(c);
+        sl.insertAdjacentHTML('beforeend', `<div class="tag">${name}</div>`);
+        $('.desks', isl).append(sl); PLACES[id] = c;
+      }
+    } else if (key === 'mach') {
+      isl.classList.add('mach'); isl.style.setProperty('--dc', '#3CD6F0'); isl.style.setProperty('--cols', 3);
+      isl.innerHTML = `<div class="lbl"><i></i>機械室<em>24時間 自動で動く仕組み</em></div><div class="desks" style="grid-template-columns:repeat(3,calc(var(--cell) + 26px))"></div>`;
+      for (const m of MACHINES) {
+        const sl = document.createElement('div'); sl.className = 'slot';
+        const c = mkCanvas(); sl.append(c); m.canvas = c; m.frames = [0, 1, 2, 3].map(f => toCanvas(drawMachine(m, f)));
+        paint(c, m.frames[0]);
+        sl.insertAdjacentHTML('beforeend', `<div class="tag" style="--dc:${m.color}">${m.name}</div>`);
+        $('.desks', isl).append(sl); PLACES[m.id] = c;
+      }
+    } else {
+      const d = DEPTS[key], list = groups[key];
+      isl.style.setProperty('--dc', d.color); isl.style.setProperty('--cols', Math.min(list.length, 4));
+      isl.innerHTML = `<div class="lbl"><i></i>${d.name}<em>${list.length}人</em></div><div class="desks"></div>`;
+      const empty = toCanvas(drawEmptyDesk());
+      for (const s of list) {
+        const sl = document.createElement('div'); sl.className = 'slot';
+        const c = mkCanvas(); paint(c, empty); sl.append(c);
+        sl.insertAdjacentHTML('beforeend', `<div class="tag">${s.name}${s.sub ? `<small>${s.sub}</small>` : ''}</div>`);
+        $('.desks', isl).append(sl); SLOTS[s.id] = c;
+      }
+    }
+    floor.append(isl);
+  }
+  floor.append(actorsLayer); // いちばん上に
+  $('#nStaff').textContent = STAFF.length;
+  $('#nMach').textContent = MACHINES.length;
+}
+
+// ---- キャラ ----
+const A = {}; // id → actor
+function makeActors() {
+  for (const s of STAFF) {
+    const el = document.createElement('div'); el.className = 'actor'; el.style.setProperty('--dc', DEPTS[s.dept].color);
+    el.innerHTML = `<div class="ring"></div><div class="glow"></div>`;
+    const c = mkCanvas(); el.append(c);
+    const bub = document.createElement('div'); bub.className = 'bub'; el.append(bub);
+    actorsLayer.append(el);
+    A[s.id] = { s, el, c, bub, x: 0, y: 0, mode: 'seat', working: false, chip: '', sayText: '', talking: false, carrying: false,
+      idle: 'type', idleUntil: 0, phase: Math.random() * 3000, locks: 0, target: null, onArrive: null, last: '' };
+  }
+}
+let geo = { fx: 0, fy: 0, fw: 0, size: 64 };
+const posOf = (el) => { const r = el.getBoundingClientRect(); return { x: r.left - geo.fx, y: r.top - geo.fy, w: r.width, h: r.height }; };
+function measure() {
+  const r = floor.getBoundingClientRect(); geo.fx = r.left; geo.fy = r.top; geo.fw = r.width;
+  geo.size = SLOTS.ceo.getBoundingClientRect().width;
+}
+const home = (id) => posOf(SLOTS[id]);
+function visitPoint(targetEl, side) { // 相手の机の横に立つ
+  const p = posOf(targetEl), s = geo.size;
+  let x = p.x + s * 0.66 * side, flip = side > 0;
+  if (x + s > geo.fw - 2) { x = p.x - s * 0.66; flip = false; }
+  if (x < 2) { x = p.x + s * 0.66; flip = true; }
+  return { x, y: p.y + s * 0.1, flip };
+}
+
+// ---- 吹き出し ----
+function showBubble(a) {
+  const b = a.bub;
+  let text = '', cls = '';
+  if (a.sayText) { text = a.sayText; cls = 'say' + (a.sayNo ? ' no' : ''); }
+  else if (a.chip) { text = a.chip; cls = 'chip'; }
+  if (!text) { b.classList.remove('on'); return; }
+  if (b.dataset.t !== text || b.dataset.c !== cls) {
+    b.dataset.t = text; b.dataset.c = cls; b.className = 'bub ' + cls; b.textContent = text; b.style.setProperty('--dx', '0px');
+  }
+  b.classList.add('on');
+  fitBubble(a);
+}
+function fitBubble(a) {
+  const b = a.bub; if (!b.classList.contains('on')) return;
+  const r = b.getBoundingClientRect(), fl = geo.fx + 4, fr = geo.fx + geo.fw - 4;
+  const cur = parseFloat(b.style.getPropertyValue('--dx')) || 0;
+  let dx = cur;
+  if (r.left < fl) dx = cur + (fl - r.left);
+  else if (r.right > fr) dx = cur - (r.right - fr);
+  if (Math.abs(dx - cur) > .5) b.style.setProperty('--dx', dx + 'px');
+}
+
+// ---- 毎フレームの更新 ----
+let lastT = performance.now();
+function tick(t) {
+  const dt = Math.min(64, t - lastT) / 1000; lastT = t;
+  measure(); // 床の位置（スクロール・画面幅の変化に追従）
+  const speed = geo.size * 2.3;
+  for (const id in A) {
+    const a = A[id];
+    // 位置
+    if (a.mode === 'seat') { const h = home(id); a.x = h.x; a.y = h.y; }
+    else if (a.mode === 'walk') {
+      const tg = a.target(); const dx = tg.x - a.x, dy = tg.y - a.y, d = Math.hypot(dx, dy), step = speed * dt;
+      if (Math.abs(dx) > 1) a.el.classList.toggle('flip', dx < 0);
+      if (d <= step) { a.x = tg.x; a.y = tg.y; const f = a.onArrive; a.onArrive = null; f && f(tg); }
+      else { a.x += dx / d * step; a.y += dy / d * step; }
+    } else if (a.mode === 'stand' && a.target) { const tg = a.target(); a.x = tg.x; a.y = tg.y; }
+    a.el.style.transform = `translate3d(${a.x.toFixed(1)}px,${a.y.toFixed(1)}px,0)`;
+    // コマ
+    let key;
+    const ph = t + a.phase;
+    if (a.mode === 'seat') {
+      if (a.working) key = 'work' + (Math.floor(ph / 200) % 2 + 1);
+      else {
+        if (a.idle !== 'type' && t > a.idleUntil) a.idle = 'type';
+        if (a.idle === 'type') key = (Math.floor(ph / 2600) % 3 === 2) ? 'type1' : 'type' + (Math.floor(ph / 260) % 2 + 1);
+        else key = a.idle;
+      }
+    } else if (a.mode === 'walk') key = (a.carrying ? 'carry' : 'stand') + (Math.floor(ph / 180) % 2 + 1);
+    else key = a.talking ? 'talk' : (a.carrying ? 'carry' : 'stand');
+    if (key !== a.last) { paint(a.c, frame(a.s, key)); a.last = key; }
+    a.el.classList.toggle('working', a.mode === 'seat' && a.working);
+    a.el.classList.toggle('walking', a.mode === 'walk');
+    a.el.classList.toggle('away', a.mode !== 'seat');
+    if (a.mode !== 'seat') fitBubble(a);
+  }
+  // 機械のランプ
+  const mf = Math.floor(t / 450);
+  for (const m of MACHINES) { const f = (mf + MACHINES.indexOf(m)) % 4; if (m.f !== f) { paint(m.canvas, m.frames[f]); m.f = f; } }
+  const wf = Math.floor(t / 700) % 3; if (wf !== winF) { paint(PLACES.window, winFrames[wf]); winF = wf; }
+  requestAnimationFrame(tick);
+}
+let winF = -1, winFrames = [];
+
+// ---- ひまなときのしぐさ（伸び・本を読む） ----
+function idleLoop() {
+  const now = performance.now();
+  const free = Object.values(A).filter(a => a.mode === 'seat' && !a.working && a.locks === 0 && a.idle === 'type');
+  if (free.length) {
+    const a = free[Math.floor(Math.random() * free.length)];
+    if (Math.random() < .45) { a.idle = 'stretch'; a.idleUntil = now + 1600; }
+    else { a.idle = 'read'; a.idleUntil = now + 4200; }
+  }
+  setTimeout(idleLoop, 1400 + Math.random() * 1600);
+}
+
+// =====================================================================
+// 物語を動かす道具
+// =====================================================================
+const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+const LOCK = {};
+async function lock(...ids) { // 同じ社員を2つの話で同時に動かさない
+  ids = [...new Set(ids)].sort();
+  for (const id of ids) { while (LOCK[id]) await LOCK[id]; let rel; LOCK[id] = new Promise(r => rel = r); LOCK[id].rel = rel; A[id].locks++; }
+  return () => { for (const id of ids) { const p = LOCK[id]; LOCK[id] = null; A[id].locks--; p.rel(); } };
+}
+let focusIds = [];
+const msgEl = $('#msg');
+function log(text, ...ids) {
+  msgEl.classList.add('fade');
+  setTimeout(() => { msgEl.textContent = text; msgEl.classList.remove('fade'); }, 220);
+  for (const id of focusIds) A[id] && A[id].el.classList.remove('focus');
+  focusIds = ids; for (const id of ids) A[id] && A[id].el.classList.add('focus');
+}
+$('#ticker').addEventListener('click', () => { const a = A[focusIds[0]]; if (a) a.el.scrollIntoView({ behavior: 'smooth', block: 'center' }); });
+
+function walk(id, targetFn) {
+  const a = A[id];
+  return new Promise(res => {
+    a.mode = 'walk'; a.target = targetFn; a.idle = 'type';
+    a.onArrive = (tg) => { a.mode = 'stand'; a.el.classList.toggle('flip', !!tg.flip); res(); };
+  });
+}
+const go = (id, to, side = 1) => walk(id, () => visitPoint(SLOTS[to] || PLACES[to], side));
+const goPlace = (id, place) => walk(id, () => { const p = posOf(PLACES[place]), s = geo.size; return { x: Math.min(p.x + s * 0.25, geo.fw - s - 2), y: p.y + s * 0.42, flip: false }; });
+async function back(id) {
+  const a = A[id]; a.talking = false; a.sayText = ''; showBubble(a);
+  await walk(id, () => home(id));
+  a.mode = 'seat'; a.target = null; a.el.classList.remove('flip'); a.carrying = false; showBubble(a);
+}
+async function say(id, text, ms = 2200, no = false) {
+  const a = A[id]; a.sayText = text; a.sayNo = no; a.talking = a.mode !== 'seat'; showBubble(a);
+  await sleep(ms);
+  a.sayText = ''; a.talking = false; showBubble(a);
+}
+function work(id, label) { const a = A[id]; a.working = true; a.chip = label; a.idle = 'type'; showBubble(a); }
+function rest(id) { const a = A[id]; a.working = false; a.chip = ''; showBubble(a); }
+function carry(id, on = true) { A[id].carrying = on; }
+function pop(el, text, cls = '') {
+  const p = posOf(el), d = document.createElement('div');
+  d.className = 'pop ' + cls; d.textContent = text;
+  d.style.left = Math.max(60, Math.min(geo.fw - 60, p.x + p.w / 2)) + 'px'; d.style.top = (p.y - 12) + 'px';
+  actorsLayer.append(d); setTimeout(() => d.remove(), 2700);
+}
+
+// =====================================================================
+// 今日の仕事（ループ再生）。お客さまの名前は出さない。
+// =====================================================================
+async function storyMap() { // メイン：Googleマップのカバー写真
+  let r = await lock('leader', 'ceo');
+  pop(SLOTS.leader, 'オーナーから依頼が届きました', 'ph');
+  log('オーナー → リーダー：Googleマップを整えたい（スマホで依頼）', 'leader');
+  await say('leader', 'おまかせください！', 2200);
+  r();
+  r = await lock('leader', 'd_chief');
+  await go('leader', 'd_chief');
+  log('リーダー → デザイン主任：Googleマップのカバー写真をお願い', 'leader', 'd_chief');
+  await say('leader', 'カバー写真をお願いします', 2400);
+  await say('d_chief', 'はい！スマホでの見え方も確認します', 2400);
+  await back('leader');
+  r();
+  r = await lock('d_chief', 'd_res');
+  await say('d_chief', '調査係さん、表示サイズを調べて', 2000);
+  log('デザイン調査係：スマホで写真がどう切り取られるか調べる', 'd_res');
+  await goPlace('d_res', 'window');
+  await say('d_res', 'スマホでは真ん中だけ表示…', 2400);
+  await back('d_res');
+  await go('d_res', 'd_chief', -1);
+  await say('d_res', '文字は中央800pxに収めましょう', 2400);
+  await back('d_res');
+  r();
+  r = await lock('d_make', 'd_check');
+  log('デザイン制作係：カバー写真（1920×1080）を作成中', 'd_make');
+  work('d_make', 'カバー写真を作成中');
+  await sleep(5200);
+  rest('d_make'); carry('d_make');
+  await go('d_make', 'd_check');
+  log('デザイン制作係 → デザイン検査係：できました、確認お願いします', 'd_make', 'd_check');
+  await say('d_make', '確認お願いします', 1800);
+  await back('d_make');
+  work('d_check', '文字のはみ出しチェック');
+  await sleep(3200);
+  rest('d_check');
+  log('デザイン検査係：文字の切れ・誤字なし。合格', 'd_check');
+  await say('d_check', '合格！はみ出しなし', 2200);
+  r();
+  r = await lock('d_chief', 'leader');
+  carry('d_chief');
+  await go('d_chief', 'leader');
+  log('デザイン主任 → リーダー：Googleマップのカバー写真を納品', 'd_chief', 'leader');
+  await say('d_chief', 'カバー写真、できました', 2200);
+  await say('leader', 'ありがとう！確認します', 2200);
+  await back('d_chief');
+  r();
+  r = await lock('leader', 'ceo');
+  await go('leader', 'ceo', -1);
+  log('リーダー → 社長：カバー写真の確認をお願いします', 'leader', 'ceo');
+  await say('ceo', 'いいね。オーナーに見てもらおう', 2400);
+  await back('leader');
+  log('リーダー → オーナー：カバー写真を報告（公開はオーナーが決めます）', 'leader');
+  pop(SLOTS.leader, 'オーナーに報告しました', 'ph');
+  await sleep(2600);
+  r();
+}
+async function storySales() { // 営業：不動産会社さまの請求書・提案書
+  await sleep(9000);
+  let r = await lock('sales');
+  log('営業担当：不動産会社さまの請求書・提案書を作成中', 'sales');
+  work('sales', '提案書を作成中');
+  r();
+  await sleep(9000);
+  r = await lock('ceo', 'sales');
+  await go('ceo', 'sales');
+  log('社長 → 営業担当：金額は決まりどおりか確認してね', 'ceo', 'sales');
+  await say('ceo', '金額の確認、お願いね', 2200);
+  await say('sales', '決まりどおりです！', 2000);
+  await back('ceo');
+  rest('sales');
+  r();
+  await sleep(8000);
+  r = await lock('sales', 'leader');
+  carry('sales');
+  await go('sales', 'leader');
+  log('営業担当 → リーダー：請求書・提案書の下書きを納品（送るのはオーナーの確認後）', 'sales', 'leader');
+  await say('sales', '請求書と提案書の下書きです', 2400);
+  await say('leader', 'オーナーに確認してもらいます', 2200);
+  await back('sales');
+  r();
+}
+async function storyResearch() { // 集客：鹿児島の古いホームページ81件
+  await sleep(15000);
+  let r = await lock('s_info');
+  log('情報収集係：鹿児島の古いホームページを調べに行く', 's_info');
+  await goPlace('s_info', 'shelf');
+  await say('s_info', '地域の会社を確認…', 2000);
+  await goPlace('s_info', 'window');
+  await say('s_info', '古いホームページ、81件', 2400);
+  await back('s_info');
+  log('情報収集係：鹿児島の古いホームページ81件をリストに', 's_info');
+  work('s_info', '81件をリスト化');
+  await sleep(6000);
+  rest('s_info');
+  r();
+  r = await lock('s_info', 's_res');
+  carry('s_info');
+  await go('s_info', 's_res');
+  await say('s_info', '81件まとまりました', 2000);
+  await back('s_info');
+  log('集客調査係：81件の「直したほうがいいところ」を整理', 's_res');
+  work('s_res', '改善ポイント整理');
+  r();
+  await sleep(7000);
+  rest('s_res');
+  r = await lock('s_impl');
+  log('集客実装係：営業リストに反映', 's_impl');
+  work('s_impl', '営業リストに反映');
+  await sleep(6000);
+  rest('s_impl');
+  r();
+}
+async function storyOps() { // 運用：タートルの動画・見張り
+  await sleep(4000);
+  let r = await lock('o_sys');
+  work('o_sys', 'タートルの動画を作成中');
+  r();
+  await sleep(18000);
+  log('仕組み担当：タートルの動画を作成中', 'o_sys');
+  await sleep(4000);
+  r = await lock('o_watch');
+  log('見張り係：機械室を見回り', 'o_watch');
+  await goPlace('o_watch', 'm_line');
+  await say('o_watch', '異常なし！', 2000);
+  await back('o_watch');
+  r();
+  r = await lock('o_chief', 'o_sys');
+  await go('o_chief', 'o_sys');
+  log('運用主任 → 仕組み担当：動画の進み具合を確認', 'o_chief', 'o_sys');
+  await say('o_chief', '動画、どうですか？', 2000);
+  await say('o_sys', 'あと少しで完成です', 2200);
+  await back('o_chief');
+  r();
+  await sleep(14000);
+  rest('o_sys');
+  log('仕組み担当：タートルの動画ができました（公開はオーナーの承認後）', 'o_sys');
+}
+async function storyNeo() { // 新規事業：案を出して、きたえる
+  await sleep(30000);
+  let r = await lock('n_plan', 'n_no', 'n_scout', 'n_ana');
+  work('n_scout', '売れる案を探す');
+  log('企画係：新しい売り物のアイデアを考える', 'n_plan');
+  work('n_plan', '新しい売り物を考え中');
+  await sleep(4000);
+  rest('n_plan');
+  await go('n_plan', 'n_no');
+  await say('n_plan', 'この案、どうでしょう？', 2000);
+  log('否定係：「本当に売れる？」と質問して案をきたえる', 'n_no');
+  await say('n_no', 'それ、本当に売れる？', 2400, true);
+  await back('n_plan');
+  log('分析改善係：数字で確かめて、案を直す', 'n_ana');
+  work('n_ana', '数字で確かめ中');
+  await sleep(6000);
+  rest('n_ana'); rest('n_scout');
+  r();
+}
+async function storyHP() { // ホームページ制作・発信
+  await sleep(40000);
+  let r = await lock('h_make', 'h_check', 'listing', 'h_res');
+  log('ホームページ制作部：スマホで見やすいかチェック', 'h_check');
+  work('h_make', 'ページを制作中');
+  work('h_check', 'スマホ表示チェック');
+  await goPlace('h_res', 'shelf');
+  await say('h_res', '同業のページを参考に', 2000);
+  await back('h_res');
+  work('listing', 'Instagram投稿文');
+  await sleep(6000);
+  rest('h_check'); rest('listing');
+  await sleep(4000);
+  rest('h_make');
+  r();
+}
+async function machines(stop) { // 機械室：24時間ずっと
+  const items = [['m_insta', 'Instagram投稿完了'], ['m_line', 'LINE通知を送信'], ['m_folder', '新刊フォルダ：見張り中']];
+  let i = 0;
+  while (!stop.done) {
+    const [id, text] = items[i % 3];
+    pop(PLACES[id], text);
+    if (i % 3 === 0 && i % 2 === 0) log('機械室：Instagramの自動投稿が完了');
+    i++;
+    await sleep(7000);
+  }
+}
+async function resetAll() {
+  for (const id in A) { rest(id); A[id].carrying = false; }
+  await Promise.all(Object.keys(A).filter(id => A[id].mode !== 'seat').map(back));
+}
+async function play() {
+  for (;;) {
+    const stop = { done: false };
+    machines(stop);
+    await Promise.all([storyMap(), storySales(), storyResearch(), storyOps(), storyNeo(), storyHP()]);
+    log('今日の仕事がひと通り終わりました。また最初から再生します');
+    await sleep(4000);
+    stop.done = true;
+    await resetAll();
+    await sleep(1000);
+  }
+}
+
+// ---- はじめる ----
+buildFloor();
+winFrames = [0, 1, 2].map(f => toCanvas(drawWindow(f)));
+makeActors();
+measure();
+new ResizeObserver(() => { measure(); for (const id in A) showBubble(A[id]); }).observe(floor);
+addEventListener('resize', measure);
+document.fonts && document.fonts.ready.then(measure);
+requestAnimationFrame(t => { lastT = t; tick(t); });
+setTimeout(idleLoop, 2500);
+setTimeout(play, 800);
+</script>
+</body>
+</html>
