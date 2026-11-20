@@ -1,0 +1,62 @@
+<template>
+  <style>
+    @font-face { font-family: "NotoJP"; src: url("assets/fonts/NotoSansJP-Bold.ttf"); font-weight: 700; }
+    @font-face { font-family: "RoundM"; src: url("assets/fonts/RoundedMplus1c-ExtraBold.ttf"); font-weight: 800; }
+    #root { position:absolute; inset:0; --navy:#08101f; --cyan:#3cd6f0; --yellow:#ffcc4d; --ink:#08101f; --white:#ffffff; --dim:#b9c8e6; --card:rgba(4,7,15,0.86); font-family:"NotoJP"; color:#fff; }
+    .card { position:absolute; left:100px; right:100px; background:var(--card); border:3px solid var(--cyan); border-radius:34px; }
+    .center { display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+    .num { position:absolute; left:28px; top:22px; width:92px; height:92px; border-radius:50%; background:var(--cyan); color:var(--ink);
+      font-family:"RoundM"; font-size:62px; line-height:92px; text-align:center; }
+    .htitle { position:absolute; left:142px; right:20px; top:20px; font-size:40px; line-height:1.3; white-space:nowrap; }
+    .hmeta { position:absolute; left:142px; right:20px; top:76px; font-size:28px; color:var(--dim); white-space:nowrap; }
+    .big { font-size:72px; line-height:1.3; }
+    .tag { display:inline-block; background:var(--yellow); color:var(--ink); font-size:34px; padding:6px 26px; border-radius:40px; }
+    .y { color:var(--yellow); }
+    .c { color:var(--cyan); }
+    .row { font-size:46px; line-height:1.25; margin:10px 0; white-space:nowrap; }
+    .small { font-size:28px; color:var(--dim); }
+
+  </style>
+  <div id="root" data-composition-id="news1" data-width="1080" data-height="1920">
+    <div id="n1-head" class="clip" data-start="0" data-duration="13.920" data-track-index="0" style="position:absolute;left:0;top:385px;width:1080px;height:120px;">
+      <div id="n1-headin" class="card" style="top:0;height:120px;">
+        <div id="n1-num" class="num">1</div>
+        <div id="n1-ht" class="htitle">新しいAI「Claude Fable 5.2」</div>
+        <div id="n1-hm" class="hmeta">発表 11月9日　｜　出典：Anthropic公式</div>
+      </div>
+    </div>
+    <div id="n1-b0" class="clip" data-start="0.375" data-duration="4.725" data-track-index="1" style="position:absolute;left:0;top:520px;width:1080px;height:260px;">
+      <div id="n1-b0-in" class="card center" style="top:0;height:260px;">
+        <div class="big">新しいAI<br/><span class="y">「Claude Fable 5.2」</span></div>
+      </div>
+    </div>
+    <div id="n1-b1" class="clip" data-start="5.100" data-duration="3.855" data-track-index="1" style="position:absolute;left:0;top:520px;width:1080px;height:260px;">
+      <div id="n1-b1-in" class="card center" style="top:0;height:260px;">
+        <div style="font-size:40px;">答えが出るのが</div><div style="font-size:112px;line-height:1.1;" class="y">最大<span id="n1-count">30</span>%<span style="font-size:72px;color:#fff;">速く</span></div><div class="small">前の型（Fable 5.1）と比べて</div>
+      </div>
+    </div>
+    <div id="n1-b2" class="clip" data-start="8.955" data-duration="4.965" data-track-index="1" style="position:absolute;left:0;top:520px;width:1080px;height:260px;">
+      <div id="n1-b2-in" class="card center" style="top:0;height:260px;">
+        <div class="tag" style="margin-bottom:14px;">中小企業なら</div><div id="n1-r1" class="row">ふだん <span class="c">→</span> 今のAI</div><div id="n1-r2" class="row">むずかしい作業 <span class="c">→</span> <span class="y">新しいAI</span></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#n1-headin", {x:900, opacity:0}, {x:0, opacity:1, duration:0.45, ease:"expo.out"}, 0.050);
+    tl.fromTo("#n1-num", {scale:0, rotation:-90}, {scale:1, rotation:0, duration:0.5, ease:"back.out(2.4)"}, 0.200);
+    tl.fromTo("#n1-hm", {opacity:0}, {opacity:1, duration:0.3}, 0.500);
+    tl.fromTo("#n1-b0-in", {opacity:0, y:60}, {opacity:1, y:0, duration:0.38, ease:"power3.out"}, 0.375);
+    tl.to("#n1-b0-in", {opacity:0, y:-30, duration:0.18, ease:"power2.in"}, 4.900);
+    tl.fromTo("#n1-b1-in", {opacity:0, scale:0.8}, {opacity:1, scale:1, duration:0.34, ease:"back.out(1.8)"}, 5.100);
+    tl.to("#n1-b1-in", {opacity:0, y:-30, duration:0.18, ease:"power2.in"}, 8.755);
+    tl.fromTo("#n1-b2-in", {opacity:0, y:60}, {opacity:1, y:0, duration:0.38, ease:"power3.out"}, 8.955);
+    tl.to("#n1-b2-in", {opacity:0, y:-30, duration:0.18, ease:"power2.in"}, 13.720);
+    tl.to("#n1-headin", {opacity:0, duration:0.2, ease:"power2.in"}, 13.700);
+    const n1c = {v:0};
+    tl.fromTo(n1c, {v:0}, {v:30, duration:0.7, ease:"power2.out", onUpdate:()=>{ document.querySelector("#n1-count").textContent = Math.round(n1c.v); }}, 5.400);
+    tl.fromTo("#n1-r1", {opacity:0, x:-60}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 9.355);
+    tl.fromTo("#n1-r2", {opacity:0, x:-60}, {opacity:1, x:0, duration:0.35, ease:"power3.out"}, 11.436);
+    window.__timelines["news1"] = tl;
+  </script>
+</template>
