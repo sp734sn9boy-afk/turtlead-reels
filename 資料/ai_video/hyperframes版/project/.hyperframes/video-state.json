@@ -210,7 +210,6 @@
         {
           "id": "2acd6eb7-01a5-48fe-a2bc-7f770dbb8e50",
           "scope": "project",
-          "report": "/home/user/turtlead-reels/資料/ai_video/hyperframes版/project/.hyperframes/artifacts/checks/2acd6eb7-01a5-48fe-a2bc-7f770dbb8e50.json",
           "metadata": {
             "ok": false,
             "browserSkipped": false,
@@ -238,14 +237,15 @@
           "revision": "fafcfacb-0835-497e-93dd-5f6c9d734be6",
           "inputFingerprint": "3eb4fcb75f4d981235d922cfe47d5df7b85a390973c652bdb6b1e272f4fd898c",
           "inputScope": "local-project-files",
-          "attribution": "recorded-revision"
+          "attribution": "recorded-revision",
+          "status": "cleaned",
+          "cleanedAfterRender": "1eb8bb3e-d9bc-4209-8273-75ece1ed19fb"
         }
       ],
       "313350a3-8822-43b1-a3fe-54efda4fa2ab": [
         {
           "id": "93da4c42-1cd1-43a1-a051-2715894ba50e",
           "scope": "project",
-          "report": "/home/user/turtlead-reels/資料/ai_video/hyperframes版/project/.hyperframes/artifacts/checks/93da4c42-1cd1-43a1-a051-2715894ba50e.json",
           "metadata": {
             "ok": true,
             "browserSkipped": false,
@@ -273,7 +273,9 @@
           "revision": "313350a3-8822-43b1-a3fe-54efda4fa2ab",
           "inputFingerprint": "df1c7ff9954abb9568fbed07d70eb5bec2d849e28c42765a7a007a08ff45a423",
           "inputScope": "local-project-files",
-          "attribution": "recorded-revision"
+          "attribution": "recorded-revision",
+          "status": "cleaned",
+          "cleanedAfterRender": "1eb8bb3e-d9bc-4209-8273-75ece1ed19fb"
         }
       ],
       "27fd91ce-f1da-4478-949f-f6cec5d6b5d3": [
@@ -360,7 +362,6 @@
         {
           "scope": "full",
           "id": "1926f4de-9a6f-456e-9aa8-9d4cea5e44ce-0",
-          "image": "/home/user/turtlead-reels/資料/ai_video/hyperframes版/project/.hyperframes/artifacts/snapshots/70756e58-236c-4e62-b5a0-0c3a692d660b/frame-00-at-0s.png",
           "time": 0,
           "metadata": {
             "width": 1080,
@@ -375,12 +376,13 @@
           "revision": "313350a3-8822-43b1-a3fe-54efda4fa2ab",
           "inputFingerprint": "df1c7ff9954abb9568fbed07d70eb5bec2d849e28c42765a7a007a08ff45a423",
           "inputScope": "local-project-files",
-          "attribution": "recorded-revision"
+          "attribution": "recorded-revision",
+          "status": "cleaned",
+          "cleanedAfterRender": "1eb8bb3e-d9bc-4209-8273-75ece1ed19fb"
         },
         {
           "scope": "full",
           "id": "1926f4de-9a6f-456e-9aa8-9d4cea5e44ce-1",
-          "image": "/home/user/turtlead-reels/資料/ai_video/hyperframes版/project/.hyperframes/artifacts/snapshots/70756e58-236c-4e62-b5a0-0c3a692d660b/frame-01-at-0.6s.png",
           "time": 0.6,
           "metadata": {
             "width": 1080,
@@ -395,12 +397,13 @@
           "revision": "313350a3-8822-43b1-a3fe-54efda4fa2ab",
           "inputFingerprint": "df1c7ff9954abb9568fbed07d70eb5bec2d849e28c42765a7a007a08ff45a423",
           "inputScope": "local-project-files",
-          "attribution": "recorded-revision"
+          "attribution": "recorded-revision",
+          "status": "cleaned",
+          "cleanedAfterRender": "1eb8bb3e-d9bc-4209-8273-75ece1ed19fb"
         },
         {
           "scope": "full",
           "id": "1926f4de-9a6f-456e-9aa8-9d4cea5e44ce-2",
-          "image": "/home/user/turtlead-reels/資料/ai_video/hyperframes版/project/.hyperframes/artifacts/snapshots/70756e58-236c-4e62-b5a0-0c3a692d660b/frame-02-at-3s.png",
           "time": 3,
           "metadata": {
             "width": 1080,
@@ -415,12 +418,13 @@
           "revision": "313350a3-8822-43b1-a3fe-54efda4fa2ab",
           "inputFingerprint": "df1c7ff9954abb9568fbed07d70eb5bec2d849e28c42765a7a007a08ff45a423",
           "inputScope": "local-project-files",
-          "attribution": "recorded-revision"
+          "attribution": "recorded-revision",
+          "status": "cleaned",
+          "cleanedAfterRender": "1eb8bb3e-d9bc-4209-8273-75ece1ed19fb"
         },
         {
           "scope": "full",
           "id": "1926f4de-9a6f-456e-9aa8-9d4cea5e44ce-3",
-          "image": "/home/user/turtlead-reels/資料/ai_video/hyperframes版/project/.hyperframes/artifacts/snapshots/70756e58-236c-4e62-b5a0-0c3a692d660b/frame-03-at-4.43s.png",
           "time": 4.43,
           "metadata": {
             "width": 1080,
@@ -435,12 +439,13 @@
           "revision": "313350a3-8822-43b1-a3fe-54efda4fa2ab",
           "inputFingerprint": "df1c7ff9954abb9568fbed07d70eb5bec2d849e28c42765a7a007a08ff45a423",
           "inputScope": "local-project-files",
-          "attribution": "recorded-revision"
+          "attribution": "recorded-revision",
+          "status": "cleaned",
+          "cleanedAfterRender": "1eb8bb3e-d9bc-4209-8273-75ece1ed19fb"
         },
         {
           "scope": "full",
           "id": "1926f4de-9a6f-456e-9aa8-9d4cea5e44ce-4",
-          "image": "/home/user/turtlead-reels/資料/ai_video/hyperframes版/project/.hyperframes/artifacts/snapshots/70756e58-236c-4e62-b5a0-0c3a692d660b/frame-04-at-6.5s.png",
           "time": 6.5,
           "metadata": {
             "width": 1080,
@@ -455,12 +460,13 @@
           "revision": "313350a3-8822-43b1-a3fe-54efda4fa2ab",
           "inputFingerprint": "df1c7ff9954abb9568fbed07d70eb5bec2d849e28c42765a7a007a08ff45a423",
           "inputScope": "local-project-files",
-          "attribution": "recorded-revision"
+          "attribution": "recorded-revision",
+          "status": "cleaned",
+          "cleanedAfterRender": "1eb8bb3e-d9bc-4209-8273-75ece1ed19fb"
         },
         {
           "scope": "full",
           "id": "1926f4de-9a6f-456e-9aa8-9d4cea5e44ce-5",
-          "image": "/home/user/turtlead-reels/資料/ai_video/hyperframes版/project/.hyperframes/artifacts/snapshots/70756e58-236c-4e62-b5a0-0c3a692d660b/frame-05-at-11.5s.png",
           "time": 11.5,
           "metadata": {
             "width": 1080,
@@ -475,12 +481,13 @@
           "revision": "313350a3-8822-43b1-a3fe-54efda4fa2ab",
           "inputFingerprint": "df1c7ff9954abb9568fbed07d70eb5bec2d849e28c42765a7a007a08ff45a423",
           "inputScope": "local-project-files",
-          "attribution": "recorded-revision"
+          "attribution": "recorded-revision",
+          "status": "cleaned",
+          "cleanedAfterRender": "1eb8bb3e-d9bc-4209-8273-75ece1ed19fb"
         },
         {
           "scope": "full",
           "id": "1926f4de-9a6f-456e-9aa8-9d4cea5e44ce-6",
-          "image": "/home/user/turtlead-reels/資料/ai_video/hyperframes版/project/.hyperframes/artifacts/snapshots/70756e58-236c-4e62-b5a0-0c3a692d660b/frame-06-at-16.5s.png",
           "time": 16.5,
           "metadata": {
             "width": 1080,
@@ -495,12 +502,13 @@
           "revision": "313350a3-8822-43b1-a3fe-54efda4fa2ab",
           "inputFingerprint": "df1c7ff9954abb9568fbed07d70eb5bec2d849e28c42765a7a007a08ff45a423",
           "inputScope": "local-project-files",
-          "attribution": "recorded-revision"
+          "attribution": "recorded-revision",
+          "status": "cleaned",
+          "cleanedAfterRender": "1eb8bb3e-d9bc-4209-8273-75ece1ed19fb"
         },
         {
           "scope": "full",
           "id": "1926f4de-9a6f-456e-9aa8-9d4cea5e44ce-7",
-          "image": "/home/user/turtlead-reels/資料/ai_video/hyperframes版/project/.hyperframes/artifacts/snapshots/70756e58-236c-4e62-b5a0-0c3a692d660b/frame-07-at-22s.png",
           "time": 22,
           "metadata": {
             "width": 1080,
@@ -515,12 +523,13 @@
           "revision": "313350a3-8822-43b1-a3fe-54efda4fa2ab",
           "inputFingerprint": "df1c7ff9954abb9568fbed07d70eb5bec2d849e28c42765a7a007a08ff45a423",
           "inputScope": "local-project-files",
-          "attribution": "recorded-revision"
+          "attribution": "recorded-revision",
+          "status": "cleaned",
+          "cleanedAfterRender": "1eb8bb3e-d9bc-4209-8273-75ece1ed19fb"
         },
         {
           "scope": "full",
           "id": "1926f4de-9a6f-456e-9aa8-9d4cea5e44ce-8",
-          "image": "/home/user/turtlead-reels/資料/ai_video/hyperframes版/project/.hyperframes/artifacts/snapshots/70756e58-236c-4e62-b5a0-0c3a692d660b/frame-08-at-25.2s.png",
           "time": 25.2,
           "metadata": {
             "width": 1080,
@@ -535,12 +544,13 @@
           "revision": "313350a3-8822-43b1-a3fe-54efda4fa2ab",
           "inputFingerprint": "df1c7ff9954abb9568fbed07d70eb5bec2d849e28c42765a7a007a08ff45a423",
           "inputScope": "local-project-files",
-          "attribution": "recorded-revision"
+          "attribution": "recorded-revision",
+          "status": "cleaned",
+          "cleanedAfterRender": "1eb8bb3e-d9bc-4209-8273-75ece1ed19fb"
         },
         {
           "scope": "full",
           "id": "1926f4de-9a6f-456e-9aa8-9d4cea5e44ce-9",
-          "image": "/home/user/turtlead-reels/資料/ai_video/hyperframes版/project/.hyperframes/artifacts/snapshots/70756e58-236c-4e62-b5a0-0c3a692d660b/frame-09-at-29s.png",
           "time": 29,
           "metadata": {
             "width": 1080,
@@ -555,12 +565,13 @@
           "revision": "313350a3-8822-43b1-a3fe-54efda4fa2ab",
           "inputFingerprint": "df1c7ff9954abb9568fbed07d70eb5bec2d849e28c42765a7a007a08ff45a423",
           "inputScope": "local-project-files",
-          "attribution": "recorded-revision"
+          "attribution": "recorded-revision",
+          "status": "cleaned",
+          "cleanedAfterRender": "1eb8bb3e-d9bc-4209-8273-75ece1ed19fb"
         },
         {
           "scope": "full",
           "id": "1926f4de-9a6f-456e-9aa8-9d4cea5e44ce-10",
-          "image": "/home/user/turtlead-reels/資料/ai_video/hyperframes版/project/.hyperframes/artifacts/snapshots/70756e58-236c-4e62-b5a0-0c3a692d660b/frame-10-at-34.8s.png",
           "time": 34.8,
           "metadata": {
             "width": 1080,
@@ -575,12 +586,13 @@
           "revision": "313350a3-8822-43b1-a3fe-54efda4fa2ab",
           "inputFingerprint": "df1c7ff9954abb9568fbed07d70eb5bec2d849e28c42765a7a007a08ff45a423",
           "inputScope": "local-project-files",
-          "attribution": "recorded-revision"
+          "attribution": "recorded-revision",
+          "status": "cleaned",
+          "cleanedAfterRender": "1eb8bb3e-d9bc-4209-8273-75ece1ed19fb"
         },
         {
           "scope": "full",
           "id": "1926f4de-9a6f-456e-9aa8-9d4cea5e44ce-11",
-          "image": "/home/user/turtlead-reels/資料/ai_video/hyperframes版/project/.hyperframes/artifacts/snapshots/70756e58-236c-4e62-b5a0-0c3a692d660b/frame-11-at-38.5s.png",
           "time": 38.5,
           "metadata": {
             "width": 1080,
@@ -595,12 +607,13 @@
           "revision": "313350a3-8822-43b1-a3fe-54efda4fa2ab",
           "inputFingerprint": "df1c7ff9954abb9568fbed07d70eb5bec2d849e28c42765a7a007a08ff45a423",
           "inputScope": "local-project-files",
-          "attribution": "recorded-revision"
+          "attribution": "recorded-revision",
+          "status": "cleaned",
+          "cleanedAfterRender": "1eb8bb3e-d9bc-4209-8273-75ece1ed19fb"
         },
         {
           "scope": "full",
           "id": "1926f4de-9a6f-456e-9aa8-9d4cea5e44ce-12",
-          "image": "/home/user/turtlead-reels/資料/ai_video/hyperframes版/project/.hyperframes/artifacts/snapshots/70756e58-236c-4e62-b5a0-0c3a692d660b/frame-12-at-43.5s.png",
           "time": 43.5,
           "metadata": {
             "width": 1080,
@@ -615,12 +628,13 @@
           "revision": "313350a3-8822-43b1-a3fe-54efda4fa2ab",
           "inputFingerprint": "df1c7ff9954abb9568fbed07d70eb5bec2d849e28c42765a7a007a08ff45a423",
           "inputScope": "local-project-files",
-          "attribution": "recorded-revision"
+          "attribution": "recorded-revision",
+          "status": "cleaned",
+          "cleanedAfterRender": "1eb8bb3e-d9bc-4209-8273-75ece1ed19fb"
         },
         {
           "scope": "full",
           "id": "1926f4de-9a6f-456e-9aa8-9d4cea5e44ce-13",
-          "image": "/home/user/turtlead-reels/資料/ai_video/hyperframes版/project/.hyperframes/artifacts/snapshots/70756e58-236c-4e62-b5a0-0c3a692d660b/frame-13-at-47.5s.png",
           "time": 47.5,
           "metadata": {
             "width": 1080,
@@ -635,12 +649,13 @@
           "revision": "313350a3-8822-43b1-a3fe-54efda4fa2ab",
           "inputFingerprint": "df1c7ff9954abb9568fbed07d70eb5bec2d849e28c42765a7a007a08ff45a423",
           "inputScope": "local-project-files",
-          "attribution": "recorded-revision"
+          "attribution": "recorded-revision",
+          "status": "cleaned",
+          "cleanedAfterRender": "1eb8bb3e-d9bc-4209-8273-75ece1ed19fb"
         },
         {
           "scope": "full",
           "id": "1926f4de-9a6f-456e-9aa8-9d4cea5e44ce-14",
-          "image": "/home/user/turtlead-reels/資料/ai_video/hyperframes版/project/.hyperframes/artifacts/snapshots/70756e58-236c-4e62-b5a0-0c3a692d660b/frame-14-at-51s.png",
           "time": 51,
           "metadata": {
             "width": 1080,
@@ -655,12 +670,13 @@
           "revision": "313350a3-8822-43b1-a3fe-54efda4fa2ab",
           "inputFingerprint": "df1c7ff9954abb9568fbed07d70eb5bec2d849e28c42765a7a007a08ff45a423",
           "inputScope": "local-project-files",
-          "attribution": "recorded-revision"
+          "attribution": "recorded-revision",
+          "status": "cleaned",
+          "cleanedAfterRender": "1eb8bb3e-d9bc-4209-8273-75ece1ed19fb"
         },
         {
           "scope": "full",
           "id": "1926f4de-9a6f-456e-9aa8-9d4cea5e44ce-15",
-          "image": "/home/user/turtlead-reels/資料/ai_video/hyperframes版/project/.hyperframes/artifacts/snapshots/70756e58-236c-4e62-b5a0-0c3a692d660b/frame-15-at-54.8s.png",
           "time": 54.8,
           "metadata": {
             "width": 1080,
@@ -675,12 +691,13 @@
           "revision": "313350a3-8822-43b1-a3fe-54efda4fa2ab",
           "inputFingerprint": "df1c7ff9954abb9568fbed07d70eb5bec2d849e28c42765a7a007a08ff45a423",
           "inputScope": "local-project-files",
-          "attribution": "recorded-revision"
+          "attribution": "recorded-revision",
+          "status": "cleaned",
+          "cleanedAfterRender": "1eb8bb3e-d9bc-4209-8273-75ece1ed19fb"
         },
         {
           "scope": "full",
           "id": "1926f4de-9a6f-456e-9aa8-9d4cea5e44ce-16",
-          "image": "/home/user/turtlead-reels/資料/ai_video/hyperframes版/project/.hyperframes/artifacts/snapshots/70756e58-236c-4e62-b5a0-0c3a692d660b/frame-16-at-55.27s.png",
           "time": 55.27,
           "metadata": {
             "width": 1080,
@@ -695,7 +712,9 @@
           "revision": "313350a3-8822-43b1-a3fe-54efda4fa2ab",
           "inputFingerprint": "df1c7ff9954abb9568fbed07d70eb5bec2d849e28c42765a7a007a08ff45a423",
           "inputScope": "local-project-files",
-          "attribution": "recorded-revision"
+          "attribution": "recorded-revision",
+          "status": "cleaned",
+          "cleanedAfterRender": "1eb8bb3e-d9bc-4209-8273-75ece1ed19fb"
         }
       ],
       "27fd91ce-f1da-4478-949f-f6cec5d6b5d3": [
@@ -882,5 +901,18 @@
       ]
     },
     "unversioned": []
-  }
+  },
+  "renders": {
+    "latest": {
+      "id": "1eb8bb3e-d9bc-4209-8273-75ece1ed19fb",
+      "completedAt": 1795183505830,
+      "output": "/home/user/turtlead-reels/資料/ai_video/hyperframes版/turtle_ainews_vol1_hyperframes.mp4",
+      "status": "completed",
+      "revision": "27fd91ce-f1da-4478-949f-f6cec5d6b5d3"
+    },
+    "retainedRevisions": [
+      "27fd91ce-f1da-4478-949f-f6cec5d6b5d3"
+    ]
+  },
+  "pendingArtifactCleanup": []
 }
