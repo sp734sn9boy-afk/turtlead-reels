@@ -14,9 +14,9 @@ LINES = [
     ("intro1", [("タートルアドのタートルです。", "タートルアドのタートルです。")]),
     ("intro2", [("今週のAIニュースを、/3つ紹介します。", "今週のエーアイニュースを、みっつ紹介します。")]),
     ("n1a", [("ひとつめ。", "ひとつめ。"),
-             ("Anthropicが、新しいAI/「Claude Fable 5.2」を出しました。", "アンソロピックが、新しいエーアイ、クロード・フェイブルごーてんにーを出しました。")]),
+             ("Anthropicが、新しいAI/「Claude Fable 5.2」を出しました。", "アンソロピックが、新しいエーアイ、くろーどふぇいぶるごーてんにを出しました。")]),
     ("n1b", [("前の型より、答えが出るのが/最大3割ほど速くなったそうです。", "前の型より、答えが出るのが最大3割ほど速くなったそうです。")]),
-    ("n1c", [("ふだんの仕事は、今のAIで十分。", "ふだんの仕事は、今のエーアイで十分。"),
+    ("n1c", [("ふだんの仕事は、今のAIで十分。", "ふだんの仕事は、今のエーアイでじゅうぶん。"),
              ("むずかしい作業のときに/試すのがおすすめです。", "むずかしい作業のときに試すのがおすすめです。")]),
     ("n2a", [("ふたつめ。", "ふたつめ。"),
              ("ChatGPTで、/会社やお店の情報を、", "チャットジーピーティーで、会社やお店の情報を、"),
@@ -27,7 +27,7 @@ LINES = [
              ("確かめる時代です。", "確かめる時代です。")]),
     ("n3a", [("みっつめ。", "みっつめ。"),
              ("GoogleのGeminiの/「タスク」機能が、", "グーグルのジェミニのタスク機能が、"),
-             ("日本でも無料になりました。", "日本でも無料になりました。")]),
+             ("日本でも無料になりました。", "にほんでも無料になりました。")]),
     ("n3b", [("アメリカでは、/AIがお店に電話して、", "アメリカでは、エーアイがお店に電話して、"),
              ("値段を聞くこともできます。", "値段を聞くこともできます。")]),
     ("n3c", [("AIがお客さんの代わりに/調べる時代。", "エーアイがお客さんの代わりに調べる時代。"),
@@ -46,7 +46,7 @@ result = []
 for key, chunks in LINES:
     reading = "".join(r for _, r in chunks)
     q = json.loads(post("/audio_query", {"text": reading, "speaker": SPK}))
-    q["speedScale"] = SPEED; q["intonationScale"] = 1.15; q["prePhonemeLength"] = 0.08; q["postPhonemeLength"] = 0.08
+    q["speedScale"] = SPEED; q["intonationScale"] = 1.15; q["prePhonemeLength"] = 0.08; q["postPhonemeLength"] = 0.08; q["pauseLengthScale"] = 0.85
     wav = post("/synthesis", {"speaker": SPK}, json.dumps(q).encode())
     path = os.path.join(OUT, key + ".wav"); open(path, "wb").write(wav)
     with wave.open(path) as f: dur = f.getnframes() / f.getframerate()
@@ -58,7 +58,7 @@ for key, chunks in LINES:
             vis.append((round(t + c * 0.6, 3), round(t + c + v, 3), m["vowel"]))
             t += c + v
         if ap.get("pause_mora"):
-            p = ap["pause_mora"]["vowel_length"] / SPEED
+            p = ap["pause_mora"]["vowel_length"] * 0.85 / SPEED
             pauses.append((round(t, 3), round(t + p, 3))); t += p
     est = t + q["postPhonemeLength"] / SPEED
     k = dur / est  # 計算と実際の長さのずれを合わせる
