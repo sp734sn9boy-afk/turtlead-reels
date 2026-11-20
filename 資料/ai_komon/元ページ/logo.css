@@ -1,0 +1,36 @@
+/* ===== turtle ad ロゴ(全ページ共通) =====
+   マーク:インラインSVG(亀甲=AIのネットワーク)/文字:HTMLテキスト(M PLUS Rounded 1c 800)
+   各ページの <style> より後に読み込んで、古いロゴの指定を上書きする */
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;white-space:nowrap;
+  font-family:'M PLUS Rounded 1c',var(--en),system-ui,sans-serif;font-weight:800;font-size:25px;letter-spacing:.02em;line-height:1}
+.logo .logo-mark{display:block;flex:none;width:40px;height:40px;overflow:visible;
+  filter:drop-shadow(0 0 3px rgba(60,214,240,.7))}
+.logo .logo-word{display:inline;color:#fff}
+.logo b{font-weight:800;color:#3CD6F0;text-shadow:0 0 8px rgba(60,214,240,.55)}
+
+/* 甲羅の白い点が、時計回りに順番にゆっくり光る(3.6秒で1周。transform と opacity だけなので軽い) */
+.logo .lm-dot{transform-box:fill-box;transform-origin:center;opacity:.75;animation:lmPulse 3.6s ease-in-out infinite}
+.logo .lm-dot:nth-of-type(2){animation-delay:.6s}
+.logo .lm-dot:nth-of-type(3){animation-delay:1.2s}
+.logo .lm-dot:nth-of-type(4){animation-delay:1.8s}
+.logo .lm-dot:nth-of-type(5){animation-delay:2.4s}
+.logo .lm-dot:nth-of-type(6){animation-delay:3s}
+@keyframes lmPulse{
+  0%,34%,100%{opacity:.75;transform:scale(1)}
+  12%{opacity:1;transform:scale(1.6)}
+}
+
+/* スマホ:マークの高さ32px前後 */
+@media (max-width:760px){
+  .logo{gap:8px;font-size:20px}
+  .logo .logo-mark{width:32px;height:32px}
+}
+/* 「トップへ戻る」ボタンと並ぶページ(AI活用)は、狭い画面では文字を隠してマークだけにする */
+@media (max-width:400px){
+  .hd-left .logo .logo-word{display:none}
+}
+
+/* 「視差効果を減らす」設定では動かさない(白い点は光った状態で止める) */
+@media (prefers-reduced-motion:reduce){
+  .logo .lm-dot{animation:none;opacity:1;transform:none}
+}
