@@ -280,6 +280,17 @@ footer a{color:#fff}
 .hd-ig a{width:30px;height:30px;border-radius:9px;background:radial-gradient(circle at 30% 110%,#fdd36b 0%,#f77d3a 30%,#d62976 60%,#7b3fbf 100%);display:grid;place-items:center}
 .hd-ig svg{width:17px;height:17px;fill:none;stroke:#fff;stroke-width:2}.hd-ig svg .dot{fill:#fff;stroke:none}
 @media(max-width:700px){.ig-grid{grid-template-columns:1fr}}
+
+.w-ban{aspect-ratio:21/8;border-radius:20px;overflow:hidden;max-width:900px;margin:0 auto 26px}
+.w-ban img{object-position:70% 35%}
+.foryou{background:var(--bg2)}
+.fy-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;max-width:960px;margin:0 auto}
+.fy{background:#fff;border-radius:20px;overflow:hidden;border:1px solid var(--bd)}
+.fy-ph{aspect-ratio:16/9;overflow:hidden}
+.fy-body{padding:22px 24px 26px}
+.fy-body h3{font-family:"Noto Serif JP",serif;font-size:19px;margin-bottom:8px}
+.fy-body p{font-size:15px;color:var(--sub);margin-bottom:12px}
+@media(max-width:760px){.fy-grid{grid-template-columns:1fr}.w-ban{aspect-ratio:16/9}}
 /* scroll reveal */
 .rv{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
 .rv.on{opacity:1;transform:none}
@@ -318,7 +329,7 @@ footer a{color:#fff}
 <section class="hs" id="hero" aria-roledescription="carousel">
   <div class="slides">
       <div class="sl on" data-i="0">
-        <div class="sl-img" style="background-image:url(img/r-woman.jpg);background-position:74% 30%"></div>
+        <div class="sl-img" style="background-image:url(img/ai-main.jpg);background-position:72% 30%"></div>
         <div class="wrap sl-copy">
           <p class="sl-en">BEAUTY &amp; DIET</p>
           <h1 class="sl-h">これを、<br><em class="gold">人生最後の</em><br>ダイエットに。</h1>
@@ -326,7 +337,7 @@ footer a{color:#fff}
         </div>
       </div>
       <div class="sl" data-i="1">
-        <div class="sl-img" style="background-image:url(img/s2-waist.jpg);background-position:50% 45%"></div>
+        <div class="sl-img" style="background-image:url(img/ai-waist.jpg);background-position:72% 45%"></div>
         <div class="wrap sl-copy">
           <p class="sl-en">NO EXERCISE</p>
           <h2 class="sl-h">運動なし。<br>カロリー計算なし。<br><em class="gold">3ヶ月で平均−7.5kg</em></h2>
@@ -350,6 +361,14 @@ footer a{color:#fff}
         </div>
       </div>
       <div class="sl" data-i="4">
+        <div class="sl-img" style="background-image:url(img/ai-bride.jpg);background-position:72% 30%"></div>
+        <div class="wrap sl-copy">
+          <p class="sl-en">BRIDAL</p>
+          <h2 class="sl-h">一生に一度の日を、<br><em class="gold">いちばん綺麗な私</em>で。</h2>
+          <p class="sl-sub">ブライダル整体・小顔矯正・姿勢改善で、<br>ドレスが映えるフェイスラインと背中へ。</p>
+        </div>
+      </div>
+      <div class="sl" data-i="5">
         <div class="sl-img" style="background-image:url(img/r-exterior.jpg);background-position:60% 55%"></div>
         <div class="wrap sl-copy">
           <p class="sl-en">IBUSUKI / TANIYAMA</p>
@@ -366,8 +385,8 @@ footer a{color:#fff}
     <a class="btn hs-ghost" href="#menu">初回 500円〜 体験</a>
   </div>
   <div class="hs-ctrl">
-    <span class="hs-count"><b id="hsNow">01</b> / 05</span>
-    <div class="dots"><button class="dot on" data-go="0" aria-label="スライド1"><i></i></button><button class="dot" data-go="1" aria-label="スライド2"><i></i></button><button class="dot" data-go="2" aria-label="スライド3"><i></i></button><button class="dot" data-go="3" aria-label="スライド4"><i></i></button><button class="dot" data-go="4" aria-label="スライド5"><i></i></button></div>
+    <span class="hs-count"><b id="hsNow">01</b> / 06</span>
+    <div class="dots"><button class="dot on" data-go="0" aria-label="スライド1"><i></i></button><button class="dot" data-go="1" aria-label="スライド2"><i></i></button><button class="dot" data-go="2" aria-label="スライド3"><i></i></button><button class="dot" data-go="3" aria-label="スライド4"><i></i></button><button class="dot" data-go="4" aria-label="スライド5"><i></i></button><button class="dot" data-go="5" aria-label="スライド6"><i></i></button></div>
   </div>
   <div class="badge-kg">
     <svg viewBox="0 0 200 200" class="ring-txt" aria-hidden="true"><defs><path id="cp" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text textLength="486" lengthAdjust="spacing"><textPath href="#cp" textLength="486" lengthAdjust="spacing">BODY SALON RISE ✦ DIET &amp; SEITAI ✦ IBUSUKI ✦</textPath></text></svg>
@@ -380,6 +399,7 @@ footer a{color:#fff}
   <div class="wrap">
     <span class="en center">Worries</span>
     <h2 class="center">こんなお悩み、ありませんか？</h2>
+    <div class="photo w-ban"><img src="img/ai-shoulder.jpg" alt="肩こりに悩む女性" loading="lazy"></div>
     <div class="wgrid">
       <div>少しずつ体重が増えていく</div>
       <div>着たい服が着られなくなった</div>
@@ -391,6 +411,24 @@ footer a{color:#fff}
       <div>ぽっこりお腹・下半身太り</div>
     </div>
     <p class="answer">痩せられないのは、意志が弱いからではありません。<br><b>「自分に合った痩せ方」を知らないだけ</b>なんです。</p>
+  </div>
+</section>
+
+<!-- FORYOU -->
+<section class="foryou">
+  <div class="wrap">
+    <span class="en center">For You</span>
+    <h2 class="center">こんな方にも選ばれています</h2>
+    <div class="fy-grid">
+      <article class="fy">
+        <div class="photo fy-ph"><img src="img/ai-mama.jpg" alt="赤ちゃんを抱っこするお母さん" loading="lazy" style="object-position:70% 40%"></div>
+        <div class="fy-body"><h3>産後の体型・骨盤が気になる方</h3><p>抱っこや授乳で崩れがちな骨盤と姿勢を、体の回復に合わせてやさしく整えます。子連れでのご来院もOKです。</p><ul class="pills"><li>産後骨盤ケア</li><li>姿勢改善</li><li>腰の違和感</li></ul></div>
+      </article>
+      <article class="fy">
+        <div class="photo fy-ph"><img src="img/ai-bride.jpg" alt="ウェディングドレスの花嫁" loading="lazy" style="object-position:72% 30%"></div>
+        <div class="fy-body"><h3>結婚式までに綺麗になりたい方</h3><p>小顔矯正と姿勢改善で、フェイスラインと立ち姿をすっきりと。ドレス姿に自信が持てるようサポートします。</p><ul class="pills"><li>ブライダル整体</li><li>小顔矯正</li><li>むくみ改善</li></ul></div>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -448,7 +486,7 @@ footer a{color:#fff}
     <p class="lead center">「痩せたい」も「痛みをなんとかしたい」も、まずはお気軽にご相談ください。<br>丁寧なカウンセリングで、目標やお体の状態に合わせた内容をご提案します。</p>
     <div class="svc">
       <article>
-        <div class="photo"><img src="img/r-counsel.jpg" alt="カウンセリングの様子" loading="lazy"></div>
+        <div class="photo"><img src="img/ai-food.jpg" alt="和食を楽しむ女性" loading="lazy" style="object-position:70% 40%"></div>
         <div class="body">
           <h3>体質改善ダイエット</h3>
           <p>「自分の体を知ること」から始めるダイエット。遺伝子検査で体質を知り、整体で歪みや巡りを整え、栄養指導で無理のない食習慣へ。食事制限に頼らず、リバウンドしにくい体を目指します。</p>
@@ -653,7 +691,7 @@ footer a{color:#fff}
   hs.addEventListener('touchend',function(e){if(sx===null)return;var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)go(now+(dx<0?1:-1));sx=null});
   if(!reduce)tm=setTimeout(function(){go(1)},6000);
   /* scroll reveal */
-  var els=document.querySelectorAll('main section:not(.hs) h2, main section:not(.hs) .en, .lead, .wgrid > div, .answer, .rcard, .num .wrap, .results .photo, .svc article, .pf > *, .mcard, .flow li, .faq details, .shop, .ig-card, .cta .wrap');
+  var els=document.querySelectorAll('main section:not(.hs) h2, main section:not(.hs) .en, .lead, .wgrid > div, .answer, .rcard, .num .wrap, .results .photo, .svc article, .pf > *, .mcard, .flow li, .faq details, .shop, .ig-card, .fy, .w-ban, .cta .wrap');
   if(!reduce&&'IntersectionObserver' in window){
     els.forEach(function(e,i){e.classList.add('rv');e.style.transitionDelay=((i%4)*90)+'ms'});
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{threshold:.15});
