@@ -244,6 +244,23 @@ footer a{color:#fff}
   .badge-kg{width:104px;height:104px;right:12px;top:16px;bottom:auto}
   .kg-in b{font-size:22px}.kg-in small{font-size:8.5px}.kg-in .ind{font-size:6.5px}
 }
+
+.logo-img{height:26px;width:auto}
+.logo{flex-direction:column;align-items:flex-start;gap:2px}
+.logo-sub{font-size:10.5px;color:var(--sub);line-height:1.2}
+.mgrid4{grid-template-columns:repeat(4,1fr);max-width:1080px;gap:18px}
+.mgrid4 .mcard{padding:30px 16px 24px}
+.mgrid4 .mcard h3{font-size:17px;line-height:1.5}
+.mgrid4 .mcard h3 small{font-size:12.5px;color:var(--sub);font-family:"Noto Sans JP",sans-serif;font-weight:400}
+.howto{text-align:center;margin-top:26px;font-size:15px}
+.howto b{color:var(--wine);background:linear-gradient(transparent 62%,#f1dcb0 62%)}
+@media(max-width:960px){.mgrid4{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.mgrid4{grid-template-columns:1fr 1fr;gap:12px}.mgrid4 .mcard{padding:28px 10px 20px}.mgrid4 .mcard .price{font-size:30px}.mgrid4 .mcard h3{font-size:14px}.mgrid4 .mcard h3 small{font-size:11px}}
+.shop-ph{aspect-ratio:16/9;border-radius:16px;overflow:hidden;margin-bottom:16px}
+.rsv{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:760px;margin:0 auto}
+.rsv-c{background:rgba(255,255,255,.08);border:1px solid rgba(232,194,122,.45);border-radius:18px;padding:22px 18px;display:flex;flex-direction:column;gap:10px}
+.rsv-c h3{font-family:"Noto Serif JP",serif;color:#f3dca8;font-size:20px}
+@media(max-width:700px){.rsv{grid-template-columns:1fr}}
 /* scroll reveal */
 .rv{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
 .rv.on{opacity:1;transform:none}
@@ -257,12 +274,12 @@ footer a{color:#fff}
 
 <div class="topbar" aria-label="お客様の結果">
   <div class="tb-track">
-    <span>✦ 3ヶ月コースで <b>−10.9kg</b> 達成</span><span>✦ 3ヶ月コースで <b>−9.1kg</b> 達成</span><span>✦ 3ヶ月コースで <b>−8.9kg</b> 達成</span><span>✦ 3ヶ月コースで <b>−7.8kg</b> 達成</span><span>✦ 3ヶ月コースで <b>−7.4kg</b> 達成</span><span>✦ 70代男性「首の痛みが楽になり、毎日を楽しく過ごせています」</span><span>✦ 初回体験 <b>2,980円</b></span><span class="tb-note">※効果には個人差があります</span>
+    <span>✦ 3ヶ月コースで <b>−10.9kg</b> 達成</span><span>✦ 3ヶ月コースで <b>−9.1kg</b> 達成</span><span>✦ 3ヶ月コースで <b>−8.9kg</b> 達成</span><span>✦ 3ヶ月コースで <b>−7.8kg</b> 達成</span><span>✦ 3ヶ月コースで <b>−7.4kg</b> 達成</span><span>✦ 70代男性「首の痛みが楽になり、毎日を楽しく過ごせています」</span><span>✦ HP限定 初回 <b>500円</b>〜</span><span class="tb-note">※効果には個人差があります</span>
   </div>
 </div>
 <header>
   <div class="wrap hd">
-    <a href="#top" class="logo"><span class="mark">R</span><span><b>Body Salon RISE</b><small>腰痛・ダイエット専門整体サロン</small></span></a>
+    <a href="#top" class="logo"><img src="img/logo.png" alt="Body Salon RISE" class="logo-img"><small class="logo-sub">腰痛・ダイエット専門整体サロン</small></a>
     <nav><ul>
       <li><a href="#reason">選ばれる理由</a></li>
       <li><a href="#service">施術内容</a></li>
@@ -281,7 +298,7 @@ footer a{color:#fff}
 <section class="hs" id="hero" aria-roledescription="carousel">
   <div class="slides">
       <div class="sl on" data-i="0">
-        <div class="sl-img" style="background-image:url(img/s1-bride.jpg);background-position:70% 30%"></div>
+        <div class="sl-img" style="background-image:url(img/r-woman.jpg);background-position:74% 30%"></div>
         <div class="wrap sl-copy">
           <p class="sl-en">BEAUTY &amp; DIET</p>
           <h1 class="sl-h">これを、<br><em class="gold">人生最後の</em><br>ダイエットに。</h1>
@@ -297,27 +314,27 @@ footer a{color:#fff}
         </div>
       </div>
       <div class="sl" data-i="2">
-        <div class="sl-img" style="background-image:url(img/s3-seitai.jpg);background-position:40% 40%"></div>
+        <div class="sl-img" style="background-image:url(img/r-treat.jpg);background-position:60% 40%"></div>
         <div class="wrap sl-copy">
           <p class="sl-en">SEITAI</p>
           <h2 class="sl-h">国家資格者による<br><em class="gold">根本改善</em>整体</h2>
-          <p class="sl-sub">柔道整復師が、腰痛・肩こり・膝痛の原因から<br>アプローチ。骨盤矯正・肩甲骨はがしも。</p>
+          <p class="sl-sub">腰痛・肩こり・首こり・膝の痛みに。<br>筋肉調整 × 骨盤矯正 × 栄養サポートで整えます。</p>
         </div>
       </div>
       <div class="sl" data-i="3">
-        <div class="sl-img" style="background-image:url(img/s4-food.jpg);background-position:72% 28%"></div>
+        <div class="sl-img" style="background-image:url(img/r-counsel.jpg);background-position:65% 40%"></div>
         <div class="wrap sl-copy">
           <p class="sl-en">ORDER MADE</p>
-          <h2 class="sl-h">遺伝子検査 ×<br>分子栄養学で<br><em class="gold">食べて、痩せる。</em></h2>
-          <p class="sl-sub">肥満遺伝子（DNA）検査で体質を知り、<br>あなた専用の食事プランをつくります。</p>
+          <h2 class="sl-h">遺伝子検査 ×<br>整体 × 栄養指導で<br><em class="gold">食べて、痩せる。</em></h2>
+          <p class="sl-sub">遺伝子検査で体質を知り、整体で歪みを整え、<br>栄養指導で無理のない食習慣へ。</p>
         </div>
       </div>
       <div class="sl" data-i="4">
-        <div class="sl-img" style="background-image:url(img/s5-room.jpg);background-position:50% 50%"></div>
+        <div class="sl-img" style="background-image:url(img/r-exterior.jpg);background-position:60% 55%"></div>
         <div class="wrap sl-copy">
-          <p class="sl-en">PRIVATE SALON</p>
-          <h2 class="sl-h">完全予約制の<br><em class="gold">プライベート空間</em></h2>
-          <p class="sl-sub">人目を気にせず、リラックスしてご相談いただけます。<br>指宿院・谷山院の2店舗。</p>
+          <p class="sl-en">IBUSUKI / TANIYAMA</p>
+          <h2 class="sl-h">完全予約制の<br><em class="gold">指宿院・谷山院</em></h2>
+          <p class="sl-sub">子連れの方も、男性の方も歓迎。<br>周りを気にせず、落ち着いて施術を受けられます。</p>
         </div>
       </div>
   </div>
@@ -325,8 +342,8 @@ footer a{color:#fff}
   <canvas id="sparkle" aria-hidden="true"></canvas>
   <p class="hs-vert" aria-hidden="true">BODY SALON RISE — IBUSUKI / TANIYAMA</p>
   <div class="wrap hs-cta">
-    <a class="btn btn-line shine" href="https://page.line.me/822zjpdb" target="_blank" rel="noopener">LINEで予約・相談する</a>
-    <a class="btn hs-ghost" href="#menu">初回体験 2,980円</a>
+    <a class="btn btn-line shine" href="#yoyaku">LINEで予約・相談する</a>
+    <a class="btn hs-ghost" href="#menu">初回 500円〜 体験</a>
   </div>
   <div class="hs-ctrl">
     <span class="hs-count"><b id="hsNow">01</b> / 05</span>
@@ -411,19 +428,19 @@ footer a{color:#fff}
     <p class="lead center">「痩せたい」も「痛みをなんとかしたい」も、まずはお気軽にご相談ください。<br>丁寧なカウンセリングで、目標やお体の状態に合わせた内容をご提案します。</p>
     <div class="svc">
       <article>
-        <div class="photo"><img src="img/c-room.jpg" alt="カウンセリングルーム（イメージ）" loading="lazy"><span class="kari">仮の写真</span></div>
+        <div class="photo"><img src="img/r-counsel.jpg" alt="カウンセリングの様子" loading="lazy"></div>
         <div class="body">
-          <h3>3ヶ月 減量プログラム</h3>
-          <p>DNA遺伝子検査・分子栄養学にもとづく食事指導・美容整体を組み合わせ、マンツーマンで目標達成まで伴走します。通っている間だけでなく、その後もずっと体形をキープできる知識と習慣が身につきます。</p>
-          <ul class="pills"><li>肥満遺伝子検査</li><li>食事指導</li><li>生活習慣の改善</li><li>痩身美容整体</li><li>ツボ</li></ul>
+          <h3>体質改善ダイエット</h3>
+          <p>「自分の体を知ること」から始めるダイエット。遺伝子検査で体質を知り、整体で歪みや巡りを整え、栄養指導で無理のない食習慣へ。食事制限に頼らず、リバウンドしにくい体を目指します。</p>
+          <ul class="pills"><li>遺伝子検査</li><li>栄養指導</li><li>部分痩せ・全身痩せ</li><li>代謝アップ</li><li>3ヶ月コース</li></ul>
         </div>
       </article>
       <article>
-        <div class="photo"><img src="img/c-reception.jpg" alt="サロン（イメージ）" loading="lazy"><span class="kari">仮の写真</span></div>
+        <div class="photo"><img src="img/r-treat2.jpg" alt="整体の施術の様子" loading="lazy" style="object-position:50% 35%"></div>
         <div class="body">
-          <h3>整体・美容整体</h3>
-          <p>肩こり・腰痛・膝痛など、原因がはっきりしない慢性的な痛みに。検査とコンディションチェックで原因を洗い出し、体の内側から改善を目指します。美容メニューも好評です。</p>
-          <ul class="pills"><li>腰痛・肩こり・膝痛</li><li>不調の根本改善</li><li>骨盤矯正</li><li>肩甲骨はがし</li><li>姿勢矯正</li><li>小顔矯正</li><li>ブライダルエステ（整体）</li></ul>
+          <h3>整体・不調改善／美容整体</h3>
+          <p>腰痛・肩こり・首こり・膝の痛み、慢性疲労やPMSなどの不調に。筋肉調整×骨盤矯正×栄養サポートの3つの視点で整えます。小顔矯正・産後骨盤ケア・ブライダル整体も人気です。</p>
+          <ul class="pills"><li>腰痛・肩こり・首こり</li><li>膝の痛み</li><li>慢性疲労・めまい</li><li>PMS・更年期</li><li>小顔矯正</li><li>骨盤矯正・姿勢改善</li><li>産後骨盤ケア</li><li>ブライダル整体</li></ul>
         </div>
       </article>
     </div>
@@ -433,7 +450,7 @@ footer a{color:#fff}
 <!-- PROFILE -->
 <section class="profile" id="profile">
   <div class="wrap pf">
-    <div class="photo"><img src="img/ryoma.jpg" alt="指宿院 院長 和田諒真" loading="lazy"><span class="kari">仮：広告の写真</span></div>
+    <div class="photo"><img src="img/r-ryoma.jpg" alt="指宿院 院長 和田諒真" loading="lazy"></div>
     <div>
       <span class="en">Profile</span>
       <p class="name">和田 諒真</p>
@@ -441,6 +458,7 @@ footer a{color:#fff}
       <ul class="quals"><li>柔道整復師（国家資格）</li><li>ダイエットエキスパート</li><li>DNA遺伝子革命インストラクター</li></ul>
       <p>整骨院に勤めていた頃、肩こりや腰痛の施術をしても、すぐに再発してしまう方を多く見てきました。「痩せていた頃はこんな痛みはなかった」――そんな声を何度も耳にし、「本当の改善とは何だろう」と考えるようになりました。</p>
       <p>たどり着いた答えは、その場しのぎの施術ではなく、生活習慣と体質を変えること。独立した今、これまで学んできた知識と技術のすべてで、本気で変わりたい方を全力でサポートします。</p>
+      <p>目指すのは、地域の誰もが気軽に通える“みんなの病院”のような存在。無理な提案や押しつけはせず、納得していただいたうえで施術を進めます。</p>
       <p>鹿児島市の谷山院では、院長・和田一真が同じ想いで皆さまをお迎えしています。</p>
       <p class="serif" style="color:var(--wine)">「もう失敗したくない」「これで最後にしたい」――その想いに、真剣にお応えします。</p>
     </div>
@@ -451,23 +469,16 @@ footer a{color:#fff}
 <section id="menu">
   <div class="wrap">
     <span class="en center">Menu</span>
-    <h2 class="center">はじめての方へ</h2>
-    <p class="lead center">まずは体験から。お悩みに合わせてお選びください。</p>
-    <div class="mgrid">
-      <div class="mcard">
-        <span class="badge">痩せたい方に</span>
-        <h3>初回ダイエットカウンセリング</h3>
-        <div class="price">2,980<small>円</small></div>
-        <p>今のお体の状態を測定し、生活習慣や食事のお悩みを伺います。目標に向けた進め方をご提案します。</p>
-      </div>
-      <div class="mcard">
-        <span class="badge">痛み・姿勢が気になる方に</span>
-        <h3>初回整体体験</h3>
-        <div class="price">2,980<small>円</small></div>
-        <p>カウンセリングと検査で原因を確かめ、お体に合わせた施術を行います。</p>
-      </div>
+    <h2 class="center">初回限定キャンペーン</h2>
+    <p class="lead center">ホームページを見た方だけの特別料金です。お悩みに合わせてお選びください。</p>
+    <div class="mgrid mgrid4">
+      <div class="mcard"><span class="badge">痩せたい方に</span><h3>体質改善ダイエット<br><small>初回カウンセリング＆姿勢矯正</small></h3><div class="price">500<small>円</small></div></div>
+      <div class="mcard"><span class="badge">慢性的な痛みに</span><h3>整体<br><small>初回施術</small></h3><div class="price">1,000<small>円</small></div></div>
+      <div class="mcard"><span class="badge">花嫁さまに</span><h3>ブライダル整体<br><small>初回施術</small></h3><div class="price">3,500<small>円</small></div></div>
+      <div class="mcard"><span class="badge">偏頭痛・生理痛など</span><h3>あらゆる不調改善<br><small>カウンセリング＆初回施術</small></h3><div class="price">3,500<small>円</small></div></div>
     </div>
-    <p class="mnote">※2回目以降の料金・3ヶ月プログラムの料金は、カウンセリング時にご案内します。お支払いは現金・クレジットカードがご利用いただけます。</p>
+    <p class="howto">公式LINEに<b>「HP特別特典を見ました！」</b>と送るだけで、この料金で体験いただけます。</p>
+    <p class="mnote">※2回目以降の料金・3ヶ月コースの料金は、カウンセリング時にご案内します。お支払いは現金・クレジットカードがご利用いただけます。</p>
   </div>
 </section>
 
@@ -505,6 +516,7 @@ footer a{color:#fff}
     <h2 class="center">店舗情報・アクセス</h2>
     <div class="shops">
       <div class="shop">
+        <div class="photo shop-ph"><img src="img/r-exterior.jpg" alt="指宿院の外観" loading="lazy"></div>
         <h3>指宿院</h3>
         <table class="acc-t">
           <tr><th>住所</th><td>〒891-0401<br>鹿児島県指宿市大牟礼3丁目25-23-1</td></tr>
@@ -518,12 +530,14 @@ footer a{color:#fff}
         <div class="map"><iframe loading="lazy" title="指宿院の地図" src="https://www.google.com/maps?q=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E6%8C%87%E5%AE%BF%E5%B8%82%E5%A4%A7%E7%89%9F%E7%A4%BC3%E4%B8%81%E7%9B%AE25-23-1&output=embed"></iframe></div>
       </div>
       <div class="shop">
+        <div class="photo shop-ph"><img src="img/r-door.jpg" alt="Body Salon RISEの入口" loading="lazy"><span class="kari">仮：入口の写真</span></div>
         <h3>谷山院（鹿児島市）</h3>
         <table class="acc-t">
-          <tr><th>住所</th><td>鹿児島県鹿児島市小松原1-48-11<br>SEAGREEN小松原 102号</td></tr>
+          <tr><th>住所</th><td>〒891-0114<br>鹿児島県鹿児島市小松原1丁目48-11<br>SEA GREEN 小松原 102号</td></tr>
           <tr><th>営業時間</th><td>平日 9:30〜19:00<br>土曜 9:30〜18:00</td></tr>
           <tr><th>定休日</th><td>日曜・祝日</td></tr>
-          <tr><th>予約</th><td>完全予約制（LINE・Instagramから）</td></tr>
+          <tr><th>予約</th><td>完全予約制</td></tr>
+          <tr><th>電話</th><td><a href="tel:07023768715">070-2376-8715</a></td></tr>
           <tr><th>院長</th><td>和田 一真</td></tr>
           <tr><th>SNS</th><td><a href="https://www.instagram.com/taniyama.diet/" target="_blank" rel="noopener">Instagram @taniyama.diet</a></td></tr>
         </table>
@@ -534,13 +548,13 @@ footer a{color:#fff}
 </section>
 
 <!-- CTA -->
-<section class="cta">
+<section class="cta" id="yoyaku">
   <div class="wrap">
     <h2>「今度こそ」を、一緒に。</h2>
-    <p>ご予約・ご相談はLINEから。お気軽にメッセージください。</p>
-    <div class="row">
-      <a class="btn btn-line" href="https://page.line.me/822zjpdb" target="_blank" rel="noopener">LINEで予約・相談する</a>
-      <a class="btn btn-ghost" href="tel:08042792503">電話する 080-4279-2503</a>
+    <p>ご予約・ご相談は、通いやすい院の公式LINEから。<br>「HP特別特典を見ました！」と送ると、初回キャンペーン料金で体験できます。</p>
+    <div class="rsv">
+      <div class="rsv-c"><h3>指宿院</h3><a class="btn btn-line shine" href="https://lin.ee/NzwOZKQ" target="_blank" rel="noopener">指宿院のLINEで予約</a><a class="btn btn-ghost" href="tel:08042792503">電話 080-4279-2503</a></div>
+      <div class="rsv-c"><h3>谷山院</h3><a class="btn btn-line shine" href="https://lin.ee/lMeHU7K" target="_blank" rel="noopener">谷山院のLINEで予約</a><a class="btn btn-ghost" href="tel:07023768715">電話 070-2376-8715</a></div>
     </div>
   </div>
 </section>
@@ -548,13 +562,13 @@ footer a{color:#fff}
 </main>
 
 <footer>
-  <p>Body Salon RISE（腰痛・ダイエット専門整体サロン）<br>指宿院：鹿児島県指宿市大牟礼3丁目25-23-1／谷山院：鹿児島市小松原1-48-11</p>
+  <p>Body Salon RISE（腰痛・ダイエット専門整体サロン）<br>指宿院：鹿児島県指宿市大牟礼3丁目25-23-1　TEL 080-4279-2503<br>谷山院：鹿児島市小松原1丁目48-11 SEA GREEN 小松原102号　TEL 070-2376-8715</p>
   <p>&copy; Body Salon RISE</p>
 </footer>
 
 <div class="spbar">
-  <a class="l" href="https://page.line.me/822zjpdb" target="_blank" rel="noopener">LINEで予約</a>
-  <a class="t" href="tel:08042792503">電話する</a>
+  <a class="l" href="#yoyaku">LINEで予約</a>
+  <a class="t" href="#yoyaku">電話する</a>
 </div>
 
 <script>
