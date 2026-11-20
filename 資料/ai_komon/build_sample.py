@@ -57,6 +57,11 @@ CSS = r"""
 .km-notes{margin-top:28px;font-size:13px;color:var(--muted);line-height:1.9}
 .km-cta{margin-top:36px;display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center}
 .km-cta p{font-weight:700;color:#d4ddf5}
+.btn-line{display:inline-flex;align-items:center;gap:10px;padding:11px 24px;border-radius:999px;text-decoration:none;font-weight:700;font-size:14px;color:var(--text);border:1px solid rgba(6,199,85,.7);background:rgba(6,199,85,.10);transition:background .2s,transform .2s}
+.btn-line:hover{background:rgba(6,199,85,.2);transform:translateY(-2px)}
+.btn-line::before{content:"";width:8px;height:8px;border-radius:50%;background:#06C755;box-shadow:0 0 10px rgba(6,199,85,.8)}
+.way.line .way-label{color:#3ee08a}
+.way.line:hover{border-color:#06C755;box-shadow:0 12px 40px rgba(6,199,85,.18)}
 .plan .more{display:inline-block;margin-top:14px;font-size:14px;font-weight:700;color:var(--cyan);text-decoration:none;border-bottom:1px solid rgba(79,227,255,.4)}
 @media (max-width:860px){
   .km-points{grid-template-columns:minmax(0,1fr);gap:12px}
@@ -188,6 +193,7 @@ SECTION = f"""<!-- ===== 4. AI顧問（月額）【追加】 ===== -->
     <p class="km-notes">
       ※料金はすべて税込です。AI顧問は月額です。<br>
       ※訪問は鹿児島県内（離島を除く）です。それ以外の地域は、Zoomなどのオンラインで全国対応します。<br>
+      ※LINE相談は、受付時間（9:00〜18:00、土日祝休み）内に順にお返事します。<br>
       ※Google検索広告の広告費（Googleにお支払いいただく分）は、月額とは別にかかります。<br>
       ※AIで作った文章や動画は、内容を人が確認してからお渡しします。
     </p>
@@ -195,6 +201,7 @@ SECTION = f"""<!-- ===== 4. AI顧問（月額）【追加】 ===== -->
     <div class="km-cta rv">
       <p>どのプランが合うかは、無料の初回相談で一緒に考えます。</p>
       <a class="btn" href="#contact">無料で相談する <span aria-hidden="true">→</span></a>
+      <a class="btn-line" href="https://line.me/R/ti/p/@486zunqz" target="_blank" rel="noopener">LINEで相談する</a>
     </div>
   </div>
 </section>
@@ -250,6 +257,36 @@ FAQ = """      <details>
         <summary><span class="q">Q</span>料金は、このページの金額で決まりですか？</summary>"""
 rep("""      <details>
         <summary><span class="q">Q</span>料金は、このページの金額で決まりですか？</summary>""", FAQ)
+
+# ---------- 6b. 公開用の追加（2026-11-20 オーナー承認） ----------
+LINE_URL = "https://line.me/R/ti/p/@486zunqz"
+# お問い合わせ欄に LINE ボタン（電話とメールの間）
+rep("""      </a>
+      <a class="way" href="mailto:info@turtle-ad.com?subject=""",
+    f"""      </a>
+      <a class="way line" href="{LINE_URL}" target="_blank" rel="noopener">
+        <span class="way-label">LINE</span>
+        <span class="way-main">LINEで相談する</span>
+        <span class="way-sub">公式LINEから、お気軽にメッセージください</span>
+      </a>
+      <a class="way" href="mailto:info@turtle-ad.com?subject=""")
+rep("AI活用の初回相談は無料です。お電話かメールでご連絡ください。",
+    "AI活用の初回相談は無料です。お電話・LINE・メールでご連絡ください。")
+# ご相談の流れ
+rep("<p>お電話かメールで、お気軽にご連絡ください。", "<p>お電話・LINE・メールで、お気軽にご連絡ください。")
+rep('<span class="term">電話・メール</span>', '<span class="term">電話・LINE・メール</span>')
+rep("研修の内容やホームページの作業の範囲を決めて", "研修・AI顧問の内容やホームページの作業の範囲を決めて")
+rep("<h3>研修・制作のスタート</h3>", "<h3>研修・顧問・制作のスタート</h3>")
+rep("ホームページは、内容を確認していただきながら進めます。</p>",
+    "AI顧問では、毎月のご相談で仕事の流れを一緒に見直します。ホームページは、内容を確認していただきながら進めます。</p>")
+rep('<span class="term">研修・制作</span>', '<span class="term">研修・顧問・制作</span>')
+# ページ説明文（description / og:description）
+rep("少人数研修（2時間・33,000円〜税込）で、", "少人数研修（2時間・33,000円〜税込）、AI顧問（月額）で、", count=2)
+
+PUB_DIR = HERE / "公開用" / "ai"
+PUB_DIR.mkdir(parents=True, exist_ok=True)
+(PUB_DIR / "index.html").write_text(out, encoding="utf-8")
+print("public ok", len(out))
 
 # ---------- 7. 見本として手元で開けるように ----------
 # ロゴ用CSSは本番の相対パス（../assets/logo.css）だと手元で読めないため、見本だけ絶対URLにする。
