@@ -78,7 +78,11 @@ def load_script(path):
     return sc
 
 def norm_chunk(c):
-    return {"sub": c, "read": None} if isinstance(c, str) else {"sub": c["sub"], "read": c.get("read")}
+    if isinstance(c, str): return {"sub": c, "read": None, "speed": None}
+    return {"sub": c["sub"], "read": c.get("read"), "speed": c.get("speed")}
+
+# 型のきまり：冒頭（hook）で「タートルアド」と名乗る行は、聞き取りやすいように自動でゆっくり読む
+NAME_LINE_SPEED = 1.0
 
 def to_read(sub, extra):
     t = sub.replace("**", "").replace("/", "")
@@ -298,7 +302,10 @@ def main():
                 if ci: t += GAP_CHUNK
                 c = norm_chunk(c); c["sub"] = wrap_sub(c["sub"])
                 read = c["read"] or to_read(c["sub"], extra_read)
-                a, meta = synth(read, spk, speed, cache)
+                sp = c["speed"]
+                if sp is None and s["name"] == "intro" and "タートルアド" in c["sub"]: sp = NAME_LINE_SPEED
+                sp = float(sp or speed); c["speed"] = sp
+                a, meta = synth(read, spk, sp, cache)
                 c.update(read=read, audio=a, dur=meta["dur"], vis=meta["vis"], kana=meta["kana"], s=round(t, 3), e=round(t + meta["dur"], 3))
                 b["chunks"].append(c); chunks.append(c); t = c["e"]
             b["s"], b["e"] = b["chunks"][0]["s"], b["chunks"][-1]["e"]
@@ -669,19 +676,19 @@ def main():
     log(f"② 場面組み立て {times['build']:.1f}秒（{PROJ}）")
 
     # 秒数表・概要欄
-    rows = ["| 時間（秒） | 場面 | 字幕 | 読み（VOICEVOXの読み） |", "|---|---|---|---|"]
+    rows = ["| 時間（秒） | 場面 | 字幕 | 速さ | 読み（VOICEVOXの読み） |", "|---|---|---|---|---|"]
     for s in scenes:
         for b in s["beats"]:
             for c in b["chunks"]:
-                rows.append(f"| {c['s']:.2f}〜{c['e']:.2f} | {s['name']} | {plain(c['sub']).replace('/', ' ')} | {c['kana']} |")
+                rows.append(f"| {c['s']:.2f}〜{c['e']:.2f} | {s['name']} | {plain(c['sub']).replace('/', ' ')} | {c['speed']} | {c['kana']} |")
     open(os.path.join(OUT, "秒数表.md"), "w").write(
         f"# 秒数表（{sc['date']} {program}）\n\n- 縦1080×1920・30fps・全体 {TOTAL} 秒・声 VOICEVOX:春日部つむぎ 速さ {speed}\n- 場面："
         + " / ".join(f"{s['name']} {s['start']:.2f}〜{s['end']:.2f}" for s in scenes) + "\n\n" + "\n".join(rows) + "\n")
     srcs = [f"・{it['headline']}（{it.get('source_label', '').replace('出典：', '')}）\n  {it['source_url']}" for it in sc["items"] if it.get("source_url")]
     for it in sc["items"]:
         for u in it.get("source_urls_extra", []): srcs.append(f"  {u}")
-    titles = sc.get("titles") or [sc.get("title", f"{hook_head}｜{program} {d.month}/{d.day}")]
-    title_txt = "\n".join(f"【タイトル案{k + 1}】{x} #Shorts" for k, x in enumerate(titles)) if len(titles) > 1 else f"【タイトル案】{titles[0]} #Shorts"
+    titles = sc.get("titles") or [f"{hook_head}｜{program} {d.month}/{d.day}"]
+    title_txt = f"{sc['title']} #Shorts" if sc.get("title") else "\n".join(f"【タイトル案{k + 1}】{x} #Shorts" for k, x in enumerate(titles)) if len(titles) > 1 else f"【タイトル案】{titles[0]} #Shorts"
     src_txt = ("■ 出典\n" + "\n".join(srcs) + "\n\n") if srcs else ""
     tags = sc.get("hashtags", "#AIニュース #生成AI #中小企業 #タートルアド")
     desc = f"""{title_txt}
