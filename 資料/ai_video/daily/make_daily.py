@@ -47,6 +47,11 @@ TYPES = {
 ROOT = os.path.abspath(os.path.join(AV, "..", ".."))  # リポジトリの一番上
 TIP_LABEL = "中小企業ならこう使える"
 
+# 宣伝カードのあとの問い合わせ案内（2026-11-21 オーナー指示。台本の "inquiry_say" で変えられる）。少しゆっくり読む
+INQUIRY_SAY = [{"sub": "くわしくは、LINEで", "read": "くわしくは、ラインで"},
+               {"sub": "お問い合わせください。"},
+               {"sub": "概要欄のリンクからどうぞ！", "read": "がいようらんのリンクからどうぞ！"}]
+INQUIRY_SPEED_MUL = 0.9
 # 宣伝カードのセリフ（台本の "cta_say" で変えられる）
 CTA_SAY = [{"sub": "このキャラクターのようなAI動画を、", "read": "このキャラクターのようなエーアイ動画を、"},
            {"sub": "御社のロゴから作ります。", "read": "おんしゃのロゴから作ります。"}]
@@ -296,7 +301,8 @@ def main():
     scenes = [{"name": "intro", "beats": [{"card": None, "say": sc["hook"]["say"]}]}]
     for i, it in enumerate(sc["items"]):
         scenes.append({"name": f"item{i + 1}", "item": it, "beats": it["beats"]})
-    scenes.append({"name": "cta", "beats": [{"card": None, "say": sc.get("cta_say", CTA_SAY)}]})
+    scenes.append({"name": "cta", "beats": [{"card": None, "say": sc.get("cta_say", CTA_SAY)},
+                                            {"card": None, "say": sc.get("inquiry_say", INQUIRY_SAY), "inq": True}]})
     HEAD, GAP_CHUNK, GAP_BEAT, GAP_SCENE = 0.12, 0.12, 0.25, 0.42
     t = HEAD; chunks = []
     for si, s in enumerate(scenes):
@@ -310,6 +316,7 @@ def main():
                 read = c["read"] or to_read(c["sub"], extra_read)
                 sp = c["speed"]
                 if sp is None and s["name"] == "intro" and "タートルアド" in c["sub"]: sp = NAME_LINE_SPEED
+                if sp is None and b.get("inq"): sp = round(speed * INQUIRY_SPEED_MUL, 3)
                 sp = float(sp or speed); c["speed"] = sp
                 a, meta = synth(read, spk, sp, cache, voice_cfg["intonation"], voice_cfg["pitch"])
                 c.update(read=read, audio=a, dur=meta["dur"], vis=meta["vis"], kana=meta["kana"], s=round(t, 3), e=round(t + meta["dur"], 3))
@@ -538,12 +545,21 @@ def main():
         elif kind == "thud": put(tone(150, 0.35, 12, 0.6), tt, 0.35)
         else: put(tone(1500 + 60 * (tt % 1), 0.05, 60, 0.0), tt, 0.04)
 
-    # --- 宣伝カード（最後 4.5〜5.5 秒）
+    # --- 宣伝カード（前半：御社のロゴから作ります → 後半：LINEでお問い合わせ・概要欄のリンクから）
     cd = round(TOTAL - cta["start"], 3); c0 = loc(cta, cta["vs"])
+    p2 = round(loc(cta, cta["beats"][1]["s"]) - 0.15, 3)
     cta_html = f"""    <div id="cta-card" class="clip" data-start="0.05" data-duration="{cd - 0.05:.3f}" data-track-index="0" style="position:absolute;left:0;top:385px;width:1080px;height:520px;">
       <div id="cta-in" class="card center" style="top:0;height:520px;padding:0 30px;">
-        <div id="cta-h" style="font-size:46px;line-height:1.32;white-space:nowrap;">このキャラクターのような<span class="hl">AI動画</span>を、<br/><span class="hl">御社のロゴ</span>から作ります</div>
-        <div id="cta-tag" class="tag" style="font-size:36px;margin-top:16px;">キャラクターAI動画のご相談はこちら</div>
+        <div id="cta-swap" style="position:relative;width:860px;height:200px;">
+          <div id="cta-a" class="center" style="position:absolute;inset:0;">
+            <div id="cta-h" style="font-size:46px;line-height:1.32;white-space:nowrap;">このキャラクターのような<span class="hl">AI動画</span>を、<br/><span class="hl">御社のロゴ</span>から作ります</div>
+            <div id="cta-tag" class="tag" style="font-size:36px;margin-top:16px;">キャラクターAI動画のご相談はこちら</div>
+          </div>
+          <div id="cta-b" class="center" style="position:absolute;inset:0;opacity:0;">
+            <div id="cta-q" style="font-size:48px;line-height:1.32;white-space:nowrap;">くわしくは <span style="display:inline-block;background:var(--line);color:#fff;font-family:RoundM;font-size:40px;padding:0 16px;border-radius:14px;line-height:1.3;">LINE</span> で<br/><span class="hl">お問い合わせ</span>ください</div>
+            <div id="cta-down" class="tag" style="font-size:38px;margin-top:16px;"><span id="cta-arr1" style="display:inline-block;">▼</span> 概要欄のリンクから <span id="cta-arr2" style="display:inline-block;">▼</span></div>
+          </div>
+        </div>
         <div id="cta-line" style="margin-top:18px;display:flex;align-items:center;gap:16px;">
           <span style="display:inline-block;background:var(--line);color:#fff;font-family:RoundM;font-size:30px;padding:2px 18px;border-radius:14px;">LINE公式</span>
           <span style="font-size:48px;letter-spacing:0.02em;">{LINE_ID}</span>
@@ -558,9 +574,14 @@ def main():
     tl.fromTo("#cta-tag", {{scale:1}}, {{scale:1.06, duration:0.4, yoyo:true, repeat:3, ease:"sine.inOut", immediateRender:false}}, 1.4);
     tl.fromTo("#cta-line", {{opacity:0, x:-50}}, {{opacity:1, x:0, duration:0.35, ease:"power3.out"}}, 0.85);
     tl.fromTo("#cta-site", {{opacity:0, x:50}}, {{opacity:1, x:0, duration:0.35, ease:"power3.out"}}, 1.05);
-    tl.fromTo("#cta-disc", {{opacity:0}}, {{opacity:1, duration:0.35}}, 1.3);"""
+    tl.fromTo("#cta-disc", {{opacity:0}}, {{opacity:1, duration:0.35}}, 1.3);
+    tl.to("#cta-a", {{opacity:0, y:-20, duration:0.25, ease:"power2.in"}}, {p2:.3f});
+    tl.fromTo("#cta-b", {{opacity:0, y:24}}, {{opacity:1, y:0, duration:0.35, ease:"power3.out"}}, {p2 + 0.2:.3f});
+    tl.fromTo("#cta-arr1, #cta-arr2", {{y:0}}, {{y:12, duration:0.3, ease:"sine.inOut", yoyo:true, repeat:{max(1, int((cd - p2 - 0.8) / 0.3) // 2 * 2 - 1)}, immediateRender:false}}, {p2 + 0.6:.3f});
+    tl.fromTo("#cta-line", {{scale:1}}, {{scale:1.08, duration:0.35, yoyo:true, repeat:3, ease:"sine.inOut", immediateRender:false}}, {p2 + 0.5:.3f});"""
     comp_file(PROJ, "cta", cta_html, cta_js)
     put(chime(1046.5, 0.8), cta["start"] + 0.9, 0.10)
+    put(chime(1318.5, 0.5), cta["start"] + p2 + 0.2, 0.08)
 
     # --- 上の帯・クレジット（いつも出ている）
     top_txt = f'<span style="color:var(--cyan);">AI動画編集部</span><br/>{esc(program)} <span style="color:var(--yellow);">{d.month}/{d.day}号</span>'
@@ -607,7 +628,8 @@ def main():
     imgs = "\n".join(f'        <img id="tm{m}{b}" src="assets/img/turtle_m{m}_b{b}.png" class="tface" style="opacity:{1 if (m, b) == (0, 0) else 0};" />' for m in (0, 1, 2) for b in (0, 1))
     cs_ = cta["start"]; breathe_end = cs_ - 0.4
     breathe_rep = max(0, int((breathe_end - 1.5) / 1.2) - 1)
-    bow_t = max(cs_ + 1.6, TOTAL - 2.0)
+    bow_t = max(cs_ + 1.6, cta["ve"] + 0.05)
+    p2_abs = cta["beats"][1]["s"] - 0.15
     comp_file(PROJ, "turtle", f"""    <div id="mover"><div id="bow"><div id="rig">
 {imgs}
     </div></div></div>""", f"""    // はじめに手をふる → 呼吸
@@ -616,7 +638,9 @@ def main():
     // 宣伝カード：小さくなってカードの下へ → 手をふる → お辞儀
     tl.fromTo("#mover", {{scale:1, y:0}}, {{scale:0.58, y:30, duration:0.5, ease:"power3.inOut", transformOrigin:"50% 100%"}}, {cs_ - 0.2:.3f});
     tl.fromTo("#rig", {{rotation:0, y:0}}, {{rotation:9, y:-12, duration:0.2, ease:"sine.inOut", yoyo:true, repeat:5, transformOrigin:"50% 90%", immediateRender:false}}, {cs_ + 0.4:.3f});
-    tl.fromTo("#bow", {{rotation:0, y:0, scaleY:1}}, {{rotation:-14, y:26, scaleY:0.9, duration:0.35, ease:"power2.out", yoyo:true, repeat:1, repeatDelay:0.45, transformOrigin:"50% 100%"}}, {bow_t:.3f});
+    // 問い合わせ案内：下（概要欄）を指すように、下へ何度もうなずく
+    tl.fromTo("#bow", {{rotation:0, y:0}}, {{rotation:-10, y:16, duration:0.22, ease:"sine.inOut", yoyo:true, repeat:5, transformOrigin:"50% 100%", immediateRender:false}}, {p2_abs + 0.3:.3f});
+    tl.fromTo("#bow", {{rotation:0, y:0, scaleY:1}}, {{rotation:-14, y:26, scaleY:0.9, duration:0.35, ease:"power2.out", yoyo:true, repeat:1, repeatDelay:0.45, transformOrigin:"50% 100%", immediateRender:false}}, {bow_t:.3f});
     // 仲間の紹介のあいだは、タートルはいったん隠れる
 {chr(10).join(f'    tl.to("#mover", {{opacity:0, duration:0.2}}, {a - 0.05:.3f});{chr(10)}    tl.to("#mover", {{opacity:1, duration:0.25}}, {b:.3f});' for a, b in team_windows)}
     // 口パク・まばたき（VOICEVOX の音の時刻から作った表）
@@ -699,6 +723,9 @@ def main():
     tags = sc.get("hashtags", "#AIニュース #生成AI #中小企業 #タートルアド")
     desc = f"""{title_txt}
 
+▼ お問い合わせ・ご相談はLINEから（キャラクターAI動画を御社のロゴから作ります）
+https://line.me/R/ti/p/{LINE_ID}
+
 {sc.get('description_extra', '')}
 
 ■ キャラクターAI動画のご相談（御社のロゴからキャラクター動画を作ります）
@@ -717,7 +744,7 @@ LINE公式：https://line.me/R/ti/p/{LINE_ID}
     report = []
     if TOTAL < T["min"] or TOTAL > T["max"]:
         warn.append(f"長さ {TOTAL} 秒は、この型の目安 {T['min']}〜{T['max']} 秒の外です（セリフを足す・削る）")
-    if not (4.5 <= cd <= 5.6): warn.append(f"宣伝カードの長さ {cd:.2f} 秒（目安 4.5〜5.5 秒）")
+    if not (7.5 <= cd <= 12.0): warn.append(f"宣伝カード＋問い合わせ案内の長さ {cd:.2f} 秒（目安 8〜11 秒）")
     if scenes[0]["vs"] > 0.3: warn.append("つかみの声の始まりが遅い")
     for it in (sc["items"] if sc["type"] != "greeting" else []):
         if not it.get("source_url"): warn.append(f"出典URLがありません: {it['headline']}")
