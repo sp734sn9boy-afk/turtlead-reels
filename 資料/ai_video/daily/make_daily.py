@@ -8,7 +8,7 @@
     --draft       書き出しを下書き画質で（速い・確認用）
     --force       チェックでエラーが出ても書き出す
 
-流れ: ①声づくり（VOICEVOX:春日部つむぎ）→ ②HyperFramesの場面組み立て → ③チェック（hyperframes check・字幕のはみ出し・秒数）
+流れ: ①声づくり（VOICEVOX:猫使ビィ）→ ②HyperFramesの場面組み立て → ③チェック（hyperframes check・字幕のはみ出し・秒数）
       → ④書き出し（MP4）→ ⑤確認（長さの照合・確認コマの画像・コンタクトシート）
 出力（台本.json と同じフォルダ）:
   turtle_ai_<日付>.mp4 / 確認コマ/ / 秒数表.md / 概要欄.txt / チェック結果.txt / project/（HyperFramesの中身） / voice/（声のキャッシュ）
@@ -32,7 +32,10 @@ W, H, FPS, SR = 1080, 1920, 30, 48000
 LINE_ID = "@486zunqz"
 SITE = "turtle-ad.com"
 DISCLOSURE = "この動画は、タートルアドのAIチームが<br/>情報収集から台本・音声・映像まで作っています"
-CREDIT = "VOICEVOX:春日部つむぎ"
+# 標準の声（2026-11-20 オーナー決定：猫使ビィ。マスコット声の聞き比べ3番の調整値）。台本の "voice" で変えられる
+DEFAULT_VOICE = {"name": "猫使ビィ", "style": "ノーマル", "intonation": 1.35, "pitch": 0.0}
+DEFAULT_SPEED = 1.15   # 猫使ビィは聞き取りやすさ優先で 1.15（1.1〜1.2）
+CREDIT = "VOICEVOX:猫使ビィ"   # main() で声の名前から自動で決め直す
 WEEK = "月火水木金土日"
 
 TYPES = {
@@ -82,7 +85,7 @@ def norm_chunk(c):
     return {"sub": c["sub"], "read": c.get("read"), "speed": c.get("speed")}
 
 # 型のきまり：冒頭（hook）で「タートルアド」と名乗る行は、聞き取りやすいように自動でゆっくり読む
-NAME_LINE_SPEED = 1.0
+NAME_LINE_SPEED = 0.97   # 猫使ビィ用（聞き比べで「タートルアド」を約16%ゆっくりにした値）
 
 def to_read(sub, extra):
     t = sub.replace("**", "").replace("/", "")
@@ -100,11 +103,11 @@ def vv(path, params, body=None, method="POST"):
                                  headers={"Content-Type": "application/json"})
     return _op.open(req, timeout=180).read()
 
-def speaker_id(name="春日部つむぎ"):
+def speaker_id(name="猫使ビィ", style="ノーマル"):
     try:
         for s in json.loads(vv("/speakers", None, method="GET")):
             if s["name"] == name:
-                return next((x["id"] for x in s["styles"] if x["name"] == "ノーマル"), s["styles"][0]["id"])
+                return next((x["id"] for x in s["styles"] if x["name"] == style), s["styles"][0]["id"])
     except Exception as e:
         sys.exit(f"VOICEVOX につながりません（{VV}）。毎日の手順.md の「VOICEVOXを起動」を先に。詳細: {e}")
     sys.exit(f"VOICEVOX に「{name}」がいません")
@@ -122,13 +125,13 @@ def write_wav(p, a):
     with wave.open(p, "w") as f:
         f.setnchannels(1); f.setsampwidth(2); f.setframerate(SR); f.writeframes((a * 32767).astype(np.int16).tobytes())
 
-def synth(text, spk, speed, cache_dir):
-    key = hashlib.sha1(f"{spk}|{speed}|v2|{text}".encode()).hexdigest()[:16]
+def synth(text, spk, speed, cache_dir, intonation=1.15, pitch=0.0):
+    key = hashlib.sha1(f"{spk}|{speed}|{intonation}|{pitch}|v3|{text}".encode()).hexdigest()[:16]
     wp, jp = os.path.join(cache_dir, key + ".wav"), os.path.join(cache_dir, key + ".json")
     if os.path.exists(wp) and os.path.exists(jp):
         return read_wav(wp), json.load(open(jp))
     q = json.loads(vv("/audio_query", {"text": text, "speaker": spk}))
-    q["speedScale"] = speed; q["intonationScale"] = 1.15; q["prePhonemeLength"] = 0.06
+    q["speedScale"] = speed; q["intonationScale"] = intonation; q["pitchScale"] = pitch; q["prePhonemeLength"] = 0.06
     q["postPhonemeLength"] = 0.06; q["pauseLengthScale"] = 0.85
     open(wp, "wb").write(vv("/synthesis", {"speaker": spk}, json.dumps(q).encode()))
     a = read_wav(wp); dur = len(a) / SR
@@ -277,7 +280,10 @@ def main():
     t_begin = time.time(); times = {}
     spath = os.path.abspath(args[0]); OUT = os.path.dirname(spath)
     sc = load_script(spath); T = TYPES[sc["type"]]; d = sc["_date"]
-    speed = float(sc.get("speed", 1.22)); hl = sc.get("highlight", []); extra_read = sc.get("readings", {})
+    global CREDIT
+    voice_cfg = dict(DEFAULT_VOICE, **sc.get("voice", {}))
+    CREDIT = f"VOICEVOX:{voice_cfg['name']}"
+    speed = float(sc.get("speed", DEFAULT_SPEED)); hl = sc.get("highlight", []); extra_read = sc.get("readings", {})
     date_tag = f"{d.month}/{d.day}({WEEK[d.weekday()]})"
     program = sc.get("program", T["program"])
     log(f"== {sc['date']} {program}（{sc['type']}）速さ {speed}")
@@ -285,7 +291,7 @@ def main():
     # ---------------- ① 声づくり
     t0 = time.time()
     cache = os.path.join(OUT, "voice"); os.makedirs(cache, exist_ok=True)
-    spk = speaker_id()
+    spk = speaker_id(voice_cfg["name"], voice_cfg["style"])
     # 場面の並び：intro → item1..N → cta。各場面は beat（カード1枚）のリスト、beat はセリフ chunk のリスト
     scenes = [{"name": "intro", "beats": [{"card": None, "say": sc["hook"]["say"]}]}]
     for i, it in enumerate(sc["items"]):
@@ -305,7 +311,7 @@ def main():
                 sp = c["speed"]
                 if sp is None and s["name"] == "intro" and "タートルアド" in c["sub"]: sp = NAME_LINE_SPEED
                 sp = float(sp or speed); c["speed"] = sp
-                a, meta = synth(read, spk, sp, cache)
+                a, meta = synth(read, spk, sp, cache, voice_cfg["intonation"], voice_cfg["pitch"])
                 c.update(read=read, audio=a, dur=meta["dur"], vis=meta["vis"], kana=meta["kana"], s=round(t, 3), e=round(t + meta["dur"], 3))
                 b["chunks"].append(c); chunks.append(c); t = c["e"]
             b["s"], b["e"] = b["chunks"][0]["s"], b["chunks"][-1]["e"]
@@ -682,7 +688,7 @@ def main():
             for c in b["chunks"]:
                 rows.append(f"| {c['s']:.2f}〜{c['e']:.2f} | {s['name']} | {plain(c['sub']).replace('/', ' ')} | {c['speed']} | {c['kana']} |")
     open(os.path.join(OUT, "秒数表.md"), "w").write(
-        f"# 秒数表（{sc['date']} {program}）\n\n- 縦1080×1920・30fps・全体 {TOTAL} 秒・声 VOICEVOX:春日部つむぎ 速さ {speed}\n- 場面："
+        f"# 秒数表（{sc['date']} {program}）\n\n- 縦1080×1920・30fps・全体 {TOTAL} 秒・声 {CREDIT}（{voice_cfg['style']}・抑揚 {voice_cfg['intonation']}・高さ {voice_cfg['pitch']}） 速さ {speed}\n- 場面："
         + " / ".join(f"{s['name']} {s['start']:.2f}〜{s['end']:.2f}" for s in scenes) + "\n\n" + "\n".join(rows) + "\n")
     srcs = [f"・{it['headline']}（{it.get('source_label', '').replace('出典：', '')}）\n  {it['source_url']}" for it in sc["items"] if it.get("source_url")]
     for it in sc["items"]:

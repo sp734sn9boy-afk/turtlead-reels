@@ -1,7 +1,6 @@
 {
   "date": "2026-11-21",
   "type": "greeting",
-  "speed": 1.22,
   "hook": {
     "headline": "はじめまして！",
     "say": [
