@@ -82,6 +82,7 @@ h1 span{background:linear-gradient(90deg,#4fe3ff,#b9a6ff);-webkit-background-cli
 .bub{position:absolute;left:50%;bottom:calc(100% - 6px);transform:translateX(calc(-50% + var(--dx,0px)));
   font-size:11px;font-weight:700;line-height:1.35;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .2s;z-index:40}
 .bub.on{opacity:1}
+.actor.away .bub.say{bottom:calc(100% + 14px)} /* 席の人の「作業中」チップと重ならないよう少し上 */
 .bub.say{background:#fff;color:#0b1634;padding:4px 8px;border-radius:9px;box-shadow:0 2px 0 rgba(0,0,0,.35);white-space:normal;width:max-content;max-width:150px;text-align:center}
 .bub.say::after{content:"";position:absolute;left:calc(50% - var(--dx,0px) - 5px);bottom:-5px;border:5px solid transparent;border-bottom:0;border-top-color:#fff}
 .bub.chip{background:rgba(8,16,36,.92);color:#e9f2ff;padding:2px 7px;border-radius:999px;border:1.5px solid var(--dc);font-size:10px}
@@ -513,14 +514,14 @@ const STAFF = [
   { id: 'n_make',  dept: 'neo',   name: '制作係',     prop: 'pen' },
   { id: 'n_mkt',   dept: 'neo',   name: 'マーケティング係', prop: 'mega' },
   { id: 'n_ana',   dept: 'neo',   name: '分析改善係', prop: 'graph' },
-  { id: 'n_scout', dept: 'neo',   name: '情報収集・<wbr>分析係', prop: 'globe', wrap: true },
+  { id: 'n_scout', dept: 'neo',   name: '情報収集・<br>分析係', prop: 'globe', wrap: true },
 ];
 const MACHINES = [
   { id: 'm_insta', name: 'Instagram<br>自動投稿', color: '#ff8fd0', icon: 'photo' },
   { id: 'm_line',  name: 'LINE通知',            color: '#5ee38f', icon: 'chat' },
   { id: 'm_folder',name: '新刊フォルダ<br>の見張り', color: '#3CD6F0', icon: 'folder' },
 ];
-const ISLAND_ORDER = ['ceo', 'eigyo', 'design', 'shu', 'ops', 'hp', 'neo', 'room', 'mach'];
+const ISLAND_ORDER = ['ceo', 'eigyo', 'design', 'room', 'shu', 'ops', 'mach', 'hp', 'neo']; // 歩く先（本棚・窓・機械室）が近くなる順
 
 // ---------------------------------------------------------------------
 // 係の小物（ドット絵）。desk＝机の右はし / hand＝立っているとき手に持つ

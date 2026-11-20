@@ -1,0 +1,11 @@
+タートルアドのAIオフィス（動くページ） 素材の出典 2026-11-20
+- 完成品：ai_office.html（HTML1枚。CSS・JS・画像はすべて中に入っている。外部読み込みは Google Fonts のみ。localStorage 不使用）
+- キャラクター・机・本棚・インターネットの窓・機械：すべて自作のドット絵。
+  ../characters/src/pixel.js・characters.js（6体のキャラの仕組み）を自動で取り込み、src/office_template.html の中で
+  部署の色（アンテナ・小物の色）と係ごとの小物を描き足している。写真・人物・ストック素材・他社キャラクターは使用なし。
+- 機械室の画面アイコン：Instagram・LINEのロゴは使わず、ふつうの記号（写真・吹き出し・フォルダ）を自作。名前は文字だけ。
+- 左上のロゴ：自社素材 資料/googlemap_logo.png を96pxに縮小（src/logo_96.png）。
+- フォント：Noto Sans JP / M PLUS Rounded 1c（Google Fonts、SIL Open Font License）。
+- お客さまの名前は出さない（「不動産会社さま」と表記）。
+- 作り方：src/ で `node build_office.js` → ../ai_office.html を書き出し。`node shot.js` でスマホ幅(390)・PC幅(1280)のスクショを screenshots/ に撮り、はみ出しを自動チェック。
+- characters.js に追加したこと（元の画像の見た目は変わらない）：席での伸び（stretch）、打つ手・歩く足のコマ（opt.tap / opt.step）、話す吹き出しを消す opt.noBubble、知らない id は小物なし、laptop の書き出し。

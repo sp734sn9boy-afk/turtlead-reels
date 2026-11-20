@@ -135,7 +135,7 @@ for k in ["n1a", "n2a", "n3a", "out1"]:
     put(tv.chime(), start[k] - 0.02, 0.12)                  # 番号が出る「ポン」
 POP = tone(880, 0.18, 30, 0.2)
 for t_abs in [start["intro2"] + 0.55 + 0.18 * i for i in range(3)]: put(POP, t_abs, 0.10)   # ①②③
-put(tone(140, 0.35, 12, 0.6) + 0.4 * whoosh(0.2)[:int(0.35 * SR)] if False else tone(150, 0.35, 12, 0.6), start["n2b"] + 0.12, 0.35)  # ハンコ「ドン」
+put(tone(150, 0.35, 12, 0.6), start["n2b"] + 0.12, 0.35)  # ハンコ「ドン」
 for t_abs in [start["n1b"] + 0.25 + 0.06 * i for i in range(10)]: put(tone(1500 + 60 * (t_abs % 1), 0.05, 60, 0.0), t_abs, 0.04)  # 数え上げ「カカカ」
 put(tv.chime(1046.5, 0.8), start["out2"] + 0.1, 0.12)
 write_wav(os.path.join(AUD, "sfx.wav"), sfx[:int(TOTAL * SR)])
@@ -216,13 +216,20 @@ for i in range(len(caps)):
     caps[i][1] = round(min(nxt, e + 0.3), 3)
 
 cap_html = []; cap_js = []
+from PIL import ImageFont
+_cf = {}
+def CAPFONT(sz):
+    if sz not in _cf: _cf[sz] = ImageFont.truetype(os.path.join(PROJ, "assets", "fonts", "NotoSansJP-Bold.ttf"), sz)
+    return _cf[sz]
 for i, (s, e, text) in enumerate(caps):
     lines = text.split("/")
     inner = "<br/>".join(highlight(x) for x in lines)
-    cap_html.append(f'    <div id="cap{i}" class="clip cap" data-start="{s:.3f}" data-duration="{e - s:.3f}" data-track-index="0"><span class="capbox" id="capb{i}">{inner}</span></div>')
+    fs = 54
+    while fs > 40 and max(CAPFONT(fs).getlength(x) * 1.02 for x in lines) > 790: fs -= 2
+    cap_html.append(f'    <div id="cap{i}" class="clip cap" data-start="{s:.3f}" data-duration="{e - s:.3f}" data-track-index="0"><span class="capbox" id="capb{i}" style="font-size:{fs}px;">{inner}</span></div>')
     cap_js.append(f"""    tl.fromTo("#capb{i}", {{opacity:0, y:26, scale:0.94}}, {{opacity:1, y:0, scale:1, duration:0.2, ease:"back.out(2)"}}, {s:.3f});
-    tl.fromTo("#capb{i} .hl", {{scale:1}}, {{scale:1.12, duration:0.12, yoyo:true, repeat:1, ease:"power2.out"}}, {s + 0.18:.3f});
-    tl.to("#capb{i}", {{opacity:0, duration:0.1, ease:"power2.in"}}, {e - 0.1:.3f});
+""" + (f"""    tl.fromTo("#capb{i} .hl", {{scale:1}}, {{scale:1.12, duration:0.12, yoyo:true, repeat:1, ease:"power2.out"}}, {s + 0.18:.3f});
+""" if 'class="hl"' in inner else "") + f"""    tl.to("#capb{i}", {{opacity:0, duration:0.1, ease:"power2.in"}}, {e - 0.1:.3f});
     tl.set("#capb{i}", {{opacity:0, visibility:"hidden"}}, {e:.3f});""")
 
 open(os.path.join(PROJ, "compositions", "captions.html"), "w").write(f"""<template>
@@ -231,7 +238,7 @@ open(os.path.join(PROJ, "compositions", "captions.html"), "w").write(f"""<templa
     .cap {{ position:absolute; left:0; right:0; bottom:690px; text-align:center; overflow:visible; }}
     .capbox {{ display:inline-block; padding:20px 40px; border-radius:28px; background:rgba(4,7,15,0.82);
       border:3px solid rgba(60,214,240,0.55); color:#fff; font-family:"NotoJP"; font-weight:700; font-size:54px;
-      line-height:1.42; letter-spacing:0.02em; max-width:960px; }}
+      line-height:1.42; letter-spacing:0.02em; white-space:nowrap; }}
     .hl {{ color:var(--yellow); display:inline-block; }}
   </style>
   <div id="root" data-composition-id="captions" data-width="1080" data-height="1920">
@@ -251,12 +258,12 @@ def scene_file(name, body_html, js, extra_css=""):
     open(os.path.join(PROJ, "compositions", f"{name}.html"), "w").write(f"""<template>
   <style>{FONT_CSS}
     #root {{ position:absolute; inset:0; {COLORS} font-family:"NotoJP"; color:#fff; }}
-    .card {{ position:absolute; left:60px; right:60px; background:var(--card); border:3px solid var(--cyan); border-radius:34px; }}
+    .card {{ position:absolute; left:100px; right:100px; background:var(--card); border:3px solid var(--cyan); border-radius:34px; }}
     .center {{ display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }}
     .num {{ position:absolute; left:28px; top:22px; width:92px; height:92px; border-radius:50%; background:var(--cyan); color:var(--ink);
       font-family:"RoundM"; font-size:62px; line-height:92px; text-align:center; }}
     .htitle {{ position:absolute; left:142px; right:20px; top:20px; font-size:40px; line-height:1.3; white-space:nowrap; }}
-    .hmeta {{ position:absolute; left:142px; right:20px; top:76px; font-size:27px; color:var(--dim); white-space:nowrap; }}
+    .hmeta {{ position:absolute; left:142px; right:20px; top:76px; font-size:28px; color:var(--dim); white-space:nowrap; }}
     .big {{ font-size:72px; line-height:1.3; }}
     .tag {{ display:inline-block; background:var(--yellow); color:var(--ink); font-size:34px; padding:6px 26px; border-radius:40px; }}
     .y {{ color:var(--yellow); }}
@@ -315,11 +322,11 @@ ICON_TAG = '<svg width="96" height="96" viewBox="0 0 100 100"><path d="M10 14v34
 # --- intro
 d_intro = SC["intro"][1]
 i2 = loc("intro", start["intro2"])
-intro_html = f"""    <div id="in-title" class="clip center" data-start="0" data-duration="{d_intro:.3f}" data-track-index="0" style="position:absolute;left:0;top:385px;width:1080px;height:330px;">
-      <div id="in-title-in" class="card center" style="top:0;height:330px;">
-        <div id="in-kicker" style="font-family:RoundM;font-size:40px;" class="c">AI動画編集部</div>
-        <div id="in-t1" style="font-size:104px;line-height:1.15;">今週の<span class="y">AI</span>ニュース</div>
-        <div style="margin-top:12px;display:flex;gap:22px;align-items:center;">
+intro_html = f"""    <div id="in-title" class="clip center" data-start="0" data-duration="{d_intro:.3f}" data-track-index="0" style="position:absolute;left:0;top:385px;width:1080px;height:265px;">
+      <div id="in-title-in" class="card center" style="top:0;height:265px;">
+        <div id="in-kicker" style="font-family:RoundM;font-size:34px;line-height:1.2;" class="c">AI動画編集部</div>
+        <div id="in-t1" style="font-size:92px;line-height:1.12;">今週の<span class="y">AI</span>ニュース</div>
+        <div style="margin-top:6px;display:flex;gap:22px;align-items:center;">
           <div id="in-date" class="tag" style="font-size:40px;">11/20号</div>
           <div id="in-d1" class="num" style="position:static;width:70px;height:70px;line-height:70px;font-size:44px;">1</div>
           <div id="in-d2" class="num" style="position:static;width:70px;height:70px;line-height:70px;font-size:44px;">2</div>
@@ -327,11 +334,11 @@ intro_html = f"""    <div id="in-title" class="clip center" data-start="0" data-
         </div>
       </div>
     </div>
-    <div id="in-disc" class="clip" data-start="0" data-duration="{d_intro:.3f}" data-track-index="1" style="position:absolute;left:0;top:735px;width:1080px;height:150px;">
-      <div id="in-disc-in" style="position:absolute;left:90px;right:90px;top:0;padding:16px 24px;background:rgba(4,7,15,0.78);border:2px solid rgba(185,200,230,0.6);border-radius:22px;font-size:30px;line-height:1.5;text-align:center;color:#dfe8fb;">この動画は、タートルアドのAIチームが<br/>情報収集から台本・音声・映像まで作っています</div>
+    <div id="in-disc" class="clip" data-start="0" data-duration="{d_intro:.3f}" data-track-index="1" style="position:absolute;left:0;top:660px;width:1080px;height:100px;">
+      <div id="in-disc-in" style="position:absolute;left:110px;right:110px;top:0;padding:9px 20px;background:rgba(4,7,15,0.78);border:2px solid rgba(185,200,230,0.6);border-radius:22px;font-size:28px;line-height:1.35;text-align:center;color:#dfe8fb;">この動画は、タートルアドのAIチームが<br/>情報収集から台本・音声・映像まで作っています</div>
     </div>"""
 intro_js = f"""    tl.fromTo("#in-title-in", {{scale:1.08}}, {{scale:1, duration:0.5, ease:"expo.out"}}, 0);
-    tl.fromTo("#in-t1", {{letterSpacing:"0.12em"}}, {{letterSpacing:"0em", duration:0.6, ease:"expo.out"}}, 0);
+    tl.fromTo("#in-t1", {{scale:0.92, y:-10}}, {{scale:1, y:0, duration:0.6, ease:"expo.out"}}, 0);
     tl.fromTo("#in-date", {{scale:2.2, opacity:0, rotation:-12}}, {{scale:1, opacity:1, rotation:-4, duration:0.3, ease:"power4.in"}}, 0.35);
     tl.fromTo("#in-d1", {{scale:0}}, {{scale:1, duration:0.3, ease:"back.out(3)"}}, {i2 + 0.55:.3f});
     tl.fromTo("#in-d2", {{scale:0}}, {{scale:1, duration:0.3, ease:"back.out(3)"}}, {i2 + 0.73:.3f});
@@ -383,19 +390,19 @@ news_scene("news3", "n3", "3", "Geminiの「タスク」が日本で無料に", 
 
 # --- outro
 od = TOTAL - SC["outro"][0]
-o2 = loc("outro", start["out2"]); ob = loc("outro", bye)
+o2 = loc("outro", start["out2"]); ob = o2 + 0.7
 outro_html = f"""    <div id="o-b0" class="clip" data-start="0.05" data-duration="{o2 - 0.15:.3f}" data-track-index="0" style="position:absolute;left:0;top:{BODY_TOP - 100}px;width:1080px;height:300px;">
       <div id="o-b0-in" class="card center" style="top:0;height:300px;"><div class="big">AIは毎週<br/><span class="y">新しく</span>なっています</div></div>
     </div>
-    <div id="o-end" class="clip" data-start="{o2 - 0.05:.3f}" data-duration="{od - o2 + 0.05:.3f}" data-track-index="0" style="position:absolute;left:0;top:385px;width:1080px;height:420px;">
-      <div id="o-end-in" class="card center" style="top:0;height:420px;">
-        <img id="o-logo" src="assets/img/logo.png" style="width:150px;height:150px;" />
-        <div id="o-name" style="font-family:RoundM;font-size:66px;line-height:1.2;">タートルアド</div>
-        <div id="o-cta" class="tag" style="font-size:42px;margin-top:14px;">AIの使い方　ご相談受付中</div>
+    <div id="o-end" class="clip" data-start="{o2 - 0.05:.3f}" data-duration="{od - o2 + 0.05:.3f}" data-track-index="0" style="position:absolute;left:0;top:385px;width:1080px;height:430px;">
+      <div id="o-end-in" class="card center" style="top:0;height:430px;">
+        <div style="display:flex;align-items:center;gap:22px;">
+          <img id="o-logo" src="assets/img/logo.png" style="width:116px;height:116px;" />
+          <div id="o-name" style="font-family:RoundM;font-size:66px;line-height:1.2;">タートルアド</div>
+        </div>
+        <div id="o-cta" class="tag" style="font-size:42px;margin-top:10px;">AIの使い方　ご相談受付中</div>
+        <div id="o-disc-in" style="margin-top:18px;font-size:28px;line-height:1.5;color:#dfe8fb;">この動画は、タートルアドのAIチームが<br/>情報収集から台本・音声・映像まで作っています<br/><span style="color:var(--cyan);">音声：VOICEVOX:春日部つむぎ</span></div>
       </div>
-    </div>
-    <div id="o-disc" class="clip" data-start="{ob - 0.05:.3f}" data-duration="{od - ob + 0.05:.3f}" data-track-index="1" style="position:absolute;left:0;top:822px;width:1080px;height:200px;">
-      <div id="o-disc-in" style="position:absolute;left:90px;right:90px;top:0;padding:14px 24px;background:rgba(4,7,15,0.82);border:2px solid rgba(185,200,230,0.6);border-radius:22px;font-size:29px;line-height:1.5;text-align:center;color:#dfe8fb;">この動画は、タートルアドのAIチームが<br/>情報収集から台本・音声・映像まで作っています<br/><span style="color:var(--cyan);">音声：VOICEVOX:春日部つむぎ</span></div>
     </div>"""
 outro_js = f"""    tl.fromTo("#o-b0-in", {{opacity:0, y:60}}, {{opacity:1, y:0, duration:0.4, ease:"power3.out"}}, 0.05);
     tl.to("#o-b0-in", {{opacity:0, y:-30, duration:0.18}}, {o2 - 0.3:.3f});
@@ -406,36 +413,85 @@ outro_js = f"""    tl.fromTo("#o-b0-in", {{opacity:0, y:60}}, {{opacity:1, y:0, 
     tl.fromTo("#o-disc-in", {{opacity:0, y:20}}, {{opacity:1, y:0, duration:0.35, ease:"power2.out"}}, {ob:.3f});"""
 scene_file("outro", outro_html, outro_js)
 
-# --- index.html（背景・上の帯・タートル・場面・字幕・ワイプ・音）
-tstart = 0
-turtle_imgs = "\n".join(f'          <img id="tm{m}{b}" src="assets/img/turtle_m{m}_b{b}.png" class="tface" style="opacity:{1 if (m, b) == (0, 0) else 0};" />'
-                        for m in (0, 1, 2) for b in (0, 1))
-wipes_html = []; wipes_js = []
-for i, k in enumerate(["n1a", "n2a", "n3a", "out1"]):
-    b = boundary(k); ws = round(b - 0.32, 3)
-    wipes_html.append(f'      <div id="wipe{i}" class="clip" data-start="{ws:.3f}" data-duration="0.64" data-track-index="4" style="position:absolute;left:0;top:0;width:1080px;height:1920px;z-index:40;" data-layout-ignore><div id="wipe{i}-a" class="wbar" style="background:var(--cyan);"></div><div id="wipe{i}-b" class="wbar" style="background:var(--navy);"></div></div>')
-    wipes_js.append(f"""      tl.fromTo("#wipe{i}-a", {{x:-2400}}, {{x:2400, duration:0.62, ease:"power2.inOut"}}, {ws:.3f});
-      tl.fromTo("#wipe{i}-b", {{x:-2600}}, {{x:2200, duration:0.62, ease:"power2.inOut"}}, {ws + 0.04:.3f});""")
+# --- 常に出ている部品は小さな場面ファイルに分ける（Studio で1行ずつ見えるように）
+def sub_file(name, css, body, js):
+    open(os.path.join(PROJ, "compositions", f"{name}.html"), "w").write(f"""<template>
+  <style>{FONT_CSS}
+    #root {{ position:absolute; inset:0; {COLORS} font-family:"NotoJP"; color:#fff; }}
+{css}
+  </style>
+  <div id="root" data-composition-id="{name}" data-width="1080" data-height="1920">
+{body}
+  </div>
+  <script>
+    const tl = gsap.timeline({{ paused: true }});
+{js}
+    window.__timelines["{name}"] = tl;
+  </script>
+</template>
+""")
 
-scene_hosts = "\n".join(
-    f'      <div id="{n}" data-composition-id="{n}" data-composition-src="compositions/{n}.html" data-start="{s:.3f}" data-duration="{e - s:.3f}" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920" style="z-index:10;"></div>'
-    for n, s, e in SCENES)
+# 上の帯・ロゴ・クレジット
+sub_file("chrome", """    #topbar-in { position:absolute; left:60px; right:60px; top:150px; height:108px; display:flex; align-items:center; gap:20px; }
+    #band { position:absolute; left:90px; right:90px; top:292px; height:68px; border-radius:34px; background:var(--yellow); color:var(--ink); font-size:36px; line-height:68px; text-align:center; }
+    #credit { position:absolute; left:0; right:0; top:1262px; height:44px; text-align:center; font-size:26px; color:var(--dim); }""",
+f"""    <div id="topbar-in" data-layout-ignore>
+      <img id="toplogo" src="assets/img/logo.png" style="width:84px;height:84px;" />
+      <div style="font-family:RoundM;font-size:38px;line-height:1.15;"><span style="color:var(--cyan);">AI動画編集部</span><br/>今週のAIニュース <span style="color:var(--yellow);">11/20号</span></div>
+    </div>
+    <div id="band">AIが情報収集から動画まで作っています</div>
+    <div id="credit" data-layout-ignore>turtle ad ｜ 音声：VOICEVOX:春日部つむぎ</div>""",
+"""    tl.fromTo("#topbar-in", {y:-30}, {y:0, duration:0.4, ease:"power3.out"}, 0);
+    tl.fromTo("#band", {y:-12}, {y:0, duration:0.45, ease:"expo.out"}, 0);
+    tl.fromTo("#toplogo", {rotation:0}, {rotation:360, duration:0.8, ease:"power2.inOut"}, 0.1);""")
+
+# タートル（口パク・まばたき・動き）
 nod_t = start["out1"] + 0.3
+turtle_imgs = "\n".join(f'        <img id="tm{m}{b}" src="assets/img/turtle_m{m}_b{b}.png" class="tface" style="opacity:{1 if (m, b) == (0, 0) else 0};" />'
+                        for m in (0, 1, 2) for b in (0, 1))
+sub_file("turtle", """    #mover { position:absolute; left:375px; top:745px; width:330px; height:330px; }
+    #rig { position:absolute; left:0; top:0; width:330px; height:330px; }
+    .tface { position:absolute; left:0; top:0; width:330px; height:330px; image-rendering:pixelated; }""",
+f"""    <div id="mover"><div id="rig">
+{turtle_imgs}
+    </div></div>""",
+f"""    // 最初に手をふる（体をゆらす）→ 呼吸 → 最後にうなずく
+    tl.fromTo("#rig", {{rotation:0, y:0}}, {{rotation:7, y:-14, duration:0.22, ease:"sine.inOut", yoyo:true, repeat:5, transformOrigin:"50% 90%"}}, 0.05);
+    tl.fromTo("#rig", {{scaleY:1}}, {{scaleY:1.025, duration:1.2, ease:"sine.inOut", yoyo:true, repeat:{int((TOTAL - 2) / 1.2) - 1}, transformOrigin:"50% 100%", immediateRender:false}}, 1.5);
+    tl.fromTo("#rig", {{y:0}}, {{y:16, duration:0.18, ease:"power1.inOut", yoyo:true, repeat:3, immediateRender:false}}, {nod_t:.3f});
+    // エンドカードのときは小さくなってカードの下へ
+    tl.fromTo("#mover", {{scale:1, y:0}}, {{scale:0.6, y:-47, duration:0.5, ease:"power3.inOut", transformOrigin:"50% 100%"}}, {start["out2"] - 0.25:.3f});
+    // 口パク・まばたき（VOICEVOX の音の時刻から作った表）
+    const faces = ["#tm00","#tm01","#tm10","#tm11","#tm20","#tm21"];
+    const mouth = [{",".join(mouth_js)}];
+    for (const [t, id] of mouth) {{ tl.set(faces.filter(f => f !== id), {{opacity:0}}, t); tl.set(id, {{opacity:1}}, t); }}""")
+
+# 場面転換のワイプ
+WB = [round(boundary(k) - 0.32, 3) for k in ["n1a", "n2a", "n3a", "out1"]]
+sub_file("wipes", """    .wbar { position:absolute; left:0; top:-400px; width:900px; height:2720px; }""",
+"\n".join(f'    <div id="wipe{i}-a" class="wbar" style="background:var(--cyan);" data-layout-ignore></div><div id="wipe{i}-b" class="wbar" style="background:var(--navy);" data-layout-ignore></div>' for i in range(4)),
+"    tl.set(\".wbar\", {x:-2600, rotation:18}, 0);\n" + "\n".join(
+    f"""    tl.fromTo("#wipe{i}-a", {{x:-2400, rotation:18}}, {{x:2400, rotation:18, duration:0.62, ease:"power2.inOut", immediateRender:false}}, {ws:.3f});
+    tl.fromTo("#wipe{i}-b", {{x:-2600, rotation:18}}, {{x:2200, rotation:18, duration:0.62, ease:"power2.inOut", immediateRender:false}}, {ws + 0.04:.3f});"""
+    for i, ws in enumerate(WB)))
+
+def host(n, s, e, track, z, kind="graphics"):
+    return (f'      <div id="{n}" data-composition-id="{n}" data-composition-src="compositions/{n}.html" data-start="{s:.3f}" '
+            f'data-duration="{e - s:.3f}" data-track-index="{track}" data-track-kind="{kind}" data-width="1080" data-height="1920" style="z-index:{z};"></div>')
+scene_hosts = "\n".join(host(n, s, e, 1, 10) for n, s, e in SCENES)
 idx = f"""<!doctype html>
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1080, height=1920" />
     <script src="assets/vendor/gsap.min.js"></script>
-    <style>{FONT_CSS}
+    <style>
       :root {{ {COLORS} }}
       * {{ margin:0; padding:0; box-sizing:border-box; }}
       html, body {{ margin:0; width:1080px; height:1920px; overflow:hidden; background:var(--navy); }}
-      #root {{ position:relative; width:100%; height:100%; font-family:"NotoJP"; color:#fff; }}
+      #root {{ position:relative; width:100%; height:100%; }}
       #bg {{ position:absolute; inset:0; }}
       #bg img {{ position:absolute; }}
-      .tface {{ position:absolute; left:0; top:0; width:330px; height:330px; image-rendering:pixelated; }}
-      .wbar {{ position:absolute; top:-400px; width:900px; height:2720px; rotate:18deg; }}
     </style>
   </head>
   <body>
@@ -444,22 +500,11 @@ idx = f"""<!doctype html>
         <img id="bgimg" src="assets/img/bg.png" style="left:0;top:0;width:1080px;height:1920px;" />
         <img id="glow" src="assets/img/glow.png" style="left:90px;top:620px;width:900px;height:900px;" />
       </div>
-      <div id="topbar" class="clip" data-start="0" data-duration="{TOTAL}" data-track-index="0" style="position:absolute;left:0;top:0;width:1080px;height:370px;z-index:5;">
-        <div id="topbar-in" style="position:absolute;left:60px;right:60px;top:150px;height:108px;display:flex;align-items:center;gap:20px;">
-          <img src="assets/img/logo.png" style="width:84px;height:84px;" />
-          <div style="font-family:RoundM;font-size:38px;line-height:1.15;"><span style="color:var(--cyan);">AI動画編集部</span><br/>今週のAIニュース <span style="color:var(--yellow);">11/20号</span></div>
-        </div>
-        <div id="band" style="position:absolute;left:90px;right:90px;top:292px;height:68px;border-radius:34px;background:var(--yellow);color:var(--ink);font-size:36px;line-height:68px;text-align:center;">AIが情報収集から動画まで作っています</div>
-      </div>
-      <div id="turtle" class="clip" data-start="0" data-duration="{TOTAL}" data-track-index="2" style="position:absolute;left:375px;top:745px;width:330px;height:330px;z-index:20;">
-        <div id="rig" style="position:absolute;left:0;top:0;width:330px;height:330px;">
-{turtle_imgs}
-        </div>
-      </div>
+{host("chrome", 0, TOTAL, 0, 5)}
+{host("turtle", 0, TOTAL, 2, 20)}
 {scene_hosts}
-      <div id="captions" data-composition-id="captions" data-composition-src="compositions/captions.html" data-start="0" data-duration="{TOTAL}" data-track-index="3" data-track-kind="captions" data-width="1080" data-height="1920" style="z-index:30;"></div>
-      <div id="credit" class="clip" data-start="0" data-duration="{TOTAL}" data-track-index="5" style="position:absolute;left:0;top:1262px;width:1080px;height:44px;text-align:center;font-size:26px;color:var(--dim);z-index:6;">turtle ad ｜ 音声：VOICEVOX:春日部つむぎ</div>
-{chr(10).join(wipes_html)}
+{host("captions", 0, TOTAL, 3, 30, "captions")}
+{host("wipes", 0, TOTAL, 4, 40)}
       <audio id="voice" class="clip" src="assets/audio/voice.wav" data-start="0" data-duration="{TOTAL}" data-track-index="6" data-volume="1"></audio>
       <audio id="bgm" class="clip" src="assets/audio/bgm.wav" data-start="0" data-duration="{TOTAL}" data-track-index="7" data-volume="0.22"></audio>
       <audio id="sfx" class="clip" src="assets/audio/sfx.wav" data-start="0" data-duration="{TOTAL}" data-track-index="8" data-volume="1"></audio>
@@ -468,18 +513,6 @@ idx = f"""<!doctype html>
       const tl = gsap.timeline({{ paused: true }});
       // 背景の光がゆっくり動く
       tl.fromTo("#glow", {{x:-60, y:0, scale:1}}, {{x:60, y:-40, scale:1.12, duration:{TOTAL / 2:.2f}, ease:"sine.inOut", yoyo:true, repeat:1}}, 0);
-      tl.fromTo("#topbar-in", {{y:-30, opacity:0.0}}, {{y:0, opacity:1, duration:0.4, ease:"power3.out"}}, 0);
-      tl.fromTo("#band", {{scaleX:0.6}}, {{scaleX:1, duration:0.45, ease:"expo.out"}}, 0);
-      // タートル：最初に手をふる（体をゆらす）→ 呼吸 → 最後にうなずく
-      tl.fromTo("#rig", {{rotation:0, y:0}}, {{rotation:7, y:-14, duration:0.22, ease:"sine.inOut", yoyo:true, repeat:5, transformOrigin:"50% 90%"}}, 0.05);
-      tl.fromTo("#rig", {{scaleY:1}}, {{scaleY:1.025, duration:1.2, ease:"sine.inOut", yoyo:true, repeat:{int((TOTAL - 2) / 1.2) - 1}, transformOrigin:"50% 100%"}}, 1.5);
-      tl.fromTo("#rig", {{y:0}}, {{y:16, duration:0.18, ease:"power1.inOut", yoyo:true, repeat:3}}, {nod_t:.3f});
-      // 口パク・まばたき（VOICEVOX の音の時刻から作った表）
-      const faces = ["#tm00","#tm01","#tm10","#tm11","#tm20","#tm21"];
-      const mouth = [{",".join(mouth_js)}];
-      for (const [t, id] of mouth) {{ tl.set(faces.filter(f => f !== id), {{opacity:0}}, t); tl.set(id, {{opacity:1}}, t); }}
-      // 場面転換のワイプ
-{chr(10).join(wipes_js)}
       window.__timelines["main"] = tl;
     </script>
   </body>
