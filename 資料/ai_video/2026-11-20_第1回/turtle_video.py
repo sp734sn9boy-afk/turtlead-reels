@@ -63,7 +63,7 @@ class Line:
     chunks: list
     head: str = None            # パネル上段（ニュースの番号・日付・出典）のキー
     body: str = None            # パネル本体のキー
-    gap: float = 0.32           # このセリフのあとの間（秒）
+    gap: float = 0.26           # このセリフのあとの間（秒）
     nod: bool = False           # うなずく
     chime: bool = False         # セリフの頭に小さな「ポン」（自作の音）
 
@@ -108,7 +108,7 @@ def chime(freq=1318.5, dur=0.45):
     return (0.6 * np.sin(2 * np.pi * freq * t) + 0.3 * np.sin(2 * np.pi * freq * 1.5 * t)) * env
 
 
-def build_audio(lines, voice, speed=1.1, pitch=0.0, intonation=1.0, head=0.35, tail=2.6, chime_db=-26,
+def build_audio(lines, voice, speed=1.1, pitch=0.0, intonation=1.0, head=0.3, tail=2.3, chime_db=-26,
                 log=None):
     """台本 → (声のみの波形, 合図入り波形, 字幕のタイミング, 各セリフの開始・終了)"""
     spk = speaker_id(voice)

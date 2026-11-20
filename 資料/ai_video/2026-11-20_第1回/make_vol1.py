@@ -17,27 +17,27 @@ PW, PH = 1080, 500          # パネルの大きさ（画面の y=425〜925）
 # ---------------------------------------------------------------- 台本（台本_ショート.md と同じ文）
 LINES = [
     Line([Chunk(["タートルアドのタートルです。"])], body="intro", gap=0.25),
-    Line([Chunk(["今週のAIニュースを、3つ紹介します。"])], body="intro", gap=0.45),
+    Line([Chunk(["今週のAIニュースを、3つ紹介します。"])], body="intro", gap=0.38),
     Line([Chunk(["ひとつめ。アンソロピックが、"]),
           Chunk(["新しいAI「Claude Fable 5.2」を", "出しました。"])], head="n1", body="n1_main", chime=True),
     Line([Chunk(["前の型より、答えが出るのが", "最大3割ほど速くなったそうです。"])], head="n1", body="n1_fast"),
     Line([Chunk(["ふだんの仕事は、今のAIで十分。"]),
-          Chunk(["むずかしい作業のときに", "試すのがおすすめです。"])], head="n1", body="n1_tip", gap=0.45),
+          Chunk(["むずかしい作業のときに", "試すのがおすすめです。"])], head="n1", body="n1_tip", gap=0.38),
     Line([Chunk(["ふたつめ。ChatGPTで、", "会社やお店の情報を、"]),
           Chunk(["自分で管理できる仕組みが", "始まりました。"])], head="n2", body="n2_main", chime=True),
     Line([Chunk(["まだ試験中の機能です。"])], head="n2", body="n2_beta"),
     Line([Chunk(["Googleマップと同じように、", "AIの中で、"]),
           Chunk(["自分の会社が", "どう紹介されているか、"]),
-          Chunk(["確かめる時代です。"])], head="n2", body="n2_tip", gap=0.45),
+          Chunk(["確かめる時代です。"])], head="n2", body="n2_tip", gap=0.38),
     Line([Chunk(["みっつめ。GoogleのGeminiの", "「タスク」機能が、"]),
           Chunk(["日本でも無料になりました。"])], head="n3", body="n3_main", chime=True),
     Line([Chunk(["アメリカでは、", "AIがお店に電話して、"]),
           Chunk(["値段を聞くこともできます。"])], head="n3", body="n3_call"),
     Line([Chunk(["AIがお客さんの代わりに", "調べる時代。"]),
-          Chunk(["営業時間や料金は、", "いつも最新にしておきましょう。"])], head="n3", body="n3_tip", gap=0.45),
-    Line([Chunk(["AIは、毎週のように", "新しくなっています。"])], body="weekly", nod=True, gap=0.4),
+          Chunk(["営業時間や料金は、", "いつも最新にしておきましょう。"])], head="n3", body="n3_tip", gap=0.38),
+    Line([Chunk(["AIは、毎週のように", "新しくなっています。"])], body="weekly", nod=True, gap=0.35),   # 「しめ」の1文目（--full のときだけ入れる）
     Line([Chunk(["タートルアドでは、AIの使い方の", "ご相談を受け付けています。"]),
-          Chunk(["また来週。"])], body="ending", gap=0.0),
+          Chunk(["また来週。"])], body="ending", gap=0.0, nod=True),
 ]
 
 NEWS = {
@@ -213,12 +213,14 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--voice", default="春日部つむぎ")
     ap.add_argument("--name", default="tsumugi", help="出力ファイル名の末尾")
-    ap.add_argument("--speed", type=float, default=1.12)
+    ap.add_argument("--speed", type=float, default=1.25)
     ap.add_argument("--pitch", type=float, default=0.0)
     ap.add_argument("--intonation", type=float, default=1.1)
     ap.add_argument("--no-chime", action="store_true")
+    ap.add_argument("--full", action="store_true", help="「AIは、毎週のように新しくなっています。」も入れる（約3秒長くなる）")
     a = ap.parse_args()
-    lines = LINES
+    # 台本の注記「長ければ『しめ』の1文目を削る」に従い、ふだんは「AIは、毎週のように…」を省いて55秒前後に収める
+    lines = LINES if a.full else [ln for ln in LINES if ln.body != "weekly"]
     if a.no_chime:
         for ln in lines: ln.chime = False
     log = []
