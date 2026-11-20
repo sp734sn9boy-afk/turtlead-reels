@@ -39,7 +39,9 @@ TYPES = {
     "weekday":  {"program": "今日のAIニュース",          "icon": "AI", "min": 30, "max": 45},
     "saturday": {"program": "AIで仕事が楽になった実例",  "icon": "例", "min": 30, "max": 45},
     "sunday":   {"program": "今週のまとめ",              "icon": "週", "min": 30, "max": 90},
+    "greeting": {"program": "チャンネル開設のごあいさつ", "icon": "初", "min": 30, "max": 40},
 }
+ROOT = os.path.abspath(os.path.join(AV, "..", ".."))  # リポジトリの一番上
 TIP_LABEL = "中小企業ならこう使える"
 
 # 宣伝カードのセリフ（台本の "cta_say" で変えられる）
@@ -70,7 +72,7 @@ def load_script(path):
     if "type" not in sc:
         sc["type"] = "saturday" if d.weekday() == 5 else "sunday" if d.weekday() == 6 else "weekday"
     if sc["type"] not in TYPES: sys.exit(f"type は weekday / saturday / sunday のどれか: {sc['type']}")
-    if sc["type"] != "sunday" and len(sc["items"]) != 1:
+    if sc["type"] not in ("sunday",) and len(sc["items"]) != 1:
         log(f"注意: {sc['type']} は1本1ネタの型です（items が {len(sc['items'])} 個）。そのまま作ります。")
     sc["_date"] = d
     return sc
@@ -235,7 +237,9 @@ BASE_CSS = """
     .hl { color:var(--yellow); }
     .c { color:var(--cyan); }
     .row { line-height:1.25; margin:8px 0; white-space:nowrap; }
-    .small { font-size:28px; color:var(--dim); }"""
+    .small { font-size:28px; color:var(--dim); }
+    .mem { display:flex; flex-direction:column; align-items:center; width:200px; }
+    .ntag { margin-top:-6px; padding:2px 16px; border-radius:16px; color:#08101f; font-size:28px; line-height:1.35; white-space:nowrap; }"""
 
 def comp_file(proj, name, body, js, css=""):
     open(os.path.join(proj, "compositions", f"{name}.html"), "w").write(f"""<template>
@@ -396,6 +400,7 @@ def main():
 
     # --- ニュース（1つの場面＝見出しカード＋ポイントのカード）
     BODY_TOP, BODY_H = 520, 260
+    team_windows = []
     pop_times = []
     multi = len(sc["items"]) > 1
     def card_html(bid, card, nrows_out):
@@ -431,6 +436,20 @@ def main():
                 h += f'<div id="{bid}-r{r_i}" class="row" style="font-size:{sz}px;">{pre}{html_x}</div>'
             nrows_out.append(len(items))
             return h, ["rows"]
+        if ty == "team":
+            # 仲間の紹介：キャラクター画像＋名札（3体＋2体の2段）
+            mem = card["members"]; cells = []
+            for k, m in enumerate(mem):
+                src = os.path.join(ROOT, m["img"]); dst = f"team_{k}.png"
+                shutil.copy(src, os.path.join(PROJ, "assets", "img", dst))
+                col = m.get("color", "#3cd6f0")
+                cells.append(f'<div id="{bid}-m{k}" class="mem"><img src="assets/img/{dst}" style="width:176px;height:176px;image-rendering:pixelated;" />'
+                             f'<div class="ntag" style="background:{col};">{esc(m["name"])}</div></div>')
+            top = f'<div style="font-size:36px;margin-bottom:4px;">{mark(card.get("title", "AIの仲間たち"), hl)}</div>'
+            rows_ = [cells[:3], cells[3:]] if len(cells) > 3 else [cells]
+            h = top + "".join(f'<div style="display:flex;gap:30px;justify-content:center;">{"".join(r)}</div>' for r in rows_)
+            nrows_out.append(len(mem))
+            return h, ["team"]
         if ty == "icon":
             ic = ICON.get(card.get("icon", "pin"), ICON["pin"])
             lines = card["text"].split("/"); sz = fit(lines, 50, 34, 640)
@@ -461,8 +480,10 @@ def main():
             be = loc(s, beats[i + 1]["s"]) - 0.1 if i + 1 < len(beats) else dur
             nrows = []
             inner, feats = card_html(bid, b["card"] or {"type": "title", "text": it["headline"]}, nrows)
-            html.append(f"""    <div id="{bid}" class="clip" data-start="{bs:.3f}" data-duration="{be - bs:.3f}" data-track-index="1" style="position:absolute;left:0;top:{BODY_TOP}px;width:1080px;height:{BODY_H}px;">
-      <div id="{bid}-in" class="card center" style="top:0;height:{BODY_H}px;">
+            bh = 500 if "team" in feats else BODY_H
+            if "team" in feats: team_windows.append((s["start"] + bs, s["start"] + be))
+            html.append(f"""    <div id="{bid}" class="clip" data-start="{bs:.3f}" data-duration="{be - bs:.3f}" data-track-index="1" style="position:absolute;left:0;top:{BODY_TOP}px;width:1080px;height:{bh}px;">
+      <div id="{bid}-in" class="card center" style="top:0;height:{bh}px;">
         {inner}
       </div>
     </div>""")
@@ -482,6 +503,11 @@ def main():
                 pop_times.append((s["start"] + bs + 0.34, "thud"))
             if "icon" in feats:
                 js.append(f'    tl.fromTo("#{bid}-ic", {{y:-50, opacity:0}}, {{y:0, opacity:1, duration:0.45, ease:"bounce.out"}}, {bs + 0.25:.3f});')
+            if "team" in feats:
+                for k in range(nrows[0]):
+                    js.append(f'    tl.fromTo("#{bid}-m{k}", {{opacity:0, y:40, scale:0.6}}, {{opacity:1, y:0, scale:1, duration:0.32, ease:"back.out(2.2)"}}, {bs + 0.25 + 0.14 * k:.3f});')
+                    js.append(f'    tl.fromTo("#{bid}-m{k}", {{y:0}}, {{y:-10, duration:0.25, ease:"sine.inOut", yoyo:true, repeat:1, immediateRender:false}}, {bs + 1.2 + 0.1 * k:.3f});')
+                    pop_times.append((s["start"] + bs + 0.25 + 0.14 * k, "pop"))
             if "rows" in feats:
                 nr = nrows[0]
                 if len(cs) >= nr: at = [cs[0] + 0.3] + cs[1:nr]
@@ -578,6 +604,8 @@ def main():
     tl.fromTo("#mover", {{scale:1, y:0}}, {{scale:0.58, y:30, duration:0.5, ease:"power3.inOut", transformOrigin:"50% 100%"}}, {cs_ - 0.2:.3f});
     tl.fromTo("#rig", {{rotation:0, y:0}}, {{rotation:9, y:-12, duration:0.2, ease:"sine.inOut", yoyo:true, repeat:5, transformOrigin:"50% 90%", immediateRender:false}}, {cs_ + 0.4:.3f});
     tl.fromTo("#bow", {{rotation:0, y:0, scaleY:1}}, {{rotation:-14, y:26, scaleY:0.9, duration:0.35, ease:"power2.out", yoyo:true, repeat:1, repeatDelay:0.45, transformOrigin:"50% 100%"}}, {bow_t:.3f});
+    // 仲間の紹介のあいだは、タートルはいったん隠れる
+{chr(10).join(f'    tl.to("#mover", {{opacity:0, duration:0.2}}, {a - 0.05:.3f});{chr(10)}    tl.to("#mover", {{opacity:1, duration:0.25}}, {b:.3f});' for a, b in team_windows)}
     // 口パク・まばたき（VOICEVOX の音の時刻から作った表）
     const faces = ["#tm00","#tm01","#tm10","#tm11","#tm20","#tm21"];
     const mouth = [{",".join(mouth_js)}];
@@ -652,7 +680,11 @@ def main():
     srcs = [f"・{it['headline']}（{it.get('source_label', '').replace('出典：', '')}）\n  {it['source_url']}" for it in sc["items"] if it.get("source_url")]
     for it in sc["items"]:
         for u in it.get("source_urls_extra", []): srcs.append(f"  {u}")
-    desc = f"""【タイトル案】{sc.get('title', f"{hook_head}｜{program} {d.month}/{d.day}")} #Shorts
+    titles = sc.get("titles") or [sc.get("title", f"{hook_head}｜{program} {d.month}/{d.day}")]
+    title_txt = "\n".join(f"【タイトル案{k + 1}】{x} #Shorts" for k, x in enumerate(titles)) if len(titles) > 1 else f"【タイトル案】{titles[0]} #Shorts"
+    src_txt = ("■ 出典\n" + "\n".join(srcs) + "\n\n") if srcs else ""
+    tags = sc.get("hashtags", "#AIニュース #生成AI #中小企業 #タートルアド")
+    desc = f"""{title_txt}
 
 {sc.get('description_extra', '')}
 
@@ -660,13 +692,10 @@ def main():
 LINE公式：https://line.me/R/ti/p/{LINE_ID}
 ホームページ：https://{SITE}/
 
-■ 出典
-{chr(10).join(srcs)}
-
-この動画は、タートルアドのAIチームが情報収集から台本・音声・映像まで作っています。
+{src_txt}この動画は、タートルアドのAIチームが情報収集から台本・音声・映像まで作っています。
 音声：{CREDIT}
 
-#AIニュース #生成AI #中小企業 #タートルアド
+{tags}
 """
     open(os.path.join(OUT, "概要欄.txt"), "w").write(desc)
 
@@ -677,7 +706,7 @@ LINE公式：https://line.me/R/ti/p/{LINE_ID}
         warn.append(f"長さ {TOTAL} 秒は、この型の目安 {T['min']}〜{T['max']} 秒の外です（セリフを足す・削る）")
     if not (4.5 <= cd <= 5.6): warn.append(f"宣伝カードの長さ {cd:.2f} 秒（目安 4.5〜5.5 秒）")
     if scenes[0]["vs"] > 0.3: warn.append("つかみの声の始まりが遅い")
-    for it in sc["items"]:
+    for it in (sc["items"] if sc["type"] != "greeting" else []):
         if not it.get("source_url"): warn.append(f"出典URLがありません: {it['headline']}")
     env = dict(os.environ, **TELEMETRY_OFF)
     hf = ["node", HF_CLI] if os.path.exists(HF_CLI) else ["npx", "--yes", "hyperframes@0.9.72"]

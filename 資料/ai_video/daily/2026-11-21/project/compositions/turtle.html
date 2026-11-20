@@ -1,0 +1,52 @@
+<template>
+  <style>
+    @font-face { font-family: "NotoJP"; src: url("assets/fonts/NotoSansJP-Bold.ttf"); font-weight: 700; }
+    @font-face { font-family: "RoundM"; src: url("assets/fonts/RoundedMplus1c-ExtraBold.ttf"); font-weight: 800; }
+    #root { position:absolute; inset:0; --navy:#08101f; --cyan:#3cd6f0; --yellow:#ffcc4d; --ink:#08101f; --white:#ffffff; --dim:#b9c8e6; --card:rgba(4,7,15,0.86); --line:#06c755; font-family:"NotoJP"; color:#fff; }
+    .card { position:absolute; left:100px; right:100px; background:var(--card); border:3px solid var(--cyan); border-radius:34px; }
+    .center { display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+    .num { position:absolute; left:28px; top:22px; width:92px; height:92px; border-radius:50%; background:var(--cyan); color:var(--ink);
+      font-family:"RoundM"; font-size:52px; line-height:92px; text-align:center; }
+    .htitle { position:absolute; left:142px; right:20px; top:20px; line-height:1.3; white-space:nowrap; }
+    .hmeta { position:absolute; left:142px; right:20px; top:76px; font-size:28px; color:var(--dim); white-space:nowrap; }
+    .big { line-height:1.3; white-space:nowrap; }
+    .tag { display:inline-block; background:var(--yellow); color:var(--ink); font-size:34px; padding:6px 26px; border-radius:40px; }
+    .hl { color:var(--yellow); }
+    .c { color:var(--cyan); }
+    .row { line-height:1.25; margin:8px 0; white-space:nowrap; }
+    .small { font-size:28px; color:var(--dim); }
+    .mem { display:flex; flex-direction:column; align-items:center; width:200px; }
+    .ntag { margin-top:-6px; padding:2px 16px; border-radius:16px; color:#08101f; font-size:28px; line-height:1.35; white-space:nowrap; }
+    #mover { position:absolute; left:375px; top:745px; width:330px; height:330px; }
+    #bow, #rig { position:absolute; left:0; top:0; width:330px; height:330px; }
+    .tface { position:absolute; left:0; top:0; width:330px; height:330px; image-rendering:pixelated; }
+  </style>
+  <div id="root" data-composition-id="turtle" data-width="1080" data-height="1920">
+    <div id="mover"><div id="bow"><div id="rig">
+        <img id="tm00" src="assets/img/turtle_m0_b0.png" class="tface" style="opacity:1;" />
+        <img id="tm01" src="assets/img/turtle_m0_b1.png" class="tface" style="opacity:0;" />
+        <img id="tm10" src="assets/img/turtle_m1_b0.png" class="tface" style="opacity:0;" />
+        <img id="tm11" src="assets/img/turtle_m1_b1.png" class="tface" style="opacity:0;" />
+        <img id="tm20" src="assets/img/turtle_m2_b0.png" class="tface" style="opacity:0;" />
+        <img id="tm21" src="assets/img/turtle_m2_b1.png" class="tface" style="opacity:0;" />
+    </div></div></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    // はじめに手をふる → 呼吸
+    tl.fromTo("#rig", {rotation:0, y:0}, {rotation:7, y:-14, duration:0.22, ease:"sine.inOut", yoyo:true, repeat:5, transformOrigin:"50% 90%"}, 0.05);
+    tl.fromTo("#rig", {scaleY:1}, {scaleY:1.025, duration:1.2, ease:"sine.inOut", yoyo:true, repeat:20, transformOrigin:"50% 100%", immediateRender:false}, 1.5);
+    // 宣伝カード：小さくなってカードの下へ → 手をふる → お辞儀
+    tl.fromTo("#mover", {scale:1, y:0}, {scale:0.58, y:30, duration:0.5, ease:"power3.inOut", transformOrigin:"50% 100%"}, 26.955);
+    tl.fromTo("#rig", {rotation:0, y:0}, {rotation:9, y:-12, duration:0.2, ease:"sine.inOut", yoyo:true, repeat:5, transformOrigin:"50% 90%", immediateRender:false}, 27.555);
+    tl.fromTo("#bow", {rotation:0, y:0, scaleY:1}, {rotation:-14, y:26, scaleY:0.9, duration:0.35, ease:"power2.out", yoyo:true, repeat:1, repeatDelay:0.45, transformOrigin:"50% 100%"}, 29.920);
+    // 仲間の紹介のあいだは、タートルはいったん隠れる
+    tl.to("#mover", {opacity:0, duration:0.2}, 16.542);
+    tl.to("#mover", {opacity:1, duration:0.25}, 20.557);
+    // 口パク・まばたき（VOICEVOX の音の時刻から作った表）
+    const faces = ["#tm00","#tm01","#tm10","#tm11","#tm20","#tm21"];
+    const mouth = [[0.000,"#tm00"],[0.200,"#tm20"],[0.300,"#tm10"],[0.400,"#tm20"],[0.567,"#tm00"],[0.667,"#tm20"],[0.833,"#tm00"],[0.900,"#tm01"],[1.030,"#tm00"],[1.167,"#tm20"],[1.367,"#tm10"],[1.433,"#tm20"],[1.967,"#tm10"],[2.000,"#tm00"],[2.067,"#tm20"],[2.167,"#tm10"],[2.300,"#tm00"],[2.600,"#tm01"],[2.730,"#tm00"],[2.733,"#tm20"],[2.967,"#tm10"],[3.033,"#tm20"],[3.167,"#tm00"],[3.833,"#tm20"],[4.133,"#tm00"],[4.200,"#tm20"],[4.300,"#tm10"],[4.367,"#tm20"],[4.600,"#tm00"],[4.967,"#tm20"],[5.200,"#tm10"],[5.300,"#tm20"],[5.367,"#tm00"],[5.433,"#tm10"],[5.667,"#tm20"],[5.867,"#tm00"],[6.100,"#tm01"],[6.230,"#tm00"],[6.300,"#tm10"],[6.433,"#tm20"],[6.633,"#tm10"],[6.767,"#tm20"],[7.300,"#tm10"],[7.400,"#tm20"],[7.467,"#tm00"],[7.600,"#tm20"],[7.667,"#tm10"],[7.767,"#tm20"],[8.100,"#tm00"],[8.333,"#tm20"],[8.400,"#tm10"],[8.700,"#tm20"],[8.800,"#tm21"],[8.930,"#tm20"],[9.100,"#tm10"],[9.200,"#tm20"],[9.300,"#tm00"],[9.833,"#tm20"],[10.400,"#tm00"],[10.700,"#tm20"],[10.933,"#tm10"],[11.000,"#tm20"],[11.500,"#tm10"],[11.900,"#tm20"],[12.033,"#tm00"],[12.300,"#tm01"],[12.300,"#tm21"],[12.430,"#tm20"],[12.733,"#tm10"],[12.800,"#tm20"],[13.167,"#tm00"],[13.500,"#tm20"],[13.567,"#tm10"],[13.667,"#tm20"],[13.767,"#tm00"],[14.300,"#tm20"],[14.667,"#tm00"],[15.167,"#tm20"],[15.400,"#tm21"],[15.530,"#tm20"],[15.733,"#tm00"],[15.833,"#tm10"],[15.933,"#tm00"],[16.000,"#tm20"],[16.067,"#tm10"],[16.167,"#tm20"],[16.233,"#tm00"],[16.733,"#tm20"],[16.933,"#tm10"],[17.000,"#tm20"],[17.800,"#tm10"],[17.967,"#tm20"],[18.033,"#tm00"],[18.100,"#tm01"],[18.167,"#tm21"],[18.230,"#tm20"],[18.333,"#tm00"],[18.600,"#tm10"],[18.700,"#tm00"],[18.767,"#tm20"],[18.967,"#tm00"],[19.067,"#tm20"],[19.700,"#tm00"],[19.800,"#tm10"],[19.900,"#tm00"],[19.967,"#tm20"],[20.033,"#tm10"],[20.133,"#tm20"],[20.200,"#tm00"],[20.733,"#tm20"],[21.133,"#tm00"],[21.467,"#tm10"],[21.533,"#tm20"],[21.600,"#tm21"],[21.633,"#tm11"],[21.700,"#tm21"],[21.730,"#tm20"],[22.267,"#tm00"],[22.333,"#tm20"],[22.433,"#tm00"],[22.500,"#tm10"],[22.600,"#tm00"],[22.733,"#tm20"],[22.800,"#tm10"],[22.967,"#tm20"],[23.233,"#tm00"],[23.500,"#tm20"],[23.600,"#tm10"],[23.800,"#tm20"],[23.900,"#tm10"],[23.933,"#tm20"],[24.167,"#tm10"],[24.267,"#tm20"],[24.300,"#tm21"],[24.400,"#tm01"],[24.430,"#tm00"],[24.667,"#tm20"],[24.767,"#tm00"],[24.833,"#tm20"],[24.933,"#tm10"],[25.033,"#tm20"],[25.300,"#tm10"],[25.367,"#tm20"],[25.567,"#tm00"],[25.867,"#tm20"],[26.033,"#tm00"],[26.133,"#tm10"],[26.200,"#tm20"],[26.500,"#tm10"],[26.667,"#tm20"],[26.733,"#tm00"],[27.433,"#tm20"],[27.800,"#tm21"],[27.833,"#tm01"],[27.900,"#tm21"],[27.930,"#tm20"],[28.133,"#tm00"],[28.200,"#tm20"],[28.633,"#tm10"],[28.733,"#tm20"],[29.133,"#tm00"],[29.333,"#tm20"],[29.400,"#tm00"],[29.500,"#tm20"],[30.067,"#tm00"],[30.167,"#tm10"],[30.333,"#tm20"],[30.433,"#tm00"],[30.500,"#tm01"],[30.630,"#tm00"]];
+    for (const [t, id] of mouth) { tl.set(faces.filter(f => f !== id), {opacity:0}, t); tl.set(id, {opacity:1}, t); }
+    window.__timelines["turtle"] = tl;
+  </script>
+</template>
