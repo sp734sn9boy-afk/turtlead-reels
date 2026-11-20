@@ -39,14 +39,14 @@ h1 span{background:linear-gradient(90deg,#4fe3ff,#b9a6ff);-webkit-background-cli
 
 /* ---- 床と島 ---- */
 .floor{position:relative;margin-top:14px;padding:12px 0 14px;border-radius:16px;
-  display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-content:flex-start;
+  display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-content:flex-start;align-items:flex-start;
   background-color:#0b1634;
   background-image:linear-gradient(rgba(60,214,240,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(60,214,240,.06) 1px,transparent 1px);
   background-size:16px 16px;border:2px solid rgba(60,214,240,.18)}
-.island{position:relative;padding:24px 6px 4px;border-radius:12px;
+.island{position:relative;padding:38px 4px 4px;border-radius:12px;
   background:color-mix(in srgb,var(--dc) 9%,#0e1b40);border:2px solid color-mix(in srgb,var(--dc) 55%,transparent);
   box-shadow:0 4px 0 rgba(0,0,0,.35)}
-.island .lbl{position:absolute;left:8px;top:4px;display:flex;align-items:center;gap:5px;font-size:12px;font-weight:900;white-space:nowrap}
+.island .lbl{position:absolute;left:8px;top:5px;display:flex;align-items:center;gap:5px;font-size:12px;font-weight:900;white-space:nowrap}
 .island .lbl i{width:10px;height:10px;background:var(--dc);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
 .island .lbl em{font-style:normal;font-weight:700;color:var(--sub);font-size:11px}
 .desks{display:grid;grid-template-columns:repeat(var(--cols),var(--cell));justify-content:center}
@@ -54,8 +54,9 @@ h1 span{background:linear-gradient(90deg,#4fe3ff,#b9a6ff);-webkit-background-cli
 .slot canvas{width:var(--s);height:var(--s);image-rendering:pixelated;display:block}
 .tag{margin-top:1px;max-width:calc(var(--cell) - 2px);font-size:10px;font-weight:700;line-height:1.25;text-align:center;
   padding:1px 5px;border-radius:5px;background:rgba(4,7,15,.72);border-bottom:2px solid var(--dc);white-space:nowrap}
+.tag.wrap{white-space:normal}
 .tag small{display:block;font-size:8.5px;font-weight:500;color:var(--sub)}
-@media (min-width:1000px){.island{padding-top:28px}.island .lbl{font-size:14px}.island .lbl em{font-size:13px}.tag{font-size:12.5px}.tag small{font-size:10px}}
+@media (min-width:1000px){.floor{gap:12px}.island{padding:46px 6px 4px}.island .lbl{font-size:14px}.island .lbl em{font-size:13px}.tag{font-size:12.5px}.tag small{font-size:10px}}
 .mach .slot{width:calc(var(--cell) + 26px)}
 .mach .tag{white-space:normal;max-width:none}
 .room .tag{white-space:normal}
@@ -165,7 +166,7 @@ const STAFF = [
   { id: 'n_make',  dept: 'neo',   name: '制作係',     prop: 'pen' },
   { id: 'n_mkt',   dept: 'neo',   name: 'マーケティング係', prop: 'mega' },
   { id: 'n_ana',   dept: 'neo',   name: '分析改善係', prop: 'graph' },
-  { id: 'n_scout', dept: 'neo',   name: '情報収集・分析係', prop: 'globe' },
+  { id: 'n_scout', dept: 'neo',   name: '情報収集・<wbr>分析係', prop: 'globe', wrap: true },
 ];
 const MACHINES = [
   { id: 'm_insta', name: 'Instagram<br>自動投稿', color: '#ff8fd0', icon: 'photo' },
@@ -356,7 +357,7 @@ function buildFloor() {
       for (const s of list) {
         const sl = document.createElement('div'); sl.className = 'slot';
         const c = mkCanvas(); paint(c, empty); sl.append(c);
-        sl.insertAdjacentHTML('beforeend', `<div class="tag">${s.name}${s.sub ? `<small>${s.sub}</small>` : ''}</div>`);
+        sl.insertAdjacentHTML('beforeend', `<div class="tag${s.wrap ? ' wrap' : ''}">${s.name}${s.sub ? `<small>${s.sub}</small>` : ''}</div>`);
         $('.desks', isl).append(sl); SLOTS[s.id] = c;
       }
     }

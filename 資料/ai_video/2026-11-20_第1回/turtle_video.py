@@ -128,12 +128,13 @@ def build_audio(lines, voice, speed=1.1, pitch=0.0, intonation=1.0, head=0.3, ta
         spans.append((st, subs[-1][1]))
     pieces.append(np.zeros(int(SR * tail), np.float32))
     voice_a = np.concatenate(pieces)
-    # 音量をそろえる（声によって大きさが違うため）：RMSを -19dBFS に、ピークは -1.5dBFS まで
+    # 音量をそろえる（声によって大きさが違うため）：話している部分のRMSを -15dBFS に（スマホ向けに約-16LUFS）。
+    # 大きすぎる山だけをやわらかく抑える（0.8を超えた分を tanh で丸める＝割れ防止）
     act = voice_a[np.abs(voice_a) > 0.01]
     rms = np.sqrt(np.mean(act ** 2)) if len(act) else 1
-    voice_a = voice_a * (10 ** (-19 / 20) / rms)
-    pk = np.abs(voice_a).max()
-    if pk > 10 ** (-1.5 / 20): voice_a *= 10 ** (-1.5 / 20) / pk
+    voice_a = voice_a * (10 ** (-15 / 20) / rms)
+    th = 0.8; over = np.abs(voice_a) > th
+    voice_a[over] = np.sign(voice_a[over]) * (th + (0.98 - th) * np.tanh((np.abs(voice_a[over]) - th) / (0.98 - th)))
     mix = voice_a.copy()
     c = chime() * 10 ** (chime_db / 20) / 0.9
     for ct in chimes:
@@ -266,7 +267,7 @@ def render(out_mp4, lines, layers, voice_a, mix_a, subs, spans, end_layer=None, 
         ev = []; prev = object()
         for ln, (st, en) in zip(lines, spans):
             k = getattr(ln, attr)
-            if k != prev: ev.append((st - 0.08, k)); prev = k
+            if k != prev: ev.append((st - 0.08 if ev else -1.0, k)); prev = k   # 最初の表示は0秒目から出しておく
         return ev
     tl = {"head": timeline("head"), "body": timeline("body")}
     def current(attr, t):

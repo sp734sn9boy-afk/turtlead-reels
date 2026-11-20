@@ -25,6 +25,7 @@ const times = (process.env.TIMES || '3,12,22,32,45,60').split(',').map(Number);
       });
       console.log(name, s + 's', chk.msg, chk.bad.length ? chk.bad : '', 'h=' + chk.h);
       await pg.screenshot({ path: path.join(OUT, `${name}_${String(s).padStart(2, '0')}s.png`), fullPage: true });
+      if (name === 'phone') await pg.screenshot({ path: path.join(OUT, `${name}_view_${String(s).padStart(2, '0')}s.png`) });
     }
     if (errs.length) console.log('ERR', name, errs);
     await pg.close();
