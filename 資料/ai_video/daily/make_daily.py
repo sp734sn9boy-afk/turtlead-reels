@@ -37,6 +37,15 @@ DEFAULT_VOICE = {"name": "猫使ビィ", "style": "ノーマル", "intonation": 
 DEFAULT_SPEED = 1.15   # 猫使ビィは聞き取りやすさ優先で 1.15（1.1〜1.2）
 CREDIT = "VOICEVOX:猫使ビィ"   # main() で声の名前から自動で決め直す
 WEEK = "月火水木金土日"
+# 概要欄の「お問い合わせ・ご相談」ブロック（2026-11-21 オーナー指示。タイトルのすぐ下に自動で入る。動画の「概要欄のリンクから」と対応）
+CONTACT_BLOCK = """▼ お問い合わせ・ご相談はこちら
+LINE公式：https://line.me/R/ti/p/@486zunqz
+お問い合わせフォーム：https://www.turtle-ad.com/contact/
+ホームページ：https://www.turtle-ad.com/
+キャラクターAI動画・リール動画：https://www.turtle-ad.com/reel/
+AI活用サポート・AI顧問：https://www.turtle-ad.com/ai/
+ホームページ制作：https://www.turtle-ad.com/hp/
+電話：099-210-3511（受付 9:00〜18:00、土日祝休み）"""
 
 TYPES = {
     # min/max は本編（宣伝カードの前まで）の秒数。最後の部分（宣伝・問い合わせ・しめ 約12〜14秒）は別
@@ -343,7 +352,7 @@ def main():
     for i, s in enumerate(scenes):
         s["start"] = 0.0 if i == 0 else round((scenes[i - 1]["ve"] + s["vs"]) / 2, 3)
     for i, s in enumerate(scenes[:-1]): s["end"] = scenes[i + 1]["start"]
-    TOTAL = round(bye["ve"] + 1.1, 2)
+    TOTAL = round(bye["ve"] + 1.0, 2)
     bye["end"] = TOTAL
     times["voice"] = time.time() - t0
     log(f"① 声づくり {times['voice']:.1f}秒 / セリフ {len(chunks)} 個 / 全体 {TOTAL} 秒")
@@ -768,14 +777,9 @@ def main():
     tags = sc.get("hashtags", "#AIニュース #生成AI #中小企業 #タートルアド")
     desc = f"""{title_txt}
 
-▼ お問い合わせ・ご相談はLINEから（キャラクターAI動画を御社のロゴから作ります）
-https://line.me/R/ti/p/{LINE_ID}
+{CONTACT_BLOCK}
 
 {sc.get('description_extra', '')}
-
-■ キャラクターAI動画のご相談（御社のロゴからキャラクター動画を作ります）
-LINE公式：https://line.me/R/ti/p/{LINE_ID}
-ホームページ：https://{SITE}/
 
 {src_txt}この動画は、タートルアドのAIチームが情報収集から台本・音声・映像まで作っています。
 音声：{CREDIT}
