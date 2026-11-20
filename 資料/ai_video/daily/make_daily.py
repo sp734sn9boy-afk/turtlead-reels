@@ -39,10 +39,11 @@ CREDIT = "VOICEVOX:猫使ビィ"   # main() で声の名前から自動で決め
 WEEK = "月火水木金土日"
 
 TYPES = {
+    # min/max は本編（宣伝カードの前まで）の秒数。最後の部分（宣伝・問い合わせ・しめ 約12〜14秒）は別
     "weekday":  {"program": "今日のAIニュース",          "icon": "AI", "min": 30, "max": 45},
     "saturday": {"program": "AIで仕事が楽になった実例",  "icon": "例", "min": 30, "max": 45},
     "sunday":   {"program": "今週のまとめ",              "icon": "週", "min": 30, "max": 90},
-    "greeting": {"program": "チャンネル開設のごあいさつ", "icon": "初", "min": 30, "max": 40},
+    "greeting": {"program": "チャンネル開設のごあいさつ", "icon": "初", "min": 30, "max": 45},  # 全体の長さ
 }
 ROOT = os.path.abspath(os.path.join(AV, "..", ".."))  # リポジトリの一番上
 TIP_LABEL = "中小企業ならこう使える"
@@ -52,6 +53,15 @@ INQUIRY_SAY = [{"sub": "くわしくは、LINEで", "read": "くわしくは、�
                {"sub": "お問い合わせください。"},
                {"sub": "概要欄のリンクからどうぞ！", "read": "がいようらんのリンクからどうぞ！"}]
 INQUIRY_SPEED_MUL = 0.9
+# しめのあいさつ（2026-11-21 オーナー指示）：型ごとの言葉。台本の "bye_say" / "bye_text" で変えられる。少しゆっくり・手をふって終わる
+BYE = {
+    "weekday":  ([{"sub": "また明日ね！", "read": "またあしたね！"}], "また明日ね！"),
+    "saturday": ([{"sub": "また明日ね！", "read": "またあしたね！"}], "また明日ね！"),
+    "sunday":   ([{"sub": "また来週もよろしくね！", "read": "またらいしゅうも、よろしくね！"}], "また来週も/よろしくね！"),
+    "greeting": ([{"sub": "明日から毎日お届けするので、", "read": "あしたから毎日おとどけするので、"},
+                  {"sub": "また見てね！バイバイ！"}], "また見てね！"),
+}
+BYE_SPEED_MUL = 0.92
 # 宣伝カードのセリフ（台本の "cta_say" で変えられる）
 CTA_SAY = [{"sub": "このキャラクターのようなAI動画を、", "read": "このキャラクターのようなエーアイ動画を、"},
            {"sub": "御社のロゴから作ります。", "read": "おんしゃのロゴから作ります。"}]
@@ -303,6 +313,9 @@ def main():
         scenes.append({"name": f"item{i + 1}", "item": it, "beats": it["beats"]})
     scenes.append({"name": "cta", "beats": [{"card": None, "say": sc.get("cta_say", CTA_SAY)},
                                             {"card": None, "say": sc.get("inquiry_say", INQUIRY_SAY), "inq": True}]})
+    bye_say, bye_text = BYE[sc["type"]]
+    bye_text = sc.get("bye_text", bye_text)
+    scenes.append({"name": "bye", "beats": [{"card": None, "say": sc.get("bye_say", bye_say), "bye": True}]})
     HEAD, GAP_CHUNK, GAP_BEAT, GAP_SCENE = 0.12, 0.12, 0.25, 0.42
     t = HEAD; chunks = []
     for si, s in enumerate(scenes):
@@ -317,20 +330,21 @@ def main():
                 sp = c["speed"]
                 if sp is None and s["name"] == "intro" and "タートルアド" in c["sub"]: sp = NAME_LINE_SPEED
                 if sp is None and b.get("inq"): sp = round(speed * INQUIRY_SPEED_MUL, 3)
+                if sp is None and b.get("bye"): sp = round(speed * BYE_SPEED_MUL, 3)
                 sp = float(sp or speed); c["speed"] = sp
                 a, meta = synth(read, spk, sp, cache, voice_cfg["intonation"], voice_cfg["pitch"])
                 c.update(read=read, audio=a, dur=meta["dur"], vis=meta["vis"], kana=meta["kana"], s=round(t, 3), e=round(t + meta["dur"], 3))
                 b["chunks"].append(c); chunks.append(c); t = c["e"]
             b["s"], b["e"] = b["chunks"][0]["s"], b["chunks"][-1]["e"]
         s["vs"], s["ve"] = s["beats"][0]["s"], s["beats"][-1]["e"]
-    cta = scenes[-1]
+    cta, bye = scenes[-2], scenes[-1]
     cta_voice_end = cta["ve"]
     # 宣伝カードは 4.5〜5.5 秒。声のあと少なくとも 1.3 秒残す
     for i, s in enumerate(scenes):
         s["start"] = 0.0 if i == 0 else round((scenes[i - 1]["ve"] + s["vs"]) / 2, 3)
     for i, s in enumerate(scenes[:-1]): s["end"] = scenes[i + 1]["start"]
-    TOTAL = round(max(cta["start"] + 4.6, cta_voice_end + 1.3), 2)
-    cta["end"] = TOTAL
+    TOTAL = round(bye["ve"] + 1.1, 2)
+    bye["end"] = TOTAL
     times["voice"] = time.time() - t0
     log(f"① 声づくり {times['voice']:.1f}秒 / セリフ {len(chunks)} 個 / 全体 {TOTAL} 秒")
 
@@ -477,7 +491,7 @@ def main():
                    (f'<div class="small" style="margin-top:10px;">{esc(card["note"])}</div>' if card.get("note") else ""), ["icon"]
         sys.exit(f"カードの type が不明: {ty}")
 
-    for n, s in enumerate(scenes[1:-1]):
+    for n, s in enumerate(scenes[1:-2]):
         it = s["item"]; sid = s["name"]; dur = round(s["end"] - s["start"], 3)
         num = str(n + 1) if multi else T["icon"]
         meta = "　｜　".join(x for x in (it.get("date_label", ""), it.get("source_label", "")) if x)
@@ -546,7 +560,7 @@ def main():
         else: put(tone(1500 + 60 * (tt % 1), 0.05, 60, 0.0), tt, 0.04)
 
     # --- 宣伝カード（前半：御社のロゴから作ります → 後半：LINEでお問い合わせ・概要欄のリンクから）
-    cd = round(TOTAL - cta["start"], 3); c0 = loc(cta, cta["vs"])
+    cd = round(cta["end"] - cta["start"], 3); c0 = loc(cta, cta["vs"])
     p2 = round(loc(cta, cta["beats"][1]["s"]) - 0.15, 3)
     cta_html = f"""    <div id="cta-card" class="clip" data-start="0.05" data-duration="{cd - 0.05:.3f}" data-track-index="0" style="position:absolute;left:0;top:385px;width:1080px;height:520px;">
       <div id="cta-in" class="card center" style="top:0;height:520px;padding:0 30px;">
@@ -582,6 +596,19 @@ def main():
     comp_file(PROJ, "cta", cta_html, cta_js)
     put(chime(1046.5, 0.8), cta["start"] + 0.9, 0.10)
     put(chime(1318.5, 0.5), cta["start"] + p2 + 0.2, 0.08)
+
+    # --- しめのあいさつ（「また明日ね！」＋タートルが大きく手をふる）
+    yd = round(bye["end"] - bye["start"], 3)
+    blines = bye_text.split("/"); bsz = fit(blines, 110, 60, 820, "R")
+    comp_file(PROJ, "bye", f"""    <div id="bye-card" class="clip" data-start="0.05" data-duration="{yd - 0.05:.3f}" data-track-index="0" style="position:absolute;left:0;top:400px;width:1080px;height:300px;">
+      <div id="bye-in" class="center" style="position:absolute;left:60px;right:60px;top:0;height:300px;">
+        <div id="bye-t" style="font-family:RoundM;font-size:{bsz}px;line-height:1.2;color:var(--yellow);white-space:nowrap;text-shadow:0 6px 0 #08101f, 0 0 30px rgba(60,214,240,0.6);">{mark(bye_text)}</div>
+        <div id="bye-s" style="margin-top:14px;font-size:30px;color:var(--dim);">AI動画編集部 ｜ タートルアド</div>
+      </div>
+    </div>""", f"""    tl.fromTo("#bye-t", {{scale:0.3, opacity:0, rotation:-8}}, {{scale:1, opacity:1, rotation:0, duration:0.5, ease:"back.out(2.2)"}}, 0.1);
+    tl.fromTo("#bye-t", {{y:0}}, {{y:-14, duration:0.4, ease:"sine.inOut", yoyo:true, repeat:{max(1, int((yd - 0.8) / 0.4) // 2 * 2 - 1)}, immediateRender:false}}, 0.7);
+    tl.fromTo("#bye-s", {{opacity:0}}, {{opacity:1, duration:0.3}}, 0.5);""")
+    put(chime(1567.98, 0.6), bye["start"] + 0.15, 0.10)
 
     # --- 上の帯・クレジット（いつも出ている）
     top_txt = f'<span style="color:var(--cyan);">AI動画編集部</span><br/>{esc(program)} <span style="color:var(--yellow);">{d.month}/{d.day}号</span>'
@@ -620,15 +647,31 @@ def main():
         clean.append((tc, st))
     blinks = sorted(round(b_ + (0.4 if int(b_) % 2 else 0), 2) for b_ in list(np.arange(2.6, TOTAL - 0.5, 3.1)) + [0.9])
     events = sorted([(t_, "m", st) for t_, st in clean] + [(b_, "b", 1) for b_ in blinks] + [(round(b_ + 0.13, 3), "b", 0) for b_ in blinks])
-    mouth_js = []; cm, cb = 0, 0
+    # 手をふるコマ（上げている手を左右に傾けた絵）を、口・まばたきの6枚それぞれに作る
+    for m in (0, 1, 2):
+        for b in (0, 1):
+            base_im = Image.open(os.path.join(PROJ, "assets", "img", f"turtle_m{m}_b{b}.png")).convert("RGBA")
+            for w, ang in ((1, 16), (2, -12)):
+                im_ = base_im.copy(); box = (368, 212, 444, 306)
+                arm = im_.crop(box); im_.paste(Image.new("RGBA", arm.size, (0, 0, 0, 0)), box[:2])
+                big = Image.new("RGBA", (arm.width + 80, arm.height + 80), (0, 0, 0, 0)); big.paste(arm, (40, 40))
+                im_.alpha_composite(big.rotate(ang, resample=Image.NEAREST, center=(20 + 40, 88 + 40)), (box[0] - 40, box[1] - 40))
+                im_.save(os.path.join(PROJ, "assets", "img", f"turtle_m{m}_b{b}_w{w}.png"))
+    # 手ふり：しめのあいさつのあいだ、0.18秒ごとに手の向きを切りかえる
+    wave_ev = [(round(bye["start"] + 0.1 + k * 0.18, 3), "w", 1 + k % 2) for k in range(int((TOTAL - bye["start"] - 0.3) / 0.18))]
+    wave_ev.append((round(TOTAL - 0.12, 3), "w", 0))
+    events = sorted(events + wave_ev)
+    mouth_js = []; cm, cb, cw = 0, 0, 0
     for t_, kind, v in events:
         if kind == "m": cm = v
-        else: cb = v
-        mouth_js.append(f'[{t_:.3f},"#tm{cm}{cb}"]')
-    imgs = "\n".join(f'        <img id="tm{m}{b}" src="assets/img/turtle_m{m}_b{b}.png" class="tface" style="opacity:{1 if (m, b) == (0, 0) else 0};" />' for m in (0, 1, 2) for b in (0, 1))
+        elif kind == "b": cb = v
+        else: cw = v
+        mouth_js.append(f'[{t_:.3f},"#tm{cm}{cb}{"w" + str(cw) if cw else ""}"]')
+    face_ids = [f"#tm{m}{b}{x}" for m in (0, 1, 2) for b in (0, 1) for x in ("", "w1", "w2")]
+    imgs = "\n".join(f'        <img id="tm{m}{b}{x}" src="assets/img/turtle_m{m}_b{b}{"_" + x if x else ""}.png" class="tface" style="opacity:{1 if (m, b, x) == (0, 0, "") else 0};" />' for m in (0, 1, 2) for b in (0, 1) for x in ("", "w1", "w2"))
     cs_ = cta["start"]; breathe_end = cs_ - 0.4
     breathe_rep = max(0, int((breathe_end - 1.5) / 1.2) - 1)
-    bow_t = max(cs_ + 1.6, cta["ve"] + 0.05)
+    by_ = bye["start"]
     p2_abs = cta["beats"][1]["s"] - 0.15
     comp_file(PROJ, "turtle", f"""    <div id="mover"><div id="bow"><div id="rig">
 {imgs}
@@ -640,11 +683,13 @@ def main():
     tl.fromTo("#rig", {{rotation:0, y:0}}, {{rotation:9, y:-12, duration:0.2, ease:"sine.inOut", yoyo:true, repeat:5, transformOrigin:"50% 90%", immediateRender:false}}, {cs_ + 0.4:.3f});
     // 問い合わせ案内：下（概要欄）を指すように、下へ何度もうなずく
     tl.fromTo("#bow", {{rotation:0, y:0}}, {{rotation:-10, y:16, duration:0.22, ease:"sine.inOut", yoyo:true, repeat:5, transformOrigin:"50% 100%", immediateRender:false}}, {p2_abs + 0.3:.3f});
-    tl.fromTo("#bow", {{rotation:0, y:0, scaleY:1}}, {{rotation:-14, y:26, scaleY:0.9, duration:0.35, ease:"power2.out", yoyo:true, repeat:1, repeatDelay:0.45, transformOrigin:"50% 100%", immediateRender:false}}, {bow_t:.3f});
+    // しめのあいさつ：もとの大きさに戻って、体をゆらしながら大きく手をふる
+    tl.to("#mover", {{scale:1, y:0, duration:0.45, ease:"back.out(1.6)"}}, {by_ - 0.1:.3f});
+    tl.fromTo("#rig", {{rotation:-6, y:0}}, {{rotation:6, y:-10, duration:0.36, ease:"sine.inOut", yoyo:true, repeat:{max(1, int((TOTAL - by_ - 0.5) / 0.36) // 2 * 2 - 1)}, transformOrigin:"50% 90%", immediateRender:false}}, {by_ + 0.1:.3f});
     // 仲間の紹介のあいだは、タートルはいったん隠れる
 {chr(10).join(f'    tl.to("#mover", {{opacity:0, duration:0.2}}, {a - 0.05:.3f});{chr(10)}    tl.to("#mover", {{opacity:1, duration:0.25}}, {b:.3f});' for a, b in team_windows)}
     // 口パク・まばたき（VOICEVOX の音の時刻から作った表）
-    const faces = ["#tm00","#tm01","#tm10","#tm11","#tm20","#tm21"];
+    const faces = {json.dumps(face_ids)};
     const mouth = [{",".join(mouth_js)}];
     for (const [t, id] of mouth) {{ tl.set(faces.filter(f => f !== id), {{opacity:0}}, t); tl.set(id, {{opacity:1}}, t); }}""",
     """    #mover { position:absolute; left:375px; top:745px; width:330px; height:330px; }
@@ -742,9 +787,14 @@ LINE公式：https://line.me/R/ti/p/{LINE_ID}
     # ---------------- ③ チェック
     t0 = time.time()
     report = []
-    if TOTAL < T["min"] or TOTAL > T["max"]:
-        warn.append(f"長さ {TOTAL} 秒は、この型の目安 {T['min']}〜{T['max']} 秒の外です（セリフを足す・削る）")
-    if not (7.5 <= cd <= 12.0): warn.append(f"宣伝カード＋問い合わせ案内の長さ {cd:.2f} 秒（目安 8〜11 秒）")
+    if sc["type"] == "greeting":   # あいさつ動画は全体で 45 秒以内
+        if TOTAL > T["max"]: warn.append(f"全体 {TOTAL} 秒は {T['max']} 秒を超えています（セリフを削る）")
+    else:                          # 毎日の動画は本編（宣伝カードの前まで）が目安の範囲＋最後の部分
+        main_len = round(cta["start"], 2)
+        if main_len < T["min"] or main_len > T["max"]:
+            warn.append(f"本編 {main_len} 秒は、この型の目安 {T['min']}〜{T['max']} 秒の外です（セリフを足す・削る）")
+    if not (7.0 <= cd <= 12.0): warn.append(f"宣伝カード＋問い合わせ案内の長さ {cd:.2f} 秒（目安 8〜11 秒）")
+    if TOTAL - cta["start"] > 16: warn.append(f"最後の部分（宣伝＋問い合わせ＋しめ）が {TOTAL - cta['start']:.1f} 秒と長め")
     if scenes[0]["vs"] > 0.3: warn.append("つかみの声の始まりが遅い")
     for it in (sc["items"] if sc["type"] != "greeting" else []):
         if not it.get("source_url"): warn.append(f"出典URLがありません: {it['headline']}")
@@ -788,7 +838,7 @@ LINE公式：https://line.me/R/ti/p/{LINE_ID}
     report.append(f"MP4の長さ {real:.2f} 秒（予定 {TOTAL} 秒）" + ("" if abs(real - TOTAL) < 0.2 else " ← ずれあり"))
     ast = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "a", "-show_entries", "stream=codec_name", "-of", "csv=p=0", mp4], capture_output=True, text=True).stdout.strip()
     report.append("音声トラック: " + (ast or "なし ← 要確認"))
-    shots = [0.1, 1.2] + [round((b["s"] + b["e"]) / 2, 2) for s in scenes[1:-1] for b in s["beats"]] + [round(cta["start"] + 1.8, 2), round(TOTAL - 0.15, 2)]
+    shots = [0.1, 1.2] + [round((b["s"] + b["e"]) / 2, 2) for s in scenes[1:-2] for b in s["beats"]] + [round(cta["start"] + 1.8, 2), round(cta["beats"][1]["s"] + 1.5, 2), round(bye["start"] + 0.9, 2), round(TOTAL - 0.15, 2)]
     fdir = os.path.join(OUT, "確認コマ"); shutil.rmtree(fdir, ignore_errors=True); os.makedirs(fdir)
     ims = []
     for k, ts in enumerate(shots):
