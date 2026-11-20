@@ -2,3 +2,7 @@
 資料/ai_video/daily/*/project/
 資料/ai_video/daily/*/cache/
 資料/ai_video/声の聞き比べ/マスコット声/project/
+資料/ai_video/**/work-*/
+資料/ai_video/**/.*.hf-transaction-*/
+資料/ai_video/**/render.log
+資料/ai_video/**/check.json
