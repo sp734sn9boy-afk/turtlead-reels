@@ -6,3 +6,5 @@
 資料/ai_video/**/.*.hf-transaction-*/
 資料/ai_video/**/render.log
 資料/ai_video/**/check.json
+資料/ai_video/daily/*/project_*/
+資料/ai_video/**/check_*.json

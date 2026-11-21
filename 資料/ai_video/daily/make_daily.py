@@ -7,11 +7,16 @@
     --no-render   声づくり・場面組み立て・チェックまで（書き出ししない）
     --draft       書き出しを下書き画質で（速い・確認用）
     --force       チェックでエラーが出ても書き出す
+    --only=youtube（または insta_tiktok / x。カンマ区切り可）  その場所の版だけ作る
+    --full-each   場所ごとの版を、つながず1本ずつ最初から書き出す（遅い。つなぎ目に問題が出たとき用）
 
-流れ: ①声づくり（VOICEVOX:猫使ビィ）→ ②HyperFramesの場面組み立て → ③チェック（hyperframes check・字幕のはみ出し・秒数）
-      → ④書き出し（MP4）→ ⑤確認（長さの照合・確認コマの画像・コンタクトシート）
+流れ: ①声づくり（VOICEVOX:猫使ビィ）→ ②HyperFramesの場面組み立て（場所ごとの版）→ ③チェック（hyperframes check・字幕のはみ出し・秒数）
+      → ④書き出し（本編は1回だけ書き出し、最後の問い合わせ案内〜しめだけ場所ごとに書き出して ffmpeg でつなぐ）
+      → ⑤確認（長さの照合・確認コマの画像・コンタクトシート）
 出力（台本.json と同じフォルダ）:
-  turtle_ai_<日付>.mp4 / 確認コマ/ / 秒数表.md / 概要欄.txt / チェック結果.txt / project/（HyperFramesの中身） / voice/（声のキャッシュ）
+  turtle_ai_<日付>_youtube.mp4 / _insta_tiktok.mp4 / _x.mp4
+  概要欄_youtube.txt（＝概要欄.txt）/ キャプション_instagram.txt / キャプション_tiktok.txt / 投稿_x.txt / 送るもの一覧.txt
+  確認コマ/ / 秒数表.md / チェック結果.txt / project/・project_<場所>/（HyperFramesの中身） / voice/（声のキャッシュ） / cache/（つなぐ前の部品）
 前提: VOICEVOX ENGINE が 127.0.0.1:50021 で動いていること（手順は 毎日の手順.md）。
 公開・投稿はしない（作るだけ）。
 """
@@ -62,6 +67,21 @@ INQUIRY_SAY = [{"sub": "くわしくは、LINEで", "read": "くわしくは、�
                {"sub": "お問い合わせください。"},
                {"sub": "概要欄のリンクからどうぞ！", "read": "がいようらんのリンクからどうぞ！"}]
 INQUIRY_SPEED_MUL = 0.9
+# 場所ごとの版（2026-11-21 オーナー承認：YouTube・Instagramリール/TikTok・X に出す）。本編は同じで、問い合わせ案内の最後の一言と矢印だけ変える
+LINKS_URL = "https://www.turtle-ad.com/links/"   # プロフィール・Xの投稿に入れる共通のリンク（リンク集ページ・作成中）
+VARIANTS = {
+    "youtube":      {"label": "YouTube", "where": "概要欄のリンクから", "dir": "down",
+                     "say_last": {"sub": "概要欄のリンクからどうぞ！", "read": "がいようらんのリンクからどうぞ！"}},
+    "insta_tiktok": {"label": "Instagramリール・TikTok", "where": "プロフィールのリンクから", "dir": "up",
+                     "say_last": {"sub": "プロフィールのリンクからどうぞ！", "read": "プロフィールのリンクからどうぞ！"}},
+    "x":            {"label": "X", "where": "投稿のリンクから", "dir": "up",   # Xは投稿の文（リンク）が動画の上に出るので上向き
+                     "say_last": {"sub": "投稿のリンクからどうぞ！", "read": "とうこうのリンクからどうぞ！"}},
+}
+def inquiry_for(sc, v):
+    """問い合わせ案内のセリフ。台本の "inquiry_say_<場所>" があればそれ、YouTubeは "inquiry_say" も使える。"""
+    if sc.get(f"inquiry_say_{v}"): return sc[f"inquiry_say_{v}"]
+    if v == "youtube" and sc.get("inquiry_say"): return sc["inquiry_say"]
+    return INQUIRY_SAY[:2] + [VARIANTS[v]["say_last"]]
 # しめのあいさつ（2026-11-21 オーナー指示）：型ごとの言葉。台本の "bye_say" / "bye_text" で変えられる。少しゆっくり・手をふって終わる
 BYE = {
     "weekday":  ([{"sub": "また明日ね！", "read": "またあしたね！"}], "また明日ね！"),
@@ -246,7 +266,8 @@ def bgm_track(total, N):
         for e in range(8):
             a = tone(note(ch[1 + (e * 3) % 4] + 12), 0.9, 5.5, 0.12) * (0.32 if e % 2 == 0 else 0.22)
             i = int((t0 + e * 0.3) * SR); b[i:i + len(a)] += a[:max(0, N - i)]
-    b = b / np.abs(b).max() * 0.5
+    # 音量そろえは最初の12秒で決める（全体の長さで変わらないように＝場所ごとの版でBGMが同じになる）
+    b = b / np.abs(b[:min(N, int(12 * SR))]).max() * 0.5
     fade = np.ones(N); fo = int(1.5 * SR); e_i = int(total * SR); fade[max(0, e_i - fo):e_i] = np.linspace(1, 0, min(fo, e_i)); fade[e_i:] = 0
     fade[:int(0.3 * SR)] = np.linspace(0, 1, int(0.3 * SR))
     return b * fade
@@ -297,20 +318,51 @@ ICON = {
 }
 
 # ------------------------------------------------------------------ メイン
-def main():
-    args = [a for a in sys.argv[1:] if not a.startswith("--")]
-    flags = {a for a in sys.argv[1:] if a.startswith("--")}
-    if not args: sys.exit(__doc__)
-    t_begin = time.time(); times = {}
-    spath = os.path.abspath(args[0]); OUT = os.path.dirname(spath)
-    sc = load_script(spath); T = TYPES[sc["type"]]; d = sc["_date"]
+def build(sc, OUT, variant, PROJ, quiet=False):
+    """1つの場所の版の、声・HyperFramesのプロジェクトを作る。本編は場所が違っても同じになる。"""
+    import copy
+    sc = copy.deepcopy(sc)
+    V = VARIANTS[variant]
+    global log
+    _log = log
+    if quiet: log = lambda *a: None
+    try:
+        return _build(sc, OUT, variant, PROJ, V)
+    finally:
+        log = _log
+
+def apply_overrides(node, variant):
+    """台本の中の「〇〇_<場所>」（例 "sub_insta_tiktok"、"text_x"）を、その場所の版では「〇〇」の代わりに使う。使ったら True。"""
+    used = False
+    if isinstance(node, dict):
+        suf = "_" + variant
+        for k in list(node):
+            if k.endswith(suf) and len(k) > len(suf):
+                base = k[:-len(suf)]
+                node[base] = node[k]; used = True
+                if base == "sub" and f"read{suf}" not in node: node.pop("read", None)   # 字幕を変えたら読みも作り直す
+        for k in list(node):
+            used = apply_overrides(node[k], variant) or used
+    elif isinstance(node, list):
+        for x in node: used = apply_overrides(x, variant) or used
+    return used
+
+def _build(sc, OUT, variant, PROJ, V):
+    times = {}
+    # 本編の言葉を場所ごとに変える指定（例：「チャンネル登録」→「フォロー」）。あるとその版は本編から書き出す（つながない）
+    body_custom = any([apply_overrides(sc["hook"], variant), apply_overrides(sc["items"], variant)])
+    for k in ("highlight", "readings"):
+        if f"{k}_{variant}" in sc: sc[k] = sc[f"{k}_{variant}"]
+    body_key = hashlib.sha1(json.dumps([sc["hook"], sc["items"], sc.get("highlight"), sc.get("readings"), sc.get("speed"), sc.get("voice")],
+                                       ensure_ascii=False, sort_keys=True, default=str).encode()).hexdigest()[:12]
+    T = TYPES[sc["type"]]; d = sc["_date"]
     global CREDIT
     voice_cfg = dict(DEFAULT_VOICE, **sc.get("voice", {}))
     CREDIT = f"VOICEVOX:{voice_cfg['name']}"
     speed = float(sc.get("speed", DEFAULT_SPEED)); hl = sc.get("highlight", []); extra_read = sc.get("readings", {})
     date_tag = f"{d.month}/{d.day}({WEEK[d.weekday()]})"
     program = sc.get("program", T["program"])
-    log(f"== {sc['date']} {program}（{sc['type']}）速さ {speed}")
+    log(f"== {sc['date']} {program}（{sc['type']}）速さ {speed} ／ 版：{V['label']}")
 
     # ---------------- ① 声づくり
     t0 = time.time()
@@ -321,7 +373,7 @@ def main():
     for i, it in enumerate(sc["items"]):
         scenes.append({"name": f"item{i + 1}", "item": it, "beats": it["beats"]})
     scenes.append({"name": "cta", "beats": [{"card": None, "say": sc.get("cta_say", CTA_SAY)},
-                                            {"card": None, "say": sc.get("inquiry_say", INQUIRY_SAY), "inq": True}]})
+                                            {"card": None, "say": inquiry_for(sc, variant), "inq": True}]})
     bye_say, bye_text = BYE[sc["type"]]
     bye_text = sc.get("bye_text", bye_text)
     scenes.append({"name": "bye", "beats": [{"card": None, "say": sc.get("bye_say", bye_say), "bye": True}]})
@@ -354,12 +406,13 @@ def main():
     for i, s in enumerate(scenes[:-1]): s["end"] = scenes[i + 1]["start"]
     TOTAL = round(bye["ve"] + 1.0, 2)
     bye["end"] = TOTAL
+    # つなぎ目：問い合わせ案内の声が始まる少し前（ここまでは場所が違っても同じ絵と音）。コマの切れ目にそろえる
+    CUT = math.floor((cta["beats"][1]["s"] - 0.1) * FPS) / FPS
     times["voice"] = time.time() - t0
     log(f"① 声づくり {times['voice']:.1f}秒 / セリフ {len(chunks)} 個 / 全体 {TOTAL} 秒")
 
     # ---------------- ② 場面組み立て
     t0 = time.time()
-    PROJ = os.path.join(OUT, "project")
     if os.path.isdir(os.path.join(PROJ, "compositions")): shutil.rmtree(os.path.join(PROJ, "compositions"))
     os.makedirs(os.path.join(PROJ, "compositions"), exist_ok=True)
     for sub in ("img", "vendor"):
@@ -571,6 +624,8 @@ def main():
     # --- 宣伝カード（前半：御社のロゴから作ります → 後半：LINEでお問い合わせ・概要欄のリンクから）
     cd = round(cta["end"] - cta["start"], 3); c0 = loc(cta, cta["vs"])
     p2 = round(loc(cta, cta["beats"][1]["s"]) - 0.15, 3)
+    UP = V["dir"] == "up"
+    ARR = "▲" if UP else "▼"
     cta_html = f"""    <div id="cta-card" class="clip" data-start="0.05" data-duration="{cd - 0.05:.3f}" data-track-index="0" style="position:absolute;left:0;top:385px;width:1080px;height:520px;">
       <div id="cta-in" class="card center" style="top:0;height:520px;padding:0 30px;">
         <div id="cta-swap" style="position:relative;width:860px;height:200px;">
@@ -580,7 +635,7 @@ def main():
           </div>
           <div id="cta-b" class="center" style="position:absolute;inset:0;opacity:0;">
             <div id="cta-q" style="font-size:48px;line-height:1.32;white-space:nowrap;">くわしくは <span style="display:inline-block;background:var(--line);color:#fff;font-family:RoundM;font-size:40px;padding:0 16px;border-radius:14px;line-height:1.3;">LINE</span> で<br/><span class="hl">お問い合わせ</span>ください</div>
-            <div id="cta-down" class="tag" style="font-size:38px;margin-top:16px;"><span id="cta-arr1" style="display:inline-block;">▼</span> 概要欄のリンクから <span id="cta-arr2" style="display:inline-block;">▼</span></div>
+            <div id="cta-down" class="tag" style="font-size:38px;margin-top:16px;"><span id="cta-arr1" style="display:inline-block;">{ARR}</span> {esc(V["where"])} <span id="cta-arr2" style="display:inline-block;">{ARR}</span></div>
           </div>
         </div>
         <div id="cta-line" style="margin-top:18px;display:flex;align-items:center;gap:16px;">
@@ -600,7 +655,7 @@ def main():
     tl.fromTo("#cta-disc", {{opacity:0}}, {{opacity:1, duration:0.35}}, 1.3);
     tl.to("#cta-a", {{opacity:0, y:-20, duration:0.25, ease:"power2.in"}}, {p2:.3f});
     tl.fromTo("#cta-b", {{opacity:0, y:24}}, {{opacity:1, y:0, duration:0.35, ease:"power3.out"}}, {p2 + 0.2:.3f});
-    tl.fromTo("#cta-arr1, #cta-arr2", {{y:0}}, {{y:12, duration:0.3, ease:"sine.inOut", yoyo:true, repeat:{max(1, int((cd - p2 - 0.8) / 0.3) // 2 * 2 - 1)}, immediateRender:false}}, {p2 + 0.6:.3f});
+    tl.fromTo("#cta-arr1, #cta-arr2", {{y:0}}, {{y:{-12 if UP else 12}, duration:0.3, ease:"sine.inOut", yoyo:true, repeat:{max(1, int((cd - p2 - 0.8) / 0.3) // 2 * 2 - 1)}, immediateRender:false}}, {p2 + 0.6:.3f});
     tl.fromTo("#cta-line", {{scale:1}}, {{scale:1.08, duration:0.35, yoyo:true, repeat:3, ease:"sine.inOut", immediateRender:false}}, {p2 + 0.5:.3f});"""
     comp_file(PROJ, "cta", cta_html, cta_js)
     put(chime(1046.5, 0.8), cta["start"] + 0.9, 0.10)
@@ -682,6 +737,12 @@ def main():
     breathe_rep = max(0, int((breathe_end - 1.5) / 1.2) - 1)
     by_ = bye["start"]
     p2_abs = cta["beats"][1]["s"] - 0.15
+    if V["dir"] == "up":   # プロフィール・投稿のリンク（画面の上のほう）：上げた手で上を指すように、上へ何度もはねる
+        turtle_inq = f"""    // 問い合わせ案内：上（プロフィール・投稿のリンク）を指すように、上へ何度もはねる
+    tl.fromTo("#bow", {{rotation:0, y:0}}, {{rotation:6, y:-22, duration:0.22, ease:"sine.inOut", yoyo:true, repeat:5, transformOrigin:"50% 100%", immediateRender:false}}, {p2_abs + 0.3:.3f});"""
+    else:
+        turtle_inq = f"""    // 問い合わせ案内：下（概要欄）を指すように、下へ何度もうなずく
+    tl.fromTo("#bow", {{rotation:0, y:0}}, {{rotation:-10, y:16, duration:0.22, ease:"sine.inOut", yoyo:true, repeat:5, transformOrigin:"50% 100%", immediateRender:false}}, {p2_abs + 0.3:.3f});"""
     comp_file(PROJ, "turtle", f"""    <div id="mover"><div id="bow"><div id="rig">
 {imgs}
     </div></div></div>""", f"""    // はじめに手をふる → 呼吸
@@ -690,8 +751,7 @@ def main():
     // 宣伝カード：小さくなってカードの下へ → 手をふる → お辞儀
     tl.fromTo("#mover", {{scale:1, y:0}}, {{scale:0.58, y:30, duration:0.5, ease:"power3.inOut", transformOrigin:"50% 100%"}}, {cs_ - 0.2:.3f});
     tl.fromTo("#rig", {{rotation:0, y:0}}, {{rotation:9, y:-12, duration:0.2, ease:"sine.inOut", yoyo:true, repeat:5, transformOrigin:"50% 90%", immediateRender:false}}, {cs_ + 0.4:.3f});
-    // 問い合わせ案内：下（概要欄）を指すように、下へ何度もうなずく
-    tl.fromTo("#bow", {{rotation:0, y:0}}, {{rotation:-10, y:16, duration:0.22, ease:"sine.inOut", yoyo:true, repeat:5, transformOrigin:"50% 100%", immediateRender:false}}, {p2_abs + 0.3:.3f});
+{turtle_inq}
     // しめのあいさつ：もとの大きさに戻って、体をゆらしながら大きく手をふる
     tl.to("#mover", {{scale:1, y:0, duration:0.45, ease:"back.out(1.6)"}}, {by_ - 0.1:.3f});
     tl.fromTo("#rig", {{rotation:-6, y:0}}, {{rotation:6, y:-10, duration:0.36, ease:"sine.inOut", yoyo:true, repeat:{max(1, int((TOTAL - by_ - 0.5) / 0.36) // 2 * 2 - 1)}, transformOrigin:"50% 90%", immediateRender:false}}, {by_ + 0.1:.3f});
@@ -749,7 +809,8 @@ def main():
     </div>
     <script>
       const tl = gsap.timeline({{ paused: true }});
-      tl.fromTo("#glow", {{x:-60, y:0, scale:1}}, {{x:60, y:-40, scale:1.12, duration:{TOTAL / 2:.2f}, ease:"sine.inOut", yoyo:true, repeat:1}}, 0);
+      tl.fromTo("#glow", {{x:-60, y:0, scale:1}}, {{x:60, y:-40, scale:1.12, duration:{CUT / 2:.3f}, ease:"sine.inOut", yoyo:true, repeat:1}}, 0);
+      tl.to("#glow", {{x:20, y:-20, scale:1.06, duration:{TOTAL - CUT - 0.02:.3f}, ease:"sine.inOut"}}, {CUT + 0.02:.3f});
       window.__timelines["main"] = tl;
     </script>
   </body>
@@ -759,15 +820,58 @@ def main():
     times["build"] = time.time() - t0
     log(f"② 場面組み立て {times['build']:.1f}秒（{PROJ}）")
 
-    # 秒数表・概要欄
+    # 秒数表（場所ごとの版の最後の一言もここで確かめられるように、版の名前をつけて書く）
     rows = ["| 時間（秒） | 場面 | 字幕 | 速さ | 読み（VOICEVOXの読み） |", "|---|---|---|---|---|"]
     for s in scenes:
         for b in s["beats"]:
             for c in b["chunks"]:
                 rows.append(f"| {c['s']:.2f}〜{c['e']:.2f} | {s['name']} | {plain(c['sub']).replace('/', ' ')} | {c['speed']} | {c['kana']} |")
-    open(os.path.join(OUT, "秒数表.md"), "w").write(
-        f"# 秒数表（{sc['date']} {program}）\n\n- 縦1080×1920・30fps・全体 {TOTAL} 秒・声 {CREDIT}（{voice_cfg['style']}・抑揚 {voice_cfg['intonation']}・高さ {voice_cfg['pitch']}） 速さ {speed}\n- 場面："
-        + " / ".join(f"{s['name']} {s['start']:.2f}〜{s['end']:.2f}" for s in scenes) + "\n\n" + "\n".join(rows) + "\n")
+    hyou = (f"## 版：{V['label']}\n\n- 縦1080×1920・30fps・全体 {TOTAL} 秒・声 {CREDIT}（{voice_cfg['style']}・抑揚 {voice_cfg['intonation']}・高さ {voice_cfg['pitch']}） 速さ {speed}・つなぎ目 {CUT:.3f} 秒\n- 場面："
+            + " / ".join(f"{s['name']} {s['start']:.2f}〜{s['end']:.2f}" for s in scenes) + "\n\n" + "\n".join(rows) + "\n")
+
+    # チェック（場所ごとの版で共通の中身）
+    if sc["type"] == "greeting":   # あいさつ動画は全体で 45 秒以内
+        if TOTAL > T["max"]: warn.append(f"全体 {TOTAL} 秒は {T['max']} 秒を超えています（セリフを削る）")
+    else:                          # 毎日の動画は本編（宣伝カードの前まで）が目安の範囲＋最後の部分
+        main_len = round(cta["start"], 2)
+        if main_len < T["min"] or main_len > T["max"]:
+            warn.append(f"本編 {main_len} 秒は、この型の目安 {T['min']}〜{T['max']} 秒の外です（セリフを足す・削る）")
+    if not (7.0 <= cd <= 12.0): warn.append(f"宣伝カード＋問い合わせ案内の長さ {cd:.2f} 秒（目安 8〜11 秒）")
+    if TOTAL - cta["start"] > 16: warn.append(f"最後の部分（宣伝＋問い合わせ＋しめ）が {TOTAL - cta['start']:.1f} 秒と長め")
+    if scenes[0]["vs"] > 0.3: warn.append("つかみの声の始まりが遅い")
+    for it in (sc["items"] if sc["type"] != "greeting" else []):
+        if not it.get("source_url"): warn.append(f"出典URLがありません: {it['headline']}")
+    return dict(variant=variant, PROJ=PROJ, TOTAL=TOTAL, CUT=CUT, body_custom=body_custom, body_key=body_key, scenes=scenes, cta=cta, bye=bye, warn=warn, hyou=hyou,
+                program=program, hook_head=hook_head, d=d, credit=CREDIT, times=times, speed=speed, voice_cfg=voice_cfg)
+
+
+# ------------------------------------------------------------------ 場所ごとの文章（概要欄・キャプション・Xの投稿）
+def x_count(s):
+    """Xの文字数（日本語などは1文字=2、英数字・記号の一部は1、URLは23）。上限280。"""
+    n = 0
+    for part in re.split(r"(https?://\S+)", s):
+        if re.match(r"https?://", part): n += 23; continue
+        for ch in part:
+            o = ord(ch)
+            n += 1 if (o <= 4351 or 8192 <= o <= 8205 or 8208 <= o <= 8223 or 8242 <= o <= 8247) else 2
+    return n
+
+def sentences_upto(text, lo, hi):
+    """文（。！？で区切る）を lo 字を超えるまでつなぐ（hi 字は超えない）。"""
+    out = ""
+    for snt in re.findall(r"[^。！？!?\n]+[。！？!?]?", text):
+        snt = snt.strip()
+        if not snt: continue
+        if out and len(out) + len(snt) > hi: break
+        out += snt
+        if len(out) >= lo: break
+    return out
+
+def write_texts(sc, OUT, info):
+    d, program, hook_head, credit = info["d"], info["program"], info["hook_head"], info["credit"]
+    sns = sc.get("sns", {})
+    ai_note = "この動画は、タートルアドのAIチームが情報収集から台本・音声・映像まで作っています。"
+    # --- YouTube 概要欄（今までの形のまま）
     srcs = [f"・{it['headline']}（{it.get('source_label', '').replace('出典：', '')}）\n  {it['source_url']}" for it in sc["items"] if it.get("source_url")]
     for it in sc["items"]:
         for u in it.get("source_urls_extra", []): srcs.append(f"  {u}")
@@ -781,86 +885,251 @@ def main():
 
 {sc.get('description_extra', '')}
 
-{src_txt}この動画は、タートルアドのAIチームが情報収集から台本・音声・映像まで作っています。
-音声：{CREDIT}
+{src_txt}{ai_note}
+音声：{credit}
 
 {tags}
 """
-    open(os.path.join(OUT, "概要欄.txt"), "w").write(desc)
+    open(os.path.join(OUT, "概要欄_youtube.txt"), "w").write(desc)
+    open(os.path.join(OUT, "概要欄.txt"), "w").write(desc)   # 今までの名前（n8n の YouTube 自動投稿の手順が使う）。中身は 概要欄_youtube.txt と同じ
 
-    # ---------------- ③ チェック
-    t0 = time.time()
-    report = []
-    if sc["type"] == "greeting":   # あいさつ動画は全体で 45 秒以内
-        if TOTAL > T["max"]: warn.append(f"全体 {TOTAL} 秒は {T['max']} 秒を超えています（セリフを削る）")
-    else:                          # 毎日の動画は本編（宣伝カードの前まで）が目安の範囲＋最後の部分
-        main_len = round(cta["start"], 2)
-        if main_len < T["min"] or main_len > T["max"]:
-            warn.append(f"本編 {main_len} 秒は、この型の目安 {T['min']}〜{T['max']} 秒の外です（セリフを足す・削る）")
-    if not (7.0 <= cd <= 12.0): warn.append(f"宣伝カード＋問い合わせ案内の長さ {cd:.2f} 秒（目安 8〜11 秒）")
-    if TOTAL - cta["start"] > 16: warn.append(f"最後の部分（宣伝＋問い合わせ＋しめ）が {TOTAL - cta['start']:.1f} 秒と長め")
-    if scenes[0]["vs"] > 0.3: warn.append("つかみの声の始まりが遅い")
-    for it in (sc["items"] if sc["type"] != "greeting" else []):
-        if not it.get("source_url"): warn.append(f"出典URLがありません: {it['headline']}")
+    # --- SNS 共通の材料（台本の "sns" で上書きできる）
+    headline = sns.get("headline") or sc.get("title") or (titles[0] if titles else f"{hook_head}｜{program}")
+    first_para = (sc.get("description_extra", "").split("\n\n")[0]).strip()
+    body = sns.get("body") or first_para or hook_head
+    short = sns.get("short") or sentences_upto(body, 40, 80) or hook_head
+    src_names = sorted({it.get("source_label", "").replace("出典：", "") for it in sc["items"] if it.get("source_url") and it.get("source_label")})
+    src_line = ("出典：" + "・".join(src_names)) if src_names and sc["type"] != "greeting" else ""
+    def tagline(lst): return " ".join(x if x.startswith("#") else "#" + x for x in lst)
+    extra_tag = {"weekday": "#AIニュース", "saturday": "#AI活用事例", "sunday": "#AIニュース", "greeting": "#はじめまして"}[sc["type"]]
+    warn = []
+
+    # --- Instagram（リンクは押せないので貼らない）
+    ig_tags = sns.get("insta_hashtags") or ["#AI", "#生成AI", "#AI活用", extra_tag, "#中小企業", "#業務効率化", "#DX", "#AI動画", "#タートルアド", "#AI動画編集部"]
+    ig = "\n".join(x for x in [
+        headline, "", body, "",
+        "▼ くわしくはプロフィールのリンクから",
+        "LINEでのご相談・お問い合わせも、プロフィールのリンクからどうぞ。",
+        src_line,
+        "", ai_note, f"音声：{credit}", "", tagline(ig_tags)] if x is not None)
+    ig = re.sub(r"\n{3,}", "\n\n", ig).strip() + "\n"
+    if len(ig) > 2200: warn.append(f"Instagramのキャプションが {len(ig)} 字（上限2200字）")
+    if not (8 <= len(ig_tags) <= 15): warn.append(f"Instagramのハッシュタグが {len(ig_tags)} 個（10個前後に）")
+    open(os.path.join(OUT, "キャプション_instagram.txt"), "w").write(ig)
+
+    # --- TikTok（短め・150字前後）
+    tt_tags = sns.get("tiktok_hashtags") or ["#AI", "#生成AI", "#中小企業", "#AI活用", "#タートルアド"]
+    def tiktok(sh):
+        return "\n".join(x for x in [sns.get("tiktok_headline") or hook_head or headline, sh, "くわしくはプロフィールのリンクから",
+                                     f"AIチームが制作／音声：{credit}", tagline(tt_tags)] if x) + "\n"
+    tt = tiktok(short)
+    if len(tt) > 190: tt = tiktok(sentences_upto(short, 20, 60))
+    if len(tt.strip()) > 190: warn.append(f"TikTokのキャプションが {len(tt.strip())} 字と長め（150字前後に）")
+    open(os.path.join(OUT, "キャプション_tiktok.txt"), "w").write(tt)
+
+    # --- X（280カウント以内・リンク1つ・ハッシュタグ1〜2個）
+    x_tags = sns.get("x_hashtags") or ["#生成AI", "#中小企業"]
+    def xpost(head, sh):
+        return "\n".join(x for x in [head, sh, "くわしくはこちら（LINEでのご相談も）", LINKS_URL,
+                                     tagline(x_tags), f"※AIが制作／音声 {credit}"] if x)
+    x_head = sns.get("x_headline") or headline
+    x_body = sns.get("x_body") or short
+    xt = xpost(x_head, x_body)
+    if x_count(xt) > 280: xt = xpost(x_head, sentences_upto(x_body, 10, 40))
+    if x_count(xt) > 280: xt = xpost(x_head, "")
+    if x_count(xt) > 280: warn.append(f"Xの投稿が {x_count(xt)} カウント（上限280）。台本の sns.x_headline / x_body を短く")
+    open(os.path.join(OUT, "投稿_x.txt"), "w").write(xt + "\n")
+    return {"ig_len": len(ig.strip()), "ig_tags": len(ig_tags), "tt_len": len(tt.strip()), "x_count": x_count(xt), "warn": warn}
+
+
+# ------------------------------------------------------------------ 書き出し・つなぐ
+def hf_cmd():
+    return ["node", HF_CLI] if os.path.exists(HF_CLI) else ["npx", "--yes", "hyperframes@0.9.72"]
+
+def render(proj, out, q, logf, start=None, end=None):
     env = dict(os.environ, **TELEMETRY_OFF)
-    hf = ["node", HF_CLI] if os.path.exists(HF_CLI) else ["npx", "--yes", "hyperframes@0.9.72"]
-    r = subprocess.run(hf + ["check", "--json"], cwd=PROJ, env=env, capture_output=True, text=True)
-    errs = None
-    try:
-        j = json.loads(r.stdout[r.stdout.index("{"):])
-        open(os.path.join(OUT, "check.json"), "w").write(json.dumps(j, ensure_ascii=False, indent=1))
-        errs = sum(int(v.get("errorCount", 0)) for v in j.values() if isinstance(v, dict))
-        if j.get("ok") is False and errs == 0: errs = 1
-        wn = sum(int(v.get("warningCount", 0)) for v in j.values() if isinstance(v, dict))
-        report.append(f"hyperframes check: ok={j.get('ok')} エラー {errs} / 注意 {wn}（中身は check.json）")
-    except Exception:
-        report.append("hyperframes check の結果が読めません:\n" + (r.stdout[-2000:] + r.stderr[-2000:]))
+    cmd = hf_cmd() + ["render", "--quality", q, "-o", out]
+    if start is not None: cmd += ["--start", f"{start:.4f}"]
+    if end is not None: cmd += ["--end", f"{end:.4f}"]
+    with open(logf, "a") as lf:
+        lf.write(f"\n===== {' '.join(cmd)}  (cwd={proj})\n"); lf.flush()
+        r = subprocess.run(cmd, cwd=proj, env=env, stdout=lf, stderr=subprocess.STDOUT)
+    return r.returncode == 0 and os.path.exists(out)
+
+def probe(p, entries, stream=None):
+    cmd = ["ffprobe", "-v", "error"] + (["-select_streams", stream] if stream else []) + ["-show_entries", entries, "-of", "csv=p=0", p]
+    return subprocess.run(cmd, capture_output=True, text=True).stdout.strip()
+
+def nframes(p):
+    v = probe(p, "stream=nb_frames", "v:0")
+    try: return int(v.split(",")[0])
+    except Exception: return 0
+
+def splice(head, tail, out, work):
+    """本編（head）と最後の部分（tail）をつなぐ。映像はそのままつなぎ（再圧縮なし）、音はWAVでつないでから1回だけAACにする。"""
+    hf_n = nframes(head)
+    if not hf_n: return False
+    lst = os.path.join(work, f"concat_{os.path.basename(out)}.txt")
+    open(lst, "w").write(f"file '{head}'\nfile '{tail}'\n")
+    hw, tw, aw = (os.path.join(work, x) for x in ("_head.wav", "_tail.wav", "_all.wav"))
+    for src, dst in ((head, hw), (tail, tw)):
+        if subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", src, "-vn", "-ac", "2", "-ar", str(SR), "-c:a", "pcm_s16le", dst]).returncode: return False
+    def rd(p):
+        with wave.open(p) as f: return np.frombuffer(f.readframes(f.getnframes()), np.int16).reshape(-1, 2)
+    a, b = rd(hw), rd(tw)
+    n_head = round(hf_n / FPS * SR)   # 本編の音は、本編の映像のコマ数ちょうどの長さにそろえる
+    a = a[:n_head] if len(a) >= n_head else np.vstack([a, np.zeros((n_head - len(a), 2), np.int16)])
+    allv = np.vstack([a, b])
+    with wave.open(aw, "w") as f:
+        f.setnchannels(2); f.setsampwidth(2); f.setframerate(SR); f.writeframes(allv.tobytes())
+    r = subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", lst, "-i", aw,
+                        "-map", "0:v:0", "-map", "1:a:0", "-c:v", "copy", "-c:a", "aac", "-b:a", "192k",
+                        "-movflags", "+faststart", "-shortest", out])
+    for x in (hw, tw, aw):
+        if os.path.exists(x): os.remove(x)
+    return r.returncode == 0 and os.path.exists(out)
+
+
+# ------------------------------------------------------------------ メイン
+def main():
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    flags = {a for a in sys.argv[1:] if a.startswith("--")}
+    if not args: sys.exit(__doc__)
+    t_begin = time.time(); times = {}
+    spath = os.path.abspath(args[0]); OUT = os.path.dirname(spath)
+    sc = load_script(spath)
+    only = [v for f in flags if f.startswith("--only=") for v in f.split("=", 1)[1].split(",") if v]
+    for v in only:
+        if v not in VARIANTS: sys.exit(f"--only は {' / '.join(VARIANTS)} のどれか: {v}")
+    vlist = [v for v in VARIANTS if not only or v in only]
+
+    # ①② 声づくり・場面組み立て（場所ごと）
+    t0 = time.time(); B = {}
+    for k, v in enumerate(vlist):
+        proj = os.path.join(OUT, "project" if v == "youtube" else f"project_{v}")
+        B[v] = build(sc, OUT, v, proj, quiet=k > 0)
+        log(f"  版 {VARIANTS[v]['label']}: 全体 {B[v]['TOTAL']} 秒（つなぎ目 {B[v]['CUT']:.3f} 秒）→ {proj}")
+    times["voice+build"] = time.time() - t0
+    first = B[vlist[0]]
+    open(os.path.join(OUT, "秒数表.md"), "w").write(f"# 秒数表（{sc['date']} {first['program']}）\n\n" + "\n".join(B[v]["hyou"] for v in vlist))
+    tx = write_texts(sc, OUT, first)
+    log(f"  文章：Instagram {tx['ig_len']}字・タグ{tx['ig_tags']}個 ／ TikTok {tx['tt_len']}字 ／ X {tx['x_count']}カウント（上限280）")
+
+    # ③ チェック
+    t0 = time.time()
+    report, warn = [], list(first["warn"]) + tx["warn"]
+    for v in vlist:
+        if B[v]["body_custom"]: warn.append(f"{VARIANTS[v]['label']} 版は本編の言葉を変えています（本編の書き出しが1回増えます）")
+    env = dict(os.environ, **TELEMETRY_OFF)
+    blocked = False
+    for v in vlist:
+        r = subprocess.run(hf_cmd() + ["check", "--json"], cwd=B[v]["PROJ"], env=env, capture_output=True, text=True)
+        errs = None
+        try:
+            j = json.loads(r.stdout[r.stdout.index("{"):])
+            open(os.path.join(OUT, "check.json" if v == "youtube" else f"check_{v}.json"), "w").write(json.dumps(j, ensure_ascii=False, indent=1))
+            errs = sum(int(x.get("errorCount", 0)) for x in j.values() if isinstance(x, dict))
+            if j.get("ok") is False and errs == 0: errs = 1
+            wn = sum(int(x.get("warningCount", 0)) for x in j.values() if isinstance(x, dict))
+            report.append(f"hyperframes check（{VARIANTS[v]['label']}）: ok={j.get('ok')} エラー {errs} / 注意 {wn}")
+        except Exception:
+            report.append(f"hyperframes check（{v}）の結果が読めません:\n" + (r.stdout[-2000:] + r.stderr[-2000:]))
+        if errs is None or errs > 0 or r.returncode != 0: blocked = True
     times["check"] = time.time() - t0
     report += [f"注意: {w}" for w in warn] or ["注意: なし"]
     log("③ チェック\n  " + "\n  ".join(report))
-    blocked = (errs is None or errs > 0 or r.returncode != 0)
     if blocked and "--force" not in flags:
         open(os.path.join(OUT, "チェック結果.txt"), "w").write("\n".join(report) + "\n")
         sys.exit("チェックでエラー。check.json を見て直すか、--force で書き出し。")
-
-    # ---------------- ④ 書き出し
-    mp4 = os.path.join(OUT, f"turtle_ai_{sc['date']}.mp4")
     if "--no-render" in flags:
         open(os.path.join(OUT, "チェック結果.txt"), "w").write("\n".join(report) + "\n（書き出しなし）\n")
         log(f"書き出しなしで終了（{time.time() - t_begin:.0f}秒）"); return
+
+    # ④ 書き出し：本編は1回、最後の部分は場所ごと → つなぐ
     t0 = time.time()
     q = "draft" if "--draft" in flags else "delivery"
-    with open(os.path.join(OUT, "render.log"), "w") as lf:
-        r = subprocess.run(hf + ["render", "--quality", q, "-o", mp4], cwd=PROJ, env=env, stdout=lf, stderr=subprocess.STDOUT)
+    work = os.path.join(OUT, "cache"); os.makedirs(work, exist_ok=True)
+    logf = os.path.join(OUT, "render.log"); open(logf, "w").close()
+    mp4s = {v: os.path.join(OUT, f"turtle_ai_{sc['date']}_{v}.mp4") for v in vlist}
+    how = {}
+    # 本編が同じ版どうし（本編の言葉・つなぎ目が同じ）をまとめ、本編は1回だけ書き出して、最後の部分だけ版ごとに書き出してつなぐ
+    groups = {}
+    for v in vlist: groups.setdefault((B[v]["body_key"], round(B[v]["CUT"], 4)), []).append(v)
+    for gi, grp in enumerate(groups.values()):
+        if len(grp) < 2 or "--full-each" in flags: continue
+        b0_ = B[grp[0]]; CUT = b0_["CUT"]; head = os.path.join(work, f"head{gi}.mp4"); t1 = time.time()
+        ok = render(b0_["PROJ"], head, q, logf, end=CUT)
+        times[f"render_head{gi}"] = time.time() - t1
+        log(f"④ 本編の書き出し（{'・'.join(VARIANTS[v]['label'] for v in grp)}）{times[f'render_head{gi}']:.0f}秒（0〜{CUT:.2f}秒）" + ("" if ok else " ← 失敗。1本ずつ書き出しに切りかえ"))
+        for v in grp:
+            if not ok: break
+            t1 = time.time(); tail = os.path.join(work, f"tail_{v}.mp4")
+            if render(B[v]["PROJ"], tail, q, logf, start=CUT) and splice(head, tail, mp4s[v], work):
+                how[v] = "本編＋最後の部分をつないだ"
+            times[f"render_tail_{v}"] = time.time() - t1
+            log(f"   最後の部分（{VARIANTS[v]['label']}）{times[f'render_tail_{v}']:.0f}秒" + ("" if v in how else " ← 失敗。この版は最初から書き出し"))
+    for v in vlist:
+        if v in how: continue
+        t1 = time.time()
+        if os.path.exists(mp4s[v]): os.remove(mp4s[v])
+        if not render(B[v]["PROJ"], mp4s[v], q, logf): sys.exit(f"書き出し失敗（{v}）。{logf} を見てください")
+        how[v] = "最初から1本で書き出し"; times[f"render_full_{v}"] = time.time() - t1
+        log(f"   {VARIANTS[v]['label']} を最初から書き出し {times[f'render_full_{v}']:.0f}秒")
     times["render"] = time.time() - t0
-    if r.returncode != 0 or not os.path.exists(mp4): sys.exit(f"書き出し失敗。{OUT}/render.log を見てください")
-    log(f"④ 書き出し {times['render']:.0f}秒 → {mp4}")
 
-    # ---------------- ⑤ 確認（長さ・確認コマ）
+    # ⑤ 確認（長さ・音・確認コマ）
     t0 = time.time()
-    real = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", mp4], capture_output=True, text=True).stdout.strip() or 0)
-    report.append(f"MP4の長さ {real:.2f} 秒（予定 {TOTAL} 秒）" + ("" if abs(real - TOTAL) < 0.2 else " ← ずれあり"))
-    ast = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "a", "-show_entries", "stream=codec_name", "-of", "csv=p=0", mp4], capture_output=True, text=True).stdout.strip()
-    report.append("音声トラック: " + (ast or "なし ← 要確認"))
-    shots = [0.1, 1.2] + [round((b["s"] + b["e"]) / 2, 2) for s in scenes[1:-2] for b in s["beats"]] + [round(cta["start"] + 1.8, 2), round(cta["beats"][1]["s"] + 1.5, 2), round(bye["start"] + 0.9, 2), round(TOTAL - 0.15, 2)]
+    for v in vlist:
+        real = float(probe(mp4s[v], "format=duration") or 0); tot = B[v]["TOTAL"]
+        ast = probe(mp4s[v], "stream=codec_name", "a")
+        report.append(f"{os.path.basename(mp4s[v])}: {real:.2f} 秒（予定 {tot} 秒）・音声 {ast or 'なし ← 要確認'}・{how[v]}"
+                      + ("" if abs(real - tot) < 0.2 else " ← ずれあり"))
     fdir = os.path.join(OUT, "確認コマ"); shutil.rmtree(fdir, ignore_errors=True); os.makedirs(fdir)
-    ims = []
-    for k, ts in enumerate(shots):
-        p = os.path.join(fdir, f"{k:02d}_{ts:05.2f}s.png")
-        subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", str(ts), "-i", mp4, "-frames:v", "1", p])
-        if os.path.exists(p): ims.append((ts, Image.open(p).convert("RGB")))
-    cols = 4; tw, th = 270, 480; rows_n = math.ceil(len(ims) / cols)
-    sheet = Image.new("RGB", (cols * tw, rows_n * (th + 30)), (20, 20, 20)); dd = ImageDraw.Draw(sheet)
-    for k, (ts, im) in enumerate(ims):
-        x, y = (k % cols) * tw, (k // cols) * (th + 30)
-        sheet.paste(im.resize((tw, th)), (x, y + 30)); dd.text((x + 8, y + 4), f"{ts:.2f}s", fill=(255, 255, 255), font=font("B", 20))
-    sheet.save(os.path.join(fdir, "contact_sheet.jpg"), quality=88)
+    def grab(mp4, ts, name):
+        p = os.path.join(fdir, name)
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", f"{ts:.3f}", "-i", mp4, "-frames:v", "1", p])
+        return Image.open(p).convert("RGB") if os.path.exists(p) else None
+    def sheet(ims, path, cols=4):
+        tw, th = 270, 480; rows_n = math.ceil(len(ims) / cols)
+        sh = Image.new("RGB", (cols * tw, rows_n * (th + 30)), (20, 20, 20)); dd = ImageDraw.Draw(sh)
+        for k, (lab, im) in enumerate(ims):
+            x, y = (k % cols) * tw, (k // cols) * (th + 30)
+            if im: sh.paste(im.resize((tw, th)), (x, y + 30))
+            dd.text((x + 8, y + 4), lab, fill=(255, 255, 255), font=font("B", 20))
+        sh.save(path, quality=88)
+    b0 = first; sc_, cta, bye, TOT = b0["scenes"], b0["cta"], b0["bye"], b0["TOTAL"]
+    shots = [0.1, 1.2] + [round((b["s"] + b["e"]) / 2, 2) for s in sc_[1:-2] for b in s["beats"]] + [round(cta["start"] + 1.8, 2), round(cta["beats"][1]["s"] + 1.5, 2), round(bye["start"] + 0.9, 2), round(TOT - 0.15, 2)]
+    m0 = mp4s[vlist[0]]
+    sheet([(f"{ts:.2f}s", grab(m0, ts, f"{k:02d}_{ts:05.2f}s.png")) for k, ts in enumerate(shots)], os.path.join(fdir, "contact_sheet.jpg"))
+    # 場所ごとの最後の部分の見くらべ（1行＝1つの版：つなぎ目の前・後／問い合わせ案内／しめ）
+    cmp_ims = []
+    for v in vlist:
+        b = B[v]; c = b["CUT"]
+        for lab, ts in (("つなぎ目の前", c - 1 / FPS), ("つなぎ目の後", c + 1 / FPS), ("問い合わせ", b["cta"]["beats"][1]["s"] + 1.8), ("しめ", b["bye"]["start"] + 0.9)):
+            cmp_ims.append((f"{v} {lab}", grab(mp4s[v], ts, f"最後_{v}_{lab}.png")))
+    sheet(cmp_ims, os.path.join(fdir, "最後_場所ごと.jpg"))
     times["verify"] = time.time() - t0
     total_t = time.time() - t_begin
     report.append("所要時間: " + " / ".join(f"{k} {v:.0f}秒" for k, v in times.items()) + f" / 合計 {total_t:.0f}秒")
     open(os.path.join(OUT, "チェック結果.txt"), "w").write("\n".join(report) + "\n")
-    log("⑤ 確認\n  " + "\n  ".join(report[-4:]))
-    log(f"完成: {mp4}\n確認コマ: {fdir}/contact_sheet.jpg\n概要欄: {OUT}/概要欄.txt")
+
+    # 送るもの一覧（毎朝オーナーへまとめて送るときの一覧）
+    files = [(os.path.basename(mp4s[v]), f"動画（{VARIANTS[v]['label']}用）") for v in vlist] + [
+        ("概要欄_youtube.txt", "YouTube：1行目がタイトル、3行目からが概要欄"),
+        ("キャプション_instagram.txt", "Instagramリール：そのまま貼る（リンクは貼らない。プロフィールのリンクへ案内）"),
+        ("キャプション_tiktok.txt", "TikTok：そのまま貼る"),
+        ("投稿_x.txt", f"X：そのまま貼る（{tx['x_count']}/280カウント）"),
+        ("確認コマ/contact_sheet.jpg", "場面ごとのコマ（見た目の確認）"),
+        ("確認コマ/最後_場所ごと.jpg", "場所ごとの最後の部分の見くらべ")]
+    lines = [f"# {sc['date']} 送るもの一覧（AI動画編集部）", ""]
+    for f, what in files:
+        p = os.path.join(OUT, f)
+        size = f"{os.path.getsize(p) / 1e6:.1f}MB" if os.path.exists(p) and f.endswith(".mp4") else ""
+        lines.append(f"- {f} {size} … {what}" + ("" if os.path.exists(p) else " ← まだありません"))
+    lines += ["", f"プロフィール（Instagram・TikTok）とXに入れる共通のリンク：{LINKS_URL}"]
+    open(os.path.join(OUT, "送るもの一覧.txt"), "w").write("\n".join(lines) + "\n")
+    log("⑤ 確認\n  " + "\n  ".join(report[-(len(vlist) + 1):]))
+    log(f"完成: {OUT}\n" + "\n".join(f"  {mp4s[v]}" for v in vlist) + f"\n確認コマ: {fdir}/contact_sheet.jpg ・ 最後_場所ごと.jpg\n文章: 概要欄_youtube.txt / キャプション_instagram.txt / キャプション_tiktok.txt / 投稿_x.txt")
 
 if __name__ == "__main__":
     main()

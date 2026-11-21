@@ -1,5 +1,6 @@
-hyperframes check: ok=True エラー 0 / 注意 8（中身は check.json）
-注意: なし
-MP4の長さ 44.40 秒（予定 44.38 秒）
-音声トラック: aac
-所要時間: voice 0秒 / build 0秒 / check 10秒 / render 141秒 / verify 4秒 / 合計 157秒
+hyperframes check（YouTube）: ok=True エラー 0 / 注意 9
+hyperframes check（Instagramリール・TikTok）: ok=True エラー 0 / 注意 8
+hyperframes check（X）: ok=True エラー 0 / 注意 8
+注意: Instagramリール・TikTok 版は本編の言葉を変えているので、つながず最初から書き出します（時間が増えます）
+注意: X 版は本編の言葉を変えているので、つながず最初から書き出します（時間が増えます）
+（書き出しなし）
