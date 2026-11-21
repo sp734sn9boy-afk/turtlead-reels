@@ -1,0 +1,20 @@
+リンク集（/links/）素材の出典・置き場所 2026-11-21（デザイン主任）
+
+サーバーに置くもの（公開用/links/ の中身を、そのまま サーバーの /links/ へ）
+- index.html … ページ本体（CSSは中に。../assets/logo.css と ../favicon.ico などは既存のものを使う）
+- turtle.jpg … タートル 400x400。元は 資料/youtube/icon_800.png（自社キャラクター）を縮小
+- og.jpg … SNSで共有されたときの画像 1200x630（src/og.html から書き出し）
+
+素材
+- キャラクター・ロゴマーク：自社素材（ロゴのSVGは既存ページと同じもの）
+- アイコン（LINE・メール・電話・SNSなど）：HTML内のSVGで自作。各社の公式ロゴは使っていない
+- フォント：Noto Sans JP／Outfit／M PLUS Rounded 1c（Google Fonts、既存ページと同じ）。OGP画像は 資料/ai_video/fonts/
+- 写真・人物・ストック素材：なし
+
+公開前に差し替えるところ
+- YouTubeのURL（今は仮の https://www.youtube.com/@turtlead）
+- TikTok・X は <li hidden>。アカウントができたらURLを入れて hidden を消す
+
+作り直し・確認（資料/links/src/ で）
+  NODE_PATH=/opt/node-tools/node_modules node render.js
+  → screenshots/ に sp_390・sp_360・pc_1280 の確認用画像。og.jpg は /tmp/og_tmp.png を JPG に変換して作る
