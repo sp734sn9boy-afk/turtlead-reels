@@ -6,4 +6,4 @@ hyperframes check（X）: ok=True エラー 0 / 注意 8
 turtle_ai_2026-11-21_youtube.mp4: 44.40 秒（予定 44.38 秒）・音声 aac・最初から1本で書き出し
 turtle_ai_2026-11-21_insta_tiktok.mp4: 43.81 秒（予定 43.77 秒）・音声 aac・本編＋最後の部分をつないだ
 turtle_ai_2026-11-21_x.mp4: 43.60 秒（予定 43.59 秒）・音声 aac・本編＋最後の部分をつないだ
-所要時間: voice+build 2秒 / check 32秒 / render_head1 127秒 / render_tail_insta_tiktok 61秒 / render_tail_x 57秒 / render_full_youtube 140秒 / render 386秒 / verify 9秒 / 合計 429秒
+所要時間: voice+build 2秒 / check 32秒 / render_head1 145秒 / render_tail_insta_tiktok 60秒 / render_tail_x 56秒 / render_full_youtube 143秒 / render 404秒 / verify 9秒 / 合計 447秒
