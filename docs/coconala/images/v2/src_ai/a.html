@@ -1,53 +1,21 @@
 <!doctype html><html lang="ja"><head><meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;900&family=Yusei+Magic&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{width:1220px;height:1240px;overflow:hidden;position:relative;font-family:"Noto Sans JP",sans-serif;color:#1b2430;
-background:#fdf6e3;
-background-image:radial-gradient(#e9dcb8 1.6px,transparent 1.7px);background-size:26px 26px}
-.blob{position:absolute;right:-140px;top:-120px;width:560px;height:560px;border-radius:50%;background:#ffd84a}
-.tag{position:absolute;left:64px;top:128px;background:#1f5fd0;color:#fff;font-weight:900;font-size:38px;padding:8px 26px 10px;border-radius:10px;letter-spacing:.03em}
-h1{position:absolute;left:58px;top:204px;font-weight:900;font-size:150px;line-height:1.1;letter-spacing:-.03em;color:#141a24}
-h1 span{background:linear-gradient(transparent 62%,#ffd84a 62%,#ffd84a 94%,transparent 94%)}
-h1 .q{color:#1f5fd0}
-.seal{position:absolute;right:50px;top:150px;width:300px;height:300px;border-radius:50%;background:#e8442e;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(8deg);font-weight:900;line-height:1.12;box-shadow:0 8px 0 #b72f1d;text-align:center}
-.seal small{font-size:40px}.seal b{font-size:62px}.seal i{font-style:normal;font-size:84px;letter-spacing:.02em}
-.pc{position:absolute;left:58px;top:540px;width:1104px;height:404px;background:#fff;border:8px solid #141a24;border-radius:26px;box-shadow:12px 12px 0 #1f5fd0;overflow:hidden}
-.bar{height:50px;background:#141a24;color:#cfd6e2;display:flex;align-items:center;padding:0 20px;font-size:24px;font-weight:700;gap:10px}
-.bar u{width:16px;height:16px;border-radius:50%;background:#ff6b5e;display:block}.bar u+u{background:#ffd84a}.bar u+u+u{background:#52c97a;margin-right:14px}
-.chat{padding:18px 28px;display:flex;flex-direction:column;gap:18px}
-.me{align-self:flex-end;max-width:800px;background:#1f5fd0;color:#fff;font-size:35px;font-weight:700;line-height:1.38;padding:14px 26px;border-radius:26px 26px 4px 26px}
-.row{display:flex;gap:16px;align-items:flex-start}
-.av{flex:none;width:72px;height:72px;border-radius:50%;background:#ffd84a;border:5px solid #141a24;font-weight:900;font-size:32px;display:flex;align-items:center;justify-content:center}
-.ai{background:#f1f4f9;border:3px solid #d5dce8;font-size:32px;font-weight:500;line-height:1.42;padding:14px 24px;border-radius:4px 26px 26px 26px;max-width:940px}
-.ai b{font-weight:700;background:linear-gradient(transparent 60%,#ffe88a 60%)}
-.hand{position:absolute;font-family:"Yusei Magic";color:#e8442e;font-size:40px;transform:rotate(-5deg);left:74px;top:604px;line-height:1.1}
-.foot{position:absolute;left:58px;top:966px;display:flex;align-items:flex-end;gap:26px}
-.price{background:#141a24;color:#fff;border-radius:18px;padding:6px 28px 10px;font-weight:900;display:flex;align-items:baseline;gap:12px;white-space:nowrap}
-.price small{font-size:42px;color:#ffd84a}.price b{font-size:84px;letter-spacing:-.02em;line-height:1.1}.price i{font-style:normal;font-size:42px}
-.sub{font-weight:900;font-size:35px;line-height:1.3;color:#141a24;padding-bottom:6px}
-.sub em{font-style:normal;color:#1f5fd0}
-.trust{position:absolute;left:62px;top:1082px;font-size:27px;font-weight:700;color:#5a6474;display:flex;align-items:center;gap:14px}
-.trust img{height:34px;background:#0d3a34;border-radius:8px;padding:4px 10px}
-.im{position:absolute;right:66px;top:958px;font-size:20px;color:#7a8494;font-weight:500}
+body{width:1220px;height:1240px;overflow:hidden;position:relative;font-family:"Noto Sans JP",sans-serif;background:#ffd400;color:#111}
+.ph{position:absolute;left:0;top:590px;width:1220px;height:650px;background:url(photos/pexels-461077.jpg) 50% 42%/1380px auto}
+h1{position:absolute;left:40px;top:96px;font-weight:900;white-space:nowrap;line-height:1}
+h1 b{display:block;font-size:232px;letter-spacing:-.05em}
+h1 span{display:block;font-size:150px;letter-spacing:-.05em;margin-top:26px}
+h1 span em{font-style:normal;color:#e60012}
+.ok{position:absolute;left:36px;top:640px;background:#e60012;color:#fff;font-weight:900;font-size:84px;padding:6px 30px 14px;transform:rotate(-4deg);letter-spacing:-.02em;box-shadow:8px 8px 0 #111;white-space:nowrap}
+.price{position:absolute;left:36px;top:868px;background:#111;color:#fff;font-weight:900;border-radius:20px;padding:0 30px 12px;white-space:nowrap;border:6px solid #ffd400}
+.price small{font-size:70px;color:#ffd400}.price b{font-size:132px;letter-spacing:-.03em}.price i{font-style:normal;font-size:64px}
+.trust{position:absolute;left:36px;top:1066px;background:#fff;font-weight:700;font-size:27px;padding:4px 16px 6px;border-radius:6px}
 </style></head><body>
-<div class="blob"></div>
-<div class="tag">生成AI　1対1レッスン</div>
-<h1><span>AI、何から</span><br><span>始める<span class="q">？</span></span></h1>
-<div class="seal"><small>パソコンが</small><b>苦手でも</b><i>OK</i></div>
-<div class="pc">
- <div class="bar"><u></u><u></u><u></u>レッスンで一緒に見る画面</div>
- <div class="chat">
-  <div class="me">予約を来週に変えたいお客さまへ、<br>ていねいな返信メールを書いて。美容室です。</div>
-  <div class="row"><div class="av">AI</div>
-  <div class="ai"><b>ご予約変更の件、承知いたしました。</b><br>来週でしたら、火曜・木曜の午後に空きがございます。ご都合のよい日時をお知らせいただけますと幸いです。</div></div>
- </div>
-</div>
-<div class="hand">こう頼むだけ →</div>
-<div class="im">※画面はイメージです</div>
-<div class="foot">
- <div class="price"><small>60分</small><b>11,000</b><i>円</i></div>
- <div class="sub">画面を見ながら<br><em>いっしょに手を動かす</em></div>
-</div>
+<div class="ph"></div>
+<h1><b>AIの使い方</b><span><em>1対1</em>で教えます</span></h1>
+<div class="ok">パソコン苦手でもOK</div>
+<div class="price"><small>60分 </small><b>11,000</b><i>円</i></div>
 <div class="trust">鹿児島で地域情報誌「マイタウンガイド」を発行する会社が教えます</div>
 </body></html>

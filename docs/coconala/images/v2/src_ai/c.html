@@ -1,47 +1,25 @@
 <!doctype html><html lang="ja"><head><meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;900&family=Yusei+Magic&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-.lab{display:none}body{width:1220px;height:1240px;overflow:hidden;position:relative;font-family:"Noto Sans JP",sans-serif;color:#1c2333;background:#eaf3fb}
-.top{position:absolute;left:0;top:0;width:100%;height:452px;background:#0e4fa8}
-.tag{position:absolute;left:60px;top:126px;font-weight:900;font-size:36px;color:#0e4fa8;background:#fff;border:4px solid #fff;padding:2px 20px 4px;border-radius:8px}
-.ok{position:absolute;right:60px;top:126px;font-weight:900;font-size:36px;color:#fff;background:#f0672a;padding:6px 22px 8px;border-radius:999px}
-h1{position:absolute;left:56px;top:196px;font-weight:900;font-size:112px;line-height:1.1;letter-spacing:-.03em;white-space:nowrap;color:#fff}
-h1 em{font-style:normal;color:#ffd84a}
-h1 span{font-size:96px}
-.col{position:absolute;top:462px;height:476px;border-radius:22px;padding:0 22px 20px;overflow:hidden}
-.L{left:44px;width:440px;background:#dfe3ea;border:4px solid #aab2c0}
-.R{left:560px;width:616px;background:#fff;border:6px solid #f0672a;box-shadow:10px 10px 0 #f0672a}
-.hd{margin:0 -22px 10px;padding:8px 22px 10px;font-weight:900;font-size:36px;color:#fff;white-space:nowrap}
-.L .hd{background:#8690a0}.R .hd{background:#f0672a}
-.lab{font-size:22px;font-weight:700;color:#6b7484;margin-bottom:4px}
-.me{font-weight:700;border-radius:18px 18px 4px 18px;padding:8px 18px;line-height:1.4;margin-bottom:10px}
-.L .me{background:#8690a0;color:#fff;font-size:38px;margin-top:8px;display:inline-block}
-.R .me{background:#0e4fa8;color:#fff;font-size:29px;margin-top:4px}
-.R .me b{background:#ffd84a;color:#1c2333;padding:0 5px;border-radius:4px;font-weight:900;white-space:nowrap}
-.ai{border-radius:4px 18px 18px 18px;padding:10px 18px;line-height:1.42;font-weight:500}
-.L .ai{background:#f4f5f8;font-size:31px;color:#6b7484}
-.R .ai{background:#fff6ee;border:3px solid #f6c7a6;font-size:31px;font-weight:700}
-.L .say{font-family:"Yusei Magic";font-size:44px;color:#6b7484;margin-top:22px;transform:rotate(-3deg);text-align:center}
-.R .say{font-family:"Yusei Magic";font-size:40px;color:#e8442e;margin-top:6px;transform:rotate(-2deg);text-align:center}.arrow{position:absolute;left:478px;top:650px;width:92px;height:92px;border-radius:50%;background:#1c2333;color:#fff;font-size:60px;font-weight:900;display:flex;align-items:center;justify-content:center;z-index:3;padding-bottom:6px}
-.foot{position:absolute;left:44px;top:960px;display:flex;align-items:center;gap:22px}
-.price{background:#1c2333;color:#fff;border-radius:16px;padding:0 24px 6px;font-weight:900;white-space:nowrap}
-.price small{font-size:38px;color:#ffd84a}.price b{font-size:74px;letter-spacing:-.02em}.price i{font-style:normal;font-size:36px}
-.sub{font-weight:900;font-size:34px;line-height:1.3}
-.trust{position:absolute;left:48px;top:1070px;font-size:26px;font-weight:700;color:#5a6474}
-.im{position:absolute;right:44px;top:1076px;font-size:19px;color:#7a8494}
-</style></head><body><div class="top"></div>
-<div class="tag">生成AI　1対1レッスン</div><div class="ok">パソコンが苦手でもOK</div>
-<h1>AIは<em>「頼み方」</em>で<br><span>答えが変わる。</span></h1>
-<div class="col L"><div class="hd">なんとなく頼むと…</div>
- <div class="lab">あなた</div><div class="me">求人の文章を書いて</div>
- <div class="lab">AI</div><div class="ai">スタッフ募集中です。やる気のある方のご応募をお待ちしております。</div>
- <div class="say">どこにでもある文…</div></div>
-<div class="arrow">→</div>
-<div class="col R"><div class="hd">レッスンで覚える頼み方だと</div>
- <div class="lab">あなた</div><div class="me">美容室の求人。<b>未経験OK</b>・<b>週3日〜</b><br><b>やさしい口調</b>で書いて</div>
- <div class="lab">AI</div><div class="ai">はじめての方も大歓迎です。先輩がとなりで教えます。週3日から働けます。</div><div class="say">そのまま使える文に！</div></div>
-<div class="im">※画面はイメージです</div>
-<div class="foot"><div class="price"><small>60分 </small><b>11,000</b><i>円</i></div><div class="sub">この頼み方を、画面を見ながら<br>いっしょに練習します</div></div>
+body{width:1220px;height:1240px;overflow:hidden;position:relative;font-family:"Noto Sans JP",sans-serif;background:#1238c8;color:#fff}
+.ph{position:absolute;right:0;top:0;width:520px;height:1240px;background:url(photos/pexels-4065876.jpg) 52% 100%/1900px auto}
+.ph:after{content:"";position:absolute;left:0;top:0;bottom:0;width:14px;background:#ffe600}
+.top{position:absolute;left:44px;top:118px;font-weight:900;font-size:66px;white-space:nowrap}
+.top em{font-style:normal;background:#e60012;padding:0 16px 6px;border-radius:8px}
+h1{position:absolute;left:36px;top:226px;font-family:"Dela Gothic One";font-weight:400;font-size:236px;line-height:1;letter-spacing:-.03em;white-space:nowrap;text-shadow:8px 8px 0 #0a1f73}
+.box{position:absolute;left:36px;top:496px;display:flex;gap:12px}
+.box b{width:180px;height:200px;background:#ffe600;color:#0a1f73;font-family:"Dela Gothic One";font-weight:400;font-size:150px;display:flex;align-items:center;justify-content:center;border:7px solid #0a1f73;box-shadow:7px 7px 0 #0a1f73;line-height:1;padding-bottom:10px}
+.ok{position:absolute;left:36px;top:740px;font-weight:900;font-size:86px;white-space:nowrap;letter-spacing:-.03em;background:#fff;color:#0a1f73;padding:0 26px 10px;border-radius:14px}
+.price{position:absolute;left:36px;top:896px;background:#e60012;color:#fff;font-weight:900;border-radius:20px;padding:0 28px 12px;white-space:nowrap;border:6px solid #fff}
+.price small{font-size:66px;color:#ffe600}.price b{font-size:128px;letter-spacing:-.03em}.price i{font-style:normal;font-size:60px}
+.trust{position:absolute;left:40px;top:1078px;font-weight:700;font-size:25px;white-space:nowrap;background:#0a1f73;padding:3px 12px 5px;border-radius:6px}
+</style></head><body>
+<div class="ph"></div>
+<div class="top"><em>1対1</em> 画面を見ながら</div>
+<h1>生成AI</h1>
+<div class="box"><b>個</b><b>別</b><b>レ</b><b>ッ</b><b>ス</b><b>ン</b></div>
+<div class="ok">パソコン苦手でもOK</div>
+<div class="price"><small>60分 </small><b>11,000</b><i>円</i></div>
 <div class="trust">鹿児島で地域情報誌「マイタウンガイド」を発行する会社が教えます</div>
 </body></html>

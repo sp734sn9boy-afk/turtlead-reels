@@ -1,0 +1,6 @@
+写真素材の出どころ（2026-11-21 取得）
+- pexels-461077.jpg   : Pexels 写真ID 461077  https://www.pexels.com/photo/461077/   取得元 https://images.pexels.com/photos/461077/pexels-photo-461077.jpeg
+- pexels-4065876.jpg  : Pexels 写真ID 4065876 https://www.pexels.com/photo/4065876/ 取得元 https://images.pexels.com/photos/4065876/pexels-photo-4065876.jpeg
+ライセンス：Pexels License（商用利用可・クレジット表記不要・加工可）。
+注意：作業環境から pexels.com の写真ページ本体は開けず（画像配信サーバーのみ接続可）、撮影者名とページ上のライセンス表示は未確認。公開前にオーナーかリーダーが上のURLを開いて確認すること。
+内容確認：どちらも顔なし（手元とパソコンのみ）。メーカーのロゴは写っていない。4065876 はキーボードにキリル文字の刻印あり（使用時は切り取り・縮小で目立たない範囲に）。
