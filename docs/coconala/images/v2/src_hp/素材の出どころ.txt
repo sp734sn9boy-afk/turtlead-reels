@@ -1,0 +1,5 @@
+写真：自社サンプル動画（https://www.turtle-ad.com/reel/ の居酒屋・工務店・美容室 mp4）から、人の顔と字幕が写らないコマを切り出し（assets/）。AI生成の架空のお店で、お客さま情報なし。
+見本サイト：site_*.html は自作（店名「こだち工務店」「炭火焼き 灯」「美容室 ソラニワ」は架空）。同名の実在店がないかは未確認。
+端末の枠・ブラウザ枠：CSSで自作（メーカーのマークなし）。書体：Google Fonts（Noto Sans JP / M PLUS Rounded 1c / Yomogi / Shippori Mincho / Zen Maru Gothic / Cormorant Garamond、いずれもOFL）。
+作り方：node shot.js → node render.js → python3 compare.py
+注意：compare_03_04.png は他社サムネの一覧を含むので、コミット・公開しない。
