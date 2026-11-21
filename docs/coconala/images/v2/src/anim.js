@@ -6,8 +6,8 @@ const easeOut = (x) => 1 - Math.pow(1 - cl(x), 3);
 const back = (x) => { x = cl(x); const c1 = 1.9, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
 function logoSVG(t, o = {}) {
   const id = 'm' + (_uid++);
-  const bg = o.bg === undefined ? '#FBF1DD' : o.bg;
-  const brown = o.mono ? '#8a8a8a' : '#4A2A14', gold = o.mono ? '#b5b5b5' : '#E9A02C', red = o.mono ? '#9a9a9a' : '#D9532B';
+  const bg = o.bg === undefined ? (o.mono ? '#FFFFFF' : '#14235A') : o.bg;
+  const brown = o.mono ? '#8a8a8a' : '#FFFFFF', gold = o.mono ? '#b5b5b5' : '#FFC81E', red = o.mono ? '#9a9a9a' : '#FF5A36';
   const C = 2 * Math.PI * 120;
   const ring = easeOut(t / 1.0);
   const cs = back((t - 0.8) / 0.7), cr = -120 * (1 - easeOut((t - 0.8) / 0.7));
@@ -29,11 +29,11 @@ function logoSVG(t, o = {}) {
   ${bg ? `<rect width="1280" height="720" fill="${bg}"/>` : ''}
   <defs><mask id="${id}"><rect width="1280" height="720" fill="#fff"/><circle cx="672" cy="246" r="62" fill="#000"/></mask></defs>
   <g transform="translate(640 360) scale(${pulse}) translate(-640 -360)">
-    <circle cx="640" cy="262" r="120" fill="none" stroke="${brown}" stroke-width="15" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C * (1 - ring)}" transform="rotate(-90 640 262)"/>
+    <circle cx="640" cy="262" r="120" fill="none" stroke="${brown}" stroke-width="18" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C * (1 - ring)}" transform="rotate(-90 640 262)"/>
     ${t > 0.8 ? `<g transform="translate(640 262) rotate(${cr}) scale(${cs}) translate(-640 -262)"><circle cx="640" cy="262" r="80" fill="${gold}" mask="url(#${id})"/></g>` : ''}
     ${t > 3.4 ? `<g transform="translate(772 150) rotate(${sr}) scale(${sp}) translate(-772 -150)"><path d="${star(772, 150, 38)}" fill="${red}"/></g><g transform="translate(826 214) scale(${sp}) translate(-826 -214)"><path d="${star(826, 214, 17)}" fill="${gold}"/></g>` : ''}
     ${txt}
-    ${t > 2.6 ? `<text x="${640 + ls / 2}" y="632" text-anchor="middle" font-family="'Zen Maru Gothic'" font-weight="700" font-size="42" letter-spacing="${ls}" fill="${brown}" opacity="${bp}">BAKERY</text>` : ''}
+    ${t > 2.6 ? `<text x="${640 + ls / 2}" y="632" text-anchor="middle" font-family="'Zen Maru Gothic'" font-weight="900" font-size="44" letter-spacing="${ls}" fill="${gold}" opacity="${bp}">BAKERY</text>` : ''}
     ${t > 3.0 ? `<path d="M${440 - 0} 618 h${-90 * lp} M${840} 618 h${90 * lp}" stroke="${gold}" stroke-width="7" stroke-linecap="round"/>` : ''}
   </g></svg>`;
 }
