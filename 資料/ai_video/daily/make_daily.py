@@ -58,7 +58,53 @@ TYPES = {
     "saturday": {"program": "AIで仕事が楽になった実例",  "icon": "例", "min": 30, "max": 45},
     "sunday":   {"program": "今週のまとめ",              "icon": "週", "min": 30, "max": 90},
     "greeting": {"program": "チャンネル開設のごあいさつ", "icon": "初", "min": 30, "max": 45},  # 全体の長さ
+    "staff":    {"program": "AI社員紹介",                "icon": "社", "min": 30, "max": 50},  # 土曜（2026-11-21 オーナー決定）
 }
+# AI社員（仲間）の絵と声（2026-11-21 オーナー決定「キャラクターごとに声を変える」）。割り当ての理由・規約は 資料/ai_video/AI社員の声.md
+# 声はどれも VOICEVOX エンジンの規約（/speaker_info の policy）で「クレジットを書けば商用・非商用で利用可」、法人の条件なし、と確かめたもの
+STAFF = {
+    "design":     {"name": "デザイン主任",   "read": "デザインしゅにん", "img": "資料/ai_office/characters/single/design.png", "color": "#ff8fd0",
+                   "voice": {"name": "冥鳴ひまり", "style": "ノーマル", "intonation": 1.25, "pitch": 0.0}, "speed": 1.12, "name_speed": 0.98,
+                   "job": "画像やキャラクターを作っています。", "job_read": "画像や、キャラクターを作っています。"},
+    "sales":      {"name": "営業担当",       "read": "えいぎょうたんとう", "img": "資料/ai_office/characters/single/sales.png", "color": "#ff5a6e",
+                   "voice": {"name": "玄野武宏", "style": "ノーマル", "intonation": 1.25, "pitch": 0.0}, "speed": 1.15, "name_speed": 1.0,
+                   "job": "お仕事さがしと、見積もりの下書きをしています。", "job_read": "おしごとさがしと、みつもりの下書きをしています。"},
+    "listing":    {"name": "出品・発信担当", "read": "しゅっぴん、はっしんたんとう", "img": "資料/ai_office/characters/single/listing.png", "color": "#5ee38f",
+                   "voice": {"name": "四国めたん", "style": "ノーマル", "intonation": 1.3, "pitch": 0.0}, "speed": 1.15, "name_speed": 1.0,
+                   "job": "出品の文章と、SNSの投稿づくりをしています。", "job_read": "しゅっぴんの文章と、エスエヌエスの投稿づくりをしています。"},
+    "automation": {"name": "仕組み担当",     "read": "しくみたんとう", "img": "資料/ai_office/characters/single/automation.png", "color": "#ff9a3c",
+                   "voice": {"name": "白上虎太郎", "style": "ふつう", "intonation": 1.3, "pitch": 0.0}, "speed": 1.15, "name_speed": 1.0,
+                   "job": "自動投稿や、動画づくりの仕組みを作っています。", "job_read": "じどう投稿や、動画づくりのしくみを作っています。"},
+    "research":   {"name": "調べもの担当",   "read": "しらべものたんとう", "img": "資料/ai_office/characters/single/research.png", "color": "#b9a3ff",
+                   "voice": {"name": "雀松朱司", "style": "ノーマル", "intonation": 1.2, "pitch": 0.0}, "speed": 1.12, "name_speed": 0.98,
+                   "job": "ニュース集めと、事実の確かめをしています。", "job_read": "ニュース集めと、じじつの確かめをしています。"},
+}
+LEADER = ("leader", "turtle", "タートル", None)
+
+def staff_faces(src, out_dir, prefix):
+    """AI社員の絵（512px・7pxドット）から、口（0=とじ 1=小さく 2=大きく）×まばたき（0/1）の6枚を作る。全員同じ顔の形。"""
+    base = np.array(Image.open(src).convert("RGBA"))
+    SCR, CY, PK = (8, 16, 36, 255), (60, 214, 240, 255), (255, 120, 160, 255)
+    def is_face(px): return (px[..., 2] > 200) & (px[..., 1] > 180) & (px[..., 0] < 120) | ((px[..., 0] > 240) & (px[..., 1] > 240) & (px[..., 2] > 240))
+    def clear(a, x0, x1, y0, y1):
+        reg = a[y0:y1 + 1, x0:x1 + 1]; reg[is_face(reg)] = SCR
+    out = []
+    for m in (0, 1, 2):
+        for b in (0, 1):
+            a = base.copy()
+            if m:
+                clear(a, 256, 297, 180, 212)
+                if m == 1:
+                    a[186:200, 270:284] = CY
+                else:
+                    a[186:207, 263:291] = CY
+                    for (x0, y0) in ((263, 186), (284, 186), (263, 200), (284, 200)): a[y0:y0 + 7, x0:x0 + 7] = SCR
+                    a[200:207, 270:284] = PK
+            if b:
+                for x0, x1 in ((228, 248), (291, 311)):
+                    clear(a, x0, x1, 144, 178); a[165:172, x0:x1 + 1] = CY
+            p = os.path.join(out_dir, f"{prefix}_m{m}_b{b}.png"); Image.fromarray(a).save(p); out.append(p)
+    return out
 ROOT = os.path.abspath(os.path.join(AV, "..", ".."))  # リポジトリの一番上
 TIP_LABEL = "中小企業ならこう使える"
 
@@ -89,6 +135,7 @@ BYE = {
     "sunday":   ([{"sub": "また来週もよろしくね！", "read": "またらいしゅうも、よろしくね！"}], "また来週も/よろしくね！"),
     "greeting": ([{"sub": "明日から毎日お届けするので、", "read": "あしたから毎日おとどけするので、"},
                   {"sub": "また見てね！バイバイ！"}], "また見てね！"),
+    "staff":    ([{"sub": "また明日ね！", "read": "またあしたね！"}, {"sub": "またね！", "speaker": "guest"}], "また明日ね！"),
 }
 BYE_SPEED_MUL = 0.92
 # 宣伝カードのセリフ（台本の "cta_say" で変えられる）
@@ -118,7 +165,9 @@ def load_script(path):
     d = datetime.date.fromisoformat(sc["date"])
     if "type" not in sc:
         sc["type"] = "saturday" if d.weekday() == 5 else "sunday" if d.weekday() == 6 else "weekday"
-    if sc["type"] not in TYPES: sys.exit(f"type は weekday / saturday / sunday のどれか: {sc['type']}")
+    if sc["type"] not in TYPES: sys.exit(f"type は {' / '.join(TYPES)} のどれか: {sc['type']}")
+    if sc["type"] == "staff" and sc.get("staff") not in STAFF:
+        sys.exit(f"AI社員紹介（staff）は \"staff\" に主役を書く: {' / '.join(STAFF)}（今: {sc.get('staff')}）")
     if sc["type"] not in ("sunday",) and len(sc["items"]) != 1:
         log(f"注意: {sc['type']} は1本1ネタの型です（items が {len(sc['items'])} 個）。そのまま作ります。")
     sc["_date"] = d
@@ -353,13 +402,26 @@ def _build(sc, OUT, variant, PROJ, V):
     body_custom = any([apply_overrides(sc["hook"], variant), apply_overrides(sc["items"], variant)])
     for k in ("highlight", "readings", "program"):
         if f"{k}_{variant}" in sc: sc[k] = sc[f"{k}_{variant}"]; body_custom = True
-    body_key = hashlib.sha1(json.dumps([sc["hook"], sc["items"], sc.get("highlight"), sc.get("readings"), sc.get("program"), sc.get("speed"), sc.get("voice")],
+    body_key = hashlib.sha1(json.dumps([sc["hook"], sc["items"], sc.get("highlight"), sc.get("readings"), sc.get("program"), sc.get("speed"), sc.get("voice"), sc.get("staff")],
                                        ensure_ascii=False, sort_keys=True, default=str).encode()).hexdigest()[:12]
     T = TYPES[sc["type"]]; d = sc["_date"]
     global CREDIT
     voice_cfg = dict(DEFAULT_VOICE, **sc.get("voice", {}))
-    CREDIT = f"VOICEVOX:{voice_cfg['name']}"
     speed = float(sc.get("speed", DEFAULT_SPEED)); hl = sc.get("highlight", []); extra_read = sc.get("readings", {})
+    # AI社員紹介（staff）：本編（items）のセリフは主役のAI社員が話す。"speaker": "leader" の行はタートル
+    guest = sc.get("staff") if sc["type"] == "staff" else None
+    G = STAFF[guest] if guest else None
+    def who_of(c, scene_name, beat):
+        w = (c.get("speaker") if isinstance(c, dict) else None) or beat.get("speaker")
+        if w is None: w = guest if (guest and scene_name.startswith("item")) else "leader"
+        if w in LEADER: return "leader"
+        if w == "guest":
+            if not guest: sys.exit("speaker \"guest\" は AI社員紹介（staff）の回だけ使えます")
+            return guest
+        if w not in STAFF: sys.exit(f"speaker が不明: {w}（leader / {' / '.join(STAFF)}）")
+        return w
+    credits = [f"VOICEVOX:{voice_cfg['name']}"]   # 使った声を全部並べる（タートルが先頭）。下で実際に使った声から作り直す
+    CREDIT = credits[0]
     date_tag = f"{d.month}/{d.day}({WEEK[d.weekday()]})"
     program = sc.get("program", T["program"])
     log(f"== {sc['date']} {program}（{sc['type']}）速さ {speed} ／ 版：{V['label']}")
@@ -368,6 +430,12 @@ def _build(sc, OUT, variant, PROJ, V):
     t0 = time.time()
     cache = os.path.join(OUT, "voice"); os.makedirs(cache, exist_ok=True)
     spk = speaker_id(voice_cfg["name"], voice_cfg["style"])
+    spk_ids = {"leader": spk}
+    def voice_for(w):
+        if w == "leader": return spk, voice_cfg, speed, NAME_LINE_SPEED
+        st = STAFF[w]
+        if w not in spk_ids: spk_ids[w] = speaker_id(st["voice"]["name"], st["voice"]["style"])
+        return spk_ids[w], dict(DEFAULT_VOICE, **st["voice"]), float(st["speed"]), float(st.get("name_speed", st["speed"]))
     # 場面の並び：intro → item1..N → cta。各場面は beat（カード1枚）のリスト、beat はセリフ chunk のリスト
     scenes = [{"name": "intro", "beats": [{"card": None, "say": sc["hook"]["say"]}]}]
     for i, it in enumerate(sc["items"]):
@@ -386,20 +454,26 @@ def _build(sc, OUT, variant, PROJ, V):
             b["chunks"] = []
             for ci, c in enumerate(b["say"]):
                 if ci: t += GAP_CHUNK
+                w = who_of(c, s["name"], b)
+                c_spk, c_vc, c_speed, c_name_speed = voice_for(w)
+                if chunks and chunks[-1]["who"] != w: t += 0.15   # 話す人が変わるときは少し間をあける
                 c = norm_chunk(c); c["sub"] = wrap_sub(c["sub"])
                 read = c["read"] or to_read(c["sub"], extra_read)
                 sp = c["speed"]
-                if sp is None and s["name"] == "intro" and "タートルアド" in c["sub"]: sp = NAME_LINE_SPEED
+                if sp is None and "タートルアド" in c["sub"] and (s["name"] == "intro" or w != "leader"): sp = c_name_speed
                 if sp is None and b.get("inq"): sp = round(speed * INQUIRY_SPEED_MUL, 3)
                 if sp is None and b.get("bye"): sp = round(speed * BYE_SPEED_MUL, 3)
-                sp = float(sp or speed); c["speed"] = sp
-                a, meta = synth(read, spk, sp, cache, voice_cfg["intonation"], voice_cfg["pitch"])
-                c.update(read=read, audio=a, dur=meta["dur"], vis=meta["vis"], kana=meta["kana"], s=round(t, 3), e=round(t + meta["dur"], 3))
+                sp = float(sp or c_speed); c["speed"] = sp
+                a, meta = synth(read, c_spk, sp, cache, c_vc["intonation"], c_vc["pitch"])
+                cr = f"VOICEVOX:{c_vc['name']}"
+                if cr not in credits: credits.append(cr)
+                c.update(who=w, read=read, audio=a, dur=meta["dur"], vis=meta["vis"], kana=meta["kana"], s=round(t, 3), e=round(t + meta["dur"], 3))
                 b["chunks"].append(c); chunks.append(c); t = c["e"]
             b["s"], b["e"] = b["chunks"][0]["s"], b["chunks"][-1]["e"]
         s["vs"], s["ve"] = s["beats"][0]["s"], s["beats"][-1]["e"]
     cta, bye = scenes[-2], scenes[-1]
     cta_voice_end = cta["ve"]
+    CREDIT = "、".join(credits)   # 例「VOICEVOX:猫使ビィ、VOICEVOX:冥鳴ひまり」
     # 宣伝カードは 4.5〜5.5 秒。声のあと少なくとも 1.3 秒残す
     for i, s in enumerate(scenes):
         s["start"] = 0.0 if i == 0 else round((scenes[i - 1]["ve"] + s["vs"]) / 2, 3)
@@ -522,13 +596,18 @@ def _build(sc, OUT, variant, PROJ, V):
             items = card["items"][:3]
             rows = [(x.replace("→", "<span class=\"c\">→</span>") if "<" not in x else x) for x in items]
             maxw = 760 if ty == "points" else 820
-            sz = fit([plain(x) + ("　" if ty == "points" else "") for x in items], 46 if len(items) < 3 else 42, 30, maxw)
+            # 見出し（title）＋3行のときは枠（高さ260）に収まるよう少し小さく始める
+            start_sz = 46 if len(items) < 3 else 36 if (ty == "points" and card.get("title")) else 42
+            sz = fit([plain(x) + ("　" if ty == "points" else "") for x in items], start_sz, 30, maxw)
             h = ""
             if ty == "tip": h += f'<div class="tag" style="margin-bottom:10px;font-size:32px;">{esc(card.get("label", TIP_LABEL))}</div>'
-            elif card.get("title"): h += f'<div style="font-size:34px;color:var(--dim);margin-bottom:6px;">{esc(card["title"])}</div>'
+            elif card.get("title"):
+                tsz_ = 30 if len(items) >= 3 else 34
+                h += f'<div style="font-size:{tsz_}px;line-height:1.2;color:var(--dim);margin-bottom:6px;">{esc(card["title"])}</div>'
             for r_i, (raw, x) in enumerate(zip(items, rows)):
                 html_x = mark(raw, hl).replace("→", '<span class="c">→</span>')
-                pre = f'<span style="display:inline-block;vertical-align:middle;margin-right:14px;">{ICON["check"]}</span>' if ty == "points" else ""
+                chk = ICON["check"].replace('width="56" height="56"', 'width="44" height="44"') if (len(items) >= 3 and card.get("title")) else ICON["check"]
+                pre = f'<span style="display:inline-block;vertical-align:middle;margin-right:14px;">{chk}</span>' if ty == "points" else ""
                 h += f'<div id="{bid}-r{r_i}" class="row" style="font-size:{sz}px;">{pre}{html_x}</div>'
             nrows_out.append(len(items))
             return h, ["rows"]
@@ -643,7 +722,7 @@ def _build(sc, OUT, variant, PROJ, V):
           <span style="font-size:48px;letter-spacing:0.02em;">{LINE_ID}</span>
         </div>
         <div id="cta-site" style="margin-top:6px;font-size:44px;" class="c">{SITE}</div>
-        <div id="cta-disc" style="margin-top:12px;font-size:28px;line-height:1.45;color:#dfe8fb;">{DISCLOSURE}<br/><span style="color:var(--cyan);">音声：{CREDIT}</span></div>
+        <div id="cta-disc" style="margin-top:12px;font-size:28px;line-height:1.45;color:#dfe8fb;">{DISCLOSURE}<br/><span style="color:var(--cyan);font-size:{fit([f"音声：{CREDIT}"], 28, 20, 800)}px;">音声：{CREDIT}</span></div>
       </div>
     </div>"""
     cta_js = f"""    tl.fromTo("#cta-in", {{opacity:0, scale:0.85}}, {{opacity:1, scale:1, duration:0.45, ease:"back.out(1.6)"}}, 0.05);
@@ -682,7 +761,7 @@ def _build(sc, OUT, variant, PROJ, V):
       <div style="font-family:RoundM;font-size:{tbsz}px;line-height:1.15;">{top_txt}</div>
     </div>
     <div id="band">AIが情報収集から動画まで作っています</div>
-    <div id="credit" data-layout-ignore>turtle ad ｜ 音声：{CREDIT}</div>""",
+    <div id="credit" data-layout-ignore style="font-size:{fit([f"turtle ad ｜ 音声：{CREDIT}"], 26, 18, 960)}px;">turtle ad ｜ 音声：{CREDIT}</div>""",
     """    tl.fromTo("#topbar-in", {y:-30}, {y:0, duration:0.4, ease:"power3.out"}, 0);
     tl.fromTo("#band", {y:-12}, {y:0, duration:0.45, ease:"expo.out"}, 0);
     tl.fromTo("#toplogo", {rotation:0}, {rotation:360, duration:0.8, ease:"power2.inOut"}, 0.1);""",
@@ -691,24 +770,27 @@ def _build(sc, OUT, variant, PROJ, V):
     #credit { position:absolute; left:0; right:0; top:1262px; height:44px; text-align:center; font-size:26px; color:var(--dim); }""")
 
     # --- タートル（口パク・まばたき・手をふる・お辞儀）
-    segs = []
-    for c in chunks:
-        for a_, b_, v in c["vis"]:
-            st = 2 if v in ("a", "o", "e") else 1 if v in ("i", "u") else 0
-            if st: segs.append((c["s"] + a_, c["s"] + b_, st))
-    changes = [(0.0, 0)]
-    for a_, b_, st in segs:
-        a_ = round(a_ * FPS) / FPS; b_ = round(b_ * FPS) / FPS
-        if b_ - a_ < 1 / FPS: b_ = a_ + 1 / FPS
-        if changes[-1][0] > a_: a_ = changes[-1][0]
-        if changes[-1][1] != st: changes.append((a_, st))
-        changes.append((b_, 0))
-    clean = [changes[0]]
-    for i in range(1, len(changes)):
-        tc, st = changes[i]
-        if i + 1 < len(changes) and st == 0 and changes[i + 1][0] - tc < 1.5 / FPS: continue
-        if clean[-1][1] == st: continue
-        clean.append((tc, st))
+    def mouth_changes(cs):
+        segs = []
+        for c in cs:
+            for a_, b_, v in c["vis"]:
+                st = 2 if v in ("a", "o", "e") else 1 if v in ("i", "u") else 0
+                if st: segs.append((c["s"] + a_, c["s"] + b_, st))
+        changes = [(0.0, 0)]
+        for a_, b_, st in segs:
+            a_ = round(a_ * FPS) / FPS; b_ = round(b_ * FPS) / FPS
+            if b_ - a_ < 1 / FPS: b_ = a_ + 1 / FPS
+            if changes[-1][0] > a_: a_ = changes[-1][0]
+            if changes[-1][1] != st: changes.append((a_, st))
+            changes.append((b_, 0))
+        clean = [changes[0]]
+        for i in range(1, len(changes)):
+            tc, st = changes[i]
+            if i + 1 < len(changes) and st == 0 and changes[i + 1][0] - tc < 1.5 / FPS: continue
+            if clean[-1][1] == st: continue
+            clean.append((tc, st))
+        return clean
+    clean = mouth_changes([c for c in chunks if c.get("who", "leader") == "leader"])
     blinks = sorted(round(b_ + (0.4 if int(b_) % 2 else 0), 2) for b_ in list(np.arange(2.6, TOTAL - 0.5, 3.1)) + [0.9])
     events = sorted([(t_, "m", st) for t_, st in clean] + [(b_, "b", 1) for b_ in blinks] + [(round(b_ + 0.13, 3), "b", 0) for b_ in blinks])
     # 手をふるコマ（上げている手を左右に傾けた絵）を、口・まばたきの6枚それぞれに作る
@@ -743,9 +825,18 @@ def _build(sc, OUT, variant, PROJ, V):
     else:
         turtle_inq = f"""    // 問い合わせ案内：下（概要欄）を指すように、下へ何度もうなずく
     tl.fromTo("#bow", {{rotation:0, y:0}}, {{rotation:-10, y:16, duration:0.22, ease:"sine.inOut", yoyo:true, repeat:5, transformOrigin:"50% 100%", immediateRender:false}}, {p2_abs + 0.3:.3f});"""
-    comp_file(PROJ, "turtle", f"""    <div id="mover"><div id="bow"><div id="rig">
+    # AI社員紹介：主役が出ているあいだ、タートルは左下に小さくよける（#slide）。しめのあいさつでは少し左へ
+    g_in = g_out = None; slide_js = ""
+    if G:
+        g_in = scenes[1]["start"]; g_out = cta["start"]
+        slide_js = f"""    // AI社員紹介：主役が出ているあいだは左下に小さくよける → 宣伝カードの前に戻る → しめでは少し左へ
+    tl.fromTo("#slide", {{x:0, scale:1}}, {{x:-300, scale:0.5, duration:0.45, ease:"power3.inOut", transformOrigin:"50% 100%"}}, {g_in - 0.15:.3f});
+    tl.to("#slide", {{x:0, scale:1, duration:0.4, ease:"power3.inOut", transformOrigin:"50% 100%"}}, {g_out - 0.5:.3f});
+    tl.to("#slide", {{x:-120, duration:0.4, ease:"power3.inOut"}}, {by_ - 0.1:.3f});"""
+    comp_file(PROJ, "turtle", f"""    <div id="slide"><div id="mover"><div id="bow"><div id="rig">
 {imgs}
-    </div></div></div>""", f"""    // はじめに手をふる → 呼吸
+    </div></div></div></div>""", f"""{slide_js}
+    // はじめに手をふる → 呼吸
     tl.fromTo("#rig", {{rotation:0, y:0}}, {{rotation:7, y:-14, duration:0.22, ease:"sine.inOut", yoyo:true, repeat:5, transformOrigin:"50% 90%"}}, 0.05);
     tl.fromTo("#rig", {{scaleY:1}}, {{scaleY:1.025, duration:1.2, ease:"sine.inOut", yoyo:true, repeat:{breathe_rep}, transformOrigin:"50% 100%", immediateRender:false}}, 1.5);
     // 宣伝カード：小さくなってカードの下へ → 手をふる → お辞儀
@@ -761,9 +852,51 @@ def _build(sc, OUT, variant, PROJ, V):
     const faces = {json.dumps(face_ids)};
     const mouth = [{",".join(mouth_js)}];
     for (const [t, id] of mouth) {{ tl.set(faces.filter(f => f !== id), {{opacity:0}}, t); tl.set(id, {{opacity:1}}, t); }}""",
-    """    #mover { position:absolute; left:375px; top:745px; width:330px; height:330px; }
-    #bow, #rig { position:absolute; left:0; top:0; width:330px; height:330px; }
+    """    #slide { position:absolute; left:375px; top:745px; width:330px; height:330px; }
+    #mover, #bow, #rig { position:absolute; left:0; top:0; width:330px; height:330px; }
     .tface { position:absolute; left:0; top:0; width:330px; height:330px; image-rendering:pixelated; }""")
+
+    # --- AI社員紹介の主役（口パク・まばたき・名札）。本編のあいだはまん中、しめのあいさつでは右で手をふる
+    if G:
+        staff_faces(os.path.join(ROOT, G["img"]), os.path.join(PROJ, "assets", "img"), f"staff_{guest}")
+        gclean = mouth_changes([c for c in chunks if c.get("who") == guest])
+        gblinks = sorted(round(b_, 2) for b_ in np.arange(g_in + 1.7, TOTAL - 0.5, 2.9))
+        gev = sorted([(t_, "m", st) for t_, st in gclean] + [(b_, "b", 1) for b_ in gblinks] + [(round(b_ + 0.13, 3), "b", 0) for b_ in gblinks])
+        gm, gb, gjs = 0, 0, []
+        for t_, kind, v in gev:
+            if kind == "m": gm = v
+            else: gb = v
+            gjs.append(f'[{t_:.3f},"#gm{gm}{gb}"]')
+        gimgs = "\n".join(f'        <img id="gm{m}{b}" src="assets/img/staff_{guest}_m{m}_b{b}.png" class="gface" style="opacity:{1 if (m, b) == (0, 0) else 0};" />' for m in (0, 1, 2) for b in (0, 1))
+        vname = G["voice"]["name"]
+        nsz = fit([G["name"]], 46, 28, 250, "R")
+        g_bob_rep = max(1, int((g_out - g_in - 1.2) / 1.1) // 2 * 2 - 1)
+        comp_file(PROJ, "guest", f"""    <div id="g-slide" style="opacity:0;"><div id="g-bob"><div id="g-rig">
+{gimgs}
+    </div></div></div>
+    <div id="g-tag" style="opacity:0;">
+      <div id="g-name" style="background:{G['color']};font-size:{nsz}px;">{esc(G['name'])}</div>
+      <div id="g-voice">声：{esc(vname)}</div>
+    </div>""", f"""    // 登場：下からぴょんと出る → 自己紹介のあいだ小さくはずむ → 宣伝カードの前にいったん下がる
+    tl.fromTo("#g-slide", {{opacity:0, y:120, scale:0.4}}, {{opacity:1, y:0, scale:1, duration:0.5, ease:"back.out(2)", transformOrigin:"50% 100%"}}, {g_in + 0.05:.3f});
+    tl.fromTo("#g-tag", {{opacity:0, x:60}}, {{opacity:1, x:0, duration:0.35, ease:"power3.out"}}, {g_in + 0.4:.3f});
+    tl.fromTo("#g-rig", {{rotation:0, y:0}}, {{rotation:-7, y:-16, duration:0.22, ease:"sine.inOut", yoyo:true, repeat:3, transformOrigin:"50% 90%"}}, {g_in + 0.55:.3f});
+    tl.fromTo("#g-bob", {{y:0}}, {{y:-8, duration:1.1, ease:"sine.inOut", yoyo:true, repeat:{g_bob_rep}, immediateRender:false}}, {g_in + 1.5:.3f});
+    tl.to("#g-tag", {{opacity:0, duration:0.2}}, {g_out - 0.45:.3f});
+    tl.to("#g-slide", {{opacity:0, y:60, scale:0.7, duration:0.3, ease:"power2.in", transformOrigin:"50% 100%"}}, {g_out - 0.45:.3f});
+    // しめのあいさつ：右に小さく出て、いっしょに手をふる
+    tl.fromTo("#g-slide", {{opacity:0, x:260, y:60, scale:0.4}}, {{opacity:1, x:260, y:0, scale:0.66, duration:0.45, ease:"back.out(1.8)", transformOrigin:"50% 100%", immediateRender:false}}, {by_ + 0.05:.3f});
+    tl.fromTo("#g-rig", {{rotation:6, y:0}}, {{rotation:-6, y:-10, duration:0.36, ease:"sine.inOut", yoyo:true, repeat:{max(1, int((TOTAL - by_ - 0.6) / 0.36) // 2 * 2 - 1)}, transformOrigin:"50% 90%", immediateRender:false}}, {by_ + 0.3:.3f});
+    // 口パク・まばたき（主役の声の時刻から）
+    const gfaces = {json.dumps([f"#gm{m}{b}" for m in (0, 1, 2) for b in (0, 1)])};
+    const gmouth = [{",".join(gjs)}];
+    for (const [t, id] of gmouth) {{ tl.set(gfaces.filter(f => f !== id), {{opacity:0}}, t); tl.set(id, {{opacity:1}}, t); }}""",
+        """    #g-slide { position:absolute; left:375px; top:745px; width:330px; height:330px; }
+    #g-bob, #g-rig { position:absolute; left:0; top:0; width:330px; height:330px; }
+    .gface { position:absolute; left:0; top:0; width:330px; height:330px; image-rendering:pixelated; }
+    #g-tag { position:absolute; left:712px; top:830px; width:270px; display:flex; flex-direction:column; align-items:flex-start; gap:10px; }
+    #g-name { font-family:"RoundM"; color:#08101f; padding:6px 20px; border-radius:22px; line-height:1.3; white-space:nowrap; border:3px solid #08101f; }
+    #g-voice { font-size:24px; color:#dfe8fb; background:rgba(4,7,15,0.78); padding:4px 14px; border-radius:14px; white-space:nowrap; }""")
 
     # --- 場面転換のワイプ
     WB = [round(s["start"] - 0.32, 3) for s in scenes[1:]]
@@ -800,6 +933,7 @@ def _build(sc, OUT, variant, PROJ, V):
       </div>
 {host("chrome", 0, TOTAL, 0, 5)}
 {host("turtle", 0, TOTAL, 2, 20)}
+{host("guest", 0, TOTAL, 5, 21) if G else ""}
 {scene_hosts}
 {host("captions", 0, TOTAL, 3, 30, "captions")}
 {host("wipes", 0, TOTAL, 4, 40)}
@@ -821,11 +955,12 @@ def _build(sc, OUT, variant, PROJ, V):
     log(f"② 場面組み立て {times['build']:.1f}秒（{PROJ}）")
 
     # 秒数表（場所ごとの版の最後の一言もここで確かめられるように、版の名前をつけて書く）
-    rows = ["| 時間（秒） | 場面 | 字幕 | 速さ | 読み（VOICEVOXの読み） |", "|---|---|---|---|---|"]
+    rows = ["| 時間（秒） | 場面 | 話す人 | 字幕 | 速さ | 読み（VOICEVOXの読み） |", "|---|---|---|---|---|---|"]
     for s in scenes:
         for b in s["beats"]:
             for c in b["chunks"]:
-                rows.append(f"| {c['s']:.2f}〜{c['e']:.2f} | {s['name']} | {plain(c['sub']).replace('/', ' ')} | {c['speed']} | {c['kana']} |")
+                who_lab = "タートル" if c["who"] == "leader" else STAFF[c["who"]]["name"] + "（" + STAFF[c["who"]]["voice"]["name"] + "）"
+                rows.append(f"| {c['s']:.2f}〜{c['e']:.2f} | {s['name']} | {who_lab} | {plain(c['sub']).replace('/', ' ')} | {c['speed']} | {c['kana']} |")
     hyou = (f"## 版：{V['label']}\n\n- 縦1080×1920・30fps・全体 {TOTAL} 秒・声 {CREDIT}（{voice_cfg['style']}・抑揚 {voice_cfg['intonation']}・高さ {voice_cfg['pitch']}） 速さ {speed}・つなぎ目 {CUT:.3f} 秒\n- 場面："
             + " / ".join(f"{s['name']} {s['start']:.2f}〜{s['end']:.2f}" for s in scenes) + "\n\n" + "\n".join(rows) + "\n")
 
@@ -839,7 +974,7 @@ def _build(sc, OUT, variant, PROJ, V):
     if not (7.0 <= cd <= 12.0): warn.append(f"宣伝カード＋問い合わせ案内の長さ {cd:.2f} 秒（目安 8〜11 秒）")
     if TOTAL - cta["start"] > 16: warn.append(f"最後の部分（宣伝＋問い合わせ＋しめ）が {TOTAL - cta['start']:.1f} 秒と長め")
     if scenes[0]["vs"] > 0.3: warn.append("つかみの声の始まりが遅い")
-    for it in (sc["items"] if sc["type"] != "greeting" else []):
+    for it in (sc["items"] if sc["type"] not in ("greeting", "staff") else []):   # あいさつ・AI社員紹介（自社の実例）は出典URLなしでよい
         if not it.get("source_url"): warn.append(f"出典URLがありません: {it['headline']}")
     return dict(variant=variant, PROJ=PROJ, TOTAL=TOTAL, CUT=CUT, body_custom=body_custom, body_key=body_key, scenes=scenes, cta=cta, bye=bye, warn=warn, hyou=hyou,
                 program=program, hook_head=hook_head, d=d, credit=CREDIT, times=times, speed=speed, voice_cfg=voice_cfg)
@@ -899,9 +1034,9 @@ def write_texts(sc, OUT, info):
     body = sns.get("body") or first_para or hook_head
     short = sns.get("short") or sentences_upto(body, 40, 80) or hook_head
     src_names = sorted({it.get("source_label", "").replace("出典：", "") for it in sc["items"] if it.get("source_url") and it.get("source_label")})
-    src_line = ("出典：" + "・".join(src_names)) if src_names and sc["type"] != "greeting" else ""
+    src_line = ("出典：" + "・".join(src_names)) if src_names and sc["type"] not in ("greeting", "staff") else ""
     def tagline(lst): return " ".join(x if x.startswith("#") else "#" + x for x in lst)
-    extra_tag = {"weekday": "#AIニュース", "saturday": "#AI活用事例", "sunday": "#AIニュース", "greeting": "#はじめまして"}[sc["type"]]
+    extra_tag = {"weekday": "#AIニュース", "saturday": "#AI活用事例", "sunday": "#AIニュース", "greeting": "#はじめまして", "staff": "#AI社員"}[sc["type"]]
     warn = []
 
     # --- Instagram（リンクは押せないので貼らない）

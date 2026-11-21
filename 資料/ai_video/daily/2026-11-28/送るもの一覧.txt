@@ -1,0 +1,13 @@
+# 2026-11-28 送るもの一覧（AI動画編集部）
+
+- turtle_ai_2026-11-28_youtube.mp4 15.8MB … 動画（YouTube用）
+- turtle_ai_2026-11-28_insta_tiktok.mp4 15.8MB … 動画（Instagramリール・TikTok用）
+- turtle_ai_2026-11-28_x.mp4 15.9MB … 動画（X用）
+- 概要欄_youtube.txt  … YouTube：1行目がタイトル、3行目からが概要欄
+- キャプション_instagram.txt  … Instagramリール：そのまま貼る（リンクは貼らない。プロフィールのリンクへ案内）
+- キャプション_tiktok.txt  … TikTok：そのまま貼る
+- 投稿_x.txt  … X：そのまま貼る（242/280カウント）
+- 確認コマ/contact_sheet.jpg  … 場面ごとのコマ（見た目の確認）
+- 確認コマ/最後_場所ごと.jpg  … 場所ごとの最後の部分の見くらべ
+
+プロフィール（Instagram・TikTok）とXに入れる共通のリンク：https://www.turtle-ad.com/links/

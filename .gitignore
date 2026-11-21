@@ -8,3 +8,6 @@
 資料/ai_video/**/check.json
 資料/ai_video/daily/*/project_*/
 資料/ai_video/**/check_*.json
+資料/ai_video/声の聞き比べ/AI社員/project/
+資料/ai_video/声の聞き比べ/AI社員/cache/
+資料/ai_video/**/__pycache__/
