@@ -10,7 +10,7 @@ const shots = path.join(base, 'screenshots');
   // 1) OGP画像 1200x630
   let p = await b.newPage({ viewport: { width: 1200, height: 630 } });
   await p.goto('file://' + path.join(__dirname, 'og.html')); await p.waitForTimeout(500);
-  await p.screenshot({ path: path.join(pub, 'og.png') });
+  await p.screenshot({ path: path.join(pub, 'og_tmp.png') });
   await p.close();
   // 2) 確認用：サーバーと同じ並び（/assets/logo.css と /links/）を一時フォルダに作る
   const tmp = fs.mkdtempSync('/tmp/links-');
