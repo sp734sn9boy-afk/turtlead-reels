@@ -1,6 +1,9 @@
-hyperframes check（YouTube）: ok=True エラー 0 / 注意 9
+hyperframes check（YouTube）: ok=True エラー 0 / 注意 8
 hyperframes check（Instagramリール・TikTok）: ok=True エラー 0 / 注意 8
 hyperframes check（X）: ok=True エラー 0 / 注意 8
-注意: Instagramリール・TikTok 版は本編の言葉を変えているので、つながず最初から書き出します（時間が増えます）
-注意: X 版は本編の言葉を変えているので、つながず最初から書き出します（時間が増えます）
-（書き出しなし）
+注意: Instagramリール・TikTok 版は本編の言葉を変えています（本編の書き出しが1回増えます）
+注意: X 版は本編の言葉を変えています（本編の書き出しが1回増えます）
+turtle_ai_2026-11-21_youtube.mp4: 44.40 秒（予定 44.38 秒）・音声 aac・最初から1本で書き出し
+turtle_ai_2026-11-21_insta_tiktok.mp4: 43.81 秒（予定 43.77 秒）・音声 aac・本編＋最後の部分をつないだ
+turtle_ai_2026-11-21_x.mp4: 43.60 秒（予定 43.59 秒）・音声 aac・本編＋最後の部分をつないだ
+所要時間: voice+build 2秒 / check 32秒 / render_head1 127秒 / render_tail_insta_tiktok 61秒 / render_tail_x 57秒 / render_full_youtube 140秒 / render 386秒 / verify 9秒 / 合計 429秒

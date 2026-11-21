@@ -351,9 +351,9 @@ def _build(sc, OUT, variant, PROJ, V):
     times = {}
     # 本編の言葉を場所ごとに変える指定（例：「チャンネル登録」→「フォロー」）。あるとその版は本編から書き出す（つながない）
     body_custom = any([apply_overrides(sc["hook"], variant), apply_overrides(sc["items"], variant)])
-    for k in ("highlight", "readings"):
-        if f"{k}_{variant}" in sc: sc[k] = sc[f"{k}_{variant}"]
-    body_key = hashlib.sha1(json.dumps([sc["hook"], sc["items"], sc.get("highlight"), sc.get("readings"), sc.get("speed"), sc.get("voice")],
+    for k in ("highlight", "readings", "program"):
+        if f"{k}_{variant}" in sc: sc[k] = sc[f"{k}_{variant}"]; body_custom = True
+    body_key = hashlib.sha1(json.dumps([sc["hook"], sc["items"], sc.get("highlight"), sc.get("readings"), sc.get("program"), sc.get("speed"), sc.get("voice")],
                                        ensure_ascii=False, sort_keys=True, default=str).encode()).hexdigest()[:12]
     T = TYPES[sc["type"]]; d = sc["_date"]
     global CREDIT
