@@ -1,4 +1,4 @@
-// 架空のお店「つきのわベーカリー」のロゴアニメ（5秒）。logoSVG(t) で t秒時点のコマを返す。
+// 架空のお店「ムーンテイル」（MOONTAIL BAKERY）のロゴアニメ（5秒）。logoSVG(t) で t秒時点のコマを返す。
 // 素材はすべて自作（図形と文字のみ）。他社ロゴ・写真は不使用。
 let _uid = 0;
 const cl = (x) => Math.max(0, Math.min(1, x));
@@ -12,16 +12,16 @@ function logoSVG(t, o = {}) {
   const ring = easeOut(t / 1.0);
   const cs = back((t - 0.8) / 0.7), cr = -120 * (1 - easeOut((t - 0.8) / 0.7));
   const pulse = 1 + 0.05 * Math.sin(Math.PI * cl((t - 3.6) / 0.5));
-  const chars = ['つ', 'き', 'の', 'わ'];
+  const chars = ['ム', 'ー', 'ン', 'テ', 'イ', 'ル'];
   let txt = '';
   chars.forEach((c, i) => {
-    const p = (t - (1.5 + 0.2 * i)) / 0.45;
+    const p = (t - (1.5 + 0.15 * i)) / 0.45;
     if (p <= 0) return;
-    const y = 545 + 70 * (1 - back(p));
-    txt += `<text x="${640 + (i - 1.5) * 128}" y="${y}" text-anchor="middle" font-family="'Zen Maru Gothic'" font-weight="900" font-size="118" fill="${brown}" opacity="${cl(p * 2.5)}">${c}</text>`;
+    const y = 532 + 70 * (1 - back(p));
+    txt += `<text x="${640 + (i - 2.5) * 90}" y="${y}" text-anchor="middle" font-family="'Zen Maru Gothic'" font-weight="900" font-size="86" fill="${brown}" opacity="${cl(p * 2.5)}">${c}</text>`;
   });
   const bp = easeOut((t - 2.6) / 0.7);
-  const ls = 16 + 40 * (1 - bp);
+  const ls = 6 + 30 * (1 - bp);
   const lp = easeOut((t - 3.0) / 0.5);
   const sp = back((t - 3.4) / 0.5), sr = 90 * (1 - easeOut((t - 3.4) / 0.6));
   const star = (cx, cy, r) => `M${cx} ${cy - r} Q${cx} ${cy} ${cx + r} ${cy} Q${cx} ${cy} ${cx} ${cy + r} Q${cx} ${cy} ${cx - r} ${cy} Q${cx} ${cy} ${cx} ${cy - r}Z`;
@@ -33,7 +33,7 @@ function logoSVG(t, o = {}) {
     ${t > 0.8 ? `<g transform="translate(640 262) rotate(${cr}) scale(${cs}) translate(-640 -262)"><circle cx="640" cy="262" r="80" fill="${gold}" mask="url(#${id})"/></g>` : ''}
     ${t > 3.4 ? `<g transform="translate(772 150) rotate(${sr}) scale(${sp}) translate(-772 -150)"><path d="${star(772, 150, 38)}" fill="${red}"/></g><g transform="translate(826 214) scale(${sp}) translate(-826 -214)"><path d="${star(826, 214, 17)}" fill="${gold}"/></g>` : ''}
     ${txt}
-    ${t > 2.6 ? `<text x="${640 + ls / 2}" y="632" text-anchor="middle" font-family="'Zen Maru Gothic'" font-weight="900" font-size="44" letter-spacing="${ls}" fill="${gold}" opacity="${bp}">BAKERY</text>` : ''}
-    ${t > 3.0 ? `<path d="M${440 - 0} 618 h${-90 * lp} M${840} 618 h${90 * lp}" stroke="${gold}" stroke-width="7" stroke-linecap="round"/>` : ''}
+    ${t > 2.6 ? `<text x="${640 + ls / 2}" y="632" text-anchor="middle" font-family="'Zen Maru Gothic'" font-weight="900" font-size="32" letter-spacing="${ls}" fill="${gold}" opacity="${bp}">MOONTAIL BAKERY</text>` : ''}
+    ${t > 3.0 ? `<path d="M408 620 h${-70 * lp} M872 620 h${70 * lp}" stroke="${gold}" stroke-width="7" stroke-linecap="round"/>` : ''}
   </g></svg>`;
 }
