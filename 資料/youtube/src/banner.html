@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<title>YouTube チャンネルバナー</title>
+<!-- フォントは動画と同じファイル（資料/ai_video/fonts/、SIL OFL） -->
+<style>
+@font-face{font-family:"NotoJP";src:url("../../ai_video/fonts/NotoSansJP-Bold.ttf");font-weight:700}
+@font-face{font-family:"RoundM";src:url("../../ai_video/fonts/RoundedMplus1c-ExtraBold.ttf");font-weight:800}
+:root{--cyan:#3CD6F0;--violet:#b9a6ff;--yellow:#ffcc4d;--ink:#08101f;--dim:#b9c8e6}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:2560px;height:1440px;overflow:hidden}
+body{position:relative;font-family:"NotoJP",sans-serif;font-weight:700;color:#fff;font-feature-settings:"palt";
+  background:radial-gradient(55% 60% at 50% 50%,#14245a 0%,#081024 60%,#04070f 100%)}
+.bg{position:absolute;inset:0}
+/* スマホでも見える安全範囲：中央 1546x423（x=507〜2053, y=509〜932）。文字とキャラはすべてこの中 */
+.safe{position:absolute;left:507px;top:509px;width:1546px;height:423px}
+.guide .safe{outline:4px dashed #ff5a5a;outline-offset:0}
+.inner{position:absolute;left:24px;right:24px;top:18px;bottom:18px;display:flex;align-items:center;justify-content:space-between}
+.turtle{width:276px;height:384px;image-rendering:pixelated;flex:none;filter:drop-shadow(0 0 18px rgba(60,214,240,.5))}
+.text{flex:none;display:flex;flex-direction:column;align-items:flex-start;margin-left:34px}
+.brand{display:flex;align-items:center;gap:14px;font-family:"RoundM";font-weight:800;font-size:46px;line-height:1;color:var(--cyan);letter-spacing:.04em}
+.brand img{width:52px;height:52px}
+.title{font-family:"RoundM";font-weight:800;font-size:116px;line-height:1.1;letter-spacing:.02em;margin-top:6px;white-space:nowrap;
+  text-shadow:0 0 26px rgba(60,214,240,.35)}
+.title .ai{background:linear-gradient(90deg,var(--cyan),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none}
+.sub{margin-top:8px;font-size:46px;line-height:1.32;white-space:nowrap}
+.sub em{font-style:normal;color:var(--yellow)}
+.pill{margin-top:14px;display:inline-block;background:var(--yellow);color:var(--ink);font-size:33px;line-height:1;padding:11px 30px 12px;border-radius:40px;white-space:nowrap}
+.team{flex:none;position:relative;width:444px;height:384px}
+.team img{position:absolute;image-rendering:pixelated;height:192px}
+.team .tag{position:absolute;font-size:22px;line-height:1;padding:5px 12px 6px;border-radius:14px;color:var(--ink);white-space:nowrap}
+</style></head>
+<body>
+<svg class="bg" viewBox="0 0 2560 1440" aria-hidden="true">
+  <defs>
+    <pattern id="hex" width="120" height="207.84" patternUnits="userSpaceOnUse">
+      <path d="M60 0 L120 34.64 L120 103.92 L60 138.56 L0 103.92 L0 34.64 Z M60 138.56 L60 207.84" fill="none" stroke="#3CD6F0" stroke-width="1.6"/>
+    </pattern>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#3CD6F0" stop-opacity=".16"/><stop offset="1" stop-color="#3CD6F0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3CD6F0"/><stop offset="1" stop-color="#b9a6ff"/></linearGradient>
+  </defs>
+  <rect width="2560" height="1440" fill="url(#hex)" opacity=".22"/>
+  <ellipse cx="1280" cy="720" rx="1000" ry="380" fill="url(#glow)"/>
+  <!-- 安全範囲の外の飾り（切れても問題ない） -->
+  <g fill="none" stroke="url(#hg)" stroke-width="5" opacity=".55">
+    <path d="M250 520 L420 618 L420 814 L250 912 L80 814 L80 618 Z"/>
+    <path d="M2310 520 L2480 618 L2480 814 L2310 912 L2140 814 L2140 618 Z"/>
+  </g>
+  <g fill="none" stroke="#3CD6F0" stroke-width="3" opacity=".3">
+    <path d="M250 440 L490 578 L490 854 L250 992 L10 854 L10 578 Z"/>
+    <path d="M2310 440 L2550 578 L2550 854 L2310 992 L2070 854 L2070 578 Z"/>
+  </g>
+  <g fill="#3CD6F0" opacity=".7">
+    <circle cx="250" cy="716" r="10"/><circle cx="2310" cy="716" r="10"/>
+  </g>
+</svg>
+<div class="safe">
+  <div class="inner">
+    <img class="turtle" src="sprites/leader_x6.png" alt="">
+    <div class="text">
+      <div class="brand"><img src="../../ai_video/daily/template/assets/img/logo.png" alt="">タートルアド</div>
+      <div class="title"><span class="ai">AI</span>動画編集部</div>
+      <div class="sub">AIのニュースと<br>中小企業のAI活用を、<em>毎日</em>お届け</div>
+      <div class="pill">動画はAIチームが作っています</div>
+    </div>
+    <div class="team">
+      <!-- 道具が右手にあるので、左のキャラを手前に重ねる -->
+      <img src="sprites/design_x3.png"     style="left:0px;top:0;z-index:5">
+      <img src="sprites/sales_x3.png"      style="left:138px;top:0;z-index:4">
+      <img src="sprites/listing_x3.png"    style="left:276px;top:0;z-index:3">
+      <img src="sprites/automation_x3.png" style="left:66px;top:186px;z-index:7">
+      <img src="sprites/research_x3.png"   style="left:214px;top:186px;z-index:6">
+    </div>
+  </div>
+</div>
+</body></html>

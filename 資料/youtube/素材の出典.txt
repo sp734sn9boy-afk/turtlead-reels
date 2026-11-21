@@ -1,0 +1,16 @@
+YouTube「タートルアド AI動画編集部」チャンネル画像　素材の出典・作り方 2026-11-21（デザイン主任）
+
+- icon_800.png（チャンネルアイコン 800x800）／banner_2560x1440.png（チャンネルバナー、安全範囲は中央1546x423）
+- キャラクター：自社素材 資料/ai_office/characters/single/（leader, design, sales, listing, automation, research）。
+  元PNGは64x64ドット（1ドット=7px）。src/make_sprites.py でドットに戻してから整数倍に nearest neighbor で拡大（アイコン9倍、バナーのタートル6倍・仲間3倍）。
+- ロゴマーク：動画と同じ 資料/ai_video/daily/template/assets/img/logo.png（自社素材）。
+- フォント：動画と同じ 資料/ai_video/fonts/（M PLUS Rounded 1c ExtraBold、Noto Sans JP Bold。SIL OFL）。
+- 背景の六角形模様・飾りの六角形：HTML内のSVGで自作。写真・人物・他社ロゴ・ストック素材は使用なし。
+- 色：紺 #14245a→#081024→#04070f、水色 #3CD6F0、紫 #b9a6ff、黄 #ffcc4d（動画の帯と同じ）。
+
+作り直し手順（資料/youtube/src/ で）：
+  python3 make_sprites.py
+  NODE_PATH=/opt/node-tools/node_modules node render.js
+  python3 make_icon_checks.py
+check/ は確認用：banner_guide_safe（安全範囲の赤枠）、banner_phone_safe_1546x423（スマホ想定）、
+  banner_desktop_2560x423（パソコン想定）、icon_guide、icon_circle_176px／48px（＋8倍拡大の zoom）。
