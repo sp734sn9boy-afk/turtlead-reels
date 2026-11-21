@@ -1,0 +1,14 @@
+Instagram（turtle_ad_pro）ハイライト 表紙5枚＋ストーリーズ10枚  素材の出典  2026-11-21
+作り方: src/ で NODE_PATH=/opt/node-tools/node_modules node render.js → python3 check_covers.py
+  元データ src/pages.html（.page 1つ＝PNG 1枚）。check/ は確認用（guide_*＝上下250pxの帯・表紙の600px円つき、cover_circles.png＝円形に切り抜いて縮小）
+
+- キャラクター（タートル＋仲間5体）: 資料/ai_office/characters/single/*.png（自作ドット絵）を 64x64 に戻して整数倍で拡大（src/img/*_64.png）
+- ホームページ見本: 資料/googlemap_photos/01_hp_katsuobushi.jpg・02_hp_bankin.jpg の一部を切り出し（社名・電話番号はぼかし済みの画像）
+- リール動画の画面: 資料/googlemap_photos/src/frames/*_sel.png（turtle-ad.com/reel/ のサンプル動画の2秒目。架空のお店・人物なしのコマ。動画内の「※イメージ」「VOICEVOX」表記はそのまま）
+- AI活用の例: 資料/googlemap_photos/05_ai.jpg の一部（自作の図。文面は架空の例）
+- ロゴマーク: turtle-ad.com ヘッダーの自社SVG（googlemap_cover_src/cover.html と同じ）
+- 表紙のアイコン（¥・画面・電球・吹き出し）: SVGで自作
+- フォント: 資料/ai_video/fonts/（Noto Sans JP Bold / M PLUS Rounded 1c ExtraBold、SIL OFL）
+- 人の顔・他社ロゴ（LINEの公式ロゴを含む）・ストック写真: 使用なし
+- 料金・連絡先: CLAUDE.md とリーダーの指示（2026-11-21）、資料/ai_komon/公開用/ai/index.html で照合
+- 「お客さまの声」: 本物の声がまだ無いため作っていない
