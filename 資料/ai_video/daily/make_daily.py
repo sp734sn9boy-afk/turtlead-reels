@@ -138,6 +138,16 @@ BYE = {
     "staff":    ([{"sub": "また明日ね！", "read": "またあしたね！"}, {"sub": "またね！", "speaker": "guest"}], "また明日ね！"),
 }
 BYE_SPEED_MUL = 0.92
+# 本編のしめの一言（ニュースのあと、宣伝カードの前にワンクッション入れる。2026-11-23 オーナー指示）
+# 本編の最後のカードの間に話す。台本の "wrap_say" で変えられる（[] で入れない）
+WRAP = {
+    "weekday":  [{"sub": "以上が、今日のAIニュースでした。", "read": "以上が、今日のエーアイニュースでした。"}],
+    "sunday":   [{"sub": "以上が、今週のまとめでした。", "read": "以上が、今週のまとめでした。"}],
+    "saturday": [{"sub": "以上が、今日の実例でした。"}],
+    "staff":    [{"sub": "以上、今日の仲間の紹介でした！", "read": "以上、今日のなかまの紹介でした！", "speaker": "leader"}],
+    "greeting": [],
+}
+
 # 宣伝カードのセリフ（台本の "cta_say" で変えられる）
 CTA_SAY = [{"sub": "このキャラクターのようなAI動画を、", "read": "このキャラクターのようなエーアイ動画を、"},
            {"sub": "御社のロゴから作ります。", "read": "おんしゃのロゴから作ります。"}]
@@ -402,7 +412,7 @@ def _build(sc, OUT, variant, PROJ, V):
     body_custom = any([apply_overrides(sc["hook"], variant), apply_overrides(sc["items"], variant)])
     for k in ("highlight", "readings", "program"):
         if f"{k}_{variant}" in sc: sc[k] = sc[f"{k}_{variant}"]; body_custom = True
-    body_key = hashlib.sha1(json.dumps([sc["hook"], sc["items"], sc.get("highlight"), sc.get("readings"), sc.get("program"), sc.get("speed"), sc.get("voice"), sc.get("staff")],
+    body_key = hashlib.sha1(json.dumps([sc["hook"], sc["items"], sc.get("wrap_say"), sc.get("highlight"), sc.get("readings"), sc.get("program"), sc.get("speed"), sc.get("voice"), sc.get("staff")],
                                        ensure_ascii=False, sort_keys=True, default=str).encode()).hexdigest()[:12]
     T = TYPES[sc["type"]]; d = sc["_date"]
     global CREDIT
@@ -438,8 +448,12 @@ def _build(sc, OUT, variant, PROJ, V):
         return spk_ids[w], dict(DEFAULT_VOICE, **st["voice"]), float(st["speed"]), float(st.get("name_speed", st["speed"]))
     # 場面の並び：intro → item1..N → cta。各場面は beat（カード1枚）のリスト、beat はセリフ chunk のリスト
     scenes = [{"name": "intro", "beats": [{"card": None, "say": sc["hook"]["say"]}]}]
+    wrap = sc.get("wrap_say", WRAP.get(sc["type"], []))
     for i, it in enumerate(sc["items"]):
-        scenes.append({"name": f"item{i + 1}", "item": it, "beats": it["beats"]})
+        beats = it["beats"]
+        if wrap and i == len(sc["items"]) - 1 and beats:   # 最後のネタの最後のカードに「以上が…」を足す
+            beats = beats[:-1] + [dict(beats[-1], say=list(beats[-1]["say"]) + list(wrap))]
+        scenes.append({"name": f"item{i + 1}", "item": it, "beats": beats})
     scenes.append({"name": "cta", "beats": [{"card": None, "say": sc.get("cta_say", CTA_SAY)},
                                             {"card": None, "say": inquiry_for(sc, variant), "inq": True}]})
     bye_say, bye_text = BYE[sc["type"]]
