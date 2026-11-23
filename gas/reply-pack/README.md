@@ -12,4 +12,6 @@
 node --test gas/reply-pack/test/reply-pack.test.js
 ```
 
+v0.2：LINEグループ（C…）への通知（人数分で通数を数える）、グループIDを調べる受け口（doPost・一時的に使う）、送り主アドレス（Gmailの別名）、自動返信の期限。
+
 お客さま専用の値はコードに書かない（すべて「設定」シート）。導入手順は docs/automation/1分返信パック_導入手順書_下書き.md。

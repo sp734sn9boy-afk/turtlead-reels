@@ -619,3 +619,15 @@ test('送り主アドレス：あとで登録が外れたら、自動返信は�
   env.ctx.runEvery10Min();
   assert.equal(env.ctx.GmailApp.sent.length, 2);
 });
+
+test('自動返信の期限：受付から48時間を過ぎた保留分には、あとから自動返信を送らない（LINEは送る）', () => {
+  const { env, form } = ready({}, { now: new Date('2026-11-23T14:00:00Z') }); // 23時（時間外）
+  submit(form, 'a', 'a@example.com', '1');
+  env.ctx.runEvery10Min();
+  assert.equal(env.logRows()[0][7], '');
+  env.setNow(new Date('2026-11-26T01:00:00Z')); // 2日半後の10時
+  env.ctx.runEvery10Min();
+  assert.equal(autoReplies(env).length, 0);
+  assert.equal(env.logRows()[0][7], 'スキップ（受付から時間が経ちすぎ）');
+  assert.match(env.logRows()[0][8], /^済/);
+});
