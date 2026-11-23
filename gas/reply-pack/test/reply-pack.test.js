@@ -24,7 +24,7 @@ function submit(form, name, mail, body) {
   form.rows.push(['2026/11/24 10:00:00', name, mail, '090-1111-2222', body, '来月']);
 }
 
-const linePushes = (env) => env.fetches.filter((f) => f.url.indexOf('api.line.me') >= 0);
+const linePushes = (env) => env.fetches.filter((f) => f.url.indexOf('/v2/bot/message/push') >= 0);
 const autoReplies = (env) => env.mails.filter((m) => m.subject.indexOf('お問い合わせありがとうございます') === 0);
 
 test('初期設定：シートができ、トリガー3つを作り、やり直しても増えない', () => {
@@ -219,7 +219,7 @@ test('Googleの送信枠が残りわずかなら自動返信しない（エラ�
 
 test('LINE送信：通知先が2人なら2回。1人目だけ成功→再実行で2人目だけ送る（同じ人に二重に届かない）', () => {
   let call = 0;
-  const { env, form } = ready({ 'LINE通知先ユーザーID': LINE_ID + ', ' + LINE_ID2 });
+  const { env, form } = ready({ 'LINE通知先ID': LINE_ID + ', ' + LINE_ID2 });
   env.setFetch((url, o) => {
     const to = JSON.parse(o.payload).to;
     call++;
@@ -446,4 +446,176 @@ test('設定シートに無い項目は版が上がったときに足される�
 test('コードにお客さま専用の値（店名・メール・トークン）が書かれていない', () => {
   const code = require('fs').readFileSync(require('path').join(__dirname, '..', 'Code.gs'), 'utf8');
   assert.doesNotMatch(code, /@gmail\.com|turtle-ad\.com|sk-ant-|Bearer [A-Za-z0-9]{20}/);
+});
+
+// ---------------------------------------------------------------- v0.2：LINEグループ・送り主アドレス
+
+const GROUP_ID = 'C' + 'c'.repeat(32);
+
+function groupFetch(members) {
+  return (url) => {
+    if (url.indexOf('/members/count') >= 0) return { code: 200, body: JSON.stringify({ count: members }) };
+    return { code: 200, body: '{}' };
+  };
+}
+
+test('LINEグループ：通知先にグループID（C…）と個人ID（U…）を混在でき、両方に送る。形の違うIDは使わない', () => {
+  const { env, form } = ready({ 'LINE通知先ID': LINE_ID + ',' + GROUP_ID + ',Cxyz' });
+  env.setFetch(groupFetch(5));
+  submit(form, 'a', 'a@example.com', '1');
+  env.ctx.runEvery10Min();
+  const to = linePushes(env).map((f) => f.payload.to).sort();
+  assert.deepEqual(to, [GROUP_ID, LINE_ID].sort());
+  const countCall = env.fetches.find((f) => f.url.indexOf('/members/count') >= 0);
+  assert.equal(countCall.url, 'https://api.line.me/v2/bot/group/' + GROUP_ID + '/members/count');
+  assert.equal(countCall.opts.method, 'get');
+});
+
+test('LINEグループ：通数は人数分で数える（5人のグループ＋個人1人＝6通）', () => {
+  const { env, form } = ready({ 'LINE通知先ID': LINE_ID + ',' + GROUP_ID });
+  env.setFetch(groupFetch(5));
+  submit(form, 'a', 'a@example.com', '1');
+  env.ctx.runEvery10Min();
+  assert.equal(env.ctx.countOf_('LINE'), 6);
+});
+
+test('LINEグループ：上限は人数分で判定（上限8・5人グループ → 1件目は送れ、2件目のグループ分は翌日に回す）', () => {
+  const { env, form } = ready({ 'LINE通知先ID': GROUP_ID, '1日の上限（LINE）': '8' });
+  env.setFetch(groupFetch(5));
+  submit(form, 'a', 'a@example.com', '1');
+  submit(form, 'b', 'b@example.com', '2');
+  env.ctx.runEvery10Min();
+  assert.equal(linePushes(env).length, 1);
+  assert.match(env.logRows()[0][8], /^済/);
+  assert.equal(env.logRows()[1][8], '');
+  // 人数は覚えておくので、2回目は問い合わせない
+  assert.equal(env.fetches.filter((f) => f.url.indexOf('/members/count') >= 0).length, 1);
+});
+
+test('LINEグループ：人数が取れないときは1通として数えて送る', () => {
+  const { env, form } = ready({ 'LINE通知先ID': GROUP_ID });
+  env.setFetch((url) => (url.indexOf('/members/count') >= 0 ? { code: 403, body: 'forbidden' } : { code: 200, body: '{}' }));
+  submit(form, 'a', 'a@example.com', '1');
+  env.ctx.runEvery10Min();
+  assert.equal(linePushes(env).length, 1);
+  assert.equal(env.ctx.countOf_('LINE'), 1);
+});
+
+test('以前の項目名「LINE通知先ユーザーID」の設定シートもそのまま使える（行は増やさない）', () => {
+  const env = createEnv();
+  env.configure(BASE_SETTINGS);
+  const st = env.sheet('設定');
+  const row = st.rows.find((r) => r[0] === 'LINE通知先ID');
+  row[0] = 'LINE通知先ユーザーID';
+  env.ctx.ensureSheets_();
+  assert.equal(st.rows.filter((r) => r[0] === 'LINE通知先ID').length, 0);
+  assert.equal(env.ctx.lineIds_(env.ctx.getSettings_()).length, 1);
+});
+
+function lineEvent(ev) {
+  return { postData: { contents: JSON.stringify({ destination: 'Uxxx', events: [ev] }) } };
+}
+
+test('LINEのID調べ：グループに招待されたら、グループIDを記録し、返信（Reply）でIDを知らせる', () => {
+  const { env } = ready({ 'LINEのID調べ（受け口）': 'する' });
+  const out = env.ctx.doPost(lineEvent({ type: 'join', replyToken: 'rt1', source: { type: 'group', groupId: GROUP_ID } }));
+  assert.equal(out.text, 'OK');
+  const sh = env.sheet('LINEのID調べ');
+  assert.equal(sh.rows.length, 2);
+  assert.equal(sh.rows[1][1], 'グループ');
+  assert.equal(sh.rows[1][2], GROUP_ID);
+  const reply = env.fetches.find((f) => f.url === 'https://api.line.me/v2/bot/message/reply');
+  assert.equal(reply.payload.replyToken, 'rt1');
+  assert.match(reply.payload.messages[0].text, new RegExp(GROUP_ID));
+  assert.equal(linePushes(env).length, 0, 'Push（通数に数える送信）は使わない');
+  assert.equal(env.ctx.countOf_('LINE'), 0);
+});
+
+test('LINEのID調べ：グループで「ID」と送ってもIDを返す。同じIDは1行だけ記録。個人のIDも取れる', () => {
+  const { env } = ready({ 'LINEのID調べ（受け口）': 'する' });
+  const msg = (src, text) => lineEvent({ type: 'message', replyToken: 'rt', source: src, message: { type: 'text', text } });
+  env.ctx.doPost(msg({ type: 'group', groupId: GROUP_ID, userId: LINE_ID2 }, 'ID'));
+  env.ctx.doPost(msg({ type: 'group', groupId: GROUP_ID, userId: LINE_ID2 }, 'こんにちは'));
+  env.ctx.doPost(msg({ type: 'user', userId: LINE_ID2 }, 'id'));
+  const sh = env.sheet('LINEのID調べ');
+  assert.deepEqual(sh.rows.slice(1).map((r) => r[2]), [GROUP_ID, LINE_ID2]);
+  assert.equal(env.fetches.filter((f) => f.url.indexOf('/message/reply') >= 0).length, 2, '「ID」のときだけ返信');
+});
+
+test('LINEのID調べ：受け口が「しない」なら何もしない。中身の無い送信（検証）にもOKを返す。通知先には自動で入れない', () => {
+  const { env } = ready();
+  assert.equal(env.ctx.doPost(lineEvent({ type: 'join', replyToken: 'rt1', source: { type: 'group', groupId: GROUP_ID } })).text, 'OK');
+  assert.equal(env.sheet('LINEのID調べ'), null);
+  assert.equal(env.ctx.doPost({}).text, 'OK');
+  assert.equal(env.ctx.doPost({ postData: { contents: '{"events":[]}' } }).text, 'OK');
+  env.configure({ 'LINEのID調べ（受け口）': 'する' });
+  env.ctx.doPost(lineEvent({ type: 'join', replyToken: 'rt1', source: { type: 'group', groupId: GROUP_ID } }));
+  assert.equal(env.ctx.lineIds_(env.ctx.getSettings_()).indexOf(GROUP_ID), -1);
+});
+
+test('LINEのID調べ：壊れた中身でも落ちずにOKを返し、エラーを記録する', () => {
+  const { env } = ready({ 'LINEのID調べ（受け口）': 'する' });
+  assert.equal(env.ctx.doPost({ postData: { contents: '{broken' } }).text, 'OK');
+  assert.ok(env.sheet('エラー記録').rows.some((r) => r[1] === 'LINEのID調べ'));
+});
+
+test('送り主アドレス：空ならこれまでどおりGmail（MailApp）から送る', () => {
+  const { env, form } = ready();
+  submit(form, 'a', 'a@example.com', '1');
+  env.ctx.runEvery10Min();
+  assert.equal(autoReplies(env).length, 1);
+  assert.equal(env.ctx.GmailApp.sent.length, 0);
+});
+
+test('送り主アドレス：Gmailに登録済みの別名なら、その別名（from）で送る', () => {
+  const env = createEnv();
+  env.ctx.GmailApp.aliases = ['Info@Example-Shop.jp'];
+  env.configure(Object.assign({}, BASE_SETTINGS, { '送り主アドレス': 'info@example-shop.jp' }));
+  const form = env.ss.addFormSheet('フォームの回答 1', FORM_HEADERS);
+  assert.equal(env.ctx.setup().ok, true);
+  submit(form, '山田', 'yamada@example.com', '1');
+  env.ctx.runEvery10Min();
+  const sent = env.ctx.GmailApp.sent;
+  assert.equal(sent.length, 1);
+  assert.equal(sent[0].to, 'yamada@example.com');
+  assert.equal(sent[0].from, 'info@example-shop.jp');
+  assert.equal(sent[0].name, 'テスト工務店');
+  assert.match(sent[0].subject, /お問い合わせありがとうございます/);
+  assert.match(env.logRows()[0][7], /^済/);
+  assert.equal(env.ctx.countOf_('MAIL'), 1, 'GmailAppで送った分も上限に数える');
+});
+
+test('送り主アドレス：登録されていなければ初期設定で止めて知らせる', () => {
+  const env = createEnv();
+  env.configure(Object.assign({}, BASE_SETTINGS, { '送り主アドレス': 'info@example-shop.jp' }));
+  const r = env.ctx.setup();
+  assert.equal(r.ok, false);
+  assert.match(r.errors.join(), /他のメールアドレスを追加/);
+  assert.equal(env.triggers.length, 0);
+});
+
+test('送り主アドレス：あとで登録が外れたら、自動返信は送らずに保留し（Gmailのまま送らない）、1日1回知らせる。LINEは届く', () => {
+  const env = createEnv();
+  env.ctx.GmailApp.aliases = ['info@example-shop.jp'];
+  env.configure(Object.assign({}, BASE_SETTINGS, { '送り主アドレス': 'info@example-shop.jp' }));
+  const form = env.ss.addFormSheet('フォームの回答 1', FORM_HEADERS);
+  env.ctx.setup();
+  env.mails.length = 0;
+  env.ctx.GmailApp.aliases = [];
+  submit(form, 'a', 'a@example.com', '1');
+  submit(form, 'b', 'b@example.com', '2');
+  env.ctx.runEvery10Min();
+  env.ctx.runEvery10Min();
+  assert.equal(env.ctx.GmailApp.sent.length, 0);
+  assert.equal(autoReplies(env).length, 0, 'Gmailのアドレスでは送らない');
+  assert.equal(env.logRows()[0][7], '', '失敗ではなく保留');
+  assert.equal(env.logRows()[0][10], 0);
+  assert.match(env.logRows()[0][8], /^済/);
+  const notes = env.mails.filter((m) => /設定の不備（送り主アドレス）/.test(m.subject));
+  assert.equal(notes.length, 1);
+  assert.match(notes[0].body, /他のメールアドレスを追加/);
+  // 登録し直すと、保留分が送られる
+  env.ctx.GmailApp.aliases = ['info@example-shop.jp'];
+  env.ctx.runEvery10Min();
+  assert.equal(env.ctx.GmailApp.sent.length, 2);
 });

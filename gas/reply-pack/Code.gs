@@ -19,11 +19,15 @@
 
 var APP = {
   NAME: '1分返信パック',
-  VERSION: '0.1.0',
+  VERSION: '0.2.0',
   TZ: 'Asia/Tokyo',
   SHEET_SETTINGS: '設定',
   SHEET_LOG: '受付記録',
   SHEET_ERR: 'エラー記録',
+  SHEET_LINEID: 'LINEのID調べ',
+  LINE_REPLY_URL: 'https://api.line.me/v2/bot/message/reply',
+  LINE_COUNT_URL: 'https://api.line.me/v2/bot/{kind}/{id}/members/count',
+  LINEID_MAX_ROWS: 200,
   MAX_RETRY: 3,
   MAIL_RESERVE: 5,
   LINE_PUSH_URL: 'https://api.line.me/v2/bot/message/push',
@@ -55,15 +59,18 @@ var SETTINGS_DEF = [
     '※このメールは自動で送信しています。\n\n{署名}',
     '{店名} {名前} {署名} {受付日時} が使えます。迷惑メールの踏み台にされないよう、問い合わせ内容は本文に入れない'],
   ['署名', '', 'メールの最後に入る店名・電話番号など'],
-  ['返信先メール', '', '自動返信に「返信」したときの宛先（空ならこのGoogleアカウント）'],
+  ['送り主アドレス', '', '自動返信の送り主（例：info@お店のドメイン）。空ならこのGmailのまま。入れる場合は先にGmailの「他のメールアドレスを追加」で送信元に登録しておく'],
+  ['返信先メール', '', '自動返信に「返信」したときの宛先（空なら送り主アドレス、それも空ならこのGoogleアカウント）'],
   ['LINE通知', 'する', '担当者のLINEに知らせるか（する／しない）'],
   ['LINEチャネルアクセストークン', '', 'LINE Developers で発行した合言葉。貼ると隠し設定に移ります', true],
-  ['LINE通知先ユーザーID', '', 'U から始まるID。複数はカンマ（,）で区切る'],
+  ['LINE通知先ID', '', '個人は U…、グループは C… から始まる33文字。複数はカンマ（,）で区切る（混在OK）。' +
+    '注意：グループに送ると「グループの人数分」が通数に数えられます（5人のグループに1回＝5通。無料プランは月200通まで）。IDは「LINEのID調べ」で調べます'],
   ['送信する時間帯（開始時）', '8', '0〜23。この時刻から送る'],
   ['送信する時間帯（終了時）', '21', '0〜23。この時刻の前まで送る（開始と同じなら24時間）'],
   ['時間外のLINE通知', '時間内まで待つ', '時間内まで待つ／すぐ送る（自動返信メールは必ず時間内だけ）'],
   ['1日の上限（メール）', '80', '自動返信メールの1日の上限（無料のGoogleアカウントは1日100通まで）'],
-  ['1日の上限（LINE）', '50', 'LINE通知の1日の上限（無料プランは月200通まで）'],
+  ['1日の上限（LINE）', '50', 'LINE通知の1日の上限（通数。グループは人数分で数える。無料プランは月200通まで）'],
+  ['LINEのID調べ（受け口）', 'しない', 'グループIDなどを調べる間だけ「する」にする（ウェブアプリの公開が必要。調べ終わったら「しない」に戻す）'],
   ['同じ宛先への自動返信の間隔（時間）', '24', 'この時間内は同じメールアドレスへ2通目を送らない'],
   ['フォーム項目（名前）', 'お名前,名前,氏名', 'Googleフォームの質問名。候補をカンマで区切る'],
   ['フォーム項目（メール）', 'メールアドレス,メール', '同上'],
@@ -80,6 +87,9 @@ var SETTINGS_DEF = [
   ['AIへの説明（お店の情報）', '', '営業時間・料金・よくある質問など。AIはここに無いことを約束しません'],
   ['1日の上限（AI）', '30', 'AI下書きの1日の上限']
 ];
+
+// 以前の項目名 → 今の項目名
+var SETTINGS_ALIAS = { 'LINE通知先ユーザーID': 'LINE通知先ID' };
 
 var YES = ['する', 'はい', 'yes', 'true', 'on', '1', '○', '〇', 'すぐ送る'];
 
@@ -122,6 +132,7 @@ function runAll_(why, opts) {
   var lock = LockService.getScriptLock();
   if (!lock.tryLock(20000)) return false; // 他の実行中。次の10分で拾う
   var s = null;
+  ALIAS_CACHE_ = null;
   try {
     ensureSheets_();
     s = getSettings_();
@@ -150,6 +161,7 @@ function getSettings_() {
   for (var i = 0; i < SETTINGS_DEF.length; i++) s[SETTINGS_DEF[i][0]] = String(SETTINGS_DEF[i][1]);
   for (var r = 0; r < values.length; r++) {
     var key = str_(values[r][0]);
+    if (SETTINGS_ALIAS[key]) key = SETTINGS_ALIAS[key];
     if (!key) continue;
     var def = defOf_(key);
     var val = str_(values[r][1]);
@@ -180,9 +192,15 @@ function validateSettings_(s) {
   else if (!isEmail_(s['見守り先メール'])) errors.push('「見守り先メール」が正しくありません');
   if (isOn_(s['自動返信']) && (!s['自動返信の件名'] || !s['自動返信の本文'])) errors.push('自動返信の件名か本文が空です');
   if (s['返信先メール'] && !isEmail_(s['返信先メール'])) errors.push('「返信先メール」が正しくありません');
+  if (s['送り主アドレス']) {
+    if (!isEmail_(s['送り主アドレス'])) errors.push('「送り主アドレス」が正しくありません');
+    else if (!fromAliasOk_(s['送り主アドレス'])) errors.push(fromAliasMessage_(s['送り主アドレス']));
+  }
   if (isOn_(s['LINE通知'])) {
     if (!s['LINEチャネルアクセストークン']) errors.push('LINE通知が「する」なのに、LINEチャネルアクセストークンが空です');
-    if (lineIds_(s).length === 0) errors.push('LINE通知が「する」なのに、LINE通知先ユーザーIDが空か、形が違います（U から始まる33文字）');
+    if (lineIds_(s).length === 0) errors.push('LINE通知が「する」なのに、LINE通知先IDが空か、形が違います（U または C から始まる33文字）');
+    var bad = splitList_(s['LINE通知先ID']).filter(function (id) { return !isLineId_(id); });
+    if (bad.length) warnings.push('LINE通知先IDのうち、形が違うものは使いません：' + bad.join(', '));
   }
   if (isOn_(s['AI下書き']) && !s['AIのAPIキー']) errors.push('AI下書きが「する」なのに、AIのAPIキーが空です');
   ['送信する時間帯（開始時）', '送信する時間帯（終了時）'].forEach(function (k) {
@@ -212,7 +230,10 @@ function ensureSheets_() {
     // 版が上がって項目が増えたときは、足りない項目だけ下に足す
     var last = st.getLastRow();
     var have = {};
-    if (last >= 2) st.getRange(2, 1, last - 1, 1).getValues().forEach(function (r) { have[str_(r[0])] = true; });
+    if (last >= 2) st.getRange(2, 1, last - 1, 1).getValues().forEach(function (r) {
+      var k = str_(r[0]);
+      have[SETTINGS_ALIAS[k] || k] = true;
+    });
     var add = [];
     SETTINGS_DEF.forEach(function (d) { if (!have[d[0]]) add.push([d[0], d[1], d[2]]); });
     if (add.length) st.getRange(last + 1, 1, add.length, 3).setValues(add);
@@ -451,6 +472,8 @@ function decideReply_(item, s, inWin) {
   if (recentlySentTo_(item.mail, s)) return 'スキップ（同じ宛先に送信済み）';
   if (!canUse_('MAIL', Number(s['1日の上限（メール）']))) { noteLimit_('メール', s); return ''; }
   if (MailApp.getRemainingDailyQuota() <= APP.MAIL_RESERVE) { noteLimit_('Googleのメール送信枠', s); return ''; } // エラー通知用に残す
+  // 送り主アドレスがGmailに登録されていなければ送らずに保留（Gmailのアドレスでお客さまに送ってしまわないため）
+  if (s['送り主アドレス'] && !fromAliasOk_(s['送り主アドレス'])) { noteConfig_('送り主アドレス', fromAliasMessage_(s['送り主アドレス']), s); return ''; }
   return 'SEND';
 }
 
@@ -467,18 +490,48 @@ function decideLine_(s, canSendNow, idCount) {
   return 'SEND';
 }
 
+// ---------------------------------------------------------------- 送り主アドレス（Gmailの別名）
+
+var ALIAS_CACHE_ = null;
+function gmailAliases_() {
+  if (ALIAS_CACHE_ === null) {
+    ALIAS_CACHE_ = (GmailApp.getAliases() || []).map(function (a) { return String(a).toLowerCase(); });
+  }
+  return ALIAS_CACHE_;
+}
+function fromAliasOk_(addr) { return gmailAliases_().indexOf(str_(addr).toLowerCase()) >= 0; }
+function fromAliasMessage_(addr) {
+  return '「送り主アドレス」の ' + addr + ' が、このGmailの送信元に登録されていません。' +
+    'Gmailの「設定」→「アカウントとインポート」→「他のメールアドレスを追加」で登録するか、「送り主アドレス」を空にしてください。' +
+    '直るまで自動返信は送らずに保留します（LINE通知と記録は続けます）';
+}
+
+/** 設定の不備を1日1回だけ知らせる */
+function noteConfig_(what, message, s) {
+  var p = PropertiesService.getScriptProperties();
+  var key = 'CONFIG_NOTE_' + hash_(what) + '_' + fmt_(now_(), 'yyyyMMdd');
+  if (p.getProperty(key)) return;
+  p.setProperty(key, '1');
+  notifyError_('設定の不備（' + what + '）', new Error(message), s);
+}
+
 // ---------------------------------------------------------------- 送る：メール
 
 function sendAutoReply_(item, s) {
   if (MailApp.getRemainingDailyQuota() <= APP.MAIL_RESERVE) throw new Error('Googleのメール送信枠が残りわずかです');
-  var opt = {
-    to: item.mail,
-    subject: fill_(s['自動返信の件名'], item, s),
-    body: fill_(s['自動返信の本文'], item, s),
-    name: s['店名']
-  };
-  if (s['返信先メール']) opt.replyTo = s['返信先メール'];
-  MailApp.sendEmail(opt);
+  var subject = fill_(s['自動返信の件名'], item, s);
+  var body = fill_(s['自動返信の本文'], item, s);
+  if (s['送り主アドレス']) {
+    // 別名（info@ など）から送るには GmailApp を使う
+    if (!fromAliasOk_(s['送り主アドレス'])) throw new Error(fromAliasMessage_(s['送り主アドレス']));
+    var gopt = { from: s['送り主アドレス'], name: s['店名'] };
+    if (s['返信先メール']) gopt.replyTo = s['返信先メール'];
+    GmailApp.sendEmail(item.mail, subject, body, gopt);
+  } else {
+    var opt = { to: item.mail, subject: subject, body: body, name: s['店名'] };
+    if (s['返信先メール']) opt.replyTo = s['返信先メール'];
+    MailApp.sendEmail(opt);
+  }
   countUp_('MAIL', 1);
   markSentTo_(item.mail);
 }
@@ -504,8 +557,39 @@ function markSentTo_(mail) {
 
 // ---------------------------------------------------------------- 送る：LINE
 
-function lineIds_(s) {
-  return splitList_(s['LINE通知先ユーザーID']).filter(function (id) { return /^U[0-9a-f]{32}$/.test(id); });
+/** U…＝個人、C…＝グループ、R…＝複数人トーク */
+function isLineId_(id) { return /^[UCR][0-9a-f]{32}$/.test(id); }
+function lineIds_(s) { return splitList_(s['LINE通知先ID']).filter(isLineId_); }
+
+/**
+ * 1回のPushで数えられる通数。個人は1、グループ・複数人トークは人数分（LINE公式の数え方）。
+ * 人数はLINEに問い合わせて6時間覚えておく。分からないときは1として扱う（上限の判定が甘くなる方に倒れるので、記録に残す）。
+ */
+function lineCost_(id, s) {
+  if (id.charAt(0) === 'U') return 1;
+  var cache = CacheService.getScriptCache();
+  var key = 'LINE_MEMBERS_' + id;
+  var hit = cache.get(key);
+  if (hit) return Number(hit);
+  var kind = id.charAt(0) === 'C' ? 'group' : 'room';
+  try {
+    var res = UrlFetchApp.fetch(APP.LINE_COUNT_URL.replace('{kind}', kind).replace('{id}', id), {
+      method: 'get',
+      headers: { Authorization: 'Bearer ' + s['LINEチャネルアクセストークン'] },
+      muteHttpExceptions: true
+    });
+    if (res.getResponseCode() === 200) {
+      var n = Number(JSON.parse(res.getContentText()).count) || 1;
+      cache.put(key, String(n), 6 * 3600);
+      return n;
+    }
+  } catch (e) { /* 下で1として扱う */ }
+  return 1;
+}
+
+function canUseN_(kind, limit, n) {
+  if (isNaN(limit)) return true;
+  return countOf_(kind) + n <= limit;
 }
 
 function buildLineText_(item, s, status) {
@@ -535,7 +619,8 @@ function sendLineAll_(item, s, status) {
   ids.forEach(function (uid) {
     var doneKey = 'LINE_DONE_' + hash_(item.id + '|' + uid);
     if (props.getProperty(doneKey)) { done++; return; } // この通知先には送信済み
-    if (!canUse_('LINE', limit)) { skipped++; return; }
+    var cost = lineCost_(uid, s);
+    if (!canUseN_('LINE', limit, cost)) { skipped++; return; }
     var keyName = 'LINE_KEY_' + hash_(item.id + '|' + uid);
     var retryKey = props.getProperty(keyName);
     if (!retryKey) { retryKey = Utilities.getUuid(); props.setProperty(keyName, retryKey); }
@@ -554,13 +639,92 @@ function sendLineAll_(item, s, status) {
       props.setProperty(doneKey, String(now_().getTime()));
       props.deleteProperty(keyName);
       done++;
-      if (code === 200) countUp_('LINE', 1);
+      if (code === 200) countUp_('LINE', cost);
     } else {
       errors.push('LINE ' + code + ' ' + cut_(res.getContentText(), 200));
     }
   });
   if (errors.length) throw new Error(errors.join(' / '));
   return { skipped: skipped, done: done };
+}
+
+// ---------------------------------------------------------------- LINEのID調べ（ウェブアプリの受け口・任意）
+//
+// LINEの画面ではグループIDが見えないため、LINE公式アカウントをグループに招待したときの知らせ（Webhook）から取る。
+// 使い方：「設定」の「LINEのID調べ（受け口）」を「する」→ Apps Script をウェブアプリとして公開 → そのURLを
+// LINE Developers の Webhook URL に入れる → 公式アカウントをグループに招待（またはグループで「ID」と送る）→
+// 「LINEのID調べ」シートと、LINEに返ってくるメッセージにIDが出る → 設定の「LINE通知先ID」に貼る → 受け口を「しない」に戻す。
+// 注意：Apps Script では LINE の署名（X-Line-Signature）を確かめられない。そのため受け取ったIDは記録するだけで、
+// 通知先には自動で入れない（人が確かめて貼る）。調べ終わったら必ず「しない」に戻し、公開も止める。
+
+function doPost(e) {
+  var out = ContentService.createTextOutput('OK');
+  var s = null;
+  try {
+    var raw = e && e.postData && e.postData.contents ? e.postData.contents : '';
+    if (!raw) return out; // LINEの「検証」など中身の無い送信
+    s = getSettingsLight_();
+    if (!isOn_(s['LINEのID調べ（受け口）'])) return out;
+    var body = JSON.parse(raw);
+    var events = body && body.events ? body.events : [];
+    if (!events.length) return out;
+    var lock = LockService.getScriptLock();
+    if (!lock.tryLock(5000)) return out;
+    try {
+      events.forEach(function (ev) { handleLineEvent_(ev, s); });
+    } finally { lock.releaseLock(); }
+  } catch (err) {
+    notifyError_('LINEのID調べ', err, s);
+  }
+  return out;
+}
+
+/** doPost 用：設定シートだけ読む（他のシートは作らない） */
+function getSettingsLight_() {
+  var ss = SpreadsheetApp.getActive();
+  if (!ss.getSheetByName(APP.SHEET_SETTINGS)) return {};
+  return getSettings_();
+}
+
+function handleLineEvent_(ev, s) {
+  var src = ev && ev.source ? ev.source : {};
+  var id = src.groupId || src.roomId || src.userId || '';
+  if (!isLineId_(id)) return;
+  var kind = src.groupId ? 'グループ' : (src.roomId ? '複数人トーク' : '個人');
+  var text = ev.message && ev.message.type === 'text' ? str_(ev.message.text) : '';
+  recordLineId_(kind, id, ev.type, text);
+  var wantsId = /^(id|ＩＤ|ｉｄ|ID確認)$/i.test(text);
+  if (ev.replyToken && (ev.type === 'join' || ev.type === 'follow' || wantsId)) {
+    var msg = (ev.type === 'join'
+      ? 'このグループを通知先の候補として記録しました。'
+      : (ev.type === 'follow' ? '友だち追加ありがとうございます。通知先の候補として記録しました。' : '記録しました。')) +
+      '\n' + kind + 'のID：' + id + '\n（このIDを「設定」シートの「LINE通知先ID」に貼ると、ここに問い合わせの通知が届きます）';
+    // 返信（Reply）は通数に数えられない
+    UrlFetchApp.fetch(APP.LINE_REPLY_URL, {
+      method: 'post',
+      contentType: 'application/json',
+      headers: { Authorization: 'Bearer ' + s['LINEチャネルアクセストークン'] },
+      payload: JSON.stringify({ replyToken: ev.replyToken, messages: [{ type: 'text', text: msg }] }),
+      muteHttpExceptions: true
+    });
+  }
+}
+
+function recordLineId_(kind, id, type, text) {
+  var ss = SpreadsheetApp.getActive();
+  var sh = ss.getSheetByName(APP.SHEET_LINEID);
+  if (!sh) {
+    sh = ss.insertSheet(APP.SHEET_LINEID);
+    sh.getRange(1, 1, 1, 5).setValues([['日時', '種類', 'ID（これを「LINE通知先ID」に貼る）', 'きっかけ', '発言（先頭20字）']]);
+    sh.setFrozenRows(1);
+  }
+  var last = sh.getLastRow();
+  if (last >= 2) {
+    var ids = sh.getRange(2, 3, last - 1, 1).getValues().map(function (r) { return str_(r[0]); });
+    if (ids.indexOf(id) >= 0) return; // 同じIDは1行だけ
+  }
+  if (last - 1 >= APP.LINEID_MAX_ROWS) return; // いたずらで埋まらないように
+  sh.appendRow([fmt_(now_(), 'yyyy/MM/dd HH:mm:ss'), kind, id, str_(type), safeCell_(cut_(text, 20))]);
 }
 
 // ---------------------------------------------------------------- 送る：AI下書き（任意）
@@ -734,6 +898,7 @@ function cleanupProps_() {
 
 function setup() {
   if (typeof ScriptApp.requireAllScopes === 'function') ScriptApp.requireAllScopes(ScriptApp.AuthMode.FULL);
+  ALIAS_CACHE_ = null;
   ensureSheets_();
   var s = getSettings_();
   var v = validateSettings_(s);
@@ -778,6 +943,7 @@ function stopAll() {
 
 /** テスト用の受付を1件作り、お客さま連絡先メールに自動返信、LINEに通知する（時間帯の制限は無視） */
 function sendTest() {
+  ALIAS_CACHE_ = null;
   ensureSheets_();
   var s = getSettings_();
   var v = validateSettings_(s);

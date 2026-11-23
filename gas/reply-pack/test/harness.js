@@ -141,6 +141,7 @@ function createEnv(opts) {
       Charset: { UTF_8: 'UTF_8' },
       sleep: () => {}
     },
+    ContentService: { createTextOutput: (t) => ({ text: t }) },
     Session: { getEffectiveUser: () => ({ getEmail: () => 'shop@example.com' }) },
     ScriptApp: {
       AuthMode: { FULL: 'FULL' },
@@ -169,6 +170,13 @@ function createEnv(opts) {
       getUserLabelByName: (n) => ctx.GmailApp.labels[n] || null,
       createLabel: (n) => { ctx.GmailApp.labels[n] = { name: n }; return ctx.GmailApp.labels[n]; },
       search: (q) => { ctx.GmailApp.lastQuery = q; return ctx.GmailApp.threads.filter((t) => !t.labeled); },
+      aliases: [],
+      sent: [],
+      getAliases: () => ctx.GmailApp.aliases.slice(),
+      sendEmail: (to, subject, body, o) => {
+        if (mailQuota <= 0) throw new Error('Service invoked too many times for one day: email.');
+        mailQuota--; ctx.GmailApp.sent.push(Object.assign({ to, subject, body }, o || {}));
+      },
       createDraft: (to, subject, body) => { drafts.push({ to, subject, body }); return {}; }
     }
   };
@@ -204,7 +212,7 @@ const BASE_SETTINGS = {
   '見守り先メール': 'watch@example.com',
   '署名': 'テスト工務店 099-000-0000',
   'LINEチャネルアクセストークン': 'TOKEN-SECRET-123',
-  'LINE通知先ユーザーID': 'U' + 'a'.repeat(32)
+  'LINE通知先ID': 'U' + 'a'.repeat(32)
 };
 
 const FORM_HEADERS = ['タイムスタンプ', 'お名前', 'メールアドレス', '電話番号', 'お問い合わせ内容', 'ご希望の時期'];
