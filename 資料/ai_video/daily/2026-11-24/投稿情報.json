@@ -1,0 +1,13 @@
+{
+  "date": "2026-11-24",
+  "fact_checked": true,
+  "instagram": {
+    "video": "turtle_ai_2026-11-24_insta_tiktok.mp4",
+    "caption_file": "キャプション_instagram.txt"
+  },
+  "youtube": {
+    "video": "turtle_ai_2026-11-24_youtube.mp4",
+    "description_file": "概要欄_youtube.txt",
+    "enabled": true
+  }
+}
