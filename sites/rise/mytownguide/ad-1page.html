@@ -2,152 +2,163 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<title>RISE 1ページ広告案</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;900&family=Noto+Serif+JP:wght@600;900&display=swap" rel="stylesheet">
+<title>RISE 1ページ広告</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;900&family=Noto+Serif+JP:wght@600;900&family=Cormorant+Garamond:ital,wght@1,600&display=block" rel="stylesheet">
 <style>
 /* 1100 x 1556 px（A4比率）。deviceScaleFactor 2 で 2200 x 3112 に書き出し */
+:root{--wine:#7d1d2c;--wine-d:#561320;--brown:#3a2420;--ink:#2e1e1a;--gold1:#9c7128;--gold2:#e9cf8a;--gold3:#fff3cf;--cream:#fbf5ec;--cream2:#f3e6d3}
 *{box-sizing:border-box;margin:0;padding:0}
-body{width:1100px;height:1556px;display:flex;flex-direction:column;background:#f8efe3;font-family:"Noto Sans JP",sans-serif;color:#3b2a22;overflow:hidden;position:relative}
+body{width:1100px;height:1556px;overflow:hidden;position:relative;background:var(--cream);font-family:"Noto Sans JP",sans-serif;color:var(--ink)}
 .serif{font-family:"Noto Serif JP",serif}
-.gold-t{background:linear-gradient(180deg,#f6e3a8 0%,#c99a3e 45%,#8a6320 60%,#d9b25c 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.tbd{background:#fff3a8;border:3px dashed #d08a00;color:#6b4300;font-weight:900;border-radius:10px}
+.goldbg{background:linear-gradient(135deg,#a77a2c 0%,#f1d999 28%,#c39a48 52%,#f6e3a6 74%,#a77a2c 100%)}
+.goldtxt{background:linear-gradient(180deg,#f7e7b4 0%,#d8b25c 38%,#9a6c22 62%,#d9b867 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
 
-/* top */
-.top{background:#4a2c22;color:#fff;padding:24px 40px 22px;position:relative;flex:none}
-.top .row{display:flex;align-items:center;justify-content:space-between}
-.logo{background:#fff;border-radius:10px;padding:10px 16px}
-.logo img{height:34px;display:block}
-.inn{display:flex;gap:10px}
-.inn span{border:2px solid #d9b25c;color:#f6e3a8;font-weight:900;font-size:26px;padding:4px 16px;border-radius:8px}
-.catch{font-family:"Noto Serif JP",serif;font-weight:900;font-size:40px;line-height:1.35;margin-top:14px;letter-spacing:.02em}
-.catch b{font-weight:900;font-size:54px}
-.qual{display:inline-block;margin-top:8px;background:linear-gradient(90deg,#b88a35,#f2d58c,#b88a35);color:#3b2219;font-weight:900;font-size:24px;padding:6px 20px;border-radius:6px}
+/* 背景の飾り */
+.bgdeco{position:absolute;inset:0;z-index:0;
+ background:radial-gradient(circle at 88% 14%,#f1dcc0 0,#f1dcc000 46%),radial-gradient(circle at 6% 52%,#f4e3cc 0,#f4e3cc00 36%)}
 
-/* 4 pillars */
-.pillars{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:20px 34px 0;flex:none}
-.pl{background:#fff;border:4px solid #c99a3e;border-radius:18px;padding:12px 18px 12px;position:relative}
-.pl .no{position:absolute;top:-4px;right:-4px;background:#b3262f;color:#fff;font-family:"Noto Serif JP",serif;font-weight:900;font-size:22px;padding:4px 14px;border-radius:0 14px 0 14px}
-.pl h3{font-family:"Noto Serif JP",serif;font-weight:900;font-size:48px;line-height:1.15;color:#4a2c22;display:flex;align-items:center;gap:12px}
-.pl h3 .ic{width:58px;height:58px;border-radius:50%;background:#4a2c22;display:grid;place-items:center;flex:none}
-.pl h3 .ic svg{width:34px;height:34px;stroke:#f2d58c;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-.pl ul{list-style:none;margin-top:6px}
-.pl li{font-size:23px;font-weight:700;line-height:1.5;padding-left:30px;position:relative}
-.pl li::before{content:"✓";position:absolute;left:0;color:#b3262f;font-weight:900}
-.pl .price{margin-top:4px;font-size:20px;font-weight:700;line-height:1.35}
-.pl .price b{font-family:"Noto Serif JP",serif;font-size:34px;color:#b3262f}
-.pl .price .tbd{display:inline-block;font-size:14px;padding:2px 8px;border-width:2px;margin-top:4px}
-.pl.wait{border-style:dashed}
-.pl.wait .tbd{margin-top:8px;padding:10px 12px;font-size:21px;line-height:1.45}
+/* ヘッダー */
+.head{position:absolute;left:0;right:0;top:0;height:92px;display:flex;align-items:center;justify-content:space-between;padding:0 44px;z-index:3}
+.head img{height:40px;display:block}
+.inns{display:flex;gap:10px}
+.inns span{font-family:"Noto Serif JP",serif;font-weight:900;font-size:24px;color:var(--wine-d);border:2px solid var(--gold1);padding:3px 18px;border-radius:40px;background:#fffaf2}
+.head::after{content:"";position:absolute;left:44px;right:44px;bottom:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold1) 12%,var(--gold2) 50%,var(--gold1) 88%,transparent)}
 
-/* middle */
-.mid{display:grid;grid-template-columns:500px 1fr;gap:0;padding:16px 34px 0;flex:1;min-height:0;grid-template-rows:100%;overflow:hidden}
-.res{display:flex;flex-direction:column;gap:8px;padding-bottom:14px}
-.res h4{font-family:"Noto Serif JP",serif;font-weight:900;font-size:28px;color:#4a2c22}
-.res h4 small{font-size:18px;font-family:"Noto Sans JP",sans-serif;font-weight:700;color:#77665b;margin-left:6px}
-.res img{width:100%;height:200px;object-fit:cover;object-position:50% 50%;border-radius:12px;border:3px solid #fff;box-shadow:0 4px 12px rgba(0,0,0,.15)}
-.res .note{font-size:16px;color:#77665b}
-.qr{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:2px}
-.qr .g{background:#fff;border-radius:12px;padding:8px 10px 10px}
-.qr .g .bx{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.qr .lb{display:block;text-align:center;font-family:"Noto Serif JP",serif;font-weight:900;font-size:22px;color:#4a2c22;line-height:1.4;margin-bottom:4px}
-.qr .box{height:80px;border:3px dashed #9a8a7a;border-radius:8px;display:grid;place-items:center;text-align:center;font-size:15px;font-weight:700;color:#77665b;line-height:1.3}
-.qr .box.line{border-color:#06c755;color:#058a3c}
-.staff{position:relative;overflow:hidden;margin-right:-34px}
-.staff img{position:absolute;right:0;bottom:0;height:100%;width:auto;max-width:none}
-.staff .names{position:absolute;bottom:12px;right:34px;left:20px;z-index:2;display:flex;justify-content:space-around}
-.staff .names div{background:rgba(74,44,34,.92);color:#fff;text-align:center;border-radius:10px;padding:6px 14px;font-size:18px;font-weight:700;line-height:1.35}
-.staff .names b{display:block;font-family:"Noto Serif JP",serif;font-size:26px}
-.staff .cap{position:absolute;top:6px;right:34px;z-index:2;background:#b3262f;color:#fff;font-weight:900;font-size:22px;padding:6px 14px;border-radius:8px;line-height:1.35;text-align:center}
+/* ヒーロー */
+.hero{position:absolute;left:0;right:0;top:92px;height:520px;z-index:2}
+.lead{position:absolute;left:46px;top:34px;font-weight:900;font-size:27px;color:var(--wine);letter-spacing:.04em}
+.lead i{font-style:normal;color:var(--gold1);margin:0 6px}
+.h1{position:absolute;left:40px;top:78px;font-family:"Noto Serif JP",serif;font-weight:900;color:var(--brown);line-height:1}
+.h1 .l1{display:flex;align-items:flex-end;white-space:nowrap}
+.h1 .num{font-size:250px;line-height:.86;margin-right:4px;letter-spacing:-.02em;filter:drop-shadow(0 4px 0 #6b4a1a33)}
+.h1 .t1{font-size:68px;padding-bottom:18px;letter-spacing:-.01em}
+.h1 .l2{font-size:68px;margin-top:20px;white-space:nowrap;letter-spacing:-.02em}
+.h1 .l2 b{color:var(--wine)}
+.medals{position:absolute;left:44px;top:392px;display:flex;gap:14px}
+.medal{width:108px;height:108px;border-radius:50%;display:grid;place-items:center;text-align:center;position:relative;box-shadow:0 6px 14px rgba(90,60,20,.28)}
+.medal::before{content:"";position:absolute;inset:6px;border-radius:50%;border:2px solid #fff7dc;opacity:.9}
+.medal b{font-family:"Noto Serif JP",serif;font-weight:900;font-size:20px;line-height:1.25;color:#4a2a12}
+.medal b small{display:block;font-size:15px;font-weight:900}
+.staff{position:absolute;right:-4px;top:40px;width:560px;height:480px;overflow:hidden}
+.staff .ring{position:absolute;right:18px;top:20px;width:440px;height:440px;border-radius:50%;background:radial-gradient(circle,#fff 0,#fbf1e2 60%,#f0dcc0 100%);border:3px solid var(--gold2)}
+.staff img{position:absolute;right:-14px;bottom:-4px;width:560px;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14%);mask-image:linear-gradient(90deg,transparent 0,#000 14%)}
+.names{position:absolute;right:26px;top:548px;display:flex;gap:12px;z-index:4}
+.names div{background:var(--brown);color:#fff;border-radius:10px;padding:6px 14px 7px;text-align:center;line-height:1.25;border:2px solid var(--gold1)}
+.names small{display:block;font-size:15px;font-weight:700;color:var(--gold2)}
+.names b{font-family:"Noto Serif JP",serif;font-size:25px}
 
-/* bottom */
-.bottom{flex:none;height:214px;background:#4a2c22;color:#fff;display:grid;grid-template-columns:1fr 1fr;gap:0;padding:16px 34px}
-.shop{padding:0 14px}
-.shop+.shop{border-left:2px solid rgba(217,178,92,.5)}
-.shop h5{font-family:"Noto Serif JP",serif;font-size:28px;line-height:1.3;color:#f2d58c;font-weight:900}
-.shop .ad{font-size:19px;font-weight:700;line-height:1.4}
-.shop .tel{font-family:"Noto Sans JP",sans-serif;font-weight:900;font-size:44px;letter-spacing:.02em;line-height:1.25;margin-top:4px}
-.shop .tel small{font-size:24px;margin-right:6px}
-.shop .hr{font-size:17px;opacity:.9;line-height:1.45}
-.camp{position:absolute;left:34px;right:34px;bottom:276px;background:#fff;border:4px solid #b3262f;border-radius:14px;display:flex;align-items:center;gap:16px;padding:10px 18px}
-.camp .t{background:#b3262f;color:#fff;font-weight:900;font-size:24px;padding:8px 14px;border-radius:8px;line-height:1.25;text-align:center;flex:none}
-.camp .p{display:flex;gap:18px;font-weight:700;font-size:20px;flex-wrap:wrap;align-items:baseline}
-.camp .p b{font-family:"Noto Serif JP",serif;font-size:34px;color:#b3262f}
-.camp .tbd{font-size:16px;padding:6px 10px;line-height:1.35;flex:none;width:220px}
+/* 4本柱の帯 */
+.band{position:absolute;left:0;right:0;top:612px;height:96px;z-index:3;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,var(--wine) 0,var(--wine-d) 100%);box-shadow:0 6px 0 var(--gold1)}
+.band span{font-weight:900;font-size:60px;color:#fff;letter-spacing:.03em;text-shadow:0 3px 0 rgba(0,0,0,.25)}
+.band i{display:inline-block;width:14px;height:14px;background:var(--gold2);transform:rotate(45deg);margin:0 26px}
+
+/* メニュー */
+.menu{position:absolute;left:30px;right:30px;top:728px;height:440px;z-index:2}
+.mtitle{text-align:center;font-family:"Noto Serif JP",serif;font-weight:900;font-size:30px;color:var(--brown);letter-spacing:.08em}
+.mtitle::before,.mtitle::after{content:"";display:inline-block;width:110px;height:2px;background:var(--gold1);vertical-align:middle;margin:0 18px}
+.mrow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:20px}
+.m{text-align:center;position:relative}
+.m .ph{width:204px;height:204px;margin:0 auto;border-radius:50%;padding:7px;position:relative}
+.m .ph img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;border:4px solid #fff}
+.m .no{position:absolute;left:8px;top:0;width:62px;height:62px;border-radius:50%;background:var(--wine);color:#fff;display:grid;place-items:center;font-family:"Cormorant Garamond",serif;font-style:italic;font-weight:600;font-size:34px;border:3px solid var(--gold2);z-index:2}
+.m h3{margin-top:10px;font-weight:900;font-size:41px;line-height:1.12;color:var(--brown);letter-spacing:-.01em}
+.m h3 em{font-style:normal;color:var(--wine)}
+.m p{min-width:200px;margin-top:8px;display:inline-block;font-weight:700;font-size:18px;line-height:1.35;color:#fff;background:var(--brown);padding:5px 14px;border-radius:30px}
+
+/* 下段：結果写真とQR */
+.low{grid-template-columns:400px 1fr!important;position:absolute;left:36px;right:36px;top:1196px;height:150px;display:grid;grid-template-columns:420px 1fr;gap:18px;z-index:2}
+.res{position:relative}
+.res img{width:100%;height:138px;object-fit:cover;border-radius:12px;border:3px solid #fff;box-shadow:0 4px 12px rgba(60,30,20,.2)}
+.res .cap{position:absolute;left:10px;top:-14px;background:var(--wine);color:#fff;font-weight:900;font-size:17px;padding:3px 14px;border-radius:20px}
+.res .note{font-size:13px;color:#6b5a50;margin-top:2px}
+.qr{background:#fff;border-radius:14px;border:2px solid var(--gold2);display:flex;align-items:center;padding:10px 14px;gap:12px;box-shadow:0 4px 12px rgba(60,30,20,.12)}
+.qr .msg{font-weight:900;font-size:23px;line-height:1.28;color:var(--wine);width:120px;flex:none}
+.qr .msg small{display:block;font-size:15px;color:var(--ink);font-weight:700;margin-top:4px}
+.qg{display:flex;gap:8px;flex:1;justify-content:space-between}
+.qg .q{text-align:center}
+.qg .q img{width:100px;height:100px;display:block;image-rendering:pixelated}
+.qg .q span{display:block;font-weight:900;font-size:14px;line-height:1.2;margin-top:3px;color:var(--brown)}
+.qg .q span.ln{color:#05a046}
+.qg .sep{width:2px;background:var(--cream2)}
+
+/* フッター */
+.foot{position:absolute;left:0;right:0;bottom:0;height:196px;border-top:5px solid #c9a24f;background:linear-gradient(180deg,#3d2520,#2b1814);color:#fff;z-index:2;display:grid;grid-template-columns:1fr 1fr;padding:16px 44px 0}
+.foot::before{content:"";position:absolute;left:0;right:0;top:0;height:6px}
+.foot .c{padding-right:20px}
+.foot .c+.c{padding-left:30px;border-left:1px solid #ffffff33}
+.foot h4{font-family:"Noto Serif JP",serif;font-weight:900;font-size:28px;color:var(--gold2);display:flex;align-items:baseline;gap:12px}
+.foot h4 small{font-family:"Noto Sans JP";font-size:17px;color:#fff;font-weight:700}
+.foot .ad{font-size:17px;font-weight:700;margin-top:2px}
+.foot .tel{font-weight:900;font-size:50px;line-height:1.1;letter-spacing:.01em;margin-top:2px}
+.foot .tel small{font-size:24px;margin-right:6px;color:var(--gold2)}
+.foot .hr{font-size:16px;line-height:1.5;color:#eadfd6;font-weight:500}
+.tagline{display:none;position:absolute;left:0;right:0;bottom:200px;height:36px;z-index:2;background:linear-gradient(90deg,#a77a2c,#f1d999 30%,#c39a48 60%,#f6e3a6 85%,#a77a2c);display:flex;align-items:center;justify-content:center;gap:16px}
+.tagline span{font-weight:900;font-size:19px;color:#3a2410;letter-spacing:.06em}
 </style>
 </head>
 <body>
+<div class="bgdeco"></div>
 
-<div class="top">
-  <div class="row">
-    <div class="logo"><img src="img/logo.png" alt="Body Salon RISE"></div>
-    <div class="inn"><span>指宿院</span><span>谷山院</span></div>
-  </div>
-  <p class="catch">からだの悩みを、まるごと相談できるサロン<br><b class="gold-t">ダイエット・整体・育毛・肌質改善</b></p>
-  <span class="qual">国家資格（柔道整復師）を持つ院長が担当します</span>
+<div class="head">
+  <img src="img/logo.png" alt="Body Salon RISE">
+  <div class="inns"><span>指宿院</span><span>谷山院</span></div>
 </div>
 
-<div class="pillars">
-  <div class="pl">
-    <span class="no">01</span>
-    <h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 12h16M7 8v8M17 8v8M2 10v4M22 10v4"/></svg></span>ダイエット</h3>
-    <ul><li>運動なし・カロリー計算なし</li><li>遺伝子検査×栄養指導の3ヶ月コース</li></ul>
-    <p class="price">初回カウンセリング＆姿勢矯正 <b>500</b>円</p>
+<div class="hero">
+  <div class="lead"><i>＼</i>国家資格をもつ院長が、ていねいに担当<i>／</i></div>
+  <div class="h1">
+    <div class="l1"><span class="num goldtxt">4</span><span class="t1">つの悩みを、</span></div>
+    <div class="l2"><b>ひとつ</b>のサロンで。</div>
   </div>
-  <div class="pl">
-    <span class="no">02</span>
-    <h3><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="2"/><path d="M12 7v7M8 10h8M12 14l-3 7M12 14l3 7"/></svg></span>整体</h3>
-    <ul><li>腰痛・肩こり・膝の痛み</li><li>骨盤矯正・ブライダル整体・不調改善</li></ul>
-    <p class="price">初回 整体 <b>1,000</b>円／ブライダル整体・不調改善 <b>3,500</b>円</p>
+  <div class="medals">
+    <div class="medal goldbg"><b>国家資格<small>柔道整復師</small></b></div>
+    <div class="medal goldbg"><b>完全<br>予約制</b></div>
+    <div class="medal goldbg"><b>2院<small>指宿・谷山</small></b></div>
   </div>
-  <div class="pl wait">
-    <span class="no">03</span>
-    <h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M5 14c0-5 3-9 7-9s7 4 7 9"/><path d="M9 6c0 3 1 5 3 6M15 6c0 3-1 5-3 6"/><path d="M6 14v4M18 14v4"/></svg></span>育毛</h3>
-    <ul><li>髪・頭皮のお悩みをご相談ください</li></ul>
-    <div class="tbd">【ライズさん確認待ち：育毛】<br>施術名・使う機械や商品・時間・初回料金</div>
-  </div>
-  <div class="pl wait">
-    <span class="no">04</span>
-    <h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3c-4 4-6 7-6 10a6 6 0 0 0 12 0c0-3-2-6-6-10z"/><path d="M9.5 14a2.5 2.5 0 0 0 2.5 2.5"/></svg></span>肌質改善</h3>
-    <ul><li>肌のお悩みをご相談ください</li></ul>
-    <div class="tbd">【ライズさん確認待ち：肌質改善】<br>施術名・使う機械や商品・時間・初回料金</div>
+  <div class="staff"><div class="ring"></div><img src="img/inchou-cut.png" alt="院長2名"></div>
+</div>
+<div class="names">
+  <div><small>谷山院 院長</small><b>和田 一真</b></div>
+  <div><small>指宿院 院長</small><b>和田 諒真</b></div>
+</div>
+
+<div class="band"><span>ダイエット</span><i></i><span>整体</span><i></i><span>育毛</span><i></i><span>肌質改善</span></div>
+
+<div class="menu">
+  <div class="mtitle">RISEのメニュー</div>
+  <div class="mrow">
+    <div class="m"><div class="ph goldbg"><img src="img/m-diet.jpg" alt=""></div><div class="no">01</div><h3>体質改善<br><em>ダイエット</em></h3><p>食事と習慣から<br>体質を整える</p></div>
+    <div class="m"><div class="ph goldbg"><img src="img/m-seitai.jpg" alt=""></div><div class="no">02</div><h3>整体<br><em>からだ</em>ケア</h3><p>腰痛・肩こり・膝痛<br>ブライダル</p></div>
+    <div class="m"><div class="ph goldbg"><img src="img/m-ikumou.jpg" alt=""></div><div class="no">03</div><h3>育毛<br><em>頭皮</em>ケア</h3><p>髪と頭皮の<br>お悩みに</p></div>
+    <div class="m"><div class="ph goldbg"><img src="img/m-hada.jpg" alt=""></div><div class="no">04</div><h3>肌質改善<br><em>フェイシャル</em></h3><p>お肌の<br>お悩みに</p></div>
   </div>
 </div>
 
-<div class="mid">
-  <div class="res">
-    <h4>お客様の結果<small>ダイエット3ヶ月コース・整体</small></h4>
-    <img src="img/results-ad.jpg" alt="お客様の結果写真">
-    <p class="note">※効果には個人差があります。</p>
-    <p class="tbd" style="font-size:15px;padding:6px 10px;border-width:2px">【ライズさん確認待ち】結果写真の掲載許可／HP限定の初回料金を誌面にも載せてよいか</p>
-    <div class="qr">
-      <div class="g"><span class="lb">指宿院</span><div class="bx"><div class="box line">公式LINE<br>QR</div><div class="box">Instagram<br>QR</div></div></div>
-      <div class="g"><span class="lb">谷山院</span><div class="bx"><div class="box line">公式LINE<br>QR</div><div class="box">Instagram<br>QR</div></div></div>
-    </div>
-  </div>
-  <div class="staff">
-    <div class="cap">ご予約は<br>LINEが便利です</div>
-    <img src="img/inchou2.jpg" alt="院長写真">
-    <div class="names">
-      <div>谷山院 院長<b>和田 一真</b></div>
-      <div>指宿院 院長<b>和田 諒真</b></div>
+<div class="low">
+  <div class="res"><img src="img/results-ad.jpg" alt="お客様の写真"><span class="cap">ダイエットコースのお客様</span><div class="note">※効果には個人差があります</div></div>
+  <div class="qr">
+    <div class="msg">ご予約・<br>ご相談は<br>LINEで</div>
+    <div class="qg">
+      <div class="q"><img src="img/qr-line-ibusuki.png" alt=""><span class="ln">指宿院<br>LINE</span></div>
+      <div class="q"><img src="img/qr-insta-ibusuki.png" alt=""><span>指宿院<br>Instagram</span></div>
+      <div class="sep"></div>
+      <div class="q"><img src="img/qr-line-taniyama.png" alt=""><span class="ln">谷山院<br>LINE</span></div>
+      <div class="q"><img src="img/qr-insta-taniyama.png" alt=""><span>谷山院<br>Instagram</span></div>
     </div>
   </div>
 </div>
 
-<div class="bottom">
-  <div class="shop">
-    <h5>指宿院</h5>
-    <p class="ad">指宿市大牟礼3丁目25-23-1<br>指宿駅から車で約3分・駐車場3台</p>
-    <p class="tel"><small>TEL</small>080-4279-2503</p>
-    <p class="hr">平日10:00〜19:00／土曜10:00〜18:00<br>完全予約制・定休日 日曜・祝日</p>
+<div class="foot">
+  <div class="c">
+    <h4>指宿院</h4><div class="ad">指宿市大牟礼 3-25-23-1</div>
+    <div class="tel"><small>TEL</small>080-4279-2503</div>
+    <div class="hr">営業時間 10:00～19:00（完全予約制）<br>定休日 日曜祝日</div>
   </div>
-  <div class="shop">
-    <h5>谷山院</h5>
-    <p class="ad">鹿児島市小松原1丁目48-11<br>SEA GREEN 小松原102号</p>
-    <p class="tel"><small>TEL</small>070-2376-8715</p>
-    <p class="hr">平日9:30〜19:00／土曜9:30〜18:00<br>完全予約制・定休日 日曜・祝日</p>
+  <div class="c">
+    <h4>谷山院</h4><div class="ad">鹿児島市小松原 1-48-11 SEAGREEN 小松原 102 号</div>
+    <div class="tel"><small>TEL</small>070-2376-8715</div>
+    <div class="hr">営業時間 9:30～19:00（完全予約制）土曜日 9:30～18:00<br>定休日 日曜祝日</div>
   </div>
 </div>
-
 </body>
 </html>
