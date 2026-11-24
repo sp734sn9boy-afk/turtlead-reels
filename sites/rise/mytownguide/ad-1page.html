@@ -72,12 +72,12 @@ body{width:1100px;height:1556px;overflow:hidden;position:relative;background:var
 .pc .ql{font-size:12.5px;font-weight:700;color:var(--gold1);margin-top:3px}
 
 /* 下段：結果写真とQR */
-.low{position:absolute;left:26px;right:26px;top:1196px;height:150px;display:grid;grid-template-columns:400px 1fr;gap:16px}
-.res{position:relative}
-.res img{width:100%;height:136px;object-fit:cover;border-radius:12px;border:3px solid #fff;box-shadow:0 4px 12px rgba(60,30,20,.2)}
-.res .cap{position:absolute;left:10px;top:-13px;background:var(--wine);color:#fff;font-weight:900;font-size:16px;padding:2px 14px;border-radius:20px}
-.res .note{font-size:12px;color:#6b5a50}
-.qr{background:#fff;border-radius:14px;border:2px solid var(--gold2);display:flex;align-items:center;padding:8px 14px;gap:12px;box-shadow:0 4px 12px rgba(60,30,20,.12);height:146px}
+.low{position:absolute;left:26px;right:26px;top:1186px;height:196px;display:grid;grid-template-columns:304px 1fr;gap:16px;align-items:end}
+.res{position:relative;padding-top:26px;align-self:end;margin-bottom:6px}
+.res img{width:100%;height:auto;display:block;border-radius:12px;border:3px solid #fff;box-shadow:0 4px 12px rgba(60,30,20,.2)}
+.res .cap{position:absolute;left:8px;top:0;background:var(--wine);color:#fff;font-weight:900;font-size:16px;padding:2px 14px;border-radius:20px}
+.res .note{position:absolute;right:8px;bottom:6px;font-size:11px;font-weight:700;color:#fff;background:rgba(43,24,20,.72);padding:1px 8px;border-radius:10px}
+.qr{background:#fff;border-radius:14px;border:2px solid var(--gold2);display:flex;align-items:center;padding:8px 18px;gap:14px;box-shadow:0 4px 12px rgba(60,30,20,.12);height:160px;margin-bottom:12px}
 .qr .msg{font-weight:900;font-size:23px;line-height:1.28;color:var(--wine);width:120px;flex:none}
 .qg{display:flex;gap:8px;flex:1;justify-content:space-between}
 .qg .q{text-align:center}
@@ -87,13 +87,13 @@ body{width:1100px;height:1556px;overflow:hidden;position:relative;background:var
 .qg .sep{width:2px;background:var(--cream2)}
 
 /* フッター */
-.foot{position:absolute;left:0;right:0;bottom:0;height:200px;background:linear-gradient(180deg,#3d2520,#2b1814);color:#fff;display:grid;grid-template-columns:1fr 1fr;padding:16px 36px 0;border-top:5px solid #c9a24f}
+.foot{position:absolute;left:0;right:0;bottom:0;height:172px;background:linear-gradient(180deg,#3d2520,#2b1814);color:#fff;display:grid;grid-template-columns:1fr 1fr;padding:10px 36px 0;border-top:5px solid #c9a24f}
 .foot .c+.c{padding-left:30px;border-left:1px solid #ffffff33}
-.foot h4{font-family:"Noto Serif JP",serif;font-weight:900;font-size:28px;color:var(--gold2)}
-.foot .ad{font-size:17px;font-weight:700;margin-top:2px}
-.foot .tel{font-weight:900;font-size:50px;line-height:1.1;margin-top:2px}
+.foot h4{font-family:"Noto Serif JP",serif;font-weight:900;font-size:25px;line-height:1.2;color:var(--gold2)}
+.foot .ad{font-size:16px;font-weight:700;margin-top:0}
+.foot .tel{font-weight:900;font-size:46px;line-height:1.05;margin-top:0}
 .foot .tel small{font-size:24px;margin-right:6px;color:var(--gold2)}
-.foot .hr{font-size:16px;line-height:1.5;color:#eadfd6;font-weight:500}
+.foot .hr{font-size:15px;line-height:1.4;color:#eadfd6;font-weight:500}
 </style>
 </head>
 <body>
