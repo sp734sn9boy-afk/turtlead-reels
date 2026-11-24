@@ -1,0 +1,5 @@
+M PLUS Rounded 1c (ExtraBold / Medium)
+Copyright 2016 The Rounded M+ Project Authors.
+License: SIL Open Font License, Version 1.1 (http://scripts.sil.org/OFL)
+入手元: https://github.com/google/fonts/tree/main/ofl/mplusrounded1c （2026-11-24 取得）
+用途: ストーリーズ見本・動画版 v4_soft の文字（make_motion_v4_soft.py）
