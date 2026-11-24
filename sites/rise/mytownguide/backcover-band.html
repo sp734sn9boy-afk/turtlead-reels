@@ -3,70 +3,61 @@
 <head>
 <meta charset="utf-8">
 <title>RISE 裏表紙 帯広告</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;900&family=Noto+Serif+JP:wght@600;900&family=Cormorant+Garamond:ital,wght@1,600&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;900&family=Noto+Serif+JP:wght@600;900&family=Cormorant+Garamond:ital,wght@1,700&display=block" rel="stylesheet">
 <style>
 /* 945 x 396 px。deviceScaleFactor 2 で 1890 x 792（今の裏表紙の枠と同じ比率） */
 :root{--wine:#7d1d2c;--wine-d:#561320;--brown:#3a2420;--ink:#2e1e1a;--gold1:#9c7128;--gold2:#e9cf8a;--cream:#fbf5ec}
 *{box-sizing:border-box;margin:0;padding:0}
-body{width:945px;height:396px;overflow:hidden;position:relative;font-family:"Noto Sans JP",sans-serif;color:var(--ink);
- background:radial-gradient(circle at 84% 30%,#f1dcc0 0,#f1dcc000 40%),var(--cream)}
-.goldbg{background:linear-gradient(135deg,#a77a2c 0%,#f1d999 28%,#c39a48 52%,#f6e3a6 74%,#a77a2c 100%)}
-.goldtxt{background:linear-gradient(180deg,#f7e7b4 0%,#d8b25c 38%,#9a6c22 62%,#d9b867 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.logo{position:absolute;left:22px;top:14px;height:22px}
-.lead{position:absolute;left:300px;top:14px;font-weight:900;font-size:15px;color:var(--wine);white-space:nowrap}
-.h1{position:absolute;left:18px;top:38px;font-family:"Noto Serif JP",serif;font-weight:900;color:var(--brown);display:flex;align-items:flex-end;white-space:nowrap;line-height:1}
-.h1 .num{font-size:112px;line-height:.86;margin-right:2px}
-.h1 .tx{font-size:37px;padding-bottom:8px;letter-spacing:-.02em}
-.h1 .tx b{color:var(--wine)}
-.band{position:absolute;left:0;width:640px;top:150px;height:50px;background:linear-gradient(180deg,var(--wine),var(--wine-d));display:flex;align-items:center;justify-content:center;box-shadow:0 3px 0 var(--gold1)}
-.band span{font-weight:900;font-size:29px;color:#fff;letter-spacing:.02em}
-.band i{display:inline-block;width:8px;height:8px;background:var(--gold2);transform:rotate(45deg);margin:0 13px}
-.mrow{position:absolute;left:14px;width:620px;top:212px;display:grid;grid-template-columns:170px 172px 118px 150px;gap:6px}
-.m{display:flex;align-items:center;gap:6px}
-.m .ph{width:62px;height:62px;border-radius:50%;padding:3px;flex:none}
-.m .ph img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:2px solid #fff;display:block}
-.m b{display:block;font-weight:900;font-size:19px;line-height:1.1;color:var(--brown);white-space:nowrap}
-.m b em{font-style:normal;color:var(--wine)}
-.m small{display:block;font-size:11px;white-space:nowrap;font-weight:700;line-height:1.3;margin-top:3px;color:#5b463d}
-.staff{position:absolute;right:0;top:0;width:300px;height:290px;overflow:hidden}
-.staff .ring{position:absolute;left:28px;top:18px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,#fff 0,#fbf1e2 60%,#f0dcc0 100%);border:2px solid var(--gold2)}
-.staff img{position:absolute;right:-8px;bottom:-2px;width:318px;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14%);mask-image:linear-gradient(90deg,transparent 0,#000 14%)}
-.names{position:absolute;right:10px;top:254px;display:flex;gap:6px}
-.names div{background:var(--brown);color:#fff;border-radius:6px;padding:2px 8px 3px;text-align:center;line-height:1.2;border:1.5px solid var(--gold1)}
-.names small{display:block;font-size:9.5px;font-weight:700;color:var(--gold2)}
-.names b{font-family:"Noto Serif JP",serif;font-size:14px}
-.foot{position:absolute;left:0;right:0;bottom:0;height:106px;background:linear-gradient(180deg,#3d2520,#2b1814);color:#fff;display:grid;grid-template-columns:1fr 1fr 168px;padding:10px 16px 0 22px;gap:14px}
-.foot::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,#a77a2c,#f1d999 40%,#a77a2c)}
+body{width:945px;height:396px;overflow:hidden;position:relative;font-family:"Noto Sans JP",sans-serif;color:var(--ink);background:var(--cream)}
+.goldtxt{background:linear-gradient(180deg,#fff1c4 0%,#e3bf6a 38%,#a87a2a 62%,#e6c878 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.head{position:absolute;left:0;right:0;top:0;height:60px;display:flex;align-items:center;padding:0 14px 0 16px;gap:14px;background:#fffaf3}
+.head img{height:22px}
+.h1{font-family:"Noto Serif JP",serif;font-weight:900;color:var(--brown);display:flex;align-items:flex-end;white-space:nowrap;line-height:1;flex:1;justify-content:center}
+.h1 .n4{font-size:62px;line-height:.82;margin-right:2px}
+.h1 .t{font-size:31px;padding-bottom:4px;letter-spacing:-.02em}
+.h1 .t b{color:var(--wine)}
+.inns{display:flex;gap:5px}
+.inns span{font-family:"Noto Serif JP",serif;font-weight:900;font-size:14px;color:var(--wine-d);border:1.5px solid var(--gold1);padding:0 9px;border-radius:30px;background:#fff}
+.row{position:absolute;left:0;right:0;top:60px;height:204px;display:grid;grid-template-columns:repeat(4,1fr);gap:3px;background:var(--gold1);border-top:3px solid var(--gold1);border-bottom:3px solid var(--gold1)}
+.cell{position:relative;overflow:hidden}
+.cell img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cell::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(35,14,10,.88) 0%,rgba(35,14,10,.35) 42%,rgba(35,14,10,0) 64%),linear-gradient(180deg,rgba(35,14,10,.55) 0%,rgba(35,14,10,0) 26%)}
+.tx{position:absolute;left:12px;right:8px;bottom:9px;z-index:2;color:#fff}
+.no{font-family:"Cormorant Garamond",serif;font-style:italic;font-weight:700;font-size:34px;line-height:.9;filter:drop-shadow(0 1px 2px rgba(0,0,0,.7));position:absolute;left:10px;top:6px;z-index:2}
+.tx h3{font-weight:900;font-size:29px;line-height:1.05;text-shadow:0 2px 6px rgba(0,0,0,.6);white-space:nowrap}
+.tx h3 small{display:block;font-size:15px;color:var(--gold2);margin-bottom:1px}
+.tx p{font-size:11.5px;font-weight:700;margin-top:4px;line-height:1.3}
+.foot{position:absolute;left:0;right:0;bottom:0;height:132px;background:linear-gradient(180deg,#3d2520,#2b1814);color:#fff;display:grid;grid-template-columns:190px 1fr 1fr 150px;gap:12px;padding:10px 12px 0 0}
+.staff{position:relative;overflow:hidden;margin-top:-10px}
+.staff img{position:absolute;left:0;bottom:-6px;width:200px}
+.staff span{position:absolute;left:6px;right:6px;bottom:5px;z-index:2;font-size:10px;font-weight:900;text-align:center;background:var(--wine);border:1px solid var(--gold2);border-radius:10px;padding:1px 0}
 .foot h4{font-family:"Noto Serif JP",serif;font-weight:900;font-size:17px;color:var(--gold2);line-height:1.2}
-.foot h4 small{font-family:"Noto Sans JP";font-size:11px;color:#fff;font-weight:700;margin-left:6px}
-.foot .tel{font-weight:900;font-size:29px;line-height:1.1;margin-top:1px;white-space:nowrap}
-.foot .tel small{font-size:14px;margin-right:4px;color:var(--gold2)}
-.foot .hr{font-size:10px;line-height:1.45;color:#eadfd6}
-.qr{display:flex;gap:8px;align-items:flex-start}
+.foot .ad{font-size:10.5px;font-weight:700;line-height:1.35}
+.foot .tel{font-weight:900;font-size:27px;line-height:1.15;white-space:nowrap}
+.foot .tel small{font-size:13px;margin-right:3px;color:var(--gold2)}
+.foot .hr{font-size:9.5px;line-height:1.45;color:#eadfd6}
+.qr{display:flex;gap:7px}
 .qr div{text-align:center}
 .qr img{width:66px;height:66px;display:block;background:#fff;padding:3px;border-radius:4px}
-.qr span{display:block;font-size:10px;font-weight:900;line-height:1.2;margin-top:2px}
+.qr span{display:block;font-size:9.5px;font-weight:900;line-height:1.2;margin-top:2px}
 </style>
 </head>
 <body>
-<img class="logo" src="img/logo.png" alt="Body Salon RISE">
-<div class="lead">＼ 国家資格をもつ院長が担当 ／</div>
-<div class="h1"><span class="num goldtxt">4</span><span class="tx">つの悩みを、<b>ひとつ</b>のサロンで。</span></div>
-<div class="band"><span>ダイエット</span><i></i><span>整体</span><i></i><span>育毛</span><i></i><span>肌質改善</span></div>
-<div class="mrow">
-  <div class="m"><div class="ph goldbg"><img src="img/m-diet.jpg" alt=""></div><div><b>体質改善<br><em>ダイエット</em></b></div></div>
-  <div class="m"><div class="ph goldbg"><img src="img/m-seitai.jpg" alt=""></div><div><b>整体</b><small>腰痛・肩こり<br>膝痛・ブライダル</small></div></div>
-  <div class="m"><div class="ph goldbg"><img src="img/m-ikumou.jpg" alt=""></div><div><b>育毛</b><small>頭皮ケア</small></div></div>
-  <div class="m"><div class="ph goldbg"><img src="img/m-hada.jpg" alt=""></div><div><b>肌質改善</b><small>フェイシャル</small></div></div>
+<div class="head">
+  <img src="img/logo.png" alt="Body Salon RISE">
+  <div class="h1"><span class="n4 goldtxt">4</span><span class="t">つの悩みを、<b>ひとつ</b>のサロンで。</span></div>
+  <div class="inns"><span>指宿院</span><span>谷山院</span></div>
 </div>
-<div class="staff"><div class="ring"></div><img src="img/inchou-cut.png" alt="院長2名"></div>
-<div class="names">
-  <div><small>谷山院 院長</small><b>和田 一真</b></div>
-  <div><small>指宿院 院長</small><b>和田 諒真</b></div>
+<div class="row">
+  <div class="cell"><img src="../img/ai-waist.jpg" style="object-position:62% 45%" alt=""><span class="no goldtxt">01</span><div class="tx"><h3><small>体質改善</small>ダイエット</h3><p>食事と習慣から体質を整える</p></div></div>
+  <div class="cell"><img src="../img/r-treat3.jpg" style="object-position:42% 40%" alt=""><span class="no goldtxt">02</span><div class="tx"><h3><small>からだケア</small>整体</h3><p>腰痛・肩こり・膝痛・ブライダル</p></div></div>
+  <div class="cell"><img src="../img/ikumou.jpg" style="object-position:48% 35%" alt=""><span class="no goldtxt">03</span><div class="tx"><h3><small>頭皮ケア</small>育毛</h3><p>髪と頭皮のお悩みに</p></div></div>
+  <div class="cell"><img src="../img/hada.jpg" style="object-position:50% 40%" alt=""><span class="no goldtxt">04</span><div class="tx"><h3><small>フェイシャル</small>肌質改善</h3><p>お肌のお悩みに</p></div></div>
 </div>
 <div class="foot">
-  <div><h4>指宿院<small>指宿市大牟礼 3-25-23-1</small></h4><div class="tel"><small>TEL</small>080-4279-2503</div><div class="hr">営業時間 10:00～19:00（完全予約制）<br>定休日 日曜祝日</div></div>
-  <div><h4>谷山院<small>鹿児島市小松原 1-48-11 SEAGREEN 小松原 102 号</small></h4><div class="tel"><small>TEL</small>070-2376-8715</div><div class="hr">営業時間 9:30～19:00（完全予約制）土曜日 9:30～18:00<br>定休日 日曜祝日</div></div>
+  <div class="staff"><img src="img/inchou-cut.png" alt="院長2名"><span>国家資格（柔道整復師）の院長が担当</span></div>
+  <div><h4>指宿院</h4><div class="ad">指宿市大牟礼 3-25-23-1</div><div class="tel"><small>TEL</small>080-4279-2503</div><div class="hr">営業時間 10:00～19:00（完全予約制）<br>定休日 日曜祝日</div></div>
+  <div><h4>谷山院</h4><div class="ad">鹿児島市小松原 1-48-11 SEAGREEN 小松原 102 号</div><div class="tel"><small>TEL</small>070-2376-8715</div><div class="hr">営業時間 9:30～19:00（完全予約制）<br>土曜日 9:30～18:00　定休日 日曜祝日</div></div>
   <div class="qr"><div><img src="img/qr-line-ibusuki.png" alt=""><span>指宿院 LINE</span></div><div><img src="img/qr-line-taniyama.png" alt=""><span>谷山院 LINE</span></div></div>
 </div>
 </body>
