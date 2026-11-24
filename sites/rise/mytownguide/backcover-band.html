@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>RISE 裏表紙 帯広告案</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;900&family=Noto+Serif+JP:wght@600;900&display=swap" rel="stylesheet">
+<style>
+/* 945 x 396 px。deviceScaleFactor 2 で 1890 x 792（今の裏表紙の枠 約180×75mm と同じ比率） */
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:945px;height:396px;background:#f8efe3;font-family:"Noto Sans JP",sans-serif;color:#3b2a22;overflow:hidden;display:flex;flex-direction:column}
+.gold-t{background:linear-gradient(180deg,#f6e3a8 0%,#c99a3e 45%,#8a6320 60%,#d9b25c 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.main{height:312px;flex:none;display:grid;grid-template-columns:1fr 330px;grid-template-rows:312px;overflow:hidden}
+.left{padding:12px 16px 12px 18px;display:flex;flex-direction:column;min-height:0}
+.catch{font-family:"Noto Serif JP",serif;font-weight:900;font-size:17px;color:#4a2c22;line-height:1.3;white-space:nowrap}
+.big{font-family:"Noto Serif JP",serif;font-weight:900;font-size:33px;white-space:nowrap;line-height:1.15;margin-top:2px;background:#4a2c22;padding:4px 12px 6px;border-radius:8px;display:inline-block;align-self:flex-start}
+.qual{display:inline-block;align-self:flex-start;margin-top:6px;background:linear-gradient(90deg,#b88a35,#f2d58c,#b88a35);color:#3b2219;font-weight:900;font-size:15px;padding:3px 12px;border-radius:5px}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px;flex:1;min-height:0}
+.t{background:#fff;border:3px solid #c99a3e;border-radius:10px;padding:6px 6px 6px;text-align:center;display:flex;flex-direction:column;align-items:center}
+.t b{font-family:"Noto Serif JP",serif;font-weight:900;font-size:21px;white-space:nowrap;color:#4a2c22;line-height:1.25}
+.t span{font-size:11.5px;font-weight:700;line-height:1.4;margin-top:2px}
+.t .pr{font-size:12px;font-weight:700;margin-top:auto}
+.t .pr em{font-style:normal;font-family:"Noto Serif JP",serif;font-size:22px;color:#b3262f;font-weight:900}
+.t.wait{border-style:dashed}
+.tbd{background:#fff3a8;border:2px dashed #d08a00;color:#6b4300;font-weight:900;border-radius:6px;font-size:11px;line-height:1.35;padding:3px 4px;margin-top:auto}
+.right{position:relative;overflow:hidden}
+.right img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.right .names{position:absolute;bottom:6px;left:6px;right:6px;display:flex;justify-content:space-around}
+.right .names div{background:rgba(74,44,34,.92);color:#fff;text-align:center;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700;line-height:1.3}
+.right .names b{display:block;font-family:"Noto Serif JP",serif;font-size:15px}
+.right .qr{position:absolute;top:8px;right:8px;display:flex;gap:6px}
+.right .qr div{width:64px;background:#fff;border:2px dashed #06c755;border-radius:6px;text-align:center;font-size:10px;font-weight:700;color:#058a3c;line-height:1.3;padding:6px 2px}
+.bar{flex:none;height:84px;background:#4a2c22;color:#fff;display:grid;grid-template-columns:170px 230px 1fr auto;align-items:center;padding:0 16px;gap:10px}
+.bar .logo{background:#fff;border-radius:6px;padding:6px 8px}
+.bar .logo img{width:100%;display:block}
+.qr2{display:flex;gap:6px}.qr2 div{width:72px;height:72px;background:#fff;border:2px dashed #06c755;border-radius:6px;text-align:center;font-size:10.5px;font-weight:700;color:#058a3c;line-height:1.3;padding-top:12px}
+.sh h5{font-family:"Noto Serif JP",serif;font-size:15px;color:#f2d58c;font-weight:900;line-height:1.2}
+.sh p{font-size:11px;line-height:1.35;opacity:.95}
+.sh .tel{font-weight:900;font-size:24px;line-height:1.15;opacity:1}
+</style>
+</head>
+<body>
+<div class="main">
+  <div class="left">
+    <p class="catch">からだの悩みを、まるごと相談できるサロン［指宿院・谷山院］</p>
+    <p class="big"><span class="gold-t">ダイエット・整体・育毛・肌質改善</span></p>
+    <span class="qual">国家資格（柔道整復師）を持つ院長が担当</span>
+    <div class="tiles">
+      <div class="t"><b>ダイエット</b><span>運動なし・<br>カロリー計算なし</span><p class="pr">初回 <em>500</em>円</p></div>
+      <div class="t"><b>整体</b><span>腰痛・肩こり・膝<br>骨盤・ブライダル</span><p class="pr">初回 <em>1,000</em>円〜</p></div>
+      <div class="t wait"><b>育毛</b><span>髪・頭皮の<br>お悩みに</span><p class="tbd">【ライズさん確認待ち：内容・料金】</p></div>
+      <div class="t wait"><b>肌質改善</b><span>肌の<br>お悩みに</span><p class="tbd">【ライズさん確認待ち：内容・料金】</p></div>
+    </div>
+  </div>
+  <div class="right">
+    <img src="img/inchou2.jpg" alt="院長写真">
+    <div class="names"><div>谷山院 院長<b>和田 一真</b></div><div>指宿院 院長<b>和田 諒真</b></div></div>
+  </div>
+</div>
+<div class="bar">
+  <div class="logo"><img src="img/logo.png" alt="Body Salon RISE"></div>
+  <div class="sh"><h5>指宿院</h5><p>指宿市大牟礼3-25-23-1</p><p class="tel">080-4279-2503</p></div>
+  <div class="sh"><h5>谷山院</h5><p>鹿児島市小松原1-48-11<br>SEAGREEN小松原102号</p><p class="tel">070-2376-8715</p></div>
+  <div class="qr2"><div>指宿院<br>LINE<br>QR</div><div>谷山院<br>LINE<br>QR</div></div>
+</div>
+</body>
+</html>

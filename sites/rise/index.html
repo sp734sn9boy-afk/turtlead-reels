@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Body Salon RISE｜指宿のダイエット・美容整体サロン</title>
-<meta name="description" content="鹿児島県指宿市のダイエット・美容整体サロン Body Salon RISE（ボディサロンライズ）。運動なし・カロリー計算なしの3ヶ月減量プログラムと、柔道整復師による整体・骨盤矯正。指宿駅から車で3分、完全予約制の個室サロンです。">
+<title>Body Salon RISE｜指宿・谷山のダイエット・整体・育毛・肌質改善サロン</title>
+<meta name="description" content="鹿児島県指宿市・鹿児島市谷山のBody Salon RISE（ボディサロンライズ）。ダイエット・整体・育毛・肌質改善の4つのメニューを、国家資格（柔道整復師）を持つ院長がご案内します。完全予約制のサロンです。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&display=swap" rel="stylesheet">
@@ -93,6 +93,7 @@ nav a:hover{color:var(--wine)}
 .svc{display:grid;grid-template-columns:1fr 1fr;gap:28px}
 .svc article{background:#fff;border-radius:20px;overflow:hidden;border:1px solid var(--bd);display:flex;flex-direction:column}
 .svc .photo{aspect-ratio:16/9;overflow:hidden}
+.svc article{scroll-margin-top:84px}
 .svc .body{padding:26px 26px 30px}
 .svc h3{font-family:"Noto Serif JP",serif;font-size:21px;margin-bottom:10px}
 .svc p{font-size:15px;color:var(--sub);margin-bottom:14px}
@@ -291,6 +292,57 @@ footer a{color:#fff}
 .fy-body h3{font-family:"Noto Serif JP",serif;font-size:19px;margin-bottom:8px}
 .fy-body p{font-size:15px;color:var(--sub);margin-bottom:12px}
 @media(max-width:760px){.fy-grid{grid-template-columns:1fr}.w-ban{aspect-ratio:16/9}}
+
+/* ===== 4本柱 ===== */
+.tbd{background:#fff7d1;border:2px dashed #d99a00;border-radius:12px;padding:14px 16px;color:#6b4300;font-size:14px;margin-top:6px}
+.tbd b{display:block;margin-bottom:4px}
+.tbd ul{padding-left:1.2em;margin:4px 0}
+.tbd small{font-size:12px;opacity:.85}
+.tbd-s{display:inline-block;background:#fff7d1;border:1.5px dashed #d99a00;color:#6b4300;font-weight:700;font-size:12px;line-height:1.5;padding:3px 8px;border-radius:6px;margin-top:6px}
+.ph-box{background:repeating-linear-gradient(135deg,#f3e8da 0 14px,#efe0cb 14px 28px);display:grid;place-items:center;text-align:center;color:#8a6a4e;font-weight:700;font-size:14px;line-height:1.6;border:2px dashed #cdb08a}
+.ph-box small{font-weight:400;font-size:12px}
+.sl-ph{background:radial-gradient(circle at 75% 40%,#6b4a3a 0%,#3a241b 55%,#1f110c 100%)}
+.sl-ph::after{content:attr(data-ph);position:absolute;right:8%;top:22%;width:36%;aspect-ratio:4/3;border:2px dashed rgba(232,194,122,.7);border-radius:18px;display:grid;place-items:center;text-align:center;color:#f3dca8;font-size:15px;padding:16px;background:rgba(255,255,255,.04)}
+.sl-copy .tbd-s{font-size:13px}
+.sl-pills{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin-top:18px}
+.sl-pills li{border:1px solid rgba(232,194,122,.8);color:#f6dfa9;background:rgba(0,0,0,.25);padding:4px 14px;border-radius:999px;font-size:14px;font-weight:700}
+.sl .sl-pills{opacity:0;transform:translateY(20px);transition:all 1s cubic-bezier(.2,.7,.2,1)}
+.sl.on .sl-pills{opacity:1;transform:none;transition-delay:1s}
+.pillars{background:var(--bg);padding-top:64px}
+.em-w{font-style:normal;color:var(--wine)}
+.pl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.pl{display:flex;flex-direction:column;text-decoration:none;background:#fff;border:1px solid var(--bd);border-radius:18px;overflow:hidden;transition:transform .25s,box-shadow .25s}
+.pl:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(74,44,34,.14)}
+.pl-ph{aspect-ratio:4/3;overflow:hidden}
+.pl-ph img{width:100%;height:100%;object-fit:cover}
+.pl-body{padding:14px 16px 18px;display:flex;flex-direction:column;flex:1}
+.pl-no{font-family:"Noto Serif JP",serif;color:var(--wine);font-size:13px;letter-spacing:.1em}
+.pl h3{font-family:"Noto Serif JP",serif;font-size:22px;line-height:1.4;margin:2px 0 6px}
+.pl p{font-size:13.5px;color:var(--sub);line-height:1.7}
+.pl-go{margin-top:auto;padding-top:10px;font-size:13px;font-weight:700;color:var(--wine)}
+.pl-go::after{content:" ↓"}
+@media(max-width:860px){.pl-grid{grid-template-columns:1fr 1fr;gap:12px}.pl h3{font-size:19px}.pl-body{padding:12px 12px 14px}.pl p{font-size:12.5px}.pl .tbd-s{font-size:10.5px}}
+@media(max-width:860px){.sl-pills{display:none}.sl-copy{padding-bottom:196px}.sl-copy .tbd-s{font-size:11.5px}.hs-cta .btn{white-space:nowrap}}
+@media(max-width:860px){.sl-ph::after{top:40px;left:20px;right:auto;width:58%;aspect-ratio:16/10;font-size:12.5px}}
+.wq-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.wq{background:var(--bg);border-radius:16px;padding:18px 18px 16px}
+.wq h3{font-family:"Noto Serif JP",serif;font-size:18px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.wq h3 span{font-size:12px;color:#fff;background:var(--wine);border-radius:999px;padding:1px 8px;font-family:"Noto Sans JP",sans-serif}
+.wq ul{list-style:none}
+.wq li{font-size:14.5px;font-weight:500;padding:3px 0}
+.wq li::before{content:"□";color:var(--wine);margin-right:6px}
+@media(max-width:960px){.wq-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.wq-grid{grid-template-columns:1fr}}
+.svc-no{font-family:"Noto Serif JP",serif;color:var(--wine);font-size:13px;letter-spacing:.15em}
+.svc-price{margin-top:14px;font-size:14px!important;color:var(--ink)!important;background:var(--bg2);border-radius:10px;padding:8px 12px}
+.svc-price b{color:var(--wine)}
+.mgrid6{grid-template-columns:repeat(3,1fr);max-width:1000px;gap:26px 18px}
+.mgrid6 .mcard{padding:30px 14px 22px}
+.mgrid6 .mcard h3{font-size:17px;line-height:1.5}
+.mgrid6 .mcard h3 small{font-size:12.5px;color:var(--sub);font-family:"Noto Sans JP",sans-serif;font-weight:400}
+.mcard-tbd{border-style:dashed}
+.tbd-price{font-size:28px!important;color:#b08a50!important}
+@media(max-width:760px){.mgrid6{grid-template-columns:1fr 1fr;gap:24px 12px}.mgrid6 .mcard{padding:28px 8px 18px}.mgrid6 .mcard .price{font-size:30px}.mgrid6 .mcard h3{font-size:14px}.mgrid6 .mcard h3 small{font-size:11px}.mgrid6 .badge{font-size:11px}.mcard .tbd-s{font-size:10.5px}}
 /* scroll reveal */
 .rv{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
 .rv.on{opacity:1;transform:none}
@@ -304,15 +356,15 @@ footer a{color:#fff}
 
 <div class="topbar" aria-label="お客様の結果">
   <div class="tb-track">
-    <span>✦ 3ヶ月コースで <b>−10.9kg</b> 達成</span><span>✦ 3ヶ月コースで <b>−9.1kg</b> 達成</span><span>✦ 3ヶ月コースで <b>−8.9kg</b> 達成</span><span>✦ 3ヶ月コースで <b>−7.8kg</b> 達成</span><span>✦ 3ヶ月コースで <b>−7.4kg</b> 達成</span><span>✦ 70代男性「首の痛みが楽になり、毎日を楽しく過ごせています」</span><span>✦ HP限定 初回 <b>500円</b>〜</span><span class="tb-note">※効果には個人差があります</span>
+    <span>✦ <b>ダイエット・整体・育毛・肌質改善</b> の4つのメニュー</span><span>✦ ダイエット3ヶ月コースで <b>−10.9kg</b> 達成</span><span>✦ 3ヶ月コースで <b>−9.1kg</b> 達成</span><span>✦ 3ヶ月コースで <b>−8.9kg</b> 達成</span><span>✦ 国家資格（柔道整復師）の院長が担当</span><span>✦ 70代男性「首の痛みが楽になり、毎日を楽しく過ごせています」</span><span>✦ HP限定 初回 <b>500円</b>〜</span><span class="tb-note">※効果には個人差があります</span>
   </div>
 </div>
 <header>
   <div class="wrap hd">
-    <a href="#top" class="logo"><img src="img/logo.png" alt="Body Salon RISE" class="logo-img"><small class="logo-sub">腰痛・ダイエット専門整体サロン</small></a>
+    <a href="#top" class="logo"><img src="img/logo.png" alt="Body Salon RISE" class="logo-img"><small class="logo-sub">ダイエット・整体・育毛・肌質改善</small></a>
     <nav><ul>
+      <li><a href="#pillars">4つのメニュー</a></li>
       <li><a href="#reason">選ばれる理由</a></li>
-      <li><a href="#service">施術内容</a></li>
       <li><a href="#profile">代表紹介</a></li>
       <li><a href="#menu">料金</a></li>
       <li><a href="#faq">よくある質問</a></li>
@@ -331,41 +383,42 @@ footer a{color:#fff}
       <div class="sl on" data-i="0">
         <div class="sl-img" style="background-image:url(img/ai-main.jpg);background-position:72% 30%"></div>
         <div class="wrap sl-copy">
-          <p class="sl-en">BEAUTY &amp; DIET</p>
-          <h1 class="sl-h">これを、<br><em class="gold">人生最後の</em><br>ダイエットに。</h1>
-          <p class="sl-sub">指宿・谷山の腰痛・ダイエット専門整体サロン。<br>体質と生活習慣から、根本的に変えていきます。</p>
+          <p class="sl-en">4 MENUS</p>
+          <h1 class="sl-h">からだの悩みを、<br><em class="gold">まるごと</em>相談できる<br>サロンへ。</h1>
+          <p class="sl-sub">ダイエット・整体・育毛・肌質改善。<br>4つのメニューで、指宿・谷山のみなさまをサポートします。</p>
+          <ul class="sl-pills"><li>ダイエット</li><li>整体</li><li>育毛</li><li>肌質改善</li></ul>
         </div>
       </div>
       <div class="sl" data-i="1">
         <div class="sl-img" style="background-image:url(img/ai-waist.jpg);background-position:72% 45%"></div>
         <div class="wrap sl-copy">
-          <p class="sl-en">NO EXERCISE</p>
+          <p class="sl-en">01 DIET</p>
           <h2 class="sl-h">運動なし。<br>カロリー計算なし。<br><em class="gold">3ヶ月で平均−7.5kg</em></h2>
-          <p class="sl-sub">きつい運動も、我慢の食事制限もいりません。<br>※効果には個人差があります。</p>
+          <p class="sl-sub">体質改善ダイエット。きつい運動も、我慢の食事制限もいりません。<br>※効果には個人差があります。</p>
         </div>
       </div>
       <div class="sl" data-i="2">
         <div class="sl-img" style="background-image:url(img/r-posture-r.jpg);background-position:75% 35%"></div>
         <div class="wrap sl-copy">
-          <p class="sl-en">SEITAI</p>
+          <p class="sl-en">02 SEITAI</p>
           <h2 class="sl-h">国家資格者による<br><em class="gold">根本改善</em>整体</h2>
           <p class="sl-sub">腰痛・肩こり・首こり・膝の痛みに。<br>筋肉調整 × 骨盤矯正 × 栄養サポートで整えます。</p>
         </div>
       </div>
       <div class="sl" data-i="3">
-        <div class="sl-img" style="background-image:url(img/r-counsel.jpg);background-position:65% 40%"></div>
+        <div class="sl-img sl-ph" style="background-position:70% 40%" data-ph="【写真準備中】育毛のイメージ写真"></div>
         <div class="wrap sl-copy">
-          <p class="sl-en">ORDER MADE</p>
-          <h2 class="sl-h">遺伝子検査 ×<br>整体 × 栄養指導で<br><em class="gold">食べて、痩せる。</em></h2>
-          <p class="sl-sub">遺伝子検査で体質を知り、整体で歪みを整え、<br>栄養指導で無理のない食習慣へ。</p>
+          <p class="sl-en">03 HAIR CARE</p>
+          <h2 class="sl-h">髪と頭皮の悩みも、<br><em class="gold">ひとりで抱えずに。</em></h2>
+          <p class="sl-sub">育毛メニューをご用意しています。<br><span class="tbd-s">【ライズさん確認待ち：育毛の施術内容】</span></p>
         </div>
       </div>
       <div class="sl" data-i="4">
-        <div class="sl-img" style="background-image:url(img/ai-bride.jpg);background-position:72% 30%"></div>
+        <div class="sl-img sl-ph" style="background-position:70% 40%" data-ph="【写真準備中】肌質改善のイメージ写真"></div>
         <div class="wrap sl-copy">
-          <p class="sl-en">BRIDAL</p>
-          <h2 class="sl-h">一生に一度の日を、<br><em class="gold">いちばん綺麗な私</em>で。</h2>
-          <p class="sl-sub">ブライダル整体・小顔矯正・姿勢改善で、<br>ドレスが映えるフェイスラインと背中へ。</p>
+          <p class="sl-en">04 SKIN CARE</p>
+          <h2 class="sl-h">肌の調子も、<br><em class="gold">いっしょに見直す。</em></h2>
+          <p class="sl-sub">肌質改善メニューをご用意しています。<br><span class="tbd-s">【ライズさん確認待ち：肌質改善の施術内容】</span></p>
         </div>
       </div>
       <div class="sl" data-i="5">
@@ -382,15 +435,42 @@ footer a{color:#fff}
   <p class="hs-vert" aria-hidden="true">BODY SALON RISE — IBUSUKI / TANIYAMA</p>
   <div class="wrap hs-cta">
     <a class="btn btn-line shine" href="#yoyaku">LINEで予約・相談する</a>
-    <a class="btn hs-ghost" href="#menu">初回 500円〜 体験</a>
+    <a class="btn hs-ghost" href="#pillars">4つのメニュー</a>
   </div>
   <div class="hs-ctrl">
     <span class="hs-count"><b id="hsNow">01</b> / 06</span>
-    <div class="dots"><button class="dot on" data-go="0" aria-label="スライド1"><i></i></button><button class="dot" data-go="1" aria-label="スライド2"><i></i></button><button class="dot" data-go="2" aria-label="スライド3"><i></i></button><button class="dot" data-go="3" aria-label="スライド4"><i></i></button><button class="dot" data-go="4" aria-label="スライド5"><i></i></button><button class="dot" data-go="5" aria-label="スライド6"><i></i></button></div>
+    <div class="dots"><button class="dot on" data-go="0" aria-label="スライド1"><i></i></button><button class="dot" data-go="1" aria-label="スライド2 ダイエット"><i></i></button><button class="dot" data-go="2" aria-label="スライド3 整体"><i></i></button><button class="dot" data-go="3" aria-label="スライド4 育毛"><i></i></button><button class="dot" data-go="4" aria-label="スライド5 肌質改善"><i></i></button><button class="dot" data-go="5" aria-label="スライド6 店舗"><i></i></button></div>
   </div>
   <div class="badge-kg">
-    <svg viewBox="0 0 200 200" class="ring-txt" aria-hidden="true"><defs><path id="cp" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text textLength="486" lengthAdjust="spacing"><textPath href="#cp" textLength="486" lengthAdjust="spacing">BODY SALON RISE ✦ DIET &amp; SEITAI ✦ IBUSUKI ✦</textPath></text></svg>
-    <div class="kg-in"><small>3ヶ月で平均</small><b>−7.5<i>kg</i></b><small class="ind">※個人差があります</small></div>
+    <svg viewBox="0 0 200 200" class="ring-txt" aria-hidden="true"><defs><path id="cp" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text textLength="486" lengthAdjust="spacing"><textPath href="#cp" textLength="486" lengthAdjust="spacing">DIET ✦ SEITAI ✦ HAIR ✦ SKIN ✦ BODY SALON RISE ✦</textPath></text></svg>
+    <div class="kg-in"><small>指宿・谷山</small><b>4<i>つの</i></b><small>専門メニュー</small></div>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="pillars" id="pillars">
+  <div class="wrap">
+    <span class="en center">4 Menus</span>
+    <h2 class="center">RISEの<em class="em-w">4つのメニュー</em></h2>
+    <p class="lead center">気になるメニューを押すと、くわしい説明に移動します。<br>いくつか組み合わせてのご相談も歓迎です。</p>
+    <div class="pl-grid">
+      <a class="pl" href="#diet">
+        <div class="pl-ph"><img src="img/ai-waist.jpg" alt="ウエストにメジャーを当てる女性" loading="lazy" style="object-position:72% 45%"></div>
+        <div class="pl-body"><span class="pl-no">01</span><h3>ダイエット</h3><p>運動なし・カロリー計算なしの体質改善ダイエット</p><span class="pl-go">くわしく見る</span></div>
+      </a>
+      <a class="pl" href="#seitai">
+        <div class="pl-ph"><img src="img/r-treat3.jpg" alt="院長による整体の施術" loading="lazy" style="object-position:50% 35%"></div>
+        <div class="pl-body"><span class="pl-no">02</span><h3>整体</h3><p>腰痛・肩こり・膝の痛み、骨盤矯正、ブライダル整体</p><span class="pl-go">くわしく見る</span></div>
+      </a>
+      <a class="pl" href="#ikumou">
+        <div class="pl-ph ph-box"><span>写真準備中<br>（育毛）</span></div>
+        <div class="pl-body"><span class="pl-no">03</span><h3>育毛</h3><p>髪・頭皮のお悩みのご相談に</p><span class="tbd-s">【ライズさん確認待ち：育毛の内容】</span><span class="pl-go">くわしく見る</span></div>
+      </a>
+      <a class="pl" href="#hada">
+        <div class="pl-ph ph-box"><span>写真準備中<br>（肌質改善）</span></div>
+        <div class="pl-body"><span class="pl-no">04</span><h3>肌質改善</h3><p>肌のお悩みのご相談に</p><span class="tbd-s">【ライズさん確認待ち：肌質改善の内容】</span><span class="pl-go">くわしく見る</span></div>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -399,36 +479,13 @@ footer a{color:#fff}
   <div class="wrap">
     <span class="en center">Worries</span>
     <h2 class="center">こんなお悩み、ありませんか？</h2>
-    <div class="photo w-ban"><img src="img/ai-shoulder.jpg" alt="肩こりに悩む女性" loading="lazy"></div>
-    <div class="wgrid">
-      <div>少しずつ体重が増えていく</div>
-      <div>着たい服が着られなくなった</div>
-      <div>色々試しても痩せない</div>
-      <div>リバウンドが怖い</div>
-      <div>肩こり・腰痛・膝痛がつらい</div>
-      <div>病院では「異常なし」と言われた</div>
-      <div>猫背・巻き肩・ストレートネック</div>
-      <div>ぽっこりお腹・下半身太り</div>
+    <div class="wq-grid">
+      <div class="wq"><h3><span>01</span>体重・体型</h3><ul><li>少しずつ体重が増えていく</li><li>色々試しても痩せない</li><li>リバウンドが怖い</li><li>ぽっこりお腹・下半身太り</li></ul></div>
+      <div class="wq"><h3><span>02</span>痛み・姿勢</h3><ul><li>肩こり・腰痛・膝痛がつらい</li><li>病院では「異常なし」と言われた</li><li>猫背・巻き肩・ストレートネック</li><li>産後の骨盤が気になる</li></ul></div>
+      <div class="wq"><h3><span>03</span>髪・頭皮</h3><ul><li>髪のボリュームが気になってきた</li><li>頭皮の状態が気になる</li><li>どこに相談すればいいか分からない</li></ul><p class="tbd-s">【ライズさん確認待ち：育毛で受けているお悩みの例】</p></div>
+      <div class="wq"><h3><span>04</span>肌</h3><ul><li>肌の調子が気になる</li><li>年齢とともに肌の変化を感じる</li><li>自分に合うケアが分からない</li></ul><p class="tbd-s">【ライズさん確認待ち：肌質改善で受けているお悩みの例】</p></div>
     </div>
-    <p class="answer">痩せられないのは、意志が弱いからではありません。<br><b>「自分に合った痩せ方」を知らないだけ</b>なんです。</p>
-  </div>
-</section>
-
-<!-- FORYOU -->
-<section class="foryou">
-  <div class="wrap">
-    <span class="en center">For You</span>
-    <h2 class="center">こんな方にも選ばれています</h2>
-    <div class="fy-grid">
-      <article class="fy">
-        <div class="photo fy-ph"><img src="img/ai-mama.jpg" alt="赤ちゃんを抱っこするお母さん" loading="lazy" style="object-position:70% 40%"></div>
-        <div class="fy-body"><h3>産後の体型・骨盤が気になる方</h3><p>抱っこや授乳で崩れがちな骨盤と姿勢を、体の回復に合わせてやさしく整えます。子連れでのご来院もOKです。</p><ul class="pills"><li>産後骨盤ケア</li><li>姿勢改善</li><li>腰の違和感</li></ul></div>
-      </article>
-      <article class="fy">
-        <div class="photo fy-ph"><img src="img/ai-bride.jpg" alt="ウェディングドレスの花嫁" loading="lazy" style="object-position:72% 30%"></div>
-        <div class="fy-body"><h3>結婚式までに綺麗になりたい方</h3><p>小顔矯正と姿勢改善で、フェイスラインと立ち姿をすっきりと。ドレス姿に自信が持てるようサポートします。</p><ul class="pills"><li>ブライダル整体</li><li>小顔矯正</li><li>むくみ改善</li></ul></div>
-      </article>
-    </div>
+    <p class="answer">痩せたい、痛みをなんとかしたい、髪や肌のことも。<br><b>ひとつのサロンで、まとめてご相談いただけます。</b></p>
   </div>
 </section>
 
@@ -440,19 +497,76 @@ footer a{color:#fff}
     <div class="rgrid">
       <div class="rcard">
         <div class="no">01</div>
-        <h3>運動なし・カロリー計算なし</h3>
-        <p>1kgの脂肪を燃やすには約7,200kcal、フルマラソン3回分の運動が必要といわれます。RISEは、きつい運動や我慢の食事制限に頼らず、生活習慣の見直しで無理なく痩せる方法をご提案します。</p>
+        <h3>4つの悩みを、<br>ひとつのサロンで</h3>
+        <p>ダイエット・整体・育毛・肌質改善。いくつもお店を回らなくても、気になることをまとめてご相談いただけます。カウンセリングで、今のあなたに合うメニューからご提案します。</p>
       </div>
       <div class="rcard">
         <div class="no">02</div>
-        <h3>遺伝子検査と分子栄養学で<br>あなた専用のプラン</h3>
-        <p>肥満遺伝子（DNA）検査で体質を知り、分子栄養学にもとづいて食事をアドバイス。マニュアル通りではない、一人ひとりのオーダーメイドプログラムです。</p>
+        <h3>国家資格・柔道整復師の<br>院長が担当</h3>
+        <p>整骨院での経験を活かし、骨盤矯正や肩甲骨はがしで姿勢と骨格のゆがみを整えます。体の土台を整えることを大切にしています。</p>
       </div>
       <div class="rcard">
         <div class="no">03</div>
-        <h3>国家資格・柔道整復師の<br>美容整体</h3>
-        <p>整骨院での経験を活かし、骨盤矯正や肩甲骨はがしで姿勢と骨格のゆがみを整えます。痩せやすく、太りにくい体の土台づくりから始めます。</p>
+        <h3>一人ひとりに合わせた<br>オーダーメイド</h3>
+        <p>ダイエットでは遺伝子検査と分子栄養学をもとに、あなた専用のプランを作ります。マニュアル通りではなく、体質や生活に合わせて無理のない進め方をご提案します。</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE -->
+<section id="service">
+  <div class="wrap">
+    <span class="en center">Service</span>
+    <h2 class="center">施術・プログラム</h2>
+    <p class="lead center">「痩せたい」も「痛みをなんとかしたい」も、髪や肌のことも、まずはお気軽にご相談ください。<br>丁寧なカウンセリングで、目標やお体の状態に合わせた内容をご提案します。</p>
+    <div class="svc">
+      <article id="diet">
+        <div class="photo"><img src="img/ai-food.jpg" alt="和食を楽しむ女性" loading="lazy" style="object-position:70% 40%"></div>
+        <div class="body">
+          <span class="svc-no">01 DIET</span>
+          <h3>ダイエット（体質改善ダイエット）</h3>
+          <p>「自分の体を知ること」から始めるダイエット。遺伝子検査で体質を知り、整体で歪みや巡りを整え、栄養指導で無理のない食習慣へ。運動なし・カロリー計算なしで、リバウンドしにくい体を目指します。</p>
+          <ul class="pills"><li>遺伝子検査</li><li>栄養指導</li><li>部分痩せ・全身痩せ</li><li>代謝アップ</li><li>3ヶ月コース</li></ul>
+          <p class="svc-price">初回カウンセリング＆姿勢矯正 <b>500円</b>（HP限定）</p>
+        </div>
+      </article>
+      <article id="seitai">
+        <div class="photo"><img src="img/r-treat2.jpg" alt="整体の施術の様子" loading="lazy" style="object-position:50% 35%"></div>
+        <div class="body">
+          <span class="svc-no">02 SEITAI</span>
+          <h3>整体・不調改善・美容整体</h3>
+          <p>腰痛・肩こり・首こり・膝の痛み、慢性疲労やPMSなどの不調に。筋肉調整×骨盤矯正×栄養サポートの3つの視点で整えます。小顔矯正・産後骨盤ケア・ブライダル整体も人気です。</p>
+          <ul class="pills"><li>腰痛・肩こり・首こり</li><li>膝の痛み</li><li>慢性疲労・めまい</li><li>PMS・更年期</li><li>小顔矯正</li><li>骨盤矯正・姿勢改善</li><li>産後骨盤ケア</li><li>ブライダル整体</li></ul>
+          <p class="svc-price">初回 整体 <b>1,000円</b>／ブライダル整体 <b>3,500円</b>／不調改善 <b>3,500円</b>（HP限定）</p>
+        </div>
+      </article>
+      <article id="ikumou">
+        <div class="photo ph-box"><span>写真準備中（育毛）<br><small>ChatGPTで作成予定、またはライズさんの写真</small></span></div>
+        <div class="body">
+          <span class="svc-no">03 HAIR CARE</span>
+          <h3>育毛</h3>
+          <p>髪や頭皮のことで気になることがある方へ。まずはカウンセリングで、今の状態やご希望をお聞きします。</p>
+          <div class="tbd">
+            <b>【ライズさん確認待ち：育毛】</b>
+            <ul><li>施術・メニューの名前</li><li>使う機械・使う商品（化粧品・医薬部外品など）</li><li>1回の時間・通う目安</li><li>料金（初回・2回目以降）</li><li>対象（男性・女性どちらも可か）</li></ul>
+            <small>※届き次第、この欄に説明文を入れます。効果を言い切る表現は使いません。</small>
+          </div>
+        </div>
+      </article>
+      <article id="hada">
+        <div class="photo ph-box"><span>写真準備中（肌質改善）<br><small>ChatGPTで作成予定、またはライズさんの写真</small></span></div>
+        <div class="body">
+          <span class="svc-no">04 SKIN CARE</span>
+          <h3>肌質改善</h3>
+          <p>肌の調子が気になる方へ。まずはカウンセリングで、今の状態やご希望をお聞きします。</p>
+          <div class="tbd">
+            <b>【ライズさん確認待ち：肌質改善】</b>
+            <ul><li>施術・メニューの名前</li><li>使う機械・使う商品（化粧品・医薬部外品など）</li><li>1回の時間・通う目安</li><li>料金（初回・2回目以降）</li><li>対象（男性・女性どちらも可か）</li></ul>
+            <small>※届き次第、この欄に説明文を入れます。効果を言い切る表現は使いません。</small>
+          </div>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -460,7 +574,7 @@ footer a{color:#fff}
 <!-- NUMBER -->
 <div class="num">
   <div class="wrap">
-    <p>3ヶ月の減量プログラムで</p>
+    <p>ダイエット（3ヶ月の減量プログラム）で</p>
     <div class="big">平均 −7.5<small>kg</small></div>
     <p>これまでにサポートした方々の実績です</p>
     <p class="note">※効果には個人差があります。</p>
@@ -471,35 +585,26 @@ footer a{color:#fff}
 <section class="results" style="padding-bottom:40px">
   <div class="wrap">
     <span class="en center">Voice</span>
-    <h2 class="center">お客様の結果</h2>
+    <h2 class="center">お客様の結果（ダイエット・整体）</h2>
     <p class="lead center">3ヶ月コースで −7.4kg、−9.1kg、−10.9kg……。<br>「首の痛みで日常生活に支障→今では楽しく過ごせている」（70代男性）という声も。</p>
     <div class="photo"><img src="img/results.jpg" alt="3ヶ月コースを終えたお客様と院長の写真" loading="lazy"><span class="kari">仮：広告の写真</span></div>
     <p class="rnote">※効果には個人差があります。</p>
   </div>
 </section>
 
-<!-- SERVICE -->
-<section id="service">
+<!-- FORYOU -->
+<section class="foryou">
   <div class="wrap">
-    <span class="en center">Service</span>
-    <h2 class="center">施術・プログラム</h2>
-    <p class="lead center">「痩せたい」も「痛みをなんとかしたい」も、まずはお気軽にご相談ください。<br>丁寧なカウンセリングで、目標やお体の状態に合わせた内容をご提案します。</p>
-    <div class="svc">
-      <article>
-        <div class="photo"><img src="img/ai-food.jpg" alt="和食を楽しむ女性" loading="lazy" style="object-position:70% 40%"></div>
-        <div class="body">
-          <h3>体質改善ダイエット</h3>
-          <p>「自分の体を知ること」から始めるダイエット。遺伝子検査で体質を知り、整体で歪みや巡りを整え、栄養指導で無理のない食習慣へ。食事制限に頼らず、リバウンドしにくい体を目指します。</p>
-          <ul class="pills"><li>遺伝子検査</li><li>栄養指導</li><li>部分痩せ・全身痩せ</li><li>代謝アップ</li><li>3ヶ月コース</li></ul>
-        </div>
+    <span class="en center">For You</span>
+    <h2 class="center">整体は、こんな方にも選ばれています</h2>
+    <div class="fy-grid">
+      <article class="fy">
+        <div class="photo fy-ph"><img src="img/ai-mama.jpg" alt="赤ちゃんを抱っこするお母さん" loading="lazy" style="object-position:70% 40%"></div>
+        <div class="fy-body"><h3>産後の体型・骨盤が気になる方</h3><p>抱っこや授乳で崩れがちな骨盤と姿勢を、体の回復に合わせてやさしく整えます。子連れでのご来院もOKです。</p><ul class="pills"><li>産後骨盤ケア</li><li>姿勢改善</li><li>腰の違和感</li></ul></div>
       </article>
-      <article>
-        <div class="photo"><img src="img/r-treat2.jpg" alt="整体の施術の様子" loading="lazy" style="object-position:50% 35%"></div>
-        <div class="body">
-          <h3>整体・不調改善／美容整体</h3>
-          <p>腰痛・肩こり・首こり・膝の痛み、慢性疲労やPMSなどの不調に。筋肉調整×骨盤矯正×栄養サポートの3つの視点で整えます。小顔矯正・産後骨盤ケア・ブライダル整体も人気です。</p>
-          <ul class="pills"><li>腰痛・肩こり・首こり</li><li>膝の痛み</li><li>慢性疲労・めまい</li><li>PMS・更年期</li><li>小顔矯正</li><li>骨盤矯正・姿勢改善</li><li>産後骨盤ケア</li><li>ブライダル整体</li></ul>
-        </div>
+      <article class="fy">
+        <div class="photo fy-ph"><img src="img/ai-bride.jpg" alt="ウェディングドレスの花嫁" loading="lazy" style="object-position:72% 30%"></div>
+        <div class="fy-body"><h3>結婚式までに綺麗になりたい方</h3><p>小顔矯正と姿勢改善で、フェイスラインと立ち姿をすっきりと。ドレス姿に自信が持てるようサポートします。</p><ul class="pills"><li>ブライダル整体</li><li>小顔矯正</li><li>むくみ改善</li></ul></div>
       </article>
     </div>
   </div>
@@ -529,11 +634,13 @@ footer a{color:#fff}
     <span class="en center">Menu</span>
     <h2 class="center">初回限定キャンペーン</h2>
     <p class="lead center">ホームページを見た方だけの特別料金です。お悩みに合わせてお選びください。</p>
-    <div class="mgrid mgrid4">
-      <div class="mcard"><span class="badge">痩せたい方に</span><h3>体質改善ダイエット<br><small>初回カウンセリング＆姿勢矯正</small></h3><div class="price">500<small>円</small></div></div>
-      <div class="mcard"><span class="badge">慢性的な痛みに</span><h3>整体<br><small>初回施術</small></h3><div class="price">1,000<small>円</small></div></div>
-      <div class="mcard"><span class="badge">花嫁さまに</span><h3>ブライダル整体<br><small>初回施術</small></h3><div class="price">3,500<small>円</small></div></div>
-      <div class="mcard"><span class="badge">偏頭痛・生理痛など</span><h3>あらゆる不調改善<br><small>カウンセリング＆初回施術</small></h3><div class="price">3,500<small>円</small></div></div>
+    <div class="mgrid mgrid6">
+      <div class="mcard"><span class="badge">ダイエット</span><h3>体質改善ダイエット<br><small>初回カウンセリング＆姿勢矯正</small></h3><div class="price">500<small>円</small></div></div>
+      <div class="mcard"><span class="badge">整体</span><h3>整体<br><small>初回施術</small></h3><div class="price">1,000<small>円</small></div></div>
+      <div class="mcard"><span class="badge">整体｜花嫁さまに</span><h3>ブライダル整体<br><small>初回施術</small></h3><div class="price">3,500<small>円</small></div></div>
+      <div class="mcard"><span class="badge">整体｜不調に</span><h3>不調改善<br><small>カウンセリング＆初回施術</small></h3><div class="price">3,500<small>円</small></div></div>
+      <div class="mcard mcard-tbd"><span class="badge">育毛</span><h3>育毛<br><small>初回メニュー</small></h3><div class="price tbd-price">準備中</div><p class="tbd-s">【ライズさん確認待ち：育毛の初回料金・時間】</p></div>
+      <div class="mcard mcard-tbd"><span class="badge">肌質改善</span><h3>肌質改善<br><small>初回メニュー</small></h3><div class="price tbd-price">準備中</div><p class="tbd-s">【ライズさん確認待ち：肌質改善の初回料金・時間】</p></div>
     </div>
     <p class="howto">公式LINEに<b>「HP特別特典を見ました！」</b>と送るだけで、この料金で体験いただけます。</p>
     <p class="mnote">※2回目以降の料金・3ヶ月コースの料金は、カウンセリング時にご案内します。お支払いは現金・クレジットカードがご利用いただけます。</p>
@@ -562,6 +669,8 @@ footer a{color:#fff}
     <details open><summary>予約は必要ですか？</summary><div class="a">完全予約制です。予約時間ちょうど、または5分前にお越しください。はじめての方は、10分前にお越しください。</div></details>
     <details><summary>予約・問い合わせの方法は？</summary><div class="a">施術中はお電話に出られないことが多いため、公式LINEかInstagramからのご連絡がスムーズです。</div></details>
     <details><summary>支払い方法は何がありますか？</summary><div class="a">現金・クレジットカードがご利用いただけます。</div></details>
+    <details><summary>育毛・肌質改善だけでも利用できますか？</summary><div class="a"><span class="tbd-s">【ライズさん確認待ち：単独での利用可否・男性の利用可否】</span></div></details>
+    <details><summary>いくつかのメニューを組み合わせられますか？</summary><div class="a"><span class="tbd-s">【ライズさん確認待ち：組み合わせの可否・料金の考え方】</span></div></details>
     <details><summary>駐車場はありますか？</summary><div class="a">3台分ご用意しています。</div></details>
     <details><summary>本当に運動しなくても痩せますか？</summary><div class="a">ハードな運動や無理な食事制限は行いません。体質に合わせた食事の見直しと美容整体で、無理なく健康的に痩せる方法をご提案します（効果には個人差があります）。</div></details>
   </div>
@@ -647,7 +756,7 @@ footer a{color:#fff}
 </main>
 
 <footer>
-  <p>Body Salon RISE（腰痛・ダイエット専門整体サロン）<br>指宿院：鹿児島県指宿市大牟礼3丁目25-23-1　TEL 080-4279-2503<br>谷山院：鹿児島市小松原1丁目48-11 SEA GREEN 小松原102号　TEL 070-2376-8715</p>
+  <p>Body Salon RISE（ダイエット・整体・育毛・肌質改善）<br>指宿院：鹿児島県指宿市大牟礼3丁目25-23-1　TEL 080-4279-2503<br>谷山院：鹿児島市小松原1丁目48-11 SEA GREEN 小松原102号　TEL 070-2376-8715</p>
   <p>Instagram：<a href="https://www.instagram.com/wada.ibusuki/" target="_blank" rel="noopener">指宿院 @wada.ibusuki</a>　／　<a href="https://www.instagram.com/taniyama.diet/" target="_blank" rel="noopener">谷山院 @taniyama.diet</a></p>
   <p>&copy; Body Salon RISE</p>
 </footer>
@@ -691,7 +800,7 @@ footer a{color:#fff}
   hs.addEventListener('touchend',function(e){if(sx===null)return;var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)go(now+(dx<0?1:-1));sx=null});
   if(!reduce)tm=setTimeout(function(){go(1)},6000);
   /* scroll reveal */
-  var els=document.querySelectorAll('main section:not(.hs) h2, main section:not(.hs) .en, .lead, .wgrid > div, .answer, .rcard, .num .wrap, .results .photo, .svc article, .pf > *, .mcard, .flow li, .faq details, .shop, .ig-card, .fy, .w-ban, .cta .wrap');
+  var els=document.querySelectorAll('main section:not(.hs) h2, main section:not(.hs) .en, .lead, .wq, .pl, .answer, .rcard, .num .wrap, .results .photo, .svc article, .pf > *, .mcard, .flow li, .faq details, .shop, .ig-card, .fy, .w-ban, .cta .wrap');
   if(!reduce&&'IntersectionObserver' in window){
     els.forEach(function(e,i){e.classList.add('rv');e.style.transitionDelay=((i%4)*90)+'ms'});
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{threshold:.15});

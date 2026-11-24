@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>RISE 1ページ広告案</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;900&family=Noto+Serif+JP:wght@600;900&display=swap" rel="stylesheet">
+<style>
+/* 1100 x 1556 px（A4比率）。deviceScaleFactor 2 で 2200 x 3112 に書き出し */
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1100px;height:1556px;display:flex;flex-direction:column;background:#f8efe3;font-family:"Noto Sans JP",sans-serif;color:#3b2a22;overflow:hidden;position:relative}
+.serif{font-family:"Noto Serif JP",serif}
+.gold-t{background:linear-gradient(180deg,#f6e3a8 0%,#c99a3e 45%,#8a6320 60%,#d9b25c 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tbd{background:#fff3a8;border:3px dashed #d08a00;color:#6b4300;font-weight:900;border-radius:10px}
+
+/* top */
+.top{background:#4a2c22;color:#fff;padding:24px 40px 22px;position:relative;flex:none}
+.top .row{display:flex;align-items:center;justify-content:space-between}
+.logo{background:#fff;border-radius:10px;padding:10px 16px}
+.logo img{height:34px;display:block}
+.inn{display:flex;gap:10px}
+.inn span{border:2px solid #d9b25c;color:#f6e3a8;font-weight:900;font-size:26px;padding:4px 16px;border-radius:8px}
+.catch{font-family:"Noto Serif JP",serif;font-weight:900;font-size:40px;line-height:1.35;margin-top:14px;letter-spacing:.02em}
+.catch b{font-weight:900;font-size:54px}
+.qual{display:inline-block;margin-top:8px;background:linear-gradient(90deg,#b88a35,#f2d58c,#b88a35);color:#3b2219;font-weight:900;font-size:24px;padding:6px 20px;border-radius:6px}
+
+/* 4 pillars */
+.pillars{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:20px 34px 0;flex:none}
+.pl{background:#fff;border:4px solid #c99a3e;border-radius:18px;padding:12px 18px 12px;position:relative}
+.pl .no{position:absolute;top:-4px;right:-4px;background:#b3262f;color:#fff;font-family:"Noto Serif JP",serif;font-weight:900;font-size:22px;padding:4px 14px;border-radius:0 14px 0 14px}
+.pl h3{font-family:"Noto Serif JP",serif;font-weight:900;font-size:48px;line-height:1.15;color:#4a2c22;display:flex;align-items:center;gap:12px}
+.pl h3 .ic{width:58px;height:58px;border-radius:50%;background:#4a2c22;display:grid;place-items:center;flex:none}
+.pl h3 .ic svg{width:34px;height:34px;stroke:#f2d58c;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.pl ul{list-style:none;margin-top:6px}
+.pl li{font-size:23px;font-weight:700;line-height:1.5;padding-left:30px;position:relative}
+.pl li::before{content:"✓";position:absolute;left:0;color:#b3262f;font-weight:900}
+.pl .price{margin-top:4px;font-size:20px;font-weight:700;line-height:1.35}
+.pl .price b{font-family:"Noto Serif JP",serif;font-size:34px;color:#b3262f}
+.pl .price .tbd{display:inline-block;font-size:14px;padding:2px 8px;border-width:2px;margin-top:4px}
+.pl.wait{border-style:dashed}
+.pl.wait .tbd{margin-top:8px;padding:10px 12px;font-size:21px;line-height:1.45}
+
+/* middle */
+.mid{display:grid;grid-template-columns:500px 1fr;gap:0;padding:16px 34px 0;flex:1;min-height:0;grid-template-rows:100%;overflow:hidden}
+.res{display:flex;flex-direction:column;gap:8px;padding-bottom:14px}
+.res h4{font-family:"Noto Serif JP",serif;font-weight:900;font-size:28px;color:#4a2c22}
+.res h4 small{font-size:18px;font-family:"Noto Sans JP",sans-serif;font-weight:700;color:#77665b;margin-left:6px}
+.res img{width:100%;height:200px;object-fit:cover;object-position:50% 50%;border-radius:12px;border:3px solid #fff;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.res .note{font-size:16px;color:#77665b}
+.qr{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:2px}
+.qr .g{background:#fff;border-radius:12px;padding:8px 10px 10px}
+.qr .g .bx{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.qr .lb{display:block;text-align:center;font-family:"Noto Serif JP",serif;font-weight:900;font-size:22px;color:#4a2c22;line-height:1.4;margin-bottom:4px}
+.qr .box{height:80px;border:3px dashed #9a8a7a;border-radius:8px;display:grid;place-items:center;text-align:center;font-size:15px;font-weight:700;color:#77665b;line-height:1.3}
+.qr .box.line{border-color:#06c755;color:#058a3c}
+.staff{position:relative;overflow:hidden;margin-right:-34px}
+.staff img{position:absolute;right:0;bottom:0;height:100%;width:auto;max-width:none}
+.staff .names{position:absolute;bottom:12px;right:34px;left:20px;z-index:2;display:flex;justify-content:space-around}
+.staff .names div{background:rgba(74,44,34,.92);color:#fff;text-align:center;border-radius:10px;padding:6px 14px;font-size:18px;font-weight:700;line-height:1.35}
+.staff .names b{display:block;font-family:"Noto Serif JP",serif;font-size:26px}
+.staff .cap{position:absolute;top:6px;right:34px;z-index:2;background:#b3262f;color:#fff;font-weight:900;font-size:22px;padding:6px 14px;border-radius:8px;line-height:1.35;text-align:center}
+
+/* bottom */
+.bottom{flex:none;height:214px;background:#4a2c22;color:#fff;display:grid;grid-template-columns:1fr 1fr;gap:0;padding:16px 34px}
+.shop{padding:0 14px}
+.shop+.shop{border-left:2px solid rgba(217,178,92,.5)}
+.shop h5{font-family:"Noto Serif JP",serif;font-size:28px;line-height:1.3;color:#f2d58c;font-weight:900}
+.shop .ad{font-size:19px;font-weight:700;line-height:1.4}
+.shop .tel{font-family:"Noto Sans JP",sans-serif;font-weight:900;font-size:44px;letter-spacing:.02em;line-height:1.25;margin-top:4px}
+.shop .tel small{font-size:24px;margin-right:6px}
+.shop .hr{font-size:17px;opacity:.9;line-height:1.45}
+.camp{position:absolute;left:34px;right:34px;bottom:276px;background:#fff;border:4px solid #b3262f;border-radius:14px;display:flex;align-items:center;gap:16px;padding:10px 18px}
+.camp .t{background:#b3262f;color:#fff;font-weight:900;font-size:24px;padding:8px 14px;border-radius:8px;line-height:1.25;text-align:center;flex:none}
+.camp .p{display:flex;gap:18px;font-weight:700;font-size:20px;flex-wrap:wrap;align-items:baseline}
+.camp .p b{font-family:"Noto Serif JP",serif;font-size:34px;color:#b3262f}
+.camp .tbd{font-size:16px;padding:6px 10px;line-height:1.35;flex:none;width:220px}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="row">
+    <div class="logo"><img src="img/logo.png" alt="Body Salon RISE"></div>
+    <div class="inn"><span>指宿院</span><span>谷山院</span></div>
+  </div>
+  <p class="catch">からだの悩みを、まるごと相談できるサロン<br><b class="gold-t">ダイエット・整体・育毛・肌質改善</b></p>
+  <span class="qual">国家資格（柔道整復師）を持つ院長が担当します</span>
+</div>
+
+<div class="pillars">
+  <div class="pl">
+    <span class="no">01</span>
+    <h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 12h16M7 8v8M17 8v8M2 10v4M22 10v4"/></svg></span>ダイエット</h3>
+    <ul><li>運動なし・カロリー計算なし</li><li>遺伝子検査×栄養指導の3ヶ月コース</li></ul>
+    <p class="price">初回カウンセリング＆姿勢矯正 <b>500</b>円</p>
+  </div>
+  <div class="pl">
+    <span class="no">02</span>
+    <h3><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="2"/><path d="M12 7v7M8 10h8M12 14l-3 7M12 14l3 7"/></svg></span>整体</h3>
+    <ul><li>腰痛・肩こり・膝の痛み</li><li>骨盤矯正・ブライダル整体・不調改善</li></ul>
+    <p class="price">初回 整体 <b>1,000</b>円／ブライダル整体・不調改善 <b>3,500</b>円</p>
+  </div>
+  <div class="pl wait">
+    <span class="no">03</span>
+    <h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M5 14c0-5 3-9 7-9s7 4 7 9"/><path d="M9 6c0 3 1 5 3 6M15 6c0 3-1 5-3 6"/><path d="M6 14v4M18 14v4"/></svg></span>育毛</h3>
+    <ul><li>髪・頭皮のお悩みをご相談ください</li></ul>
+    <div class="tbd">【ライズさん確認待ち：育毛】<br>施術名・使う機械や商品・時間・初回料金</div>
+  </div>
+  <div class="pl wait">
+    <span class="no">04</span>
+    <h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3c-4 4-6 7-6 10a6 6 0 0 0 12 0c0-3-2-6-6-10z"/><path d="M9.5 14a2.5 2.5 0 0 0 2.5 2.5"/></svg></span>肌質改善</h3>
+    <ul><li>肌のお悩みをご相談ください</li></ul>
+    <div class="tbd">【ライズさん確認待ち：肌質改善】<br>施術名・使う機械や商品・時間・初回料金</div>
+  </div>
+</div>
+
+<div class="mid">
+  <div class="res">
+    <h4>お客様の結果<small>ダイエット3ヶ月コース・整体</small></h4>
+    <img src="img/results-ad.jpg" alt="お客様の結果写真">
+    <p class="note">※効果には個人差があります。</p>
+    <p class="tbd" style="font-size:15px;padding:6px 10px;border-width:2px">【ライズさん確認待ち】結果写真の掲載許可／HP限定の初回料金を誌面にも載せてよいか</p>
+    <div class="qr">
+      <div class="g"><span class="lb">指宿院</span><div class="bx"><div class="box line">公式LINE<br>QR</div><div class="box">Instagram<br>QR</div></div></div>
+      <div class="g"><span class="lb">谷山院</span><div class="bx"><div class="box line">公式LINE<br>QR</div><div class="box">Instagram<br>QR</div></div></div>
+    </div>
+  </div>
+  <div class="staff">
+    <div class="cap">ご予約は<br>LINEが便利です</div>
+    <img src="img/inchou2.jpg" alt="院長写真">
+    <div class="names">
+      <div>谷山院 院長<b>和田 一真</b></div>
+      <div>指宿院 院長<b>和田 諒真</b></div>
+    </div>
+  </div>
+</div>
+
+<div class="bottom">
+  <div class="shop">
+    <h5>指宿院</h5>
+    <p class="ad">指宿市大牟礼3丁目25-23-1<br>指宿駅から車で約3分・駐車場3台</p>
+    <p class="tel"><small>TEL</small>080-4279-2503</p>
+    <p class="hr">平日10:00〜19:00／土曜10:00〜18:00<br>完全予約制・定休日 日曜・祝日</p>
+  </div>
+  <div class="shop">
+    <h5>谷山院</h5>
+    <p class="ad">鹿児島市小松原1丁目48-11<br>SEA GREEN 小松原102号</p>
+    <p class="tel"><small>TEL</small>070-2376-8715</p>
+    <p class="hr">平日9:30〜19:00／土曜9:30〜18:00<br>完全予約制・定休日 日曜・祝日</p>
+  </div>
+</div>
+
+</body>
+</html>
