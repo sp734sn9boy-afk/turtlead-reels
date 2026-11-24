@@ -1,0 +1,706 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Body Salon RISE｜指宿のダイエット・美容整体サロン</title>
+<meta name="description" content="鹿児島県指宿市のダイエット・美容整体サロン Body Salon RISE（ボディサロンライズ）。運動なし・カロリー計算なしの3ヶ月減量プログラムと、柔道整復師による整体・骨盤矯正。指宿駅から車で3分、完全予約制の個室サロンです。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbf6ef; --bg2:#f3e8da; --ink:#3b2a22; --sub:#77665b;
+  --wine:#b3262f; --wine-d:#4a2c22; --rose:#d9bf8c; --line:#06c755;
+  --card:#ffffff; --bd:#eadcc8; --gold:#a8823a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Noto Sans JP",sans-serif;line-height:1.9;font-size:16px;-webkit-text-size-adjust:100%}
+img{max-width:100%;display:block}
+a{color:inherit}
+.serif{font-family:"Noto Serif JP",serif}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+section{padding:80px 0}
+.en{display:block;font-family:"Noto Serif JP",serif;color:var(--wine);letter-spacing:.2em;font-size:13px;text-transform:uppercase;margin-bottom:6px}
+h2{text-wrap:balance;font-family:"Noto Serif JP",serif;font-size:clamp(22px,4.6vw,32px);line-height:1.5;margin-bottom:28px;font-weight:600}
+.center{text-align:center}
+.lead{color:var(--sub);max-width:720px;margin:0 auto 40px}
+
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(255,250,247,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--bd)}
+.hd{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo b{font-family:"Noto Serif JP",serif;font-size:20px;letter-spacing:.06em}
+.logo small{display:block;font-size:11px;color:var(--sub);line-height:1.2}
+.mark{width:34px;height:34px;border-radius:50%;background:var(--wine-d);display:grid;place-items:center;color:#fff;font-family:"Noto Serif JP",serif;font-size:17px}
+nav ul{display:flex;gap:22px;list-style:none;font-size:14px}
+nav a{text-decoration:none}
+nav a:hover{color:var(--wine)}
+.hd-tel{font-size:14px;text-decoration:none;font-weight:700;color:var(--wine)}
+@media(max-width:860px){nav,.hd-tel{display:none}}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 28px;border-radius:999px;font-weight:700;text-decoration:none;font-size:16px;transition:.2s}
+.btn-line{background:var(--line);color:#fff;box-shadow:0 6px 16px rgba(6,199,85,.25)}
+.btn-line:hover{filter:brightness(1.05);transform:translateY(-1px)}
+.btn-ghost{border:1.5px solid var(--wine);color:var(--wine);background:#fff}
+.btn-ghost:hover{background:var(--wine);color:#fff}
+
+/* hero */
+.hero{padding:0;background:linear-gradient(180deg,#f6ebdc 0%,var(--bg) 100%);overflow:hidden}
+.hero-in{display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:40px;min-height:560px;padding:60px 20px}
+.hero .tag{display:inline-block;background:#fff;border:1px solid var(--rose);color:var(--wine);padding:4px 14px;border-radius:999px;font-size:13px;margin-bottom:18px}
+.hero h1{font-family:"Noto Serif JP",serif;font-size:clamp(30px,6vw,50px);line-height:1.4;font-weight:600;margin-bottom:18px}
+.hero h1 em{font-style:normal;color:var(--wine)}
+.hero p.sub{color:var(--sub);margin-bottom:22px}
+.checks{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;list-style:none}
+.checks li{background:#fff;border:1px solid var(--bd);border-radius:8px;padding:6px 12px;font-size:14px;font-weight:500}
+.checks li::before{content:"✓";color:var(--wine);margin-right:6px;font-weight:700}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero-ph{aspect-ratio:3/2;border-radius:24px;object-fit:cover;width:100%;background:#f5e9da;box-shadow:0 16px 40px rgba(74,44,34,.15)}
+@media(max-width:860px){.hero-in{grid-template-columns:1fr;padding:40px 20px 56px;min-height:auto}.hero-in>.photo{order:-1}}
+
+/* photo placeholder */
+.photo{position:relative}.photo img{width:100%;height:100%;object-fit:cover}.kari{position:absolute;right:10px;bottom:10px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;padding:2px 8px;border-radius:6px}
+.ph{background:linear-gradient(135deg,#efe1cc,#f8f0e4 60%,#ead8bf);display:grid;place-items:center;color:#a98480;font-size:13px;text-align:center;padding:12px;position:relative;overflow:hidden}
+.ph::after{content:"写真が入ります";position:absolute;bottom:10px;right:12px;font-size:11px;opacity:.7}
+
+/* worries */
+.worries{background:#fff}
+.wgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;max-width:900px;margin:0 auto}
+.wgrid div{background:var(--bg);border-radius:12px;padding:16px 18px;font-weight:500}
+.wgrid div::before{content:"□";color:var(--wine);margin-right:8px}
+.answer{margin:40px auto 0;max-width:760px;text-align:center;font-family:"Noto Serif JP",serif;font-size:clamp(18px,3.6vw,22px);line-height:1.8}
+.answer b{color:var(--wine);background:linear-gradient(transparent 65%,#f1dcb0 65%)}
+
+/* reasons */
+.rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.rcard{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:30px 24px}
+.rcard .no{font-family:"Noto Serif JP",serif;color:var(--wine);font-size:34px;line-height:1}
+.rcard h3{font-family:"Noto Serif JP",serif;font-size:19px;margin:12px 0 10px;line-height:1.6}
+.rcard p{font-size:15px;color:var(--sub)}
+@media(max-width:860px){.rgrid{grid-template-columns:1fr}}
+
+/* number */
+.num{background:var(--wine);color:#fff;text-align:center;padding:56px 0}
+.num .big{font-family:"Noto Serif JP",serif;font-size:clamp(46px,10vw,72px);line-height:1.1}
+.num .big small{font-size:.4em}
+.num p{opacity:.92}
+.num .note{font-size:12px;opacity:.75;margin-top:8px}
+
+/* services */
+.svc{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.svc article{background:#fff;border-radius:20px;overflow:hidden;border:1px solid var(--bd);display:flex;flex-direction:column}
+.svc .photo{aspect-ratio:16/9;overflow:hidden}
+.svc .body{padding:26px 26px 30px}
+.svc h3{font-family:"Noto Serif JP",serif;font-size:21px;margin-bottom:10px}
+.svc p{font-size:15px;color:var(--sub);margin-bottom:14px}
+.pills{display:flex;flex-wrap:wrap;gap:6px;list-style:none}
+.pills li{font-size:13px;background:var(--bg2);color:var(--wine-d);padding:3px 11px;border-radius:999px}
+@media(max-width:860px){.svc{grid-template-columns:1fr}}
+
+/* profile */
+.profile{background:var(--bg2)}
+.pf{display:grid;grid-template-columns:320px 1fr;gap:44px;align-items:center}
+.pf .photo{aspect-ratio:3/4;border-radius:20px;overflow:hidden;background:#f5e9da}
+.pf .name{font-family:"Noto Serif JP",serif;font-size:26px;margin:4px 0 2px}
+.pf .role{color:var(--sub);font-size:14px;margin-bottom:16px}
+.quals{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;list-style:none}
+.quals li{background:#fff;border:1px solid var(--rose);border-radius:8px;padding:4px 12px;font-size:13px;font-weight:500}
+.pf p{margin-bottom:12px;font-size:15.5px}
+@media(max-width:860px){.pf{grid-template-columns:1fr}.pf .photo{max-width:300px;margin:0 auto;width:100%}}
+.results img{border-radius:16px;margin:0 auto;max-width:860px;width:100%;box-shadow:0 10px 30px rgba(74,44,34,.12)}
+.rnote{max-width:860px;margin:14px auto 0;font-size:13px;color:var(--sub);text-align:center}
+.shops{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.shop h3{font-family:'Noto Serif JP',serif;font-size:20px;margin-bottom:8px;color:var(--wine-d)}
+.shop .map{margin-top:14px;min-height:260px}.shop .map iframe{min-height:260px}
+@media(max-width:860px){.shops{grid-template-columns:1fr}}
+
+/* menu */
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:860px;margin:0 auto}
+.mcard{background:#fff;border:2px solid var(--rose);border-radius:20px;padding:30px 26px;text-align:center;position:relative}
+.mcard .badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--wine);color:#fff;font-size:12px;padding:3px 14px;border-radius:999px;white-space:nowrap}
+.mcard h3{font-family:"Noto Serif JP",serif;font-size:20px;margin:6px 0 6px}
+.mcard .price{font-family:"Noto Serif JP",serif;font-size:40px;color:var(--wine);line-height:1.3}
+.mcard .price small{font-size:15px;color:var(--ink)}
+.mcard p{font-size:14px;color:var(--sub);margin-top:8px;text-align:left}
+.mnote{max-width:860px;margin:18px auto 0;font-size:13px;color:var(--sub)}
+@media(max-width:700px){.mgrid{grid-template-columns:1fr}}
+
+/* flow */
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:f}
+.flow li{list-style:none;background:#fff;border-radius:16px;padding:22px 18px;border:1px solid var(--bd);position:relative}
+.flow li::before{counter-increment:f;content:"STEP " counter(f);font-family:"Noto Serif JP",serif;color:var(--wine);font-size:13px;letter-spacing:.1em}
+.flow h3{font-size:17px;margin:4px 0 6px}
+.flow p{font-size:14px;color:var(--sub)}
+@media(max-width:860px){.flow{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.flow{grid-template-columns:1fr}}
+
+/* faq */
+.faq{background:#fff}
+.faq details{max-width:800px;margin:0 auto 12px;border:1px solid var(--bd);border-radius:14px;background:var(--bg)}
+.faq summary{cursor:pointer;padding:18px 48px 18px 20px;font-weight:700;list-style:none;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:"Q.";color:var(--wine);font-family:"Noto Serif JP",serif;margin-right:8px}
+.faq summary::after{content:"+";position:absolute;right:20px;top:14px;font-size:22px;color:var(--wine)}
+.faq details[open] summary::after{content:"−"}
+.faq .a{padding:0 20px 18px 20px;color:var(--sub);font-size:15px}
+
+/* access */
+.acc{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.acc table,.acc-t{width:100%;border-collapse:collapse;font-size:15px}
+.acc th,.acc td,.acc-t th,.acc-t td{text-align:left;padding:12px 6px;border-bottom:1px solid var(--bd);vertical-align:top}
+.acc th,.acc-t th{width:96px;color:var(--wine);font-weight:500}
+.map{border-radius:18px;overflow:hidden;min-height:340px;border:1px solid var(--bd)}
+.map iframe{width:100%;height:100%;min-height:340px;border:0}
+@media(max-width:860px){.acc{grid-template-columns:1fr}}
+
+/* cta */
+.cta{background:linear-gradient(135deg,#3b2219,var(--wine-d));color:#fff;text-align:center}
+.cta h2{margin-bottom:12px}
+.cta p{opacity:.92;margin-bottom:28px}
+.cta .row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.cta .btn-ghost{background:transparent;border-color:#fff;color:#fff}
+.cta .btn-ghost:hover{background:#fff;color:var(--wine)}
+
+footer{background:#2f2523;color:#d9c9c5;padding:36px 0 96px;font-size:13px;text-align:center}
+footer a{color:#fff}
+
+/* sp fixed bar */
+.spbar{display:none}
+@media(max-width:860px){
+  .spbar{display:grid;grid-template-columns:1fr 1fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);border-top:1px solid var(--bd)}
+  .spbar a{padding:12px 6px;border-radius:999px;text-align:center;font-weight:700;text-decoration:none;font-size:15px}
+  .spbar .l{background:var(--line);color:#fff}
+  .spbar .t{border:1.5px solid var(--wine);color:var(--wine)}
+  section{padding:60px 0}
+}
+
+
+/* ===== top ribbon ===== */
+.topbar{background:#1f110c;color:#f3dca8;overflow:hidden;white-space:nowrap;font-size:13px;padding:7px 0;position:relative;z-index:51}
+.tb-track{display:inline-flex;gap:38px;padding-left:100%;animation:tb 40s linear infinite}
+.tb-track b{color:#ffd77a;font-size:15px;font-family:"Noto Serif JP",serif;margin:0 2px}
+.tb-note{opacity:.6;font-size:11px}
+@keyframes tb{to{transform:translateX(-100%)}}
+/* ===== slider hero ===== */
+.hs{position:relative;height:calc(100svh - 96px);min-height:560px;max-height:900px;overflow:hidden;background:#1f110c;color:#fff;padding:0}
+.slides,.sl,.sl-img,.hs-shade{position:absolute;inset:0}
+.sl{opacity:0;visibility:hidden;transition:opacity 1.4s ease,visibility 1.4s}
+.sl.on{opacity:1;visibility:visible}
+.sl-img{background-size:cover;transform:scale(1.12);transition:transform 7.5s linear}
+.sl.on .sl-img{transform:scale(1.0)}
+.hs-shade{background:linear-gradient(90deg,rgba(25,12,8,.82) 0%,rgba(25,12,8,.55) 42%,rgba(25,12,8,.05) 75%),linear-gradient(0deg,rgba(25,12,8,.6),transparent 35%);z-index:1;pointer-events:none}
+#sparkle{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;mix-blend-mode:screen}
+.sl-copy{position:relative;z-index:3;height:100%;display:flex;flex-direction:column;justify-content:center;padding-bottom:120px}
+.sl-en{font-family:"Noto Serif JP",serif;letter-spacing:.35em;font-size:13px;color:#e8c27a;margin-bottom:14px;display:flex;align-items:center;gap:12px}
+.sl-en::before{content:"";width:40px;height:1px;background:#e8c27a}
+.sl-h{font-family:"Noto Serif JP",serif;font-weight:600;font-size:clamp(32px,5.8vw,64px);line-height:1.38;margin-bottom:20px;text-shadow:0 4px 30px rgba(0,0,0,.35)}
+.sl-sub{font-size:15.5px;color:rgba(255,255,255,.88);max-width:520px}
+.sl .sl-en,.sl .sl-h,.sl .sl-sub{opacity:0;transform:translateY(34px);filter:blur(6px);transition:all 1s cubic-bezier(.2,.7,.2,1)}
+.sl.on .sl-en{opacity:1;transform:none;filter:none;transition-delay:.35s}
+.sl.on .sl-h{opacity:1;transform:none;filter:none;transition-delay:.55s}
+.sl.on .sl-sub{opacity:1;transform:none;filter:none;transition-delay:.8s}
+.gold{font-style:normal;background:linear-gradient(100deg,#c79a45 0%,#f7e2a6 22%,#fffaf0 30%,#e2b75e 42%,#b8862f 60%,#f2d58c 80%,#c79a45 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 4.5s ease-in-out infinite}
+@keyframes shimmer{0%{background-position:100% 0}50%{background-position:0 0}100%{background-position:100% 0}}
+.hs-cta{position:absolute;left:0;right:0;bottom:96px;z-index:4;display:flex;gap:12px;flex-wrap:wrap}
+.hs-ghost{border:1.5px solid #e8c27a;color:#f6dfa9;background:rgba(0,0,0,.15);backdrop-filter:blur(4px)}
+.hs-ghost:hover{background:#e8c27a;color:#3a2118}
+.shine{position:relative;overflow:hidden}
+.shine::after{content:"";position:absolute;top:-50%;left:-60%;width:40%;height:200%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.7),transparent);transform:rotate(20deg);animation:sweep 3.2s ease-in-out infinite}
+@keyframes sweep{0%,55%{left:-60%}100%{left:130%}}
+.hs-ctrl{position:absolute;left:max(20px,calc((100% - 1080px)/2 + 20px));bottom:34px;z-index:4;display:flex;align-items:center;gap:18px}
+.hs-count{font-family:"Noto Serif JP",serif;font-size:13px;letter-spacing:.1em;color:rgba(255,255,255,.7)}
+.hs-count b{color:#fff;font-size:18px;font-weight:500}
+.dots{display:flex;gap:8px}
+.dot{width:46px;height:3px;border:0;background:rgba(255,255,255,.3);cursor:pointer;position:relative;overflow:hidden;padding:0}
+.dot i{position:absolute;inset:0;background:#e8c27a;transform:scaleX(0);transform-origin:left}
+.dot.on i{animation:prog 6s linear forwards}
+.dot.done i{transform:scaleX(1)}
+@keyframes prog{to{transform:scaleX(1)}}
+.hs-vert{position:absolute;right:26px;top:50%;transform:translateY(-50%);writing-mode:vertical-rl;z-index:4;font-size:11px;letter-spacing:.35em;color:rgba(255,255,255,.6);font-family:"Noto Serif JP",serif}
+.badge-kg{position:absolute;right:max(24px,calc((100% - 1080px)/2 + 20px));bottom:40px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#c8323b,#8f1c24);box-shadow:0 14px 34px rgba(0,0,0,.45),0 0 0 4px rgba(232,194,122,.6);display:grid;place-items:center;animation:floaty 5s ease-in-out infinite;z-index:5;color:#fff}
+.ring-txt{position:absolute;inset:0;width:100%;height:100%;animation:spin 18s linear infinite}
+.ring-txt text{fill:#f6dfa9;font-size:15px;font-family:"Noto Sans JP",sans-serif}
+@keyframes spin{to{transform:rotate(360deg)}}
+.kg-in{text-align:center;line-height:1.15}
+.kg-in small{display:block;font-size:10.5px;opacity:.9}
+.kg-in b{font-family:"Noto Serif JP",serif;font-size:32px;color:#fff3cf}
+.kg-in b i{font-style:normal;font-size:14px;margin-left:2px}
+.kg-in .ind{font-size:8px;opacity:.75;margin-top:2px}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@media(max-width:860px){
+  .hs{height:calc(100svh - 96px);min-height:600px}
+  .hs-shade{background:linear-gradient(0deg,rgba(25,12,8,.9) 0%,rgba(25,12,8,.6) 45%,rgba(25,12,8,.1) 80%)}
+  .sl-copy{justify-content:flex-end;padding-bottom:178px}
+  .sl-h{font-size:clamp(28px,8.4vw,40px)}
+  .sl-sub{font-size:14px}
+  .hs-cta{bottom:112px;flex-wrap:nowrap;gap:8px}
+  .hs-cta .btn{padding:12px 10px;font-size:14px;flex:1}
+  .hs-ctrl{bottom:80px}
+  .dot{width:30px}
+  .hs-vert{display:none}
+  .badge-kg{width:104px;height:104px;right:12px;top:16px;bottom:auto}
+  .kg-in b{font-size:22px}.kg-in small{font-size:8.5px}.kg-in .ind{font-size:6.5px}
+}
+
+.logo-img{height:26px;width:auto}
+.logo{flex-direction:column;align-items:flex-start;gap:2px}
+.logo-sub{font-size:10.5px;color:var(--sub);line-height:1.2}
+.mgrid4{grid-template-columns:repeat(4,1fr);max-width:1080px;gap:18px}
+.mgrid4 .mcard{padding:30px 16px 24px}
+.mgrid4 .mcard h3{font-size:17px;line-height:1.5}
+.mgrid4 .mcard h3 small{font-size:12.5px;color:var(--sub);font-family:"Noto Sans JP",sans-serif;font-weight:400}
+.howto{text-align:center;margin-top:26px;font-size:15px}
+.howto b{color:var(--wine);background:linear-gradient(transparent 62%,#f1dcb0 62%)}
+@media(max-width:960px){.mgrid4{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.mgrid4{grid-template-columns:1fr 1fr;gap:12px}.mgrid4 .mcard{padding:28px 10px 20px}.mgrid4 .mcard .price{font-size:30px}.mgrid4 .mcard h3{font-size:14px}.mgrid4 .mcard h3 small{font-size:11px}}
+.shop-ph{aspect-ratio:16/9;border-radius:16px;overflow:hidden;margin-bottom:16px}
+.rsv{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:760px;margin:0 auto}
+.rsv-c{background:rgba(255,255,255,.08);border:1px solid rgba(232,194,122,.45);border-radius:18px;padding:22px 18px;display:flex;flex-direction:column;gap:10px}
+.rsv-c h3{font-family:"Noto Serif JP",serif;color:#f3dca8;font-size:20px}
+@media(max-width:700px){.rsv{grid-template-columns:1fr}}
+
+.insta{background:#fff}
+.ig-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:860px;margin:0 auto}
+.ig-card{display:block;text-decoration:none;border-radius:20px;overflow:hidden;border:1px solid var(--bd);background:var(--bg);transition:transform .25s,box-shadow .25s}
+.ig-card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(74,44,34,.14)}
+.ig-ph{aspect-ratio:4/3;overflow:hidden}
+.ig-ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.ig-card:hover .ig-ph img{transform:scale(1.05)}
+.ig-body{display:flex;align-items:center;gap:12px;padding:16px 18px}
+.ig-body b{display:block;font-family:"Noto Serif JP",serif;font-size:18px}
+.ig-body small{color:var(--sub);font-size:13px}
+.ig-ico{width:42px;height:42px;border-radius:12px;background:radial-gradient(circle at 30% 110%,#fdd36b 0%,#f77d3a 30%,#d62976 60%,#7b3fbf 100%);display:grid;place-items:center;flex:none}
+.ig-ico svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:2}
+.ig-ico svg .dot{fill:#fff;stroke:none}
+.ig-go{margin-left:auto;font-size:13px;font-weight:700;color:#fff;background:linear-gradient(90deg,#d62976,#7b3fbf);padding:7px 14px;border-radius:999px;white-space:nowrap}
+.hd-ig{display:inline-flex;gap:6px;margin-left:14px}
+.hd-ig a{width:30px;height:30px;border-radius:9px;background:radial-gradient(circle at 30% 110%,#fdd36b 0%,#f77d3a 30%,#d62976 60%,#7b3fbf 100%);display:grid;place-items:center}
+.hd-ig svg{width:17px;height:17px;fill:none;stroke:#fff;stroke-width:2}.hd-ig svg .dot{fill:#fff;stroke:none}
+@media(max-width:700px){.ig-grid{grid-template-columns:1fr}}
+
+.w-ban{aspect-ratio:21/8;border-radius:20px;overflow:hidden;max-width:900px;margin:0 auto 26px}
+.w-ban img{object-position:70% 35%}
+.foryou{background:var(--bg2)}
+.fy-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;max-width:960px;margin:0 auto}
+.fy{background:#fff;border-radius:20px;overflow:hidden;border:1px solid var(--bd)}
+.fy-ph{aspect-ratio:16/9;overflow:hidden}
+.fy-body{padding:22px 24px 26px}
+.fy-body h3{font-family:"Noto Serif JP",serif;font-size:19px;margin-bottom:8px}
+.fy-body p{font-size:15px;color:var(--sub);margin-bottom:12px}
+@media(max-width:760px){.fy-grid{grid-template-columns:1fr}.w-ban{aspect-ratio:16/9}}
+/* scroll reveal */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.on{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .rv{opacity:1!important;transform:none!important}.sl .sl-en,.sl .sl-h,.sl .sl-sub{opacity:1!important;transform:none!important;filter:none!important}.tb-track{padding-left:0}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar" aria-label="お客様の結果">
+  <div class="tb-track">
+    <span>✦ 3ヶ月コースで <b>−10.9kg</b> 達成</span><span>✦ 3ヶ月コースで <b>−9.1kg</b> 達成</span><span>✦ 3ヶ月コースで <b>−8.9kg</b> 達成</span><span>✦ 3ヶ月コースで <b>−7.8kg</b> 達成</span><span>✦ 3ヶ月コースで <b>−7.4kg</b> 達成</span><span>✦ 70代男性「首の痛みが楽になり、毎日を楽しく過ごせています」</span><span>✦ HP限定 初回 <b>500円</b>〜</span><span class="tb-note">※効果には個人差があります</span>
+  </div>
+</div>
+<header>
+  <div class="wrap hd">
+    <a href="#top" class="logo"><img src="img/logo.png" alt="Body Salon RISE" class="logo-img"><small class="logo-sub">腰痛・ダイエット専門整体サロン</small></a>
+    <nav><ul>
+      <li><a href="#reason">選ばれる理由</a></li>
+      <li><a href="#service">施術内容</a></li>
+      <li><a href="#profile">代表紹介</a></li>
+      <li><a href="#menu">料金</a></li>
+      <li><a href="#faq">よくある質問</a></li>
+      <li><a href="#access">アクセス</a></li>
+      <li><a href="#instagram">Instagram</a></li>
+    </ul></nav>
+    <a class="hd-tel" href="tel:08042792503">☎ 080-4279-2503</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hs" id="hero" aria-roledescription="carousel">
+  <div class="slides">
+      <div class="sl on" data-i="0">
+        <div class="sl-img" style="background-image:url(img/ai-main.jpg);background-position:72% 30%"></div>
+        <div class="wrap sl-copy">
+          <p class="sl-en">BEAUTY &amp; DIET</p>
+          <h1 class="sl-h">これを、<br><em class="gold">人生最後の</em><br>ダイエットに。</h1>
+          <p class="sl-sub">指宿・谷山の腰痛・ダイエット専門整体サロン。<br>体質と生活習慣から、根本的に変えていきます。</p>
+        </div>
+      </div>
+      <div class="sl" data-i="1">
+        <div class="sl-img" style="background-image:url(img/ai-waist.jpg);background-position:72% 45%"></div>
+        <div class="wrap sl-copy">
+          <p class="sl-en">NO EXERCISE</p>
+          <h2 class="sl-h">運動なし。<br>カロリー計算なし。<br><em class="gold">3ヶ月で平均−7.5kg</em></h2>
+          <p class="sl-sub">きつい運動も、我慢の食事制限もいりません。<br>※効果には個人差があります。</p>
+        </div>
+      </div>
+      <div class="sl" data-i="2">
+        <div class="sl-img" style="background-image:url(img/r-posture-r.jpg);background-position:75% 35%"></div>
+        <div class="wrap sl-copy">
+          <p class="sl-en">SEITAI</p>
+          <h2 class="sl-h">国家資格者による<br><em class="gold">根本改善</em>整体</h2>
+          <p class="sl-sub">腰痛・肩こり・首こり・膝の痛みに。<br>筋肉調整 × 骨盤矯正 × 栄養サポートで整えます。</p>
+        </div>
+      </div>
+      <div class="sl" data-i="3">
+        <div class="sl-img" style="background-image:url(img/r-counsel.jpg);background-position:65% 40%"></div>
+        <div class="wrap sl-copy">
+          <p class="sl-en">ORDER MADE</p>
+          <h2 class="sl-h">遺伝子検査 ×<br>整体 × 栄養指導で<br><em class="gold">食べて、痩せる。</em></h2>
+          <p class="sl-sub">遺伝子検査で体質を知り、整体で歪みを整え、<br>栄養指導で無理のない食習慣へ。</p>
+        </div>
+      </div>
+      <div class="sl" data-i="4">
+        <div class="sl-img" style="background-image:url(img/ai-bride.jpg);background-position:72% 30%"></div>
+        <div class="wrap sl-copy">
+          <p class="sl-en">BRIDAL</p>
+          <h2 class="sl-h">一生に一度の日を、<br><em class="gold">いちばん綺麗な私</em>で。</h2>
+          <p class="sl-sub">ブライダル整体・小顔矯正・姿勢改善で、<br>ドレスが映えるフェイスラインと背中へ。</p>
+        </div>
+      </div>
+      <div class="sl" data-i="5">
+        <div class="sl-img" style="background-image:url(img/r-exterior.jpg);background-position:60% 55%"></div>
+        <div class="wrap sl-copy">
+          <p class="sl-en">IBUSUKI / TANIYAMA</p>
+          <h2 class="sl-h">完全予約制の<br><em class="gold">指宿院・谷山院</em></h2>
+          <p class="sl-sub">子連れの方も、男性の方も歓迎。<br>周りを気にせず、落ち着いて施術を受けられます。</p>
+        </div>
+      </div>
+  </div>
+  <div class="hs-shade" aria-hidden="true"></div>
+  <canvas id="sparkle" aria-hidden="true"></canvas>
+  <p class="hs-vert" aria-hidden="true">BODY SALON RISE — IBUSUKI / TANIYAMA</p>
+  <div class="wrap hs-cta">
+    <a class="btn btn-line shine" href="#yoyaku">LINEで予約・相談する</a>
+    <a class="btn hs-ghost" href="#menu">初回 500円〜 体験</a>
+  </div>
+  <div class="hs-ctrl">
+    <span class="hs-count"><b id="hsNow">01</b> / 06</span>
+    <div class="dots"><button class="dot on" data-go="0" aria-label="スライド1"><i></i></button><button class="dot" data-go="1" aria-label="スライド2"><i></i></button><button class="dot" data-go="2" aria-label="スライド3"><i></i></button><button class="dot" data-go="3" aria-label="スライド4"><i></i></button><button class="dot" data-go="4" aria-label="スライド5"><i></i></button><button class="dot" data-go="5" aria-label="スライド6"><i></i></button></div>
+  </div>
+  <div class="badge-kg">
+    <svg viewBox="0 0 200 200" class="ring-txt" aria-hidden="true"><defs><path id="cp" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text textLength="486" lengthAdjust="spacing"><textPath href="#cp" textLength="486" lengthAdjust="spacing">BODY SALON RISE ✦ DIET &amp; SEITAI ✦ IBUSUKI ✦</textPath></text></svg>
+    <div class="kg-in"><small>3ヶ月で平均</small><b>−7.5<i>kg</i></b><small class="ind">※個人差があります</small></div>
+  </div>
+</section>
+
+<!-- WORRIES -->
+<section class="worries" id="worries">
+  <div class="wrap">
+    <span class="en center">Worries</span>
+    <h2 class="center">こんなお悩み、ありませんか？</h2>
+    <div class="photo w-ban"><img src="img/ai-shoulder.jpg" alt="肩こりに悩む女性" loading="lazy"></div>
+    <div class="wgrid">
+      <div>少しずつ体重が増えていく</div>
+      <div>着たい服が着られなくなった</div>
+      <div>色々試しても痩せない</div>
+      <div>リバウンドが怖い</div>
+      <div>肩こり・腰痛・膝痛がつらい</div>
+      <div>病院では「異常なし」と言われた</div>
+      <div>猫背・巻き肩・ストレートネック</div>
+      <div>ぽっこりお腹・下半身太り</div>
+    </div>
+    <p class="answer">痩せられないのは、意志が弱いからではありません。<br><b>「自分に合った痩せ方」を知らないだけ</b>なんです。</p>
+  </div>
+</section>
+
+<!-- FORYOU -->
+<section class="foryou">
+  <div class="wrap">
+    <span class="en center">For You</span>
+    <h2 class="center">こんな方にも選ばれています</h2>
+    <div class="fy-grid">
+      <article class="fy">
+        <div class="photo fy-ph"><img src="img/ai-mama.jpg" alt="赤ちゃんを抱っこするお母さん" loading="lazy" style="object-position:70% 40%"></div>
+        <div class="fy-body"><h3>産後の体型・骨盤が気になる方</h3><p>抱っこや授乳で崩れがちな骨盤と姿勢を、体の回復に合わせてやさしく整えます。子連れでのご来院もOKです。</p><ul class="pills"><li>産後骨盤ケア</li><li>姿勢改善</li><li>腰の違和感</li></ul></div>
+      </article>
+      <article class="fy">
+        <div class="photo fy-ph"><img src="img/ai-bride.jpg" alt="ウェディングドレスの花嫁" loading="lazy" style="object-position:72% 30%"></div>
+        <div class="fy-body"><h3>結婚式までに綺麗になりたい方</h3><p>小顔矯正と姿勢改善で、フェイスラインと立ち姿をすっきりと。ドレス姿に自信が持てるようサポートします。</p><ul class="pills"><li>ブライダル整体</li><li>小顔矯正</li><li>むくみ改善</li></ul></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- REASON -->
+<section id="reason">
+  <div class="wrap">
+    <span class="en center">Reason</span>
+    <h2 class="center">RISEが選ばれる3つの理由</h2>
+    <div class="rgrid">
+      <div class="rcard">
+        <div class="no">01</div>
+        <h3>運動なし・カロリー計算なし</h3>
+        <p>1kgの脂肪を燃やすには約7,200kcal、フルマラソン3回分の運動が必要といわれます。RISEは、きつい運動や我慢の食事制限に頼らず、生活習慣の見直しで無理なく痩せる方法をご提案します。</p>
+      </div>
+      <div class="rcard">
+        <div class="no">02</div>
+        <h3>遺伝子検査と分子栄養学で<br>あなた専用のプラン</h3>
+        <p>肥満遺伝子（DNA）検査で体質を知り、分子栄養学にもとづいて食事をアドバイス。マニュアル通りではない、一人ひとりのオーダーメイドプログラムです。</p>
+      </div>
+      <div class="rcard">
+        <div class="no">03</div>
+        <h3>国家資格・柔道整復師の<br>美容整体</h3>
+        <p>整骨院での経験を活かし、骨盤矯正や肩甲骨はがしで姿勢と骨格のゆがみを整えます。痩せやすく、太りにくい体の土台づくりから始めます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBER -->
+<div class="num">
+  <div class="wrap">
+    <p>3ヶ月の減量プログラムで</p>
+    <div class="big">平均 −7.5<small>kg</small></div>
+    <p>これまでにサポートした方々の実績です</p>
+    <p class="note">※効果には個人差があります。</p>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<section class="results" style="padding-bottom:40px">
+  <div class="wrap">
+    <span class="en center">Voice</span>
+    <h2 class="center">お客様の結果</h2>
+    <p class="lead center">3ヶ月コースで −7.4kg、−9.1kg、−10.9kg……。<br>「首の痛みで日常生活に支障→今では楽しく過ごせている」（70代男性）という声も。</p>
+    <div class="photo"><img src="img/results.jpg" alt="3ヶ月コースを終えたお客様と院長の写真" loading="lazy"><span class="kari">仮：広告の写真</span></div>
+    <p class="rnote">※効果には個人差があります。</p>
+  </div>
+</section>
+
+<!-- SERVICE -->
+<section id="service">
+  <div class="wrap">
+    <span class="en center">Service</span>
+    <h2 class="center">施術・プログラム</h2>
+    <p class="lead center">「痩せたい」も「痛みをなんとかしたい」も、まずはお気軽にご相談ください。<br>丁寧なカウンセリングで、目標やお体の状態に合わせた内容をご提案します。</p>
+    <div class="svc">
+      <article>
+        <div class="photo"><img src="img/ai-food.jpg" alt="和食を楽しむ女性" loading="lazy" style="object-position:70% 40%"></div>
+        <div class="body">
+          <h3>体質改善ダイエット</h3>
+          <p>「自分の体を知ること」から始めるダイエット。遺伝子検査で体質を知り、整体で歪みや巡りを整え、栄養指導で無理のない食習慣へ。食事制限に頼らず、リバウンドしにくい体を目指します。</p>
+          <ul class="pills"><li>遺伝子検査</li><li>栄養指導</li><li>部分痩せ・全身痩せ</li><li>代謝アップ</li><li>3ヶ月コース</li></ul>
+        </div>
+      </article>
+      <article>
+        <div class="photo"><img src="img/r-treat2.jpg" alt="整体の施術の様子" loading="lazy" style="object-position:50% 35%"></div>
+        <div class="body">
+          <h3>整体・不調改善／美容整体</h3>
+          <p>腰痛・肩こり・首こり・膝の痛み、慢性疲労やPMSなどの不調に。筋肉調整×骨盤矯正×栄養サポートの3つの視点で整えます。小顔矯正・産後骨盤ケア・ブライダル整体も人気です。</p>
+          <ul class="pills"><li>腰痛・肩こり・首こり</li><li>膝の痛み</li><li>慢性疲労・めまい</li><li>PMS・更年期</li><li>小顔矯正</li><li>骨盤矯正・姿勢改善</li><li>産後骨盤ケア</li><li>ブライダル整体</li></ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PROFILE -->
+<section class="profile" id="profile">
+  <div class="wrap pf">
+    <div class="photo"><img src="img/r-ryoma.jpg" alt="指宿院 院長 和田諒真" loading="lazy"></div>
+    <div>
+      <span class="en">Profile</span>
+      <p class="name">和田 諒真</p>
+      <p class="role">Body Salon RISE 指宿院 院長</p>
+      <ul class="quals"><li>柔道整復師（国家資格）</li><li>ダイエットエキスパート</li><li>DNA遺伝子革命インストラクター</li></ul>
+      <p>整骨院に勤めていた頃、肩こりや腰痛の施術をしても、すぐに再発してしまう方を多く見てきました。「痩せていた頃はこんな痛みはなかった」――そんな声を何度も耳にし、「本当の改善とは何だろう」と考えるようになりました。</p>
+      <p>たどり着いた答えは、その場しのぎの施術ではなく、生活習慣と体質を変えること。独立した今、これまで学んできた知識と技術のすべてで、本気で変わりたい方を全力でサポートします。</p>
+      <p>目指すのは、地域の誰もが気軽に通える“みんなの病院”のような存在。無理な提案や押しつけはせず、納得していただいたうえで施術を進めます。</p>
+      <p>鹿児島市の谷山院では、院長・和田一真が同じ想いで皆さまをお迎えしています。</p>
+      <p class="serif" style="color:var(--wine)">「もう失敗したくない」「これで最後にしたい」――その想いに、真剣にお応えします。</p>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="wrap">
+    <span class="en center">Menu</span>
+    <h2 class="center">初回限定キャンペーン</h2>
+    <p class="lead center">ホームページを見た方だけの特別料金です。お悩みに合わせてお選びください。</p>
+    <div class="mgrid mgrid4">
+      <div class="mcard"><span class="badge">痩せたい方に</span><h3>体質改善ダイエット<br><small>初回カウンセリング＆姿勢矯正</small></h3><div class="price">500<small>円</small></div></div>
+      <div class="mcard"><span class="badge">慢性的な痛みに</span><h3>整体<br><small>初回施術</small></h3><div class="price">1,000<small>円</small></div></div>
+      <div class="mcard"><span class="badge">花嫁さまに</span><h3>ブライダル整体<br><small>初回施術</small></h3><div class="price">3,500<small>円</small></div></div>
+      <div class="mcard"><span class="badge">偏頭痛・生理痛など</span><h3>あらゆる不調改善<br><small>カウンセリング＆初回施術</small></h3><div class="price">3,500<small>円</small></div></div>
+    </div>
+    <p class="howto">公式LINEに<b>「HP特別特典を見ました！」</b>と送るだけで、この料金で体験いただけます。</p>
+    <p class="mnote">※2回目以降の料金・3ヶ月コースの料金は、カウンセリング時にご案内します。お支払いは現金・クレジットカードがご利用いただけます。</p>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section style="background:var(--bg2)">
+  <div class="wrap">
+    <span class="en center">Flow</span>
+    <h2 class="center">ご来店の流れ</h2>
+    <ol class="flow">
+      <li><h3>LINEでご予約</h3><p>施術中は電話に出られないことが多いため、LINEかInstagramが確実です。</p></li>
+      <li><h3>カウンセリング</h3><p>お悩みや「こうなりたい」というご希望をじっくり伺います。</p></li>
+      <li><h3>測定・検査</h3><p>体の状態や姿勢のゆがみを確認し、原因を探ります。</p></li>
+      <li><h3>施術・プランのご提案</h3><p>お体に合わせた施術と、今後の進め方をご提案します。</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <span class="en center">Q&amp;A</span>
+    <h2 class="center">よくあるご質問</h2>
+    <details open><summary>予約は必要ですか？</summary><div class="a">完全予約制です。予約時間ちょうど、または5分前にお越しください。はじめての方は、10分前にお越しください。</div></details>
+    <details><summary>予約・問い合わせの方法は？</summary><div class="a">施術中はお電話に出られないことが多いため、公式LINEかInstagramからのご連絡がスムーズです。</div></details>
+    <details><summary>支払い方法は何がありますか？</summary><div class="a">現金・クレジットカードがご利用いただけます。</div></details>
+    <details><summary>駐車場はありますか？</summary><div class="a">3台分ご用意しています。</div></details>
+    <details><summary>本当に運動しなくても痩せますか？</summary><div class="a">ハードな運動や無理な食事制限は行いません。体質に合わせた食事の見直しと美容整体で、無理なく健康的に痩せる方法をご提案します（効果には個人差があります）。</div></details>
+  </div>
+</section>
+
+<!-- ACCESS -->
+<section id="access">
+  <div class="wrap">
+    <span class="en center">Access</span>
+    <h2 class="center">店舗情報・アクセス</h2>
+    <div class="shops">
+      <div class="shop">
+        <div class="photo shop-ph"><img src="img/r-exterior.jpg" alt="指宿院の外観" loading="lazy"></div>
+        <h3>指宿院</h3>
+        <table class="acc-t">
+          <tr><th>住所</th><td>〒891-0401<br>鹿児島県指宿市大牟礼3丁目25-23-1</td></tr>
+          <tr><th>アクセス</th><td>指宿駅から車で約3分／駐車場3台</td></tr>
+          <tr><th>営業時間</th><td>平日 10:00〜19:00<br>土曜 10:00〜18:00</td></tr>
+          <tr><th>定休日</th><td>日曜・祝日</td></tr>
+          <tr><th>電話</th><td><a href="tel:08042792503">080-4279-2503</a></td></tr>
+          <tr><th>院長</th><td>和田 諒真</td></tr>
+          <tr><th>SNS</th><td><a href="https://www.instagram.com/wada.ibusuki/" target="_blank" rel="noopener">Instagram @wada.ibusuki</a></td></tr>
+        </table>
+        <div class="map"><iframe loading="lazy" title="指宿院の地図" src="https://www.google.com/maps?q=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E6%8C%87%E5%AE%BF%E5%B8%82%E5%A4%A7%E7%89%9F%E7%A4%BC3%E4%B8%81%E7%9B%AE25-23-1&output=embed"></iframe></div>
+      </div>
+      <div class="shop">
+        <div class="photo shop-ph"><img src="img/r-door.jpg" alt="Body Salon RISEの入口" loading="lazy"><span class="kari">仮：入口の写真</span></div>
+        <h3>谷山院（鹿児島市）</h3>
+        <table class="acc-t">
+          <tr><th>住所</th><td>〒891-0114<br>鹿児島県鹿児島市小松原1丁目48-11<br>SEA GREEN 小松原 102号</td></tr>
+          <tr><th>営業時間</th><td>平日 9:30〜19:00<br>土曜 9:30〜18:00</td></tr>
+          <tr><th>定休日</th><td>日曜・祝日</td></tr>
+          <tr><th>予約</th><td>完全予約制</td></tr>
+          <tr><th>電話</th><td><a href="tel:07023768715">070-2376-8715</a></td></tr>
+          <tr><th>院長</th><td>和田 一真</td></tr>
+          <tr><th>SNS</th><td><a href="https://www.instagram.com/taniyama.diet/" target="_blank" rel="noopener">Instagram @taniyama.diet</a></td></tr>
+        </table>
+        <div class="map"><iframe loading="lazy" title="谷山院の地図" src="https://www.google.com/maps?q=%E9%B9%BF%E5%85%90%E5%B3%B6%E5%B8%82%E5%B0%8F%E6%9D%BE%E5%8E%9F1-48-11&output=embed"></iframe></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section class="insta" id="instagram">
+  <div class="wrap">
+    <span class="en center">Instagram</span>
+    <h2 class="center">Instagramで、日々の様子を発信中</h2>
+    <p class="lead center">お客様の変化や施術の様子、体にいい食事のヒントなどを投稿しています。<br>InstagramのDMからもご予約・ご相談いただけます。</p>
+    <div class="ig-grid">
+      <a class="ig-card" href="https://www.instagram.com/wada.ibusuki/" target="_blank" rel="noopener">
+        <div class="ig-ph"><img src="img/r-treat2.jpg" alt="指宿院の施術の様子" loading="lazy"></div>
+        <div class="ig-body">
+          <span class="ig-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" class="dot"/></svg></span>
+          <div><b>指宿院</b><small>@wada.ibusuki</small></div>
+          <span class="ig-go">フォローする</span>
+        </div>
+      </a>
+      <a class="ig-card" href="https://www.instagram.com/taniyama.diet/" target="_blank" rel="noopener">
+        <div class="ig-ph"><img src="img/r-counsel.jpg" alt="谷山院のカウンセリングの様子" loading="lazy"></div>
+        <div class="ig-body">
+          <span class="ig-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" class="dot"/></svg></span>
+          <div><b>谷山院</b><small>@taniyama.diet</small></div>
+          <span class="ig-go">フォローする</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="yoyaku">
+  <div class="wrap">
+    <h2>「今度こそ」を、一緒に。</h2>
+    <p>ご予約・ご相談は、通いやすい院の公式LINEから。<br>「HP特別特典を見ました！」と送ると、初回キャンペーン料金で体験できます。</p>
+    <div class="rsv">
+      <div class="rsv-c"><h3>指宿院</h3><a class="btn btn-line shine" href="https://lin.ee/NzwOZKQ" target="_blank" rel="noopener">指宿院のLINEで予約</a><a class="btn btn-ghost" href="tel:08042792503">電話 080-4279-2503</a></div>
+      <div class="rsv-c"><h3>谷山院</h3><a class="btn btn-line shine" href="https://lin.ee/lMeHU7K" target="_blank" rel="noopener">谷山院のLINEで予約</a><a class="btn btn-ghost" href="tel:07023768715">電話 070-2376-8715</a></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>Body Salon RISE（腰痛・ダイエット専門整体サロン）<br>指宿院：鹿児島県指宿市大牟礼3丁目25-23-1　TEL 080-4279-2503<br>谷山院：鹿児島市小松原1丁目48-11 SEA GREEN 小松原102号　TEL 070-2376-8715</p>
+  <p>Instagram：<a href="https://www.instagram.com/wada.ibusuki/" target="_blank" rel="noopener">指宿院 @wada.ibusuki</a>　／　<a href="https://www.instagram.com/taniyama.diet/" target="_blank" rel="noopener">谷山院 @taniyama.diet</a></p>
+  <p>&copy; Body Salon RISE</p>
+</footer>
+
+<div class="spbar">
+  <a class="l" href="#yoyaku">LINEで予約</a>
+  <a class="t" href="#yoyaku">電話する</a>
+</div>
+
+<script>
+(function(){
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* gold sparkles */
+  var c=document.getElementById('sparkle');
+  if(c&&!reduce){
+    var x=c.getContext('2d'),W,H,ps=[],dpr=Math.min(window.devicePixelRatio||1,2);
+    function size(){W=c.offsetWidth;H=c.offsetHeight;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0)}
+    function mk(init){return{x:Math.random()*W,y:init?Math.random()*H:H+10,r:Math.random()*2.2+.6,vy:-(Math.random()*.35+.08),vx:(Math.random()-.5)*.15,t:Math.random()*6.28,s:Math.random()*.04+.015,star:Math.random()<.18}}
+    size();var n=Math.round(Math.min(60,W*H/14000));for(var i=0;i<n;i++)ps.push(mk(true));
+    window.addEventListener('resize',size);
+    function star(px,py,r,a){x.save();x.globalAlpha=a;x.fillStyle='#fff4cf';x.beginPath();for(var k=0;k<4;k++){var ang=k*Math.PI/2;x.moveTo(px,py);x.quadraticCurveTo(px+Math.cos(ang+.78)*r*.5,py+Math.sin(ang+.78)*r*.5,px+Math.cos(ang)*r*4,py+Math.sin(ang)*r*4);x.quadraticCurveTo(px+Math.cos(ang-.78)*r*.5,py+Math.sin(ang-.78)*r*.5,px,py)}x.fill();x.restore()}
+    var vis=true;new IntersectionObserver(function(e){vis=e[0].isIntersecting}).observe(c);
+    (function loop(){
+      if(vis){x.clearRect(0,0,W,H);
+      ps.forEach(function(p,i){p.t+=p.s;p.y+=p.vy;p.x+=p.vx;var a=(Math.sin(p.t)+1)/2;
+        if(p.y<-10)ps[i]=mk(false);
+        if(p.star){star(p.x,p.y,p.r,.25+a*.75)}else{
+        var g=x.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*4);g.addColorStop(0,'rgba(255,236,170,'+(.5+a*.5)+')');g.addColorStop(1,'rgba(255,200,100,0)');
+        x.fillStyle=g;x.beginPath();x.arc(p.x,p.y,p.r*4,0,6.29);x.fill()}});}
+      requestAnimationFrame(loop)})();
+  }
+  /* slider */
+  var sls=[].slice.call(document.querySelectorAll('.sl')),dts=[].slice.call(document.querySelectorAll('.dot')),now=0,tm,nowEl=document.getElementById('hsNow');
+  function go(n){sls[now].classList.remove('on');dts[now].classList.remove('on');now=(n+sls.length)%sls.length;
+    dts.forEach(function(d,k){d.classList.toggle('done',k<now)});
+    sls[now].classList.add('on');var d=dts[now];d.classList.remove('on');void d.offsetWidth;d.classList.add('on');nowEl.textContent='0'+(now+1);
+    clearTimeout(tm);if(!reduce)tm=setTimeout(function(){go(now+1)},6000)}
+  dts.forEach(function(d){d.addEventListener('click',function(){go(+d.dataset.go)})});
+  var hs=document.getElementById('hero'),sx=null;
+  hs.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
+  hs.addEventListener('touchend',function(e){if(sx===null)return;var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)go(now+(dx<0?1:-1));sx=null});
+  if(!reduce)tm=setTimeout(function(){go(1)},6000);
+  /* scroll reveal */
+  var els=document.querySelectorAll('main section:not(.hs) h2, main section:not(.hs) .en, .lead, .wgrid > div, .answer, .rcard, .num .wrap, .results .photo, .svc article, .pf > *, .mcard, .flow li, .faq details, .shop, .ig-card, .fy, .w-ban, .cta .wrap');
+  if(!reduce&&'IntersectionObserver' in window){
+    els.forEach(function(e,i){e.classList.add('rv');e.style.transitionDelay=((i%4)*90)+'ms'});
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{threshold:.15});
+    els.forEach(function(e){io.observe(e)});
+  }
+  /* count up */
+  var big=document.querySelector('.num .big');
+  if(big&&!reduce){var done=false;new IntersectionObserver(function(es){if(es[0].isIntersecting&&!done){done=true;var t0=null;function f(t){t0=t0||t;var k=Math.min(1,(t-t0)/1400),v=(7.5*(1-Math.pow(1-k,3))).toFixed(1);big.innerHTML='平均 −'+v+'<small>kg</small>';if(k<1)requestAnimationFrame(f)}requestAnimationFrame(f)}},{threshold:.5}).observe(big)}
+})();
+</script>
+</body>
+</html>
