@@ -1,11 +1,11 @@
 @page { size: A4; margin: 10mm 14mm; }
-body { font-family: "Noto Sans CJK JP","Noto Sans JP",sans-serif; color:#222; font-size:9.5pt; line-height:1.45; margin:0; }
+body { font-family: "Noto Sans CJK JP","Noto Sans JP",sans-serif; color:#222; font-size:9.2pt; line-height:1.4; margin:0; }
 .page { page-break-after: always; }
 .page:last-child { page-break-after: auto; }
 .top { display:flex; justify-content:space-between; font-size:10pt; }
 .name { font-size:13pt; border-bottom:1px solid #333; display:inline-block; min-width:70mm; padding-top:4mm; }
 h1 { font-size:15pt; text-align:center; margin:3mm 0 2mm; color:#0b5a3c; border-top:3px solid #0b5a3c; border-bottom:3px solid #0b5a3c; padding:2mm 0; }
-h2 { font-size:12pt; background:#0b5a3c; color:#fff; padding:1mm 3mm; margin:2.5mm 0 1.5mm; }
+h2 { font-size:12pt; background:#0b5a3c; color:#fff; padding:1mm 3mm; margin:2mm 0 1mm; }
 p { margin:1mm 0; }
 ol { margin:1mm 0; padding-left:6mm; } li { margin-bottom:0.5mm; }
 b { color:#0b5a3c; }
@@ -20,3 +20,9 @@ td.old { text-decoration:line-through; color:#777; }
 .contact { border:2px solid #0b5a3c; padding:2mm 4mm; margin-top:3mm; display:flex; justify-content:space-between; align-items:center; }
 .qr { width:24mm; height:24mm; border:1px dashed #888; font-size:8pt; display:flex; align-items:center; justify-content:center; text-align:center; }
 .right { text-align:right; }
+td.cont { font-size:8pt; text-align:left; line-height:1.35; }
+img.qr { width:22mm; height:22mm; border:none; }
+table { table-layout:fixed; }
+th:nth-child(1){width:25mm} th:nth-child(3){width:22mm} th:nth-child(4){width:32mm}
+td, th { white-space:normal; }
+td.old, td.sp, td:first-child { white-space:nowrap; }
