@@ -60,9 +60,10 @@ def price3():
 <p class="cmp">この内容でこの価格は、掲載企業さまだけの感謝価格です。<b>ぜひ他社のお見積もりと比べてみてください。</b></p>
 </section>"""
 
-def domain(title, items):
+def domain(title, items, note=""):
     cells = "".join(f'<li><span class="di">{icon(ic)}</span><b>{h}</b></li>' for ic, h in items)
-    return f"""<section class="dom"><div class="dom-h">{title}</div><ul class="dom-l">{cells}</ul></section>"""
+    n = f'<p class="dom-n">{note}</p>' if note else ""
+    return f"""<section class="dom"><div class="dom-h">{title}</div><ul class="dom-l">{cells}</ul>{n}</section>"""
 
 def monthly3(line):
     return f"""<section class="monthly m3">
@@ -84,6 +85,7 @@ SPAN_TAIL = ('お作りした見本は、<b>検索対策込みのスタンダー
 SPAN_A = '御社らしさが伝わる、きれいなホームページをお作りします。仕上がりは、お作りした見本でご確認ください。' + SPAN_TAIL
 SPAN_B = '今のページをもとに、御社らしさが伝わる見本をお作りしました。仕上がりは、QRから今のページと見比べてご確認ください。' + SPAN_TAIL
 PUSH_H = '価格は抑えても、<em>仕上がりには手を抜きません。</em>'
+DOM_NOTE = '<b>ドメイン（御社名入りのアドレス）は、こちらで候補をいくつかご提案し、お選びいただきます。</b>'
 CALL2 = '<small>こちらからお電話することはありません。見るだけでもかまいません。</small>'
 
 PAGE_A = f"""<div class="page v3" id="A">
@@ -103,11 +105,11 @@ PAGE_A = f"""<div class="page v3" id="A">
     {merit3(3,"phone","同じ説明の電話が減る","")}
   </div>
 </section>
-{domain('<b>「www.<em>御社名</em>.jp」</b>自社のアドレスを持つと、信用が変わります', [
+{domain('<b>「www.<em>御社名</em>.com」</b>自社のアドレスを持つと、信用が変わります', [
   ("globe","名刺・チラシ・誌面で、きちんとした印象に"),
   ("people","取引先・求人の応募者・金融機関にも安心を"),
   ("home","御社名義の「財産」として残る"),
-  ("shield","突然消える心配が少ない")])}
+  ("shield","突然消える心配が少ない")], DOM_NOTE + "無料サービスは、終了や規約の変更でページが見られなくなることがあります。御社名義なら、その心配が少なくなります。")}
 {price3()}
 {monthly3("変更のご依頼は、<b>LINEで送るだけ</b>です。")}
 {push(PUSH_H, SPAN_A, ["QRで見本を見る","気に入ったらお電話","打ち合わせで直して公開"])}
@@ -132,16 +134,16 @@ PAGE_B = f"""<div class="page pB v3" id="B">
   <div class="ba">
     <div class="url old"><span class="lb">いま</span><span>〇〇blog.jp/user/〇〇〇</span><span class="ad">広告</span></div>
     <div class="arrow">▼</div>
-    <div class="url new"><span class="lb">これから</span><span>www.<em>御社名</em>.jp</span></div>
+    <div class="url new"><span class="lb">これから</span><span>www.<em>御社名</em>.com</span></div>
     <p>アドレスだけで「<em>しっかりした会社</em>」だと伝わります。</p>
     <p class="r">今のページの文章や写真も、活かして作り直します。<br>今お持ちのドメインを使い続けたい場合もご相談ください。</p>
   </div>
 </section>
 {domain('<b>今のアドレスと、</b>ここが違います', [
-  ("globe","アドレスだけで、信用が変わる"),
-  ("home","借りものではなく、御社の財産に"),
-  ("shield","突然消える心配が少ない"),
-  ("people","取引先・求人にも安心感")])}
+  ("globe","アドレスだけで、<br>信用が変わる"),
+  ("home","借りものでなく、<br>御社の財産に"),
+  ("shield","突然消える<br>心配が少ない"),
+  ("people","取引先・求人にも<br>安心感")], DOM_NOTE)}
 {price3()}
 {monthly3("作り直したあとも、変更は<b>LINEで送るだけ</b>。")}
 {push(PUSH_H, SPAN_B, ["QRで今のページと見比べる","気に入ったらお電話","打ち合わせで直して公開"])}
@@ -151,7 +153,7 @@ PAGE_B = f"""<div class="page pB v3" id="B">
 </div>"""
 
 out = HEAD + PAGE_A + "\n" + PAGE_B + "\n</body></html>\n"
-for bad in ("33,000", "132,000", "ライトプラン", "しっかりプラン", "毎月先着3社", "2営業日以内", "月額は任意", "49,000", "最短7日"):
+for bad in ("33,000", "132,000", "ライトプラン", "しっかりプラン", "毎月先着3社", "2営業日以内", "月額は任意", "49,000", "最短7日", ".jp」", "名</em>.jp", "業界最安", "他にない", "どこよりも", "他社に負けない", "Instagram・LINE"):
     assert bad not in out, bad
 (D / "letter_v3.html").write_text(out)
 print("ok")
