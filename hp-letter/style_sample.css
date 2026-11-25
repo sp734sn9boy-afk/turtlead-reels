@@ -27,3 +27,40 @@ h1.long{font-size:17pt}
 .push .row2 .lim{font-size:8.4pt}
 .push .row2 .lim b{font-size:10.5pt;letter-spacing:-.02em}
 .push{padding-right:3mm}
+
+.cta-l .call small{display:block;font-size:9.6pt;font-weight:700;color:#e6ecf8;margin-top:.2mm}
+.cta .noqr{margin-top:0;position:relative;font-size:9.4pt;font-weight:700;color:#fff;background:rgba(79,227,255,.14);border-radius:1.2mm;padding:.6mm 2mm}
+.cta .noqr b{color:var(--cyan)}
+.cta{align-items:start}
+.cta-r{align-self:center}
+#A .sub b{font-size:15pt}
+#A .sub{font-size:11.5pt}
+.stage{height:34mm}
+.ph.back{transform:rotate(-7deg) scale(.8);transform-origin:0 0}
+.ph.front{transform:rotate(4deg) scale(.8);transform-origin:100% 0}
+
+.qcol.go .arw{font-size:18pt}
+.qcol.go p{font-size:9.4pt}
+.body{gap:1.5mm}
+
+.cta-l .call{font-size:10.6pt}
+.cta .noqr{grid-column:1/-1}
+.cta{row-gap:1.4mm}
+.tel b{font-size:33pt}
+.ba p.r{font-size:9.6pt}
+.tel b{font-size:31pt}
+.cta{padding-top:2.6mm;padding-bottom:2.4mm}
+.cta-l .co{margin-top:.8mm;padding-top:.8mm}
+.merits3 .mt{padding:1.2mm 3mm}
+.pB .body{gap:1.2mm}
+.pB .check li{font-size:9.2pt;line-height:1.15}
+.pB .check ul{gap:.3mm}
+.pB .merits4 .mt{padding:.6mm 2.2mm}
+.pB .sub b{font-size:16pt}
+.pB .lead{font-size:9pt;line-height:1.5}
+.qcol{width:25mm}
+.qcol.go p small{font-size:8pt;letter-spacing:-.02em}
+.body{padding-top:1.4mm}
+.fine{line-height:1.36}
+.addr{line-height:1.15}
+.push{padding-top:1.2mm;padding-bottom:1.2mm}
