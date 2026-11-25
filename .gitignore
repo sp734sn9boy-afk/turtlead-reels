@@ -1,0 +1,5 @@
+
+# お客さま情報（GitHubに上げない）
+hp-letter/送り先リスト/*.csv
+!hp-letter/送り先リスト/sample_test.csv
+hp-letter/出力/
