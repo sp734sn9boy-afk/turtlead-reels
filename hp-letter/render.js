@@ -1,9 +1,11 @@
 // letter.html → ホームページ案内文_2種.pdf と確認用PNG（node render.js）
+// 見本付き版：node render.js letter_sample.html ホームページ案内文_見本付き版_2種.pdf preview_sample_
 const { chromium } = require('/opt/node-tools/node_modules/playwright');
 const path=require('path'); const D=__dirname;
+const [HTML='letter.html',PDF='ホームページ案内文_2種.pdf',PNG='preview_']=process.argv.slice(2);
 (async()=>{
   const b=await chromium.launch(); const p=await b.newPage({viewport:{width:900,height:1200},deviceScaleFactor:2});
-  await p.goto('file://'+path.join(D,'letter.html'),{waitUntil:'networkidle'});
+  await p.goto('file://'+path.join(D,HTML),{waitUntil:'networkidle'});
   await p.evaluate(()=>document.fonts.ready);
   const fonts=await p.evaluate(()=>['Noto Sans JP','Outfit','M PLUS Rounded 1c'].map(f=>f+':'+document.fonts.check('900 12px "'+f+'"')+'/'+document.fonts.check('700 12px "'+f+'"')));
   console.log('fonts',fonts.join(' '));
@@ -13,8 +15,8 @@ const path=require('path'); const D=__dirname;
     const clip=[...pg.querySelectorAll('h1,h2,h3,p,li,b,span')].filter(e=>e.scrollWidth>e.clientWidth+1&&getComputedStyle(e).overflow!=='visible').length;
     return {id:pg.id,h:r.height.toFixed(1),childrenSum:sum.toFixed(1),bodyBottomSpare:(body.getBoundingClientRect().bottom-inner).toFixed(1),over}}));
   console.log(JSON.stringify(chk));
-  for(const id of ['A','B']){ const el=await p.$('#'+id); await el.screenshot({path:path.join(D,'preview_'+id+'.png')}); }
+  for(const id of ['A','B']){ const el=await p.$('#'+id); await el.screenshot({path:path.join(D,PNG+id+'.png')}); }
   await p.emulateMedia({media:'print'});
-  await p.pdf({path:path.join(D,'ホームページ案内文_2種.pdf'),format:'A4',printBackground:true,margin:{top:0,right:0,bottom:0,left:0},preferCSSPageSize:true});
+  await p.pdf({path:path.join(D,PDF),format:'A4',printBackground:true,margin:{top:0,right:0,bottom:0,left:0},preferCSSPageSize:true});
   await b.close();
 })();

@@ -1,0 +1,29 @@
+/* 見本付き版だけの追加 */
+.qrbox.paste{width:26mm;height:26mm;background:#fff;border-radius:2mm;position:relative}
+.qrbox.paste::after{content:"";position:absolute;inset:1.5mm;border:.35mm dashed #b7c3d6;border-radius:1mm}
+.cta-r p em{font-style:normal;color:var(--cyan)}
+.qcol.go{display:flex;flex-direction:column;align-items:center;justify-content:center;align-self:stretch;gap:.6mm;border:.3mm solid rgba(79,227,255,.5);border-radius:2mm;background:rgba(255,255,255,.06);padding:2mm 1mm}
+.qcol.go p{font-size:10pt;font-weight:900;line-height:1.35;margin:0}
+.qcol.go p em{font-style:normal;color:var(--cyan)}
+.qcol.go p small{font-size:8pt;color:#e6ecf8;margin:0}
+.qcol.go .arw{font-size:22pt;line-height:1;color:var(--cyan);font-weight:900}
+h1.long{font-size:17pt}
+.push .tag{font-size:8.6pt}
+
+.push .row2{flex-basis:100%;display:flex;align-items:center;gap:3mm;border-top:.3mm dashed var(--line);padding-top:1.2mm}
+.push .row2 .flow{flex:1;flex-basis:auto;border-top:0;padding-top:0}
+.push .row2 .lim{display:flex;align-items:baseline;gap:2mm;border-left:.3mm dashed var(--line);padding-left:3mm}
+.push .row2 .lim b{margin-top:0}
+.push .t strong{font-size:10.6pt}
+.body{gap:1.8mm}
+
+.cta-r p{width:25mm}
+.push .row2{gap:2mm}
+.push .row2 .flow{gap:1mm}
+.push .row2 .flow li{font-size:9pt}
+.push .row2 .flow li+li::before{margin-right:.6mm}
+.push .row2 .lim{gap:1.2mm;padding-left:2mm;white-space:nowrap;flex:none}
+.push .row2 .lim b{font-size:11pt}
+.push .row2 .lim{font-size:8.4pt}
+.push .row2 .lim b{font-size:10.5pt;letter-spacing:-.02em}
+.push{padding-right:3mm}
