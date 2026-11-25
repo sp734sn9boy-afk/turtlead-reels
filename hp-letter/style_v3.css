@@ -244,3 +244,19 @@
 .pB.v3 .body{gap:1.7mm}
 .pc-name .chip{font-size:9pt}
 .v3 .url .lb{font-size:9pt}
+
+/* ===== v3.3 チェック担当の指摘 ===== */
+/* 言葉の途中で改行しない（句読点と<wbr>の位置だけで折り返す） */
+.ka,.dom-n,.push.p3 .t span,.pB .ba p,.dom-h{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}
+/* 上の価格ブロック：プラン名｜制作費（1行目）／月額（2行目） */
+.catch.c4{display:grid;grid-template-columns:auto 1fr;column-gap:3.4mm;align-items:center;padding:1mm 3.4mm 1.2mm}
+.c4 .c0{grid-row:1/3;white-space:normal;background:var(--navy);color:#fff;border-radius:2mm;padding:1.6mm 2.6mm;line-height:1.3;text-align:center}
+.c4 .c0 b{display:block;font-size:11pt;font-weight:900;color:var(--cyan)}
+.c4 .c0 span{display:block;font-size:9pt;font-weight:700;color:#e6ecf8;margin-top:.3mm}
+.c4 .c2{margin-top:0;font-size:11.5pt}
+.c4 .c2 em{font-style:normal}
+.c4 .c2 b{font-size:30pt}
+.c4 .c1{font-size:13.5pt;margin-top:.6mm}
+.c4 .c1 b{font-size:24pt}
+.c4 .c1 span{font-size:13.5pt}
+.pB.v3 .body{gap:.8mm}
