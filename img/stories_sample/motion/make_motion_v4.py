@@ -172,7 +172,7 @@ def make_audio(M, T, wav_path):
     add("boom", boom, T["B"] + B_L2, .75)
     add("riser", v2.a_riser(.2), T["C"] + .2, .35)
     add("boom", boom, T["C"] + .4, 1.0)
-    cuts = [T["C"]] + [T["D0"] + i * T["d_len"] for i in range(n)]
+    cuts = sorted(set([T["C"]] + [T["D0"] + i * T["d_len"] for i in range(n)]))   # 1社版では C と D が同じ時刻
     for c in cuts:
         bar = int(round((c - BEAT0) / BEAT)) // 4 % 4
         add("whoosh", whoosh, c - .14, .3)

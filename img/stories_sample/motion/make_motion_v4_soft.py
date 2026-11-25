@@ -191,7 +191,7 @@ def prepare(spec):
         d.ellipse(ms.P(4, 4, 76, 76), outline=t["main"], width=int(8 * S))
     def spark(d):
         v1.star(d, 40 * S, 40 * S, 38 * S, ACC)
-    deco = [fade(shape(68, 100, leaf) if kind == "house" else shape(80, 80, ring), .5),
+    deco = [fade(shape(68, 100, leaf) if kind in ("house", "pest") else shape(80, 80, ring), .5),
             fade(shape(44, 44, lambda d: d.ellipse(ms.P(0, 0, 44, 44), fill=ACC)), .42),
             fade(shape(64, 64, lambda d: d.ellipse(ms.P(0, 0, 64, 64), fill=WHITE)), .8),
             fade(shape(80, 80, spark), .6)]
@@ -202,7 +202,8 @@ def prepare(spec):
     M["spark"] = shape(80, 80, spark)
 
     # A: 地名＋呼びかけ
-    na = len(area)
+    big = spec.get("area_big", area)        # 大きく積む文字（「姶良・伊佐」→「姶良伊佐」のように記号を抜く用）
+    na = len(big)
     if na <= 3:
         size = min(500, int(1000 / na))
         pos = [(440, 350 + size * .97 * (i + .5)) for i in range(na)]
@@ -215,7 +216,7 @@ def prepare(spec):
         de = (978, pos[-1][1] + 120, 150)
         bottom = 1220
         lands = [0.0 + .1 * i for i in range(na)]
-    M["A"] = dict(chars=[stxt(c, size, t["deep"], ow=14) for c in area], pos=pos, lands=lands,
+    M["A"] = dict(chars=[stxt(c, size, t["deep"], ow=14) for c in big], pos=pos, lands=lands,
                   de=stxt(part, de[2], INK, ow=9), de_pos=de[:2], de_land=lands[-1] + .1,
                   pill=pill_text(hook, rfit(hook, 800, 118), ACC, WHITE, pad=64),
                   pill_y=min(1440, bottom + 150), pill_land=.5)
@@ -288,13 +289,13 @@ def prepare(spec):
                                                     ms.draw_text(d, (nr, nr - 4), str(i + 1), rfont(54), WHITE, anchor="mm")))
         card.alpha_composite(num, (m + 28, int(m + ch / 2 - nr)))
         tx = m + 28 + nr * 2 + 24
-        two = ch >= 240
+        two = ch >= 240 or (spec.get("card_rows3") and ch >= 220)   # card_rows3: 3社でも3段（長い社名用）
         telr = hstack([put_center(panel(84, 46, t["deep"], radius=12, shadow=0), stxt("TEL", 28, WHITE), dy=-1),
-                       stxt(tel, 62 if two else 50, t["deep"])], gap=-14, center=True)
-        nm = stxt(name, rfit(name, cw - (tx - m) - (0 if two else telr.width) - 44, 72 if two else 60), INK)
-        if ch >= 240:      # 2社: 社名／強み／電話の3段
+                       stxt(tel, (62 if ch >= 240 else 54) if two else 50, t["deep"])], gap=-14, center=True)
+        nm = stxt(name, rfit(name, cw - (tx - m) - (0 if two else telr.width) - 44, (72 if ch >= 240 else 62) if two else 60), INK)
+        if two:            # 社名／強み／電話の3段
             card.alpha_composite(nm, (tx, int(m + ch * .24 - nm.height / 2)))
-            st = strong_row(strong, 44, SUB, bold=False)
+            st = strong_row(strong, 44 if ch >= 240 else 38, SUB, bold=False)
             card.alpha_composite(st, (tx, int(m + ch * .52 - st.height / 2)))
             card.alpha_composite(telr, (tx - 24, int(m + ch * .8 - telr.height / 2)))
         else:              # 3社以上: 社名＋電話／強み
