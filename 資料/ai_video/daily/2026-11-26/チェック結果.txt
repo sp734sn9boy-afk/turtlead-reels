@@ -1,0 +1,8 @@
+hyperframes check（YouTube）: ok=True エラー 0 / 注意 12
+hyperframes check（Instagramリール・TikTok）: ok=True エラー 0 / 注意 12
+hyperframes check（X）: ok=True エラー 0 / 注意 12
+注意: なし
+turtle_ai_2026-11-26_youtube.mp4: 53.60 秒（予定 53.59 秒）・音声 aac・本編＋最後の部分をつないだ
+turtle_ai_2026-11-26_insta_tiktok.mp4: 53.54 秒（予定 53.52 秒）・音声 aac・本編＋最後の部分をつないだ
+turtle_ai_2026-11-26_x.mp4: 53.33 秒（予定 53.33 秒）・音声 aac・本編＋最後の部分をつないだ
+所要時間: voice+build 3秒 / check 32秒 / render_head0 149秒 / render_tail_youtube 40秒 / render_tail_insta_tiktok 39秒 / render_tail_x 38秒 / render 265秒 / verify 8秒 / 合計 308秒

@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-26",
+  "fact_checked": true,
+  "instagram": {
+    "video": "turtle_ai_2026-11-26_insta_tiktok.mp4",
+    "caption_file": "キャプション_instagram.txt"
+  },
+  "youtube": {
+    "video": "turtle_ai_2026-11-26_youtube.mp4",
+    "description_file": "概要欄_youtube.txt",
+    "enabled": true,
+    "tags": ["ChatGPT", "OpenAI", "GPT-6.2", "業務効率化", "AIニュース"]
+  }
+}
