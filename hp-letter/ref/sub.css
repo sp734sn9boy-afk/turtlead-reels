@@ -1,0 +1,140 @@
+/* ===== 下層ページ共通（少し暗めのグレー） 2026-11-10 ===== */
+:root{
+  --bg:#23262c;
+  --bg2:#2a2e35;
+  --card:#33383f;
+  --card2:#3a4048;
+  --line:rgba(220,230,245,.16);
+  --text:#f3f5f8;
+  --sub:#d3d9e2;
+  --muted:#aab3bf;
+  --cyan:#4fe3ff;
+  --cyan-d:#2bb8d6;
+  --en:'Outfit',system-ui,sans-serif;
+  --jp:'Noto Sans JP',system-ui,sans-serif;
+  --gut:clamp(16px,5vw,64px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);font-family:var(--jp);font-size:17px;line-height:1.9;overflow-x:hidden;font-feature-settings:"palt"}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding:0 var(--gut)}
+
+/* 背景にうっすら光る線（控えめ） */
+.bg-lines{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5}
+.bg-lines path{fill:none;stroke-width:1.2}
+
+/* ===== ヘッダー（トップと共通） ===== */
+.hd{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px var(--gut);background:rgba(6,11,24,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--en);font-weight:700;letter-spacing:.04em;font-size:20px;white-space:nowrap}
+.logo img{width:30px;height:auto}
+.logo b{color:var(--cyan)}
+.nav{display:flex;gap:26px;align-items:center;font-size:15px;font-weight:700}
+.nav a{text-decoration:none;color:var(--sub);white-space:nowrap}
+.nav a:hover{color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:999px;text-decoration:none;font-weight:700;font-size:16px;color:#04101c;background:linear-gradient(90deg,var(--cyan),#a9c0ff);transition:transform .2s;white-space:nowrap}
+.btn:hover{transform:translateY(-2px)}
+.btn-line{background:transparent;color:var(--text);border:1.5px solid rgba(79,227,255,.65)}
+.btn-line:hover{background:rgba(79,227,255,.12)}
+.nav .btn{min-height:42px;padding:0 20px;font-size:14px;color:#04101c}
+@media (max-width:960px){.nav a:not(.btn){display:none}}
+
+/* ===== ページの見出し ===== */
+.page-hd{padding:130px 0 56px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#060b18 0%,#0b1430 55%,var(--bg) 100%)}
+.crumb{font-size:14px;color:var(--muted);margin-bottom:18px}
+.crumb a{color:var(--cyan);text-decoration:none}
+.page-en{font-family:var(--en);font-size:14px;letter-spacing:.2em;color:var(--cyan);font-weight:500}
+.page-title{font-size:clamp(30px,5vw,52px);font-weight:900;line-height:1.35;margin-top:6px}
+.page-lead{margin-top:16px;color:var(--sub);max-width:760px;font-size:clamp(16px,1.8vw,19px)}
+
+/* ===== セクション ===== */
+.sec{padding:clamp(64px,9vw,110px) 0;border-bottom:1px solid var(--line)}
+.sec:nth-of-type(even){background:rgba(255,255,255,.02)}
+.sec-no{font-family:var(--en);font-size:14px;letter-spacing:.18em;color:var(--cyan);font-weight:500}
+.h2{font-size:clamp(26px,3.6vw,38px);font-weight:900;line-height:1.4;margin:6px 0 18px}
+.h3{font-size:clamp(20px,2.2vw,24px);font-weight:900;line-height:1.5;margin-bottom:10px}
+.txt{color:var(--sub)}
+.txt+.txt{margin-top:10px}
+.small{font-size:14px;color:var(--muted)}
+.note{margin-top:18px;font-size:14px;color:var(--muted);line-height:1.8}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:clamp(20px,3vw,30px)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.tag{display:inline-block;font-family:var(--en);font-size:13px;letter-spacing:.14em;color:var(--cyan);font-weight:700;margin-bottom:6px}
+
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.lk{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 18px;border-radius:8px;text-decoration:none;font-size:15px;font-weight:700;border:1px solid rgba(79,227,255,.5);background:var(--card);transition:background .2s,border-color .2s}
+.lk:hover{background:var(--card2);border-color:var(--cyan)}
+.lk i{font-style:normal;color:var(--cyan);font-size:14px}
+.lk.main{background:linear-gradient(90deg,var(--cyan),#a9c0ff);color:#04101c;border-color:transparent}
+.lk.main i{color:#04101c}
+
+/* 表 */
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:10px;margin-top:24px}
+table{width:100%;border-collapse:collapse;font-size:16px;min-width:560px}
+th,td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+thead th{background:var(--card2);color:#fff;font-weight:900;font-size:15px}
+tbody tr:nth-child(odd){background:rgba(255,255,255,.025)}
+tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
+td a{color:var(--cyan);font-weight:700;text-decoration:none}
+td.num{font-family:var(--en);font-weight:700;font-size:17px;text-align:right}
+th.num{text-align:right}
+.scroll-hint{display:none;font-size:13px;color:var(--muted);margin-top:8px}
+
+/* よくある質問 */
+.faq details{border-bottom:1px solid var(--line)}
+.faq details:first-child{border-top:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;gap:16px;align-items:flex-start;padding:22px 40px 22px 0;position:relative;font-weight:700;font-size:clamp(16px,1.8vw,18px)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .q{font-family:var(--en);color:var(--cyan);font-size:20px;line-height:1.4}
+.faq summary::after{content:"";position:absolute;right:8px;top:30px;width:12px;height:12px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);transition:transform .3s}
+.faq details[open] summary::after{transform:rotate(225deg);top:36px}
+.faq .a{padding:0 0 24px 36px;color:var(--sub)}
+.faq .a p+p{margin-top:8px}
+
+/* 流れ */
+.steps{list-style:none;counter-reset:s;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:20px}
+.steps li{counter-increment:s;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 16px;font-weight:700;position:relative}
+.steps li::before{content:"STEP " counter(s);display:block;font-family:var(--en);font-size:12px;letter-spacing:.14em;color:var(--cyan);margin-bottom:6px}
+
+/* お問い合わせ（共通） */
+.contact-box{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;margin-top:24px}
+.way{display:flex;flex-direction:column;gap:4px;text-decoration:none;padding:24px 26px;border-radius:10px;border:1px solid var(--line);background:var(--card);transition:border-color .25s,transform .25s}
+.way:hover{border-color:var(--cyan);transform:translateY(-3px)}
+.way.tel{border-color:rgba(79,227,255,.6)}
+.way-label{font-size:14px;font-weight:700;color:var(--cyan);letter-spacing:.1em}
+.way-main{font-family:var(--en);font-weight:700;font-size:clamp(26px,3.2vw,38px);line-height:1.25;word-break:break-all}
+.way-sub{font-size:14px;color:var(--sub)}
+
+/* ===== フッター（トップと共通） ===== */
+.ft{border-top:1px solid var(--line);padding:56px 0 40px;font-size:14px;color:var(--muted);background:#1e2126}
+.ft-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:28px}
+.ft address{font-style:normal;line-height:2;color:var(--sub)}
+.ft-links{display:flex;flex-wrap:wrap;gap:18px}
+.ft-links a{text-decoration:none}
+.ft-links a:hover{color:#fff}
+.copy{margin-top:32px;font-size:12px}
+
+/* 出てくる動き */
+.js .rv{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.js .rv.in{opacity:1;transform:none}
+
+/* ===== スマホ ===== */
+@media (max-width:860px){
+  .grid2,.grid3,.contact-box{grid-template-columns:minmax(0,1fr)}
+  .steps{grid-template-columns:minmax(0,1fr)}
+  .scroll-hint{display:block}
+}
+@media (max-width:520px){
+  .logo span{display:none}
+  body{font-size:16px}
+}
+
+/* ===== 動きを減らす設定 ===== */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js .rv{opacity:1;transform:none}
+}

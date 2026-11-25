@@ -1,0 +1,427 @@
+{
+ "cs": [
+  [
+   "body",
+   {
+    "font-family": "\"Noto Sans JP\", system-ui, sans-serif",
+    "font-size": "17px",
+    "font-weight": "400",
+    "color": "rgb(242, 246, 255)",
+    "background-color": "rgb(6, 11, 24)",
+    "background-image": "none",
+    "border-radius": "0px",
+    "border": "0px none rgb(242, 246, 255)",
+    "box-shadow": "none",
+    "padding": "0px",
+    "letter-spacing": "normal",
+    "line-height": "32.3px"
+   }
+  ],
+  [
+   "h1",
+   {
+    "font-family": "\"Noto Sans JP\", system-ui, sans-serif",
+    "font-size": "89.6px",
+    "font-weight": "900",
+    "color": "rgb(242, 246, 255)",
+    "background-color": "rgba(0, 0, 0, 0)",
+    "background-image": "none",
+    "border-radius": "0px",
+    "border": "0px none rgb(242, 246, 255)",
+    "box-shadow": "none",
+    "padding": "0px",
+    "letter-spacing": "1.792px",
+    "line-height": "116.48px"
+   }
+  ],
+  [
+   ".eyebrow",
+   {
+    "font-family": "\"Noto Sans JP\", system-ui, sans-serif",
+    "font-size": "15px",
+    "font-weight": "700",
+    "color": "rgb(79, 227, 255)",
+    "background-color": "rgba(0, 0, 0, 0)",
+    "background-image": "none",
+    "border-radius": "0px",
+    "border": "0px none rgb(79, 227, 255)",
+    "box-shadow": "none",
+    "padding": "0px",
+    "letter-spacing": "1.8px",
+    "line-height": "28.5px"
+   }
+  ],
+  [
+   ".sec-en",
+   {
+    "font-family": "Outfit, system-ui, sans-serif",
+    "font-size": "153.6px",
+    "font-weight": "700",
+    "color": "rgba(0, 0, 0, 0)",
+    "background-color": "rgba(0, 0, 0, 0)",
+    "background-image": "none",
+    "border-radius": "0px",
+    "border": "0px none rgba(0, 0, 0, 0)",
+    "box-shadow": "none",
+    "padding": "0px",
+    "letter-spacing": "-3.072px",
+    "line-height": "138.24px"
+   }
+  ],
+  [
+   ".sec-title",
+   {
+    "font-family": "\"Noto Sans JP\", system-ui, sans-serif",
+    "font-size": "46px",
+    "font-weight": "900",
+    "color": "rgb(242, 246, 255)",
+    "background-color": "rgba(0, 0, 0, 0)",
+    "background-image": "none",
+    "border-radius": "0px",
+    "border": "0px none rgb(242, 246, 255)",
+    "box-shadow": "none",
+    "padding": "0px",
+    "letter-spacing": "normal",
+    "line-height": "62.1px"
+   }
+  ],
+  [
+   ".biz h3",
+   {
+    "font-family": "\"Noto Sans JP\", system-ui, sans-serif",
+    "font-size": "42px",
+    "font-weight": "900",
+    "color": "rgb(242, 246, 255)",
+    "background-color": "rgba(0, 0, 0, 0)",
+    "background-image": "none",
+    "border-radius": "0px",
+    "border": "0px none rgb(242, 246, 255)",
+    "box-shadow": "none",
+    "padding": "0px",
+    "letter-spacing": "normal",
+    "line-height": "56.7px"
+   }
+  ],
+  [
+   ".biz-no",
+   {
+    "font-family": "Outfit, system-ui, sans-serif",
+    "font-size": "15px",
+    "font-weight": "500",
+    "color": "rgb(79, 227, 255)",
+    "background-color": "rgba(0, 0, 0, 0)",
+    "background-image": "none",
+    "border-radius": "0px",
+    "border": "0px none rgb(79, 227, 255)",
+    "box-shadow": "none",
+    "padding": "0px",
+    "letter-spacing": "3px",
+    "line-height": "28.5px"
+   }
+  ],
+  [
+   ".price-h",
+   {
+    "font-family": "\"Noto Sans JP\", system-ui, sans-serif",
+    "font-size": "24px",
+    "font-weight": "900",
+    "color": "rgb(242, 246, 255)",
+    "background-color": "rgba(0, 0, 0, 0)",
+    "background-image": "none",
+    "border-radius": "0px",
+    "border": "0px none rgb(242, 246, 255)",
+    "box-shadow": "none",
+    "padding": "0px",
+    "letter-spacing": "normal",
+    "line-height": "45.6px"
+   }
+  ],
+  [
+   ".pc",
+   {
+    "font-family": "\"Noto Sans JP\", system-ui, sans-serif",
+    "font-size": "17px",
+    "font-weight": "400",
+    "color": "rgb(242, 246, 255)",
+    "background-color": "rgba(0, 0, 0, 0)",
+    "background-image": "linear-gradient(rgba(22, 36, 72, 0.7), rgba(10, 18, 40, 0.7))",
+    "border-radius": "8px",
+    "border": "1px solid rgba(150, 190, 255, 0.22)",
+    "box-shadow": "none",
+    "padding": "26px 24px",
+    "letter-spacing": "normal",
+    "line-height": "32.3px"
+   }
+  ],
+  [
+   ".pc.mid",
+   {
+    "font-family": "\"Noto Sans JP\", system-ui, sans-serif",
+    "font-size": "17px",
+    "font-weight": "400",
+    "color": "rgb(242, 246, 255)",
+    "background-color": "rgba(0, 0, 0, 0)",
+    "background-image": "linear-gradient(rgb(16, 28, 60), rgb(16, 28, 60)), linear-gradient(135deg, rgb(79, 227, 255), rgb(139, 107, 255))",
+    "border-radius": "8px",
+    "border": "1px solid rgba(0, 0, 0, 0)",
+    "box-shadow": "rgba(79, 227, 255, 0.14) 0px 20px 60px 0px",
+    "padding": "26px 24px",
+    "letter-spacing": "normal",
+    "line-height": "32.3px"
+   }
+  ],
+  [
+   ".pc-badge",
+   {
+    "font-family": "\"Noto Sans JP\", system-ui, sans-serif",
+    "font-size": "13px",
+    "font-weight": "900",
+    "color": "rgb(5, 16, 28)",
+    "background-color": "rgba(0, 0, 0, 0)",
+    "background-image": "linear-gradient(90deg, rgb(79, 227, 255), rgb(185, 166, 255))",
+    "border-radius": "999px",
+    "border": "0px none rgb(5, 16, 28)",
+    "box-shadow": "none",
+    "padding": "2px 14px",
+    "letter-spacing": "normal",
+    "line-height": "24.7px"
+   }
+  ],
+  [
+   ".pc-name",
+   {
+    "font-family": "\"Noto Sans JP\", system-ui, sans-serif",
+    "font-size": "18px",
+    "font-weight": "900",
+    "color": "rgb(242, 246, 255)",
+    "background-color": "rgba(0, 0, 0, 0)",
+    "background-image": "none",
+    "border-radius": "0px",
+    "border": "0px none rgb(242, 246, 255)",
+    "box-shadow": "none",
+    "padding": "0px",
+    "letter-spacing": "normal",
+    "line-height": "34.2px"
+   }
+  ],
+  [
+   ".pc-price",
+   {
+    "font-family": "Outfit, system-ui, sans-serif",
+    "font-size": "46px",
+    "font-weight": "700",
+    "color": "rgb(242, 246, 255)",
+    "background-color": "rgba(0, 0, 0, 0)",
+    "background-image": "none",
+    "border-radius": "0px",
+    "border": "0px none rgb(242, 246, 255)",
+    "box-shadow": "none",
+    "padding": "0px",
+    "letter-spacing": "normal",
+    "line-height": "50.6px"
+   }
+  ],
+  [
+   ".pc-price span",
+   {
+    "font-family": "\"Noto Sans JP\", system-ui, sans-serif",
+    "font-size": "16px",
+    "font-weight": "700",
+    "color": "rgb(242, 246, 255)",
+    "background-color": "rgba(0, 0, 0, 0)",
+    "background-image": "none",
+    "border-radius": "0px",
+    "border": "0px none rgb(242, 246, 255)",
+    "box-shadow": "none",
+    "padding": "0px",
+    "letter-spacing": "normal",
+    "line-height": "17.6px"
+   }
+  ],
+  [
+   ".pc-small",
+   {
+    "font-family": "\"Noto Sans JP\", system-ui, sans-serif",
+    "font-size": "14px",
+    "font-weight": "400",
+    "color": "rgb(169, 182, 216)",
+    "background-color": "rgba(0, 0, 0, 0)",
+    "background-image": "none",
+    "border-radius": "0px",
+    "border": "0px none rgb(169, 182, 216)",
+    "box-shadow": "none",
+    "padding": "0px",
+    "letter-spacing": "normal",
+    "line-height": "26.6px"
+   }
+  ],
+  [
+   ".pc-catch",
+   {
+    "font-family": "\"Noto Sans JP\", system-ui, sans-serif",
+    "font-size": "17px",
+    "font-weight": "700",
+    "color": "rgb(201, 212, 240)",
+    "background-color": "rgba(0, 0, 0, 0)",
+    "background-image": "none",
+    "border-radius": "0px",
+    "border": "0px none rgb(201, 212, 240)",
+    "box-shadow": "none",
+    "padding": "0px",
+    "letter-spacing": "normal",
+    "line-height": "28.9px"
+   }
+  ],
+  [
+   ".pc-list li",
+   {
+    "font-family": "\"Noto Sans JP\", system-ui, sans-serif",
+    "font-size": "15px",
+    "font-weight": "400",
+    "color": "rgb(242, 246, 255)",
+    "background-color": "rgba(0, 0, 0, 0)",
+    "background-image": "none",
+    "border-radius": "0px",
+    "border": "0px none rgb(242, 246, 255)",
+    "box-shadow": "none",
+    "padding": "0px 0px 0px 20px",
+    "letter-spacing": "normal",
+    "line-height": "28.5px"
+   }
+  ],
+  [
+   ".btn",
+   {
+    "font-family": "\"Noto Sans JP\", system-ui, sans-serif",
+    "font-size": "14px",
+    "font-weight": "700",
+    "color": "rgb(242, 246, 255)",
+    "background-color": "rgba(0, 0, 0, 0)",
+    "background-image": "none",
+    "border-radius": "999px",
+    "border": "1px solid rgba(79, 227, 255, 0.6)",
+    "box-shadow": "none",
+    "padding": "0px 20px",
+    "letter-spacing": "normal",
+    "line-height": "26.6px"
+   }
+  ],
+  [
+   ".btn-line",
+   {
+    "font-family": "\"Noto Sans JP\", system-ui, sans-serif",
+    "font-size": "14px",
+    "font-weight": "700",
+    "color": "rgb(242, 246, 255)",
+    "background-color": "rgba(0, 0, 0, 0)",
+    "background-image": "none",
+    "border-radius": "999px",
+    "border": "1px solid rgba(79, 227, 255, 0.6)",
+    "box-shadow": "none",
+    "padding": "0px 20px",
+    "letter-spacing": "normal",
+    "line-height": "26.6px"
+   }
+  ],
+  [
+   ".lk",
+   {
+    "font-family": "\"Noto Sans JP\", system-ui, sans-serif",
+    "font-size": "15px",
+    "font-weight": "700",
+    "color": "rgb(242, 246, 255)",
+    "background-color": "rgba(10, 20, 44, 0.7)",
+    "background-image": "none",
+    "border-radius": "8px",
+    "border": "1px solid rgba(79, 227, 255, 0.45)",
+    "box-shadow": "none",
+    "padding": "0px 18px",
+    "letter-spacing": "normal",
+    "line-height": "28.5px"
+   }
+  ],
+  [
+   ".extra-list li",
+   {
+    "font-family": "\"Noto Sans JP\", system-ui, sans-serif",
+    "font-size": "15px",
+    "font-weight": "700",
+    "color": "rgb(242, 246, 255)",
+    "background-color": "rgba(10, 20, 44, 0.6)",
+    "background-image": "none",
+    "border-radius": "999px",
+    "border": "1px solid rgba(150, 190, 255, 0.22)",
+    "box-shadow": "none",
+    "padding": "8px 16px",
+    "letter-spacing": "normal",
+    "line-height": "28.5px"
+   }
+  ],
+  [
+   ".logo",
+   {
+    "font-family": "\"M PLUS Rounded 1c\", Outfit, system-ui, sans-serif, system-ui, sans-serif",
+    "font-size": "25px",
+    "font-weight": "800",
+    "color": "rgb(255, 255, 255)",
+    "background-color": "rgba(0, 0, 0, 0)",
+    "background-image": "none",
+    "border-radius": "0px",
+    "border": "0px none rgb(255, 255, 255)",
+    "box-shadow": "none",
+    "padding": "0px",
+    "letter-spacing": "0.5px",
+    "line-height": "25px"
+   }
+  ],
+  [
+   ".logo b",
+   {
+    "font-family": "\"M PLUS Rounded 1c\", Outfit, system-ui, sans-serif, system-ui, sans-serif",
+    "font-size": "25px",
+    "font-weight": "800",
+    "color": "rgb(60, 214, 240)",
+    "background-color": "rgba(0, 0, 0, 0)",
+    "background-image": "none",
+    "border-radius": "0px",
+    "border": "0px none rgb(60, 214, 240)",
+    "box-shadow": "none",
+    "padding": "0px",
+    "letter-spacing": "0.5px",
+    "line-height": "25px"
+   }
+  ]
+ ],
+ "logo": "<a class=\"logo\" href=\"#top\" aria-label=\"合同会社turtle ad トップへ\">\n    <svg class=\"logo-mark\" viewBox=\"0 0 100 100\" aria-hidden=\"true\" focusable=\"false\"><polygon points=\"50,6 88.1,28 88.1,72 50,94 11.9,72 11.9,28\" fill=\"#0D3A34\" stroke=\"#3CD6F0\" stroke-width=\"3\" stroke-linejoin=\"round\"></polygon><polygon points=\"50,32 65.6,41 65.6,59 50,68 34.4,59 34.4,41\" fill=\"none\" stroke=\"#3CD6F0\" stroke-width=\"2.5\" stroke-linejoin=\"round\"></polygon><path d=\"M50 6 L50 32 M88.1 28 L65.6 41 M88.1 72 L65.6 59 M50 94 L50 68 M11.9 72 L34.4 59 M11.9 28 L34.4 41\" stroke=\"#3CD6F0\" stroke-width=\"2\" stroke-linecap=\"round\" fill=\"none\" opacity=\"0.8\"></path><circle class=\"lm-dot\" cx=\"50\" cy=\"32\" r=\"3\" fill=\"#fff\"></circle><circle class=\"lm-dot\" cx=\"65.6\" cy=\"41\" r=\"3\" fill=\"#fff\"></circle><circle class=\"lm-dot\" cx=\"65.6\" cy=\"59\" r=\"3\" fill=\"#fff\"></circle><circle class=\"lm-dot\" cx=\"50\" cy=\"68\" r=\"3\" fill=\"#fff\"></circle><circle class=\"lm-dot\" cx=\"34.4\" cy=\"59\" r=\"3\" fill=\"#fff\"></circle><circle class=\"lm-dot\" cx=\"34.4\" cy=\"41\" r=\"3\" fill=\"#fff\"></circle><circle cx=\"50\" cy=\"50\" r=\"5\" fill=\"#3CD6F0\"></circle></svg>\n    <span class=\"logo-word\">turtle <b>ad</b></span>\n  </a>",
+ "hp_heads": [
+  "H1 hero-title | 作る前に、無料でトップページの見本をお見せします",
+  "H2 h2 | turtle ad の3つのちがい",
+  "H3 h3 | 作る前に、見本で確かめられる",
+  "H3 h3 | 料金を最初から全部見せる",
+  "H3 h3 | 文章が苦手でも大丈夫",
+  "H2 h2 | こんなトップページを、御社の内容で作ります",
+  "H2 h2 | 料金 （すべて税込）",
+  "H3  | 追加でかかる費用も、先にお見せします",
+  "H2 h2 | 鹿児島の、地域情報誌の会社です",
+  "H3 sub-h | お申し込みから見本まで",
+  "H2 h2 | 無料見本・ご相談のお申し込み",
+  "H3 h3 | 送信したあとの流れ"
+ ],
+ "hp_classes": "js bg-lines hd logo logo-mark lm-dot logo-word hd-tel tel-num hero wrap hero-in hero-badge gift area hero-title hero-price chk cta btn btn-tel fine hero-pic lbl sec sec-no h2 diffs card diff main rv in num h3 txt small offer works wk wk-body wk-kind wk-name wk-go note real k n s go plans pl pl-name pl-price pl-pages mid pl-badge inc costs trust co lead sub-h steps s3 faq q a form-wrap cf field req err pair opt hint small-field hp agree submit side flow way tel way-label way-main way-sub ft ft-simple fixbar fb-tel fb-form",
+ "demo_heads": [
+  "H1 page-title | 業種別デモサイト（4業種×3プラン）",
+  "H2 h2 rv in | 3つの制作プラン",
+  "H3 h3 | ライト",
+  "H3 h3 | スタンダード",
+  "H3 h3 | しっかり",
+  "H2 h2 rv in | 4業種のデモサイト",
+  "H3 h3 | 炭火割烹 ひなた",
+  "H3 h3 | はるかぜ内科クリニック",
+  "H3 h3 | 山並工務店",
+  "H3 h3 | hair salon moku",
+  "H3 h3 | 料金に含まれないもの（別途お見積り）",
+  "H3 h3 | 月額費用（ご契約が必要です）",
+  "H2 h2 | 制作のご相談はメールで"
+ ],
+ "demo_classes": "js bg-lines hd logo logo-mark lm-dot logo-word nav btn page-hd wrap crumb page-en page-title page-lead sec rv in txt howto plan3 h2 grid3 card h3 price demos demo swatch kind plans lk grid2 extra-list links main note ft ft-top ft-links copy"
+}
