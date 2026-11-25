@@ -37,33 +37,37 @@ def merit(n, ic, h, p):
 def merit2(n, ic, h, p):
     return f"""<div class="mt"><div class="mt-h"><div class="ic"><span class="n">{n}</span>{icon(ic)}</div></div><div class="mt-b"><h3>{h}</h3></div></div>"""
 
+def merit3(n, ic, h, p):
+    return f"""<div class="mt"><div class="ic"><span class="n">{n}</span>{icon(ic)}</div><div class="mt-b"><h3>{h}</h3><p>{p}</p></div></div>"""
+
 def price(title_extra=""):
     def card(name, old, new, pages, feat, mid=False):
         badge = '<span class="pl-badge">おすすめ</span>' if mid else ""
         return f"""<div class="pl{' mid' if mid else ''}">{badge}
   <p class="pl-name">{name}</p>
-  <p class="pl-old"><span>通常 <s>{old}円</s></span><span class="pl-lab">掲載企業さま価格</span></p>
-  <p class="pl-price">{new}<span>円</span></p>
+  <p class="pl-old">通常 <s>{old}円〜</s></p>
+  <p class="pl-price">{new}<span>円〜</span></p>
   <p class="pl-pages">{pages}</p>
   <p class="pl-feat">{feat}</p>
 </div>"""
     return f"""<section>
-<div class="sec-h"><h2><span class="blank"></span>様だけの特別価格です<small>（すべて税込）</small></h2><span class="en">PRICE</span></div>
+<div class="sec-h"><h2><span class="blank"></span>様だけの特別価格です<small>（すべて税込）</small></h2><span class="pl-lab big">掲載企業さま価格</span><span class="en">PRICE</span></div>
 <div class="plans">
 {card("ライト","55,000","33,000","TOP＋基本2ページ","SNSリンク")}
-{card("スタンダード","88,000","55,000","TOP＋基本4〜5ページ","SNS連携／検索対策の基本設定",True)}
-{card("しっかり","132,000","88,000","TOP＋6〜8ページ","SNS連携／SEO設定／ブログ機能")}
+{card("スタンダード","88,000","55,000","TOP＋基本4〜5ページ","SNS連携／検索対策（基本）",True)}
+{card("しっかり","132,000","88,000","TOP＋6〜8ページ","SNS連携／検索対策／ブログ機能")}
 </div>
-<p class="plans-note">どのプランも<b>スマホ対応・お問い合わせフォーム</b>込み。制作費とは別に<b>月額5,500円（税込）</b>のご契約が必要です。</p>
+<p class="plans-note">どのプランも<b>スマホ対応・お問い合わせフォーム</b>込み。原稿づくり・写真撮影はオプション（別途お見積もり）。</p>
 </section>"""
 
 def monthly(h3, line=True):
     return f"""<section class="monthly">
-  <div class="m-price"><p class="k">月々の管理・修正</p><p class="v">5,500<span>円</span><small>（税込）</small></p><p class="s">ドメインは御社名義</p></div>
-  <div class="m-body"><h3>{h3}</h3>
+  <div class="m-price"><p class="k">制作費とは別に</p><p class="v"><span class="pre">月々</span>5,500<span>円</span><small>（税込）</small></p><p class="s">ドメインは御社名義</p></div>
+  <div class="m-body">
     <ul class="tags"><li>サーバー・ドメイン代</li><li>写真の差し替え・文章の変更</li><li>Googleマップの情報更新</li><li>WordPressの更新</li><li>セキュリティ対策・バックアップ</li></ul>
-    {'<p>「この写真に変えて」「営業時間が変わった」は<b>LINEで送るだけ</b>。パソコンが苦手でも安心です。</p>' if line else ''}
+    <p>写真の差し替えや文章の変更は、<b>LINEで送るだけ</b>。パソコンが苦手でも安心。</p>
   </div>
+  <p class="m-term">月額は<b>24か月のご利用が前提</b>です（24か月未満で解約の場合は5,500円×残りの月数）</p>
 </section>"""
 
 def push(strong, span):
@@ -71,6 +75,7 @@ def push(strong, span):
   <div class="tag">無料<b>見本</b></div>
   <div class="t"><strong>{strong}</strong><span>{span}</span></div>
   <div class="lim">お申込み期限<b>＿＿月＿＿日まで</b></div>
+  <ol class="flow"><li><i>1</i>お電話・QRでご連絡</li><li><i>2</i>2営業日以内にご連絡・無料で見本作成</li><li><i>3</i>見本を見てからご判断</li></ol>
 </section>"""
 
 TEL_SVG = '<svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>'
@@ -79,15 +84,14 @@ def cta(call):
     return f"""<footer class="cta">
   <div class="cta-l">
     <p class="call">{call}</p>
-    <div class="tel"><div class="ti">{TEL_SVG}</div><b>099-210-3511</b><span>受付 9:00〜18:00<br>土日祝休み</span></div>
-    <p class="mail">メール <b>info@turtle-ad.com</b>　　同封のチラシでは、AI動画づくりもご紹介しています。</p>
-    <p class="co"><b>合同会社turtle ad（タートルアド）</b>　代表　見立 大作　〒891-0109 鹿児島県鹿児島市清和3-25-15</p>
+    <div class="tel"><div class="ti">{TEL_SVG}</div><b>099-210-3511</b><span>受付 9:00〜18:00<br>土日祝休み<br><em>info@turtle-ad.com</em></span></div>
+    <p class="co"><b>合同会社turtle ad</b>　代表 見立 大作　〒891-0109 鹿児島市清和3-25-15</p>
   </div>
-  <div class="cta-r"><div class="qrbox"><img src="qr-contact.svg" alt="お問い合わせフォームのQRコード"></div>
-    <p>QRから<br>24時間<br>お申込み<small>入力フォーム</small></p></div>
+  <div class="cta-r"><div class="qrbox"><img src="qr-hp.svg" alt="無料見本お申込みページのQRコード"></div>
+    <p>QRから<br>無料見本の<br>お申込み<small>24時間受付</small></p></div>
 </footer>"""
 
-FINE = """<p class="fine">※ドメインは御社名義でお取りします。24か月以上のご利用で、サイトのデータ（ZIP）とドメインの移管手続きを無償でお渡しします。24か月未満でのご解約は、5,500円×残りの月数をいただきます。※ご解約は毎月25日までのご連絡で翌月分から停止します。※ページの追加やデザインの変更など、大きな変更は別にお見積もりします。※特別価格はマイタウンガイド掲載企業さま限定です。詳しい条件は契約書に明記します。</p>"""
+FINE = """<p class="fine">※ドメインは御社名義でお取りします。24か月以上のご利用で、サイトのデータ（ZIP）とドメインの移管手続きを無償でお渡しします。※ご解約は毎月25日までのご連絡で翌月分から停止します。※ページの追加やデザインの変更など、大きな変更は別にお見積もりします。※特別価格はマイタウンガイド掲載企業さま限定です。詳しい条件は契約書に明記します。※同封のチラシでは、AI動画づくりもご紹介しています。</p>"""
 
 PHONES = """<div class="phones">
   <p class="phones-ttl">こんなホームページを、<br><em>御社の内容で</em>お作りします</p>
@@ -109,7 +113,7 @@ PHONES = """<div class="phones">
       <div class="map"></div>
     </div></div>
   </div>
-  <div class="qcol"><div class="qrbox"><img src="qr-demo.svg" alt="見本サイトのQRコード"></div><p>見本サイトを<br>スマホで見る<small>業種別の見本（デモ）</small></p></div></div>
+  <div class="qcol"><div class="qrbox"><img src="qr-demo.svg" alt="見本サイトのQRコード"></div><p>見本サイトを<br>スマホで見る<small>業種別の見本</small></p></div></div>
 </div>"""
 
 PAGE_A = f"""<div class="page" id="A">
@@ -123,16 +127,15 @@ PAGE_A = f"""<div class="page" id="A">
 </section>
 <section class="show">
 {PHONES}
-  <div class="merits">
-    {merit(1,"search","調べたら、<br>ちゃんと出てくる","名前で調べて何も出ないと、お客さまは不安になります。ページがあるだけで安心につながります。")}
-    {merit(2,"moon","お休みの日も夜中も、<br>御社を案内","メニュー・料金・地図・お店の様子を、いつでもお客さまに見てもらえます。")}
-    {merit(3,"phone","同じ説明の電話が減る","料金や場所、よくある質問をのせておけば、お問い合わせの前に分かっていただけます。")}
-    {merit(4,"people","人を募集するときにも<br>役立つ","働きたい方も、応募の前に会社を調べます。会社の様子が分かると安心です。")}
+  <div class="merits3">
+    {merit3(1,"search","調べたときに、ちゃんと出てくるように","名前で調べて何も出ないと、お客さまは不安になります。")}
+    {merit3(2,"moon","お休みの日も夜中も、御社を案内","メニュー・料金・地図を、いつでも見てもらえます。")}
+    {merit3(3,"phone","同じ説明の電話が減る","よくある質問をのせれば、電話の前に分かっていただけます。")}
   </div>
 </section>
 {price()}
-{monthly("作ったあとも、まかせて安心。<em>月々5,500円（税込）</em>にまるごと込み")}
-{push("まずは無料で、<em>御社のトップページの見本</em>をお見せします","<b>毎月先着3社まで。</b>見本を見てから決めてください。お断りもかまいません。")}
+{monthly("作ったあとも、まかせて安心")}
+{push("まずは無料で、<em>御社のトップページの見本</em>をお見せします","<b>毎月先着3社まで。</b>※見本は打ち合わせ用です（そのまま公開はできません）。")}
 </main>
 {cta("お電話ひとつで大丈夫です。<em>「案内を見た」</em>とお伝えください。")}
 {FINE}
@@ -145,7 +148,7 @@ PAGE_B = f"""<div class="page" id="B">
 <section>
   <h1>そのホームページ、「<em>御社のもの</em>」になっていますか？</h1>
   <p class="sub">御社名義のアドレスで、信用される「本当のホームページ」に。<b>33,000</b>円（税込）から。</p>
-  <p class="lead">いつもマイタウンガイドにご掲載いただき、ありがとうございます。無料のブログや作成サービスは手軽ですが、アドレスも中身も御社のものではありません。名刺やチラシにのせても恥ずかしくない、御社名義のホームページに作り直しませんか。</p>
+  <p class="lead">いつもマイタウンガイドにご掲載いただき、ありがとうございます。無料のブログや作成サービスは手軽で便利です。ただ、アドレスは御社のものにはなりません。御社名義のアドレスで、もっと信用されるホームページにしませんか。</p>
 </section>
 <section class="check-wrap">
   <div class="check"><h3>ひとつでも当てはまったら、<em>見直しどき</em>です</h3>
@@ -155,19 +158,19 @@ PAGE_B = f"""<div class="page" id="B">
     <div class="url old"><span class="lb">いま</span><span>〇〇blog.jp/user/〇〇〇</span><span class="ad">広告</span></div>
     <div class="arrow">▼</div>
     <div class="url new"><span class="lb">これから</span><span>www.<em>御社名</em>.jp</span></div>
-    <p>アドレスを見ただけで「<em>ちゃんとした会社</em>」と伝わります。</p>
+    <p>アドレスだけで「<em>ちゃんとした会社</em>」と伝わります。</p>
     <p class="r">今のページの文章や写真も、活かして作り直します。<br>今のドメインを使い続けたい場合もご相談ください。</p>
   </div>
 </section>
 <section class="merits4">
   {merit2(1,"globe","アドレスだけで、<br>信用が変わる","名刺やチラシでの印象が、まったく違います。")}
-  {merit2(2,"home","ある日突然、<br>消える心配がない","ドメインは御社名義なので安心です。")}
+  {merit2(2,"home","突然消える<br>心配が少ない","ドメインは御社名義なので安心です。")}
   {merit2(3,"shield","セキュリティ対策・<br>バックアップ込み","WordPressの更新も、月額に込みです。")}
   {merit2(4,"refresh","いつも<br>新しい情報に","写真や文章の変更は、LINEで送るだけ。")}
 </section>
 {price()}
-{monthly("作り直したあとも、<em>月々5,500円（税込）</em>に更新・修正まで込み")}
-{push("今のページを拝見して、<em>作り直した場合の見本</em>を無料でお見せします","<b>毎月先着3社まで。</b>見てから決めてください。お断りいただいてもかまいません。")}
+{monthly("作り直したあとも、まかせて安心")}
+{push("今のページを拝見して、<em>作り直した場合の見本</em>を無料でお見せします","<b>毎月先着3社まで。</b>※見本は打ち合わせ用です（そのまま公開はできません）。")}
 </main>
 {cta("「今のページ、どうかな？」の<em>ご相談だけでも</em>大丈夫です。")}
 {FINE}
