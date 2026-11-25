@@ -6,11 +6,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;900&family=Noto+Serif+JP:wght@600;900&family=Cormorant+Garamond:ital,wght@1,700&display=block" rel="stylesheet">
 <style>
 /* 945 x 396 px。deviceScaleFactor 2 で 1890 x 792（今の裏表紙の枠と同じ比率） */
-:root{--wine:#7d1d2c;--wine-d:#561320;--brown:#3a2420;--ink:#2e1e1a;--gold1:#9c7128;--gold2:#e9cf8a;--cream:#fbf5ec}
+:root{--wine:#1d5a3e;--wine-d:#123d29;--brown:#1d3a2b;--ink:#17291f;--gold1:#9c7128;--gold2:#e9cf8a;--cream:#f5f8ef}
 *{box-sizing:border-box;margin:0;padding:0}
 body{width:945px;height:396px;overflow:hidden;position:relative;font-family:"Noto Sans JP",sans-serif;color:var(--ink);background:var(--cream)}
 .goldtxt{background:linear-gradient(180deg,#fff1c4 0%,#e3bf6a 38%,#a87a2a 62%,#e6c878 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.head{position:absolute;left:0;right:0;top:0;height:60px;display:flex;align-items:center;padding:0 14px 0 16px;gap:14px;background:#fffaf3}
+.head{position:absolute;left:0;right:0;top:0;height:60px;display:flex;align-items:center;padding:0 14px 0 16px;gap:14px;background:#fbfcf6}
 .head img{height:22px}
 .h1{font-family:"Noto Serif JP",serif;font-weight:900;color:var(--brown);display:flex;align-items:flex-end;white-space:nowrap;line-height:1;flex:1;justify-content:center}
 .h1 .n4{font-size:62px;line-height:.82;margin-right:2px}
@@ -21,13 +21,13 @@ body{width:945px;height:396px;overflow:hidden;position:relative;font-family:"Not
 .row{position:absolute;left:0;right:0;top:60px;height:204px;display:grid;grid-template-columns:repeat(4,1fr);gap:3px;background:var(--gold1);border-top:3px solid var(--gold1);border-bottom:3px solid var(--gold1)}
 .cell{position:relative;overflow:hidden}
 .cell img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.cell::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(35,14,10,.88) 0%,rgba(35,14,10,.35) 42%,rgba(35,14,10,0) 64%),linear-gradient(180deg,rgba(35,14,10,.55) 0%,rgba(35,14,10,0) 26%)}
+.cell::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,34,22,.88) 0%,rgba(10,34,22,.35) 42%,rgba(10,34,22,0) 64%),linear-gradient(180deg,rgba(10,34,22,.55) 0%,rgba(10,34,22,0) 26%)}
 .tx{position:absolute;left:12px;right:8px;bottom:9px;z-index:2;color:#fff}
 .no{font-family:"Cormorant Garamond",serif;font-style:italic;font-weight:700;font-size:34px;line-height:.9;filter:drop-shadow(0 1px 2px rgba(0,0,0,.7));position:absolute;left:10px;top:6px;z-index:2}
 .tx h3{font-weight:900;font-size:29px;line-height:1.05;text-shadow:0 2px 6px rgba(0,0,0,.6);white-space:nowrap}
 .tx h3 small{display:block;font-size:15px;color:var(--gold2);margin-bottom:1px}
 .tx p{font-size:11.5px;font-weight:700;margin-top:4px;line-height:1.3}
-.foot{position:absolute;left:0;right:0;bottom:0;height:132px;background:linear-gradient(180deg,#3d2520,#2b1814);color:#fff;display:grid;grid-template-columns:190px 1fr 1fr 150px;gap:12px;padding:10px 12px 0 0}
+.foot{position:absolute;left:0;right:0;bottom:0;height:132px;background:linear-gradient(180deg,#1f4b36,#112f21);color:#fff;display:grid;grid-template-columns:190px 1fr 1fr 150px;gap:12px;padding:10px 12px 0 0}
 .staff{position:relative;overflow:hidden;margin-top:-10px}
 .staff img{position:absolute;left:0;bottom:-6px;width:200px}
 .staff span{position:absolute;left:6px;right:6px;bottom:5px;z-index:2;font-size:10px;font-weight:900;text-align:center;background:var(--wine);border:1px solid var(--gold2);border-radius:10px;padding:1px 0}
@@ -35,18 +35,20 @@ body{width:945px;height:396px;overflow:hidden;position:relative;font-family:"Not
 .foot .ad{font-size:10.5px;font-weight:700;line-height:1.35}
 .foot .tel{font-weight:900;font-size:27px;line-height:1.15;white-space:nowrap}
 .foot .tel small{font-size:13px;margin-right:3px;color:var(--gold2)}
-.foot .hr{font-size:9.5px;line-height:1.45;color:#eadfd6}
+.foot .hr{font-size:9.5px;line-height:1.45;color:#dfeadf}
 .qr{display:flex;gap:7px}
 .qr div{text-align:center}
 .qr img{width:66px;height:66px;display:block;background:#fff;padding:3px;border-radius:4px}
 .qr span{display:block;font-size:9.5px;font-weight:900;line-height:1.2;margin-top:2px}
+.kw{margin-left:auto;background:var(--wine);color:#fff;font-weight:900;font-size:11px;line-height:1.25;padding:5px 10px;border-radius:14px;border:1.5px solid var(--gold2);text-align:center;white-space:nowrap}
+.kw b{display:block;font-size:14.5px;color:#f3d98e}
 </style>
 </head>
 <body>
 <div class="head">
   <img src="img/logo.png" alt="Body Salon RISE">
   <div class="h1"><span class="n4 goldtxt">4</span><span class="t">つの悩みを、<b>ひとつ</b>のサロンで。</span></div>
-  <div class="inns"><span>指宿院</span><span>谷山院</span></div>
+  <div class="kw">ご予約・ご来店時に<b>「マイタウンを見た」</b>とお伝えください</div>
 </div>
 <div class="row">
   <div class="cell"><img src="../img/ai-waist.jpg" style="object-position:62% 45%" alt=""><span class="no goldtxt">01</span><div class="tx"><h3><small>体質改善</small>ダイエット</h3><p>食事と習慣から体質を整える</p></div></div>
@@ -55,7 +57,7 @@ body{width:945px;height:396px;overflow:hidden;position:relative;font-family:"Not
   <div class="cell"><img src="../img/hada.jpg" style="object-position:50% 40%" alt=""><span class="no goldtxt">04</span><div class="tx"><h3><small>フェイシャル</small>肌質改善</h3><p>お肌のお悩みに</p></div></div>
 </div>
 <div class="foot">
-  <div class="staff"><img src="img/inchou-cut.png" alt="院長2名"><span>国家資格（柔道整復師）の院長が担当</span></div>
+  <div class="staff"><img src="img/inchou-cut.png" alt="院長2名"><span>国家資格（柔道整復師・作業療法士）の院長が担当</span></div>
   <div><h4>指宿院</h4><div class="ad">指宿市大牟礼 3-25-23-1</div><div class="tel"><small>TEL</small>080-4279-2503</div><div class="hr">営業時間 10:00～19:00（完全予約制）<br>定休日 日曜祝日</div></div>
   <div><h4>谷山院</h4><div class="ad">鹿児島市小松原 1-48-11 SEAGREEN 小松原 102 号</div><div class="tel"><small>TEL</small>070-2376-8715</div><div class="hr">営業時間 9:30～19:00（完全予約制）<br>土曜日 9:30～18:00　定休日 日曜祝日</div></div>
   <div class="qr"><div><img src="img/qr-line-ibusuki.png" alt=""><span>指宿院 LINE</span></div><div><img src="img/qr-line-taniyama.png" alt=""><span>谷山院 LINE</span></div></div>

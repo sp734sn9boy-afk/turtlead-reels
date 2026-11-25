@@ -6,14 +6,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;900&family=Noto+Serif+JP:wght@600;900&family=Cormorant+Garamond:ital,wght@1,600;1,700&display=block" rel="stylesheet">
 <style>
 /* 1100 x 1556 px（A4比率）。deviceScaleFactor 2 で 2200 x 3112 に書き出し */
-:root{--wine:#7d1d2c;--wine-d:#561320;--brown:#3a2420;--ink:#2e1e1a;--gold1:#9c7128;--gold2:#e9cf8a;--cream:#fbf5ec;--cream2:#f3e6d3}
+:root{--wine:#1d5a3e;--wine-d:#123d29;--brown:#1d3a2b;--ink:#17291f;--gold1:#9c7128;--gold2:#e9cf8a;--cream:#f5f8ef;--cream2:#dfe9d6}
 *{box-sizing:border-box;margin:0;padding:0}
 body{width:1100px;height:1556px;overflow:hidden;position:relative;background:var(--cream);font-family:"Noto Sans JP",sans-serif;color:var(--ink)}
 .goldbg{background:linear-gradient(135deg,#a77a2c 0%,#f1d999 28%,#c39a48 52%,#f6e3a6 74%,#a77a2c 100%)}
 .goldtxt{background:linear-gradient(180deg,#fff1c4 0%,#e3bf6a 38%,#a87a2a 62%,#e6c878 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
 
 /* ヘッダー */
-.head{position:absolute;left:0;right:0;top:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 30px;background:#fffaf3}
+.head{position:absolute;left:0;right:0;top:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 30px;background:#fbfcf6}
 .head img{height:34px;display:block}
 .head .lead{font-weight:900;font-size:19px;color:var(--wine)}
 .inns{display:flex;gap:8px}
@@ -24,8 +24,8 @@ body{width:1100px;height:1556px;overflow:hidden;position:relative;background:var
 .cell{position:relative;overflow:hidden}
 .cell img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .cell::after{content:"";position:absolute;inset:0}
-.c1::after,.c2::after{background:linear-gradient(180deg,rgba(35,14,10,.82) 0%,rgba(35,14,10,.35) 38%,rgba(35,14,10,0) 60%)}
-.c3::after,.c4::after{background:linear-gradient(0deg,rgba(35,14,10,.85) 0%,rgba(35,14,10,.35) 40%,rgba(35,14,10,0) 62%)}
+.c1::after,.c2::after{background:linear-gradient(180deg,rgba(10,34,22,.82) 0%,rgba(10,34,22,.35) 38%,rgba(10,34,22,0) 60%)}
+.c3::after,.c4::after{background:linear-gradient(0deg,rgba(10,34,22,.85) 0%,rgba(10,34,22,.35) 40%,rgba(10,34,22,0) 62%)}
 .tx{position:absolute;z-index:2;color:#fff}
 .c1 .tx{left:26px;top:16px}.c2 .tx{right:26px;top:16px;text-align:right}
 .c3 .tx{left:26px;bottom:20px}.c4 .tx{right:26px;bottom:20px;text-align:right}
@@ -58,42 +58,44 @@ body{width:1100px;height:1556px;overflow:hidden;position:relative;background:var
 .photo2 img.p{position:absolute;left:-10px;bottom:-78px;width:550px;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 10%);mask-image:linear-gradient(90deg,transparent 0,#000 10%)}
 .medal{position:absolute;width:92px;height:92px;border-radius:50%;display:grid;place-items:center;text-align:center;box-shadow:0 5px 12px rgba(90,60,20,.3);z-index:3}
 .medal b{font-family:"Noto Serif JP",serif;font-weight:900;font-size:17px;line-height:1.2;color:#4a2a12}
-.medal b small{display:block;font-size:12.5px}
+.medal b small{display:block;font-size:11px;line-height:1.25;margin-top:2px}
 .m1{right:400px;top:70px}
 .prof{position:absolute;left:26px;right:520px;top:58px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.pc{background:#fff;border-radius:12px;border:2px solid var(--gold2);overflow:hidden;box-shadow:0 4px 12px rgba(60,30,20,.1)}
+.pc{background:#fff;border-radius:12px;border:2px solid var(--gold2);overflow:hidden;box-shadow:0 4px 12px rgba(20,50,35,.1)}
 .pc .ph{height:150px;overflow:hidden}
 .pc .ph img{width:100%;height:100%;object-fit:cover;display:block}
 .pc .bd{padding:8px 12px 10px}
 .pc .in{font-size:14px;font-weight:900;color:#fff;background:var(--wine);display:inline-block;padding:1px 10px;border-radius:14px}
 .pc .nm{font-family:"Noto Serif JP",serif;font-weight:900;font-size:30px;line-height:1.15;color:var(--brown);margin-top:3px}
 .pc .nm small{font-size:15px;margin-left:6px;color:var(--gold1)}
-.pc .q{font-size:15px;font-weight:700;line-height:1.45;color:#4b3a33;margin-top:4px}
+.pc .q{font-size:15px;font-weight:700;line-height:1.45;color:#2f4036;margin-top:4px}
 .pc .ql{font-size:12.5px;font-weight:700;color:var(--gold1);margin-top:3px}
 
 /* 下段：結果写真とQR */
 .low{position:absolute;left:26px;right:26px;top:1186px;height:196px;display:grid;grid-template-columns:304px 1fr;gap:16px;align-items:end}
 .res{position:relative;padding-top:26px;align-self:end;margin-bottom:6px}
-.res img{width:100%;height:auto;display:block;border-radius:12px;border:3px solid #fff;box-shadow:0 4px 12px rgba(60,30,20,.2)}
+.res img{width:100%;height:auto;display:block;border-radius:12px;border:3px solid #fff;box-shadow:0 4px 12px rgba(20,50,35,.2)}
 .res .cap{position:absolute;left:8px;top:0;background:var(--wine);color:#fff;font-weight:900;font-size:16px;padding:2px 14px;border-radius:20px}
-.res .note{position:absolute;right:8px;bottom:6px;font-size:11px;font-weight:700;color:#fff;background:rgba(43,24,20,.72);padding:1px 8px;border-radius:10px}
-.qr{background:#fff;border-radius:14px;border:2px solid var(--gold2);display:flex;align-items:center;padding:8px 18px;gap:14px;box-shadow:0 4px 12px rgba(60,30,20,.12);height:160px;margin-bottom:12px}
+.res .note{position:absolute;right:8px;bottom:6px;font-size:11px;font-weight:700;color:#fff;background:rgba(18,50,36,.78);padding:1px 8px;border-radius:10px}
+.qr{background:#fff;border-radius:14px;border:2px solid var(--gold2);display:flex;align-items:center;padding:8px 18px;gap:14px;box-shadow:0 4px 12px rgba(20,50,35,.12);height:136px;margin-bottom:12px;position:relative}
+.kw{position:absolute;left:-2px;right:-2px;top:-50px;height:40px;border-radius:22px;background:var(--wine);color:#fff;display:flex;align-items:center;justify-content:center;gap:6px;font-weight:900;font-size:19px;box-shadow:0 4px 10px rgba(20,50,35,.25);border:2px solid var(--gold2);white-space:nowrap}
+.kw b{font-size:24px;color:var(--wine);background:linear-gradient(135deg,#f6e3a6,#e3bf6a);padding:0 12px;border-radius:14px;line-height:1.35}
 .qr .msg{font-weight:900;font-size:23px;line-height:1.28;color:var(--wine);width:120px;flex:none}
 .qg{display:flex;gap:8px;flex:1;justify-content:space-between}
 .qg .q{text-align:center}
-.qg .q img{width:98px;height:98px;display:block}
+.qg .q img{width:86px;height:86px;display:block}
 .qg .q span{display:block;font-weight:900;font-size:13px;line-height:1.2;margin-top:3px;color:var(--brown)}
 .qg .q span.ln{color:#05a046}
 .qg .sep{width:2px;background:var(--cream2)}
 
 /* フッター */
-.foot{position:absolute;left:0;right:0;bottom:0;height:172px;background:linear-gradient(180deg,#3d2520,#2b1814);color:#fff;display:grid;grid-template-columns:1fr 1fr;padding:10px 36px 0;border-top:5px solid #c9a24f}
+.foot{position:absolute;left:0;right:0;bottom:0;height:172px;background:linear-gradient(180deg,#1f4b36,#112f21);color:#fff;display:grid;grid-template-columns:1fr 1fr;padding:10px 36px 0;border-top:5px solid #c9a24f}
 .foot .c+.c{padding-left:30px;border-left:1px solid #ffffff33}
 .foot h4{font-family:"Noto Serif JP",serif;font-weight:900;font-size:25px;line-height:1.2;color:var(--gold2)}
 .foot .ad{font-size:16px;font-weight:700;margin-top:0}
 .foot .tel{font-weight:900;font-size:46px;line-height:1.05;margin-top:0}
 .foot .tel small{font-size:24px;margin-right:6px;color:var(--gold2)}
-.foot .hr{font-size:15px;line-height:1.4;color:#eadfd6;font-weight:500}
+.foot .hr{font-size:15px;line-height:1.4;color:#dfeadf;font-weight:500}
 </style>
 </head>
 <body>
@@ -118,18 +120,19 @@ body{width:1100px;height:1556px;overflow:hidden;position:relative;background:var
 <div class="band"><span>ダイエット</span><i></i><span>整体</span><i></i><span>育毛</span><i></i><span>肌質改善</span></div>
 
 <div class="staffsec">
-  <div class="sttl">施術するのは、<b>国家資格をもつ院長</b>です<small>柔道整復師</small></div>
+  <div class="sttl">施術するのは、<b>国家資格をもつ院長</b>です<small>柔道整復師・作業療法士</small></div>
   <div class="photo2"><div class="ring"></div><img class="p" src="img/inchou-cut.png" alt="院長2名"></div>
-  <div class="medal goldbg m1"><b>国家資格<small>柔道整復師</small></b></div>
+  <div class="medal goldbg m1"><b>国家資格<small>柔道整復師<br>作業療法士</small></b></div>
   <div class="prof">
     <div class="pc"><div class="ph"><img src="../img/r-posture.jpg" style="object-position:30% 40%" alt=""></div><div class="bd"><span class="in">指宿院 院長</span><div class="nm">和田 諒真<small>柔道整復師</small></div><div class="q">「無理な提案や押しつけはせず、納得していただいてから施術します。」</div></div></div>
-    <div class="pc"><div class="ph"><img src="../img/r-treat.jpg" style="object-position:40% 40%" alt=""></div><div class="bd"><span class="in">谷山院 院長</span><div class="nm">和田 一真<small>柔道整復師</small></div><div class="q">「お悩みやご希望を、ていねいにうかがってから進めます。」</div></div></div>
+    <div class="pc"><div class="ph"><img src="../img/r-treat.jpg" style="object-position:40% 40%" alt=""></div><div class="bd"><span class="in">谷山院 院長</span><div class="nm">和田 一真<small>作業療法士</small></div><div class="q">「お悩みやご希望を、ていねいにうかがってから進めます。」</div></div></div>
   </div>
 </div>
 
 <div class="low">
   <div class="res"><img src="img/results-ad.jpg" alt="お客様の写真"><span class="cap">ダイエットコースのお客様</span><div class="note">※効果には個人差があります</div></div>
   <div class="qr">
+    <div class="kw">ご予約・ご来店の際に<b>「マイタウンを見た」</b>とお伝えください</div>
     <div class="msg">ご予約・<br>ご相談は<br>LINEで</div>
     <div class="qg">
       <div class="q"><img src="img/qr-line-ibusuki.png" alt=""><span class="ln">指宿院<br>LINE</span></div>
