@@ -1,4 +1,4 @@
-# 案内文 第3版（見本付き・スタンダード1本）A・B。
+# 案内文 第3版（見本付き・スタンダード1本・v3.1 安さを大きく）A・B。
 # 見本付き版（build_letter_sample.py）の部品を土台に、ページの中身を組み直す。
 # python3 build_letter_v3.py → letter_v3.html（ほかの版のファイルは変えない）
 import pathlib
@@ -18,19 +18,35 @@ exec(compile(src, "parts", "exec"), g)
 header, icon, merit3, push, cta, ADDR, HEAD = (g[k] for k in ("header", "icon", "merit3", "push", "cta", "ADDR", "HEAD"))
 
 # 左パネル：枠の下に一言（スタンダード内容）
-PHONES = g["PHONES"]
+PHONES = g["PHONES"].replace('御社のホームページの見本、<br><em>できています</em>', '御社のホームページの見本、<em>できています</em>')
 i = PHONES.rindex("</div>")
-PHONES = PHONES[:i] + '<p class="std-cap">見本は<b>検索対策込みのスタンダード</b>内容です</p>' + PHONES[i:]
+PHONES = PHONES[:i] + '<p class="std-cap"><b>仕上がり</b>は、この見本でご確認ください</p>' + PHONES[i:]
+
+def push(strong, span, flow=None):
+    return f"""<section class="push p3">
+  <div class="tag">御社の<b>見本</b></div>
+  <div class="t"><div class="t-h"><strong>{strong}</strong><div class="lim">お申込み期限<b>＿＿月＿＿日まで</b></div></div><span>{span}</span></div>
+</section>"""
+
+def header3():
+    h = header()
+    return h.replace('<div class="hd-badge">マイタウンガイド掲載企業さま限定のご案内</div>',
+        '<div class="hd-r"><div class="hd-badge">マイタウンガイド掲載企業さま限定のご案内</div><p class="hd-co">代表 見立 大作　〒891-0109 鹿児島市清和3-25-15</p></div>')
+
+def cta3(call, qtxt):
+    h = cta(call, qtxt)
+    i = h.index('<p class="co">'); j = h.index('</p>', i) + 4
+    return h[:i] + h[j:]
 
 def check_ic():
     return '<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'
 
 def price3():
     items = ["トップページ＋基本4〜5ページ", "スマホ対応", "お問い合わせフォーム", "SNS連携",
-             "検索対策<small>（検索で見つけてもらうための基本設定）</small>"]
-    lis = "".join(f'<li class="{"wide" if k == 0 else ""}">{check_ic()}<span>{x}</span></li>' for k, x in enumerate(items))
+             "検索対策<small class='in'>（検索で見つけてもらうための基本設定）</small>"]
+    lis = "".join(f'<li class="{"wide" if k in (0, 4) else ""}">{check_ic()}<span>{x}</span></li>' for k, x in enumerate(items))
     return f"""<section class="price3">
-<div class="sec-h"><h2><span class="blank"></span>様だけの特別価格です<small>（税込）</small></h2><span class="pl-lab big">掲載企業さま価格</span><span class="en">PRICE</span></div>
+<div class="sec-h"><h2>いつもお世話になっている<span class="blank"></span>様への、<em class="hl">感謝価格</em>です<small>（税込）</small></h2><span class="en">PRICE</span></div>
 <div class="pcard">
   <span class="pc-badge">見本と同じプラン</span>
   <div class="pc-l">
@@ -41,7 +57,7 @@ def price3():
   </div>
   <ul class="pc-r">{lis}</ul>
 </div>
-<p class="plans-note">原稿づくり・写真撮影はオプション（別途お見積もり）です。ほかのプランもご用意しています。お気軽にご相談ください。</p>
+<p class="cmp">この内容でこの価格は、掲載企業さまだけの感謝価格です。<b>ぜひ他社のお見積もりと比べてみてください。</b></p>
 </section>"""
 
 def domain(title, items):
@@ -49,37 +65,42 @@ def domain(title, items):
     return f"""<section class="dom"><div class="dom-h">{title}</div><ul class="dom-l">{cells}</ul></section>"""
 
 def monthly3(line):
-    return f"""<section class="monthly">
-  <div class="m-price"><p class="k">制作費とは別に</p><p class="v"><span class="pre">月々</span>5,500<span>円</span><small>（税込）</small></p><p class="s">ドメインは御社名義</p></div>
-  <div class="m-body">
-    <ul class="tags"><li>サーバー・ドメイン代</li><li>写真の差し替え・文章の変更</li><li>Googleマップの情報更新</li><li>WordPressの更新</li><li>セキュリティ対策・バックアップ</li></ul>
-    <p>{line}</p>
-  </div>
+    return f"""<section class="monthly m3">
+  <div class="m-top"><span class="m-k">制作費とは別に</span><h3>これが全部込みで、月々<b>5,500</b>円<small>（税込）</small></h3><p class="m-line">{line}</p></div>
+  <ul class="tags"><li>サーバー・ドメイン代</li><li>写真の差し替え・文章の変更</li><li>Googleマップの情報更新</li><li>WordPressの更新</li><li>セキュリティ対策・バックアップ</li></ul>
   <p class="m-term">月額は<b>24か月のご利用が前提</b>です（24か月未満で解約の場合は5,500円×残りの月数）</p>
 </section>"""
 
-FINE = """<p class="fine">※価格はすべて税込です。※制作費とは別に月額5,500円（税込）のご契約が必要です。※ドメインは御社名義でお取りします（取得・更新の費用は月額に含みます）。※24か月以上のご利用で、サイトのデータ（ZIP）とドメインの移管手続きを無償でお渡しします。※ご解約は毎月25日までのご連絡で翌月分から停止します。※ページの追加・デザイン変更は別途お見積もりです。※特別価格はマイタウンガイド掲載企業さま限定です。詳しい条件は契約書に明記します。※同封のチラシでは、AI動画づくりもご紹介しています。</p>"""
+def catch():
+    return """<div class="catch">
+  <p class="c1">月々<b>5,500</b><span>円</span>に、サーバー・ドメイン代まで込み。</p>
+  <p class="c2">制作費は 通常 <s>88,000円〜</s><i>→</i><b>55,000</b><span>円〜</span><small>（すべて税込）</small></p>
+</div>"""
 
-SPAN = ('お作りした見本は、<b>検索対策込みのスタンダードプラン（55,000円〜）の内容</b>です。'
-        '<b>見るだけ・お断りでも費用はかかりません。</b>文章や写真は仮のもので、打ち合わせで直してから公開します。'
-        '')
+FINE = """<p class="fine">※ドメインは御社名義でお取りします（取得・更新の費用は月額に含みます）。※24か月以上のご利用で、サイトのデータ（ZIP）とドメインの移管手続きを無償でお渡しします。※ご解約は毎月25日までのご連絡で翌月分から停止します。※ページの追加・デザイン変更、原稿づくり・写真撮影は別途お見積もりです（オプション）。ほかのプランもご相談ください。※特別価格（感謝価格）はマイタウンガイド掲載企業さま限定です。※見本はお申込み期限を過ぎたら削除します。詳しい条件は契約書に明記します。※同封のチラシでは、AI動画づくりもご紹介しています。</p>"""
+
+SPAN_TAIL = ('お作りした見本は、<b>検索対策込みのスタンダードプラン（55,000円〜）の内容</b>です。'
+        '<b>見るだけ・お断りでも費用はかかりません。</b>文章や写真は仮のもので、打ち合わせで直してから公開します。')
+SPAN_A = '御社らしさが伝わる、きれいなホームページをお作りします。仕上がりは、お作りした見本でご確認ください。' + SPAN_TAIL
+SPAN_B = '今のページをもとに、御社らしさが伝わる見本をお作りしました。仕上がりは、QRから今のページと見比べてご確認ください。' + SPAN_TAIL
+PUSH_H = '価格は抑えても、<em>仕上がりには手を抜きません。</em>'
 CALL2 = '<small>こちらからお電話することはありません。見るだけでもかまいません。</small>'
 
 PAGE_A = f"""<div class="page v3" id="A">
-{header()}
+{header3()}
 <main class="body">
 {ADDR}
 <section>
   <h1>御社のホームページの<em>見本</em>を、ひとつお作りしました。</h1>
-  <p class="sub">御社のホームページ、<b>55,000</b>円（税込）からお作りします。<small class="plus">＋月々5,500円（税込）</small></p>
-  <p class="lead">いつもマイタウンガイドにご掲載いただき、ありがとうございます。お客さまは、電話や来店の前に、まずスマホで御社の名前を調べます。日頃の感謝を込めて、御社のホームページの見本をひとつお作りしました。右下のQRコードから、スマホでご覧ください。</p>
+  {catch()}
+  <p class="lead">いつもマイタウンガイドにご掲載いただき、ありがとうございます。日頃の感謝を込めて、御社のホームページの見本をひとつお作りしました。右下のQRコードから、スマホでご覧ください。</p>
 </section>
 <section class="show">
 {PHONES}
   <div class="merits3">
-    {merit3(1,"search","調べたときに、ちゃんと出てくるように","名前で調べて何も出ないと、お客さまは不安になります。")}
-    {merit3(2,"moon","お休みの日も夜中も、御社を案内","メニュー・料金・地図を、いつでも見てもらえます。")}
-    {merit3(3,"phone","同じ説明の電話が減る","よくある質問をのせれば、電話の前に分かっていただけます。")}
+    {merit3(1,"search","調べたときに、ちゃんと出てくるように","")}
+    {merit3(2,"moon","お休みの日も夜中も、御社を案内","")}
+    {merit3(3,"phone","同じ説明の電話が減る","")}
   </div>
 </section>
 {domain('<b>「www.<em>御社名</em>.jp」</b>自社のアドレスを持つと、信用が変わります', [
@@ -88,20 +109,20 @@ PAGE_A = f"""<div class="page v3" id="A">
   ("home","御社名義の「財産」として残る"),
   ("shield","突然消える心配が少ない")])}
 {price3()}
-{monthly3("写真の差し替えや文章の変更は、<b>LINEで送るだけ</b>。パソコンが苦手でも安心。")}
-{push("すでに<em>御社の見本</em>をお作りしました。スマホでQRを読んで、ご覧ください。", SPAN, ["QRで見本を見る","気に入ったらお電話","打ち合わせで直して公開"])}
+{monthly3("変更のご依頼は、<b>LINEで送るだけ</b>です。")}
+{push(PUSH_H, SPAN_A, ["QRで見本を見る","気に入ったらお電話","打ち合わせで直して公開"])}
 </main>
-{cta("気になったらお電話ください。<em>「見本を見た」</em>とお伝えください。" + CALL2, "御社の<br>ホームページの<br><em>見本はこちら</em>")}
+{cta3("気になったらお電話ください。<em>「見本を見た」</em>とお伝えください。" + CALL2, "御社の<br>ホームページの<br><em>見本はこちら</em>")}
 {FINE}
 </div>"""
 
 PAGE_B = f"""<div class="page pB v3" id="B">
-{header()}
+{header3()}
 <main class="body">
 {ADDR}
 <section>
   <h1 class="long">御社のホームページを「<em>作り直したら</em>」の見本を、お作りしました。</h1>
-  <p class="sub">御社名のアドレスで、もっと信頼されるホームページに。<span class="br"></span><b>55,000</b>円（税込）から。<small class="plus">＋月々5,500円（税込）</small></p>
+  {catch()}
   <p class="lead">いつもマイタウンガイドにご掲載いただき、ありがとうございます。日頃の感謝を込めて、今の御社のページを拝見し、御社名のアドレスで作り直した場合の見本をひとつお作りしました。右下のQRコードから、今のページと見比べてみてください。</p>
 </section>
 <section class="check-wrap">
@@ -122,10 +143,10 @@ PAGE_B = f"""<div class="page pB v3" id="B">
   ("shield","突然消える心配が少ない"),
   ("people","取引先・求人にも安心感")])}
 {price3()}
-{monthly3("作り直したあとも、写真や文章の変更は<b>LINEで送るだけ</b>。ほったらかしにしません。")}
-{push("今のページをもとに、<em>作り直した見本</em>をお作りしました。QRからご覧ください。", SPAN, ["QRで今のページと見比べる","気に入ったらお電話","打ち合わせで直して公開"])}
+{monthly3("作り直したあとも、変更は<b>LINEで送るだけ</b>。")}
+{push(PUSH_H, SPAN_B, ["QRで今のページと見比べる","気に入ったらお電話","打ち合わせで直して公開"])}
 </main>
-{cta("<em>「見本を見た」</em>のひとことで大丈夫です。ご相談だけでもどうぞ。" + CALL2, "作り直した<br>御社の見本は<br><em>こちら</em>")}
+{cta3("<em>「見本を見た」</em>のひとことで大丈夫です。ご相談だけでもどうぞ。" + CALL2, "作り直した<br>御社の見本は<br><em>こちら</em>")}
 {FINE}
 </div>"""
 
