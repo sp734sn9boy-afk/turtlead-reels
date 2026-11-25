@@ -260,3 +260,8 @@
 .c4 .c1 b{font-size:24pt}
 .c4 .c1 span{font-size:13.5pt}
 .pB.v3 .body{gap:.8mm}
+
+/* ===== v3.4 下の余白5mm（印刷で切れないように） ===== */
+.v3 .fine{padding-bottom:5mm}
+.pB.v3 .body{gap:1.1mm}
+.pB .dom-l b{word-break:keep-all}
