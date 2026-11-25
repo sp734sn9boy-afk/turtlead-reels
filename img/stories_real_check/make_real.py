@@ -46,7 +46,19 @@ def icon_bag(d, cx, cy, r, col):
         d.ellipse(ms.P(cx + r * sx - r * .045, cy - r * .1, cx + r * sx + r * .045, cy - r * .01), fill=ms.WHITE)
 
 
+def icon_roof(d, cx, cy, r, col):
+    """板金の屋根（三角の屋根に、たてのつなぎ目）。図形で自作"""
+    top, base = cy - r * .44, cy + r * .28
+    d.polygon([ms.P(cx - r * .7, base), ms.P(cx, top), ms.P(cx + r * .7, base)], fill=col)
+    for k in (-.42, -.2, 0, .2, .42):
+        y0 = top + (base - top) * abs(k) / .7 + r * .1
+        d.rectangle(ms.P(cx + r * k - r * .022, y0, cx + r * k + r * .022, base), fill=ms.WHITE)
+    d.rounded_rectangle(ms.P(cx - r * .76, base, cx + r * .76, base + r * .13), radius=int(r * .04 * S), fill=col)
+
+
 ms.ICONS["shop"] = icon_bag
+ms.ICONS["roof"] = icon_roof
+vs.SOFT["roof"] = dict(main=(124, 152, 174), deep=(62, 92, 116), pale=(228, 236, 243))        # 屋根・板金: スレート色
 ms.ICONS["pest"] = ms.icon_house
 ms.THEMES["shop"] = dict(main=(224, 82, 128), dark=(146, 30, 78), pale=(253, 230, 238))      # お買い物: ピンク
 vs.SOFT["pest"] = dict(main=(196, 156, 118), deep=(134, 92, 58), pale=(246, 236, 224))       # シロアリ: 茶系
@@ -68,24 +80,23 @@ SPECS = [
          hook="シロアリ・害虫にこまったら", edition_name="奄美大島版", count_label="シロアリ・害虫の相談先",
          companies=[("有限会社奄美通商", "施工後5年保証＋毎年無料点検", "0997-53-0067")]),
     dict(file="20261207_aira_isa_reform", style="soft", kind="house", area="姶良・伊佐", area_big="姶良伊佐",
-         particle="で", hook="リフォームするなら", edition_name="姶良市版・伊佐版", count_label="リフォームの相談先",
+         particle="で", hook="家づくり・リフォームなら", edition_name="姶良市版・伊佐版",
+         count_label="家づくり・リフォームの相談先",
          companies=[("合同会社カネユミ建築", "外壁塗装から水まわりまでおまかせ", "0120-698-222"),
-                    ("匠塗（TAKUTO）", "一級技能士が施工・見積無料", "090-8839-2538")]),
+                    ("日置住建 アイホーム設計", "冬暖かく夏涼しい家。新築もリフォームも", "0993-57-3222")]),
     dict(file="20261209_tanegashima_kuruma1", style="strong", kind="car", area="種子島", particle="で",
          hook="車のことなら", edition_name="種子島版", count_label="たよれる車屋さん", part="その1",
          companies=[("ロータスイトウ", "指定工場で車検・整備", "0997-22-0222"),
                     ("株式会社 南星", "スピード車検・当日仕上げOK", "0997-23-2838"),
                     ("種子島ファミリーモータース", "新車・中古車の販売と買取", "0997-28-0913")]),
-    dict(file="20261211_okinoerabu_omise1", style="strong", kind="shop", area="沖永良部", particle="で",
-         hook="お店をさがすなら", edition_name="沖永良部版", count_label="島のお店・蔵元", part="その1",
+    dict(file="20261211_okinoerabu_omiyage", style="strong", kind="shop", area="沖永良部", particle="で",
+         hook="お土産を買うなら", edition_name="沖永良部版", count_label="島のお土産さがし",
          companies=[("ニシムタ", "キャン★ドゥの100円ショップあり", "0997-93-1147"),
-                    ("沖永良部酒造株式会社", "島の焼酎をつくる蔵元", "0997-92-0185"),
-                    ("新納酒造株式会社", "予約で工場見学ができる", "0997-93-4620")]),
-    dict(file="20261214_minamikyushu_reform", style="soft", kind="house", area="南九州市", particle="で",
-         hook="家をリフォームするなら", edition_name="南九州市版", count_label="リフォームの相談先",
+                    ("森商事 主婦の店", "島の花・果物・お土産を全国へ発送", "0997-93-2531")]),
+    dict(file="20261214_minamikyushu_yane", style="soft", kind="roof", area="南九州市", particle="で",
+         hook="屋根・板金の相談なら", edition_name="南九州市版", count_label="屋根・板金の相談先",
          companies=[("株式会社塗木板金塗装", "一級塗装技能士が在籍", "0993-84-0408"),
-                    ("株式会社 元脇板金工業", "一級技能士の屋根・外壁板金", "0993-25-4114"),
-                    ("冨山塗装", "遮熱・断熱塗装と雨漏り防水", "0993-23-4552")]),
+                    ("株式会社 元脇板金工業", "一級技能士の屋根・外壁板金", "0993-25-4114")]),
 ]
 
 
@@ -154,6 +165,7 @@ def prepare_strong(spec):
     ch = min((bot - top - gap * (n - 1)) / n, 300)
     y0 = top + (bot - top - (ch * n + gap * (n - 1))) / 2
     F["cards"], F["card_y"] = [], []
+    k = min(1.25, ch / 236)                      # 2社のときはカードが大きいので文字も大きく
     for i, (name, strong, tel) in enumerate(comps):
         def f_card(d, i=i, name=name, strong=strong, tel=tel):
             d.rounded_rectangle(ms.P(6, 8, cw + 6, ch + 8), radius=int(26 * S), fill=t["pale"])
@@ -163,10 +175,10 @@ def prepare_strong(spec):
             ms.draw_text(d, (28 + nr, ch / 2 - 3), str(i + 1), ms.font(60), ms.WHITE, anchor="mm")
             tx = 28 + nr * 2 + 24
             inner = cw - 28 - tx
-            ms.draw_text(d, (tx, ch * .22), name, ms.font(fit(name, inner, 60)), ms.INK, anchor="lm")
-            ms.draw_text(d, (tx, ch * .52), strong, ms.font(fit(strong, inner, 40, min_size=26), bold=False), ms.SUB, anchor="lm")
-            ms.icon_phone(d, tx, ch * .81 - 19, 38, t["main"])
-            ms.draw_text(d, (tx + 38 * 1.9 + 14, ch * .81), tel, ms.font(54), t["dark"], anchor="lm")
+            ms.draw_text(d, (tx, ch * .22), name, ms.font(fit(name, inner, int(60 * k))), ms.INK, anchor="lm")
+            ms.draw_text(d, (tx, ch * .52), strong, ms.font(fit(strong, inner, int(40 * k), min_size=26), bold=False), ms.SUB, anchor="lm")
+            ms.icon_phone(d, tx, ch * .81 - 19 * k, 38 * k, t["main"])
+            ms.draw_text(d, (tx + 38 * k * 1.9 + 14, ch * .81), tel, ms.font(54 * k), t["dark"], anchor="lm")
         F["cards"].append(shape(cw + 8, ch + 10, f_card))
         F["card_y"].append(y0 + i * (ch + gap) + (ch + 10) / 2)
     M["F"] = F

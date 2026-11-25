@@ -295,7 +295,11 @@ def prepare(spec):
         nm = stxt(name, rfit(name, cw - (tx - m) - (0 if two else telr.width) - 44, (72 if ch >= 240 else 62) if two else 60), INK)
         if two:            # 社名／強み／電話の3段
             card.alpha_composite(nm, (tx, int(m + ch * .24 - nm.height / 2)))
-            st = strong_row(strong, 44 if ch >= 240 else 38, SUB, bold=False)
+            ssz = 44 if ch >= 240 else 38
+            st = strong_row(strong, ssz, SUB, bold=False)
+            while ssz > 28 and st.width > m + cw - tx - 30:       # 長い強みは枠に入るまで縮める
+                ssz -= 2
+                st = strong_row(strong, ssz, SUB, bold=False)
             card.alpha_composite(st, (tx, int(m + ch * .52 - st.height / 2)))
             card.alpha_composite(telr, (tx - 24, int(m + ch * .8 - telr.height / 2)))
         else:              # 3社以上: 社名＋電話／強み
