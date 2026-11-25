@@ -68,7 +68,7 @@ def domain(title, items, note=""):
 def monthly3(line):
     return f"""<section class="monthly m3">
   <div class="m-top"><span class="m-k">制作費とは別に</span><h3>これが全部込みで、月々<b>5,500</b>円<small>（税込）</small></h3><p class="m-line">{line}</p></div>
-  <ul class="tags"><li>サーバー・ドメイン代</li><li>写真の差し替え・文章の変更</li><li>Googleマップの情報更新</li><li>WordPressの更新</li><li>セキュリティ対策・バックアップ</li></ul>
+  <ul class="tags"><li>サーバー・ドメイン代</li><li>写真の差し替え・文章の変更</li><li>Googleマップの情報更新</li><li>WordPressの更新</li><li>暗号化（https）・セキュリティ・バックアップ</li></ul>
   <p class="m-term">月額は<b>24か月のご利用が前提</b>です（24か月未満で解約の場合は5,500円×残りの月数）</p>
 </section>"""
 
@@ -145,14 +145,14 @@ PAGE_B = f"""<div class="page pB v3" id="B">
     <div class="url old o3"><span class="lb">いま</span><div class="st"><span class="u">〇〇blog.jp/…<i class="ad">広告</i></span><span><i class="wn">!</i>保護されていない通信</span><span><i class="wn">!</i>スマホで崩れる・古いまま</span></div></div>
     <div class="arrow">▼</div>
     <div class="url new"><span class="lb">これから</span><span>www.<em>御社名</em>.com</span></div>
-    <div class="nt"><span><b>✓</b>安心して見られる</span><span><b>✓</b>スマホでもパソコンでも見やすい</span></div>
+    <div class="nt"><span><b>✓</b>鍵マーク付き（https）</span><span><b>✓</b>スマホでもパソコンでも見やすい</span></div>
     <p>アドレス・安心・見やすさを、<em>まとめて新しく。</em></p>
     <p class="r">今お持ちのドメインを使い続けたい場合もご相談ください<br>（費用の扱いはご相談時にご説明します）。</p>
   </div>
 </section>
 {domain('<b>作り直すと、</b>ここが変わります', [
   ("globe","御社名のアドレスで、<br>信用が変わる"),
-  ("shield","お客さまが<br>安心して見られる"),
+  ("shield","安全の鍵マーク<br>付き（https）に"),
   ("phone","スマホでも<br>パソコンでも見やすい"),
   ("home","借りものでなく、<br>御社の財産に")])}
 {price3()}
