@@ -265,3 +265,25 @@
 .v3 .fine{padding-bottom:5mm}
 .pB.v3 .body{gap:1.1mm}
 .pB .dom-l b{word-break:keep-all}
+
+/* ===== v3.5 Bの比較パネル（3タイプ共通）・注意書きの改行 ===== */
+.nw{white-space:nowrap}
+.v3 .fine{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}
+.url.old.o3{border-radius:2mm;align-items:center;padding:.9mm 2.4mm;font-family:var(--jp);opacity:1;background:#d9dee8}
+.o3 .st{display:flex;flex-wrap:wrap;gap:.6mm 2.4mm;min-width:0}
+.o3 .st span{display:inline-flex;align-items:center;gap:.8mm;font-size:9pt;font-weight:700;color:#4a5570;line-height:1.3;white-space:nowrap}
+.o3 .st span.u{font-family:var(--en);font-weight:500}
+.o3 .ad{font-style:normal;font-family:var(--jp);font-size:8pt;font-weight:900;color:#fff;background:#b8a04a;border-radius:.8mm;padding:0 1.2mm;margin-left:1mm}
+.o3 .wn{font-style:normal;display:inline-grid;place-items:center;width:3.4mm;height:3.4mm;border-radius:50%;background:#d9534f;color:#fff;font-family:var(--en);font-size:8pt;font-weight:700}
+.nt{position:relative;display:flex;gap:2.4mm;justify-content:center;margin-top:.4mm}
+.nt span{font-size:9.2pt;font-weight:900;color:#fff;white-space:nowrap}
+.nt b{color:var(--cyan);margin-right:.6mm}
+.pB .ba p{margin-top:.2mm}
+.pB .ba{padding:1.4mm 3.4mm;gap:.5mm}
+.pB .arrow{line-height:.6}
+.pB.v3 .body{gap:.9mm}
+.pB .dom{grid-template-columns:28mm minmax(0,1fr)}
+.pB .dom-l .di{display:none}
+.pB .dom-l li{padding:.8mm 1.6mm;justify-content:center;text-align:center}
+.pB .dom-l b{font-size:9.6pt;letter-spacing:-.03em;line-height:1.3}
+.pB.v3 .body{gap:.7mm}
