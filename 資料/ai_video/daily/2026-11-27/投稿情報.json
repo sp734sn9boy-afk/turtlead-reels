@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-27",
+  "fact_checked": true,
+  "instagram": {
+    "video": "turtle_ai_2026-11-27_insta_tiktok.mp4",
+    "caption_file": "キャプション_instagram.txt"
+  },
+  "youtube": {
+    "video": "turtle_ai_2026-11-27_youtube.mp4",
+    "description_file": "概要欄_youtube.txt",
+    "enabled": true,
+    "tags": ["Google", "DeepMind", "AIテスト", "AIの使い方", "AIニュース"]
+  }
+}
