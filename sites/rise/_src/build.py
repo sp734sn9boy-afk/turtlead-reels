@@ -448,8 +448,8 @@ def build_top():
   <div class="sh"><span class="en">First Visit</span><h2><span class="ib">はじめての方へ</span> <b class="ib">初回限定キャンペーン</b></h2><p>はじめての方に、まずは気軽に体験していただける料金をご用意しています。</p></div>
   <div class="kwwrap">{kw_ribbon()}<p class="kw-note">はじめての方（ご新規の方）は、下の初回料金で体験いただけます。</p></div>
   <div class="cpgrid">
-   <div class="cpc"><div class="hd"><span>01</span><h3>ダイエット</h3></div><ul><li><span class="nm">初回カウンセリング</span><span class="pr">500<small>円</small></span></li></ul><a class="more" href="diet/">ダイエットについて →</a></div>
-   <div class="cpc"><div class="hd"><span>02</span><h3>整体</h3></div><ul><li><span class="nm">整体 初回施術</span><span class="pr">1,000<small>円</small></span></li></ul><a class="more" href="seitai/">整体について →</a></div>
+   <div class="cpc"><div class="hd"><span>01</span><h3>ダイエット</h3></div><ul><li><span class="nm">初回カウンセリング</span><span class="pr"><span class="was">通常 6,600円 →</span>500<small>円</small></span></li></ul><a class="more" href="diet/">ダイエットについて →</a></div>
+   <div class="cpc"><div class="hd"><span>02</span><h3>整体</h3></div><ul><li><span class="nm">整体 初回施術</span><span class="pr"><span class="was">通常 4,500円 →</span>1,000<small>円</small></span></li></ul><a class="more" href="seitai/">整体について →</a></div>
    <div class="cpc"><div class="hd"><span>03</span><h3>育毛</h3></div><ul><li><span class="nm">育毛施術 初回限定</span><span class="pr"><span class="was">通常 55,000円 →</span>38,500<small>円</small></span></li></ul><a class="more" href="ikumou/">育毛について →</a></div>
    <div class="cpc"><div class="hd"><span>04</span><h3>肌質改善</h3></div><ul><li><span class="nm">肌質改善コース 初回限定</span><span class="pr"><span class="was">通常 11,000円 →</span>5,500<small>円</small></span></li></ul><a class="more" href="hada/">肌質改善について →</a></div>
   </div>
@@ -618,7 +618,7 @@ PAGES = {
               ("測定・姿勢チェック", "体の状態や姿勢のゆがみを確かめ、太りやすい原因を探ります。"),
               ("プランのご提案", "整体と食事の見直しを組み合わせ、3ヶ月コースなどあなたに合うプランをご提案します。")],
         price_h="はじめての方へ　初回限定",
-        prices=[("初回カウンセリング", "はじめての方（ご新規の方）", "500"),
+        prices=[("初回カウンセリング", "はじめての方（ご新規の方）", '<span class="was">通常 6,600円 →</span>500'),
                 ("3ヶ月コース", "カウンセリングの内容に合わせてご案内", None)],
         price_note="※料金は税込です。2回目以降の料金・3ヶ月コースの料金は、カウンセリング時にご案内します。お支払いは現金・クレジットカードがご利用いただけます。",
         faq=[("本当に運動しなくても痩せますか？", "ハードな運動や無理な食事制限は行いません。体質に合わせた食事の見直しと整体で、無理なく健康的に痩せる方法をご提案します（効果には個人差があります）。"),
@@ -653,7 +653,7 @@ PAGES = {
               ("姿勢・体のチェック", "姿勢や骨盤のゆがみ、動きのクセを確かめて、原因を探ります。"),
               ("施術・セルフケアのご提案", "体に合わせて施術し、ご自宅でできるケアや通い方をご提案します。")],
         price_h="はじめての方へ　初回限定",
-        prices=[("整体 初回施術", "はじめての方（ご新規の方）", "1,000")],
+        prices=[("整体 初回施術", "はじめての方（ご新規の方）", '<span class="was">通常 4,500円 →</span>1,000')],
         price_note="※料金は税込です。2回目以降の料金は、カウンセリング時にご案内します。お支払いは現金・クレジットカードがご利用いただけます。",
         faq=[("痛みが強くても受けられますか？", "強い痛みやしびれ、けがの直後などは、まず医療機関の受診をおすすめします。状態をうかがったうえで、施術ができるかをご案内します。"),
              ("骨盤矯正は痛くないですか？", "力加減を確かめながら行います。痛みや不安があるときは、施術中でもお気軽にお伝えください。"),
