@@ -533,3 +533,5 @@ section{padding:88px 0}
   .js .cell img,.js .cell .tx,.js .badge,.js .badge .in::after{animation:none!important}
   .js .rv{opacity:1;transform:none;transition:none}
 }
+/* 通常価格（初回限定の比較表示） */
+.pr .was{display:block;font-size:13px;font-weight:700;color:var(--sub,#5b6b61);letter-spacing:0;line-height:1.4;margin-bottom:2px}

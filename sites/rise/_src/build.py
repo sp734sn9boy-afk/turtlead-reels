@@ -27,16 +27,17 @@ SHOPS = {
     "ibu": dict(name="指宿院", full="Body Salon RISE 指宿院", zip="891-0401", region="鹿児島県", city="指宿市",
                 street="大牟礼3丁目25-23-1", addr="鹿児島県指宿市大牟礼3丁目25-23-1", addr_q="鹿児島県指宿市大牟礼3丁目25-23-1", short="指宿市大牟礼 3-25-23-1",
                 tel="080-4279-2503", telh="08042792503", line=LINE_IBU, ig=IG_IBU, igname="@wada.ibusuki",
-                hours="10:00～19:00（完全予約制）", closed="日曜・祝日", chief="和田 諒真（柔道整復師）",
+                hours="平日 10:00～19:00／土曜 10:00～18:00（完全予約制）", closed="日曜・祝日", chief="和田 諒真（柔道整復師）",
                 extra="指宿駅から車で約3分／駐車場3台",
                 map="https://www.google.com/maps?q=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E6%8C%87%E5%AE%BF%E5%B8%82%E5%A4%A7%E7%89%9F%E7%A4%BC3%E4%B8%81%E7%9B%AE25-23-1&output=embed",
-                spec=[dict(d=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"], o="10:00", c="19:00")]),
+                spec=[dict(d=["Monday","Tuesday","Wednesday","Thursday","Friday"], o="10:00", c="19:00"),
+                      dict(d=["Saturday"], o="10:00", c="18:00")]),
     "tani": dict(name="谷山院", full="Body Salon RISE 谷山院", zip="891-0114", region="鹿児島県", city="鹿児島市",
                  street="小松原1丁目48-11 SEAGREEN小松原102号", addr='鹿児島県鹿児島市小松原1丁目48-11 <span class="ib">SEAGREEN 小松原102号</span>', addr_q="鹿児島県鹿児島市小松原1丁目48-11",
                  short='<span class="ib">鹿児島市小松原 1-48-11</span> <span class="ib">SEAGREEN 小松原 102 号</span>',
                  tel="070-2376-8715", telh="07023768715", line=LINE_TANI, ig=IG_TANI, igname="@taniyama.diet",
                  hours="平日 9:30～19:00／土曜 9:30～18:00（完全予約制）", closed="日曜・祝日", chief="和田 一真（作業療法士）",
-                 extra="鹿児島市谷山エリア",
+                 extra="駐車場なし（近くのコインパーキングをご利用ください）",
                  map="https://www.google.com/maps?q=%E9%B9%BF%E5%85%90%E5%B3%B6%E5%B8%82%E5%B0%8F%E6%9D%BE%E5%8E%9F1-48-11&output=embed",
                  spec=[dict(d=["Monday","Tuesday","Wednesday","Thursday","Friday"], o="09:30", c="19:00"),
                        dict(d=["Saturday"], o="09:30", c="18:00")]),
@@ -283,8 +284,8 @@ def biz_ld(r):
     for k in ("ibu", "tani"):
         s = SHOPS[k]
         d = {"@type": "HealthAndBeautyBusiness", "@id": (url("") or "") + "#" + k, "name": s["full"],
-             "alternateName": "ボディサロンライズ " + s["name"],
-             "description": "ダイエット・整体・育毛・肌質改善の4つのメニューを提供するボディサロン（完全予約制）。",
+             "alternateName": "ボディーサロンライズ " + s["name"],
+             "description": "ダイエット・整体・育毛・肌質改善の4つのメニューを提供するボディーサロン（完全予約制）。",
              "image": url("img/ogp.jpg") or "img/ogp.jpg",
              "telephone": s["tel"],
              "address": {"@type": "PostalAddress", "postalCode": s["zip"], "addressRegion": s["region"],
@@ -326,10 +327,10 @@ def build_top():
         ("育毛・肌質改善だけでも利用できますか？", "まずは公式LINEからお気軽にご相談ください。お悩みやご希望をうかがい、合うメニューをご案内します。"),
         ("支払い方法は何がありますか？", "現金・クレジットカードがご利用いただけます。"),
         ("子ども連れや男性でも利用できますか？", "はい。子連れの方も男性の方も歓迎しています。完全予約制なので、周りを気にせずご相談いただけます。"),
-        ("駐車場はありますか？", "指宿院は3台分ご用意しています。谷山院は、ご予約の際にお問い合わせください。"),
+        ("駐車場はありますか？", "指宿院は3台分ご用意しています。谷山院は専用の駐車場がないため、近くのコインパーキングをご利用ください。"),
     ]
     title = "指宿・谷山のダイエット・整体・育毛・肌質改善｜Body Salon RISE"
-    desc = "鹿児島県指宿市・鹿児島市谷山のBody Salon RISE（ボディサロンライズ）。ダイエット・整体・育毛・肌質改善の4つの悩みを、ひとつのサロンで。国家資格（柔道整復師・作業療法士）をもつ院長がご案内します。完全予約制。"
+    desc = "鹿児島県指宿市・鹿児島市谷山のBody Salon RISE（ボディーサロンライズ）。ダイエット・整体・育毛・肌質改善の4つの悩みを、ひとつのサロンで。国家資格（柔道整復師・作業療法士）をもつ院長がご案内します。完全予約制。"
     ld = {"@context": "https://schema.org", "@graph": biz_ld(r) + [faq_ld(faq)]}
     if BASE_URL:
         ld["@graph"].append({"@type": "WebSite", "name": "Body Salon RISE", "url": BASE_URL})
@@ -371,7 +372,7 @@ def build_top():
  </div></div>
 </section>
 <div class="band">
- <h1><span class="pre">指宿・谷山のボディサロン「Body Salon RISE」</span><span class="w">ダイエット</span><span class="sep">・</span><span class="w">整体</span><span class="sep">・</span><span class="w">育毛</span><span class="sep">・</span><span class="w">肌質改善</span></h1>
+ <h1><span class="pre">指宿・谷山のボディーサロン「Body Salon RISE」</span><span class="w">ダイエット</span><span class="sep">・</span><span class="w">整体</span><span class="sep">・</span><span class="w">育毛</span><span class="sep">・</span><span class="w">肌質改善</span></h1>
 </div>
 <div class="kwbar">
  <div class="wrap in">
@@ -386,7 +387,7 @@ def build_top():
   <div class="row">
    <div class="txt">
     <p class="big"><span class="ib">痩せたい。</span><span class="ib">痛みをなんとかしたい。</span><br><span class="ib">髪や肌のことも、</span><b class="ib">まとめて相談したい。</b></p>
-    <p>Body Salon RISE（ボディサロンライズ）は、鹿児島県指宿市と鹿児島市谷山にある、完全予約制のボディサロンです。</p>
+    <p>Body Salon RISE（ボディーサロンライズ）は、鹿児島県指宿市と鹿児島市谷山にある、完全予約制のボディーサロンです。</p>
     <p>ダイエット・整体・育毛・肌質改善の4つのメニューを、ひとつのサロンでご相談いただけます。いくつもお店を回らなくても大丈夫。カウンセリングで、今のあなたにいちばん合う進め方からご提案します。</p>
     <p>施術するのは、国家資格（柔道整復師・作業療法士）をもつ院長です。</p>
    </div>
@@ -445,14 +446,14 @@ def build_top():
 <section class="cp on-dark" id="cp">
  <div class="wrap">
   <div class="sh"><span class="en">First Visit</span><h2><span class="ib">はじめての方へ</span> <b class="ib">初回限定キャンペーン</b></h2><p>はじめての方に、まずは気軽に体験していただける料金をご用意しています。</p></div>
-  <div class="kwwrap">{kw_ribbon()}<p class="kw-note">ご予約・ご来店の際にお伝えいただくと、下の初回料金で体験いただけます。</p></div>
+  <div class="kwwrap">{kw_ribbon()}<p class="kw-note">はじめての方（ご新規の方）は、下の初回料金で体験いただけます。</p></div>
   <div class="cpgrid">
-   <div class="cpc"><div class="hd"><span>01</span><h3>ダイエット</h3></div><ul><li><span class="nm">初回カウンセリング＆姿勢矯正</span><span class="pr">500<small>円</small></span></li></ul><a class="more" href="diet/">ダイエットについて →</a></div>
-   <div class="cpc"><div class="hd"><span>02</span><h3>整体</h3></div><ul><li><span class="nm">整体 初回施術</span><span class="pr">1,000<small>円</small></span></li><li><span class="nm">ブライダル整体 初回施術</span><span class="pr">3,500<small>円</small></span></li><li><span class="nm">不調改善 カウンセリング＆初回施術</span><span class="pr">3,500<small>円</small></span></li></ul><a class="more" href="seitai/">整体について →</a></div>
-   <div class="cpc"><div class="hd"><span>03</span><h3>育毛</h3></div><ul><li><p class="ask">料金は、カウンセリング時にご案内します。<small>頭皮の状態とご希望をうかがってから、内容と料金をお伝えします。</small></p></li></ul><a class="more" href="ikumou/">育毛について →</a></div>
-   <div class="cpc"><div class="hd"><span>04</span><h3>肌質改善</h3></div><ul><li><p class="ask">料金は、カウンセリング時にご案内します。<small>肌の状態とご希望をうかがってから、内容と料金をお伝えします。</small></p></li></ul><a class="more" href="hada/">肌質改善について →</a></div>
+   <div class="cpc"><div class="hd"><span>01</span><h3>ダイエット</h3></div><ul><li><span class="nm">初回カウンセリング</span><span class="pr">500<small>円</small></span></li></ul><a class="more" href="diet/">ダイエットについて →</a></div>
+   <div class="cpc"><div class="hd"><span>02</span><h3>整体</h3></div><ul><li><span class="nm">整体 初回施術</span><span class="pr">1,000<small>円</small></span></li></ul><a class="more" href="seitai/">整体について →</a></div>
+   <div class="cpc"><div class="hd"><span>03</span><h3>育毛</h3></div><ul><li><span class="nm">育毛施術 初回限定</span><span class="pr"><span class="was">通常 55,000円 →</span>38,500<small>円</small></span></li></ul><a class="more" href="ikumou/">育毛について →</a></div>
+   <div class="cpc"><div class="hd"><span>04</span><h3>肌質改善</h3></div><ul><li><span class="nm">肌質改善コース 初回限定</span><span class="pr"><span class="was">通常 11,000円 →</span>5,500<small>円</small></span></li></ul><a class="more" href="hada/">肌質改善について →</a></div>
   </div>
-  <p class="note">※料金はすべて税込です。2回目以降の料金・3ヶ月コースの料金は、カウンセリング時にご案内します。<br>※お支払いは現金・クレジットカードがご利用いただけます。</p>
+  <p class="note">※初回料金は、はじめての方（ご新規の方）が対象です。料金はすべて税込です。2回目以降の料金・3ヶ月コースの料金は、カウンセリング時にご案内します。<br>※お支払いは現金・クレジットカードがご利用いただけます。</p>
  </div>
 </section>
 
@@ -617,7 +618,7 @@ PAGES = {
               ("測定・姿勢チェック", "体の状態や姿勢のゆがみを確かめ、太りやすい原因を探ります。"),
               ("プランのご提案", "整体と食事の見直しを組み合わせ、3ヶ月コースなどあなたに合うプランをご提案します。")],
         price_h="はじめての方へ　初回限定",
-        prices=[("初回カウンセリング＆姿勢矯正", "ダイエットのご相談がはじめての方", "500"),
+        prices=[("初回カウンセリング", "はじめての方（ご新規の方）", "500"),
                 ("3ヶ月コース", "カウンセリングの内容に合わせてご案内", None)],
         price_note="※料金は税込です。2回目以降の料金・3ヶ月コースの料金は、カウンセリング時にご案内します。お支払いは現金・クレジットカードがご利用いただけます。",
         faq=[("本当に運動しなくても痩せますか？", "ハードな運動や無理な食事制限は行いません。体質に合わせた食事の見直しと整体で、無理なく健康的に痩せる方法をご提案します（効果には個人差があります）。"),
@@ -652,9 +653,7 @@ PAGES = {
               ("姿勢・体のチェック", "姿勢や骨盤のゆがみ、動きのクセを確かめて、原因を探ります。"),
               ("施術・セルフケアのご提案", "体に合わせて施術し、ご自宅でできるケアや通い方をご提案します。")],
         price_h="はじめての方へ　初回限定",
-        prices=[("整体 初回施術", "腰痛・肩こり・膝の痛みなど", "1,000"),
-                ("ブライダル整体 初回施術", "花嫁さまに", "3,500"),
-                ("不調改善 カウンセリング＆初回施術", "慢性的な不調のご相談に", "3,500")],
+        prices=[("整体 初回施術", "はじめての方（ご新規の方）", "1,000")],
         price_note="※料金は税込です。2回目以降の料金は、カウンセリング時にご案内します。お支払いは現金・クレジットカードがご利用いただけます。",
         faq=[("痛みが強くても受けられますか？", "強い痛みやしびれ、けがの直後などは、まず医療機関の受診をおすすめします。状態をうかがったうえで、施術ができるかをご案内します。"),
              ("骨盤矯正は痛くないですか？", "力加減を確かめながら行います。痛みや不安があるときは、施術中でもお気軽にお伝えください。"),
@@ -678,11 +677,11 @@ PAGES = {
         flow=[COMMON_FLOW_1, ("カウンセリング", "気になっていること、いつ頃からか、生活習慣などをうかがいます。"),
               ("頭皮の状態チェック", "今の頭皮の状態を確かめ、気になる点をいっしょに見ていきます。"),
               ("ケアのご提案", "状態に合わせたケアの内容・通い方・料金をご案内します。")],
-        price_h="育毛・頭皮ケア",
-        prices=[("育毛・頭皮ケア", "内容は頭皮の状態とご希望に合わせてご提案", None)],
-        price_note="※料金は、頭皮の状態とご希望をうかがったうえで、カウンセリング時にご案内します。お支払いは現金・クレジットカードがご利用いただけます。",
+        price_h="はじめての方へ　初回限定",
+        prices=[("育毛施術 初回限定", "はじめての方（ご新規の方）", '<span class="was">通常 55,000円 →</span>38,500')],
+        price_note="※初回料金は、はじめての方（ご新規の方）が対象です。2回目以降の内容と料金は、頭皮の状態とご希望をうかがったうえで、カウンセリング時にご案内します。お支払いは現金・クレジットカードがご利用いただけます。",
         faq=[("どんなケアをしますか？", "頭皮の状態とご希望をカウンセリングでうかがったうえで、内容をご案内します。気になることは何でもお気軽にお聞かせください。"),
-             ("料金はいくらですか？", "頭皮の状態とご希望によって内容が変わるため、カウンセリング時にご案内します。"),
+             ("料金はいくらですか？", "はじめての方は、育毛施術を初回限定38,500円（通常55,000円）でお受けいただけます。2回目以降は、頭皮の状態とご希望をうかがってカウンセリング時にご案内します。"),
              ("育毛だけでも利用できますか？", "まずは公式LINEからお気軽にご相談ください。お悩みやご希望をうかがい、合うメニューをご案内します。"),
              ("どのくらいで変化を感じられますか？", "頭皮や髪の状態には個人差があるため、一概にはお伝えできません。カウンセリングで、通い方の目安をご相談しながら進めます。"),
              ("ほかのメニューと組み合わせられますか？", "はい。ダイエットや整体など、ほかのお悩みとあわせてご相談いただけます。")]),
@@ -704,11 +703,11 @@ PAGES = {
         flow=[COMMON_FLOW_1, ("カウンセリング", "気になっていること、ふだんのお手入れや生活習慣をうかがいます。"),
               ("肌の状態チェック", "今の肌の状態を確かめ、気になる点をいっしょに見ていきます。"),
               ("ケアのご提案", "状態に合わせたケアの内容・通い方・料金をご案内します。")],
-        price_h="肌質改善・フェイシャル",
-        prices=[("肌質改善・フェイシャル", "内容は肌の状態とご希望に合わせてご提案", None)],
-        price_note="※料金は、肌の状態とご希望をうかがったうえで、カウンセリング時にご案内します。お支払いは現金・クレジットカードがご利用いただけます。",
+        price_h="はじめての方へ　初回限定",
+        prices=[("肌質改善コース 初回限定", "はじめての方（ご新規の方）", '<span class="was">通常 11,000円 →</span>5,500')],
+        price_note="※初回料金は、はじめての方（ご新規の方）が対象です。2回目以降の内容と料金は、肌の状態とご希望をうかがったうえで、カウンセリング時にご案内します。お支払いは現金・クレジットカードがご利用いただけます。",
         faq=[("どんなケアをしますか？", "肌の状態とご希望をカウンセリングでうかがったうえで、内容をご案内します。気になることは何でもお気軽にお聞かせください。"),
-             ("料金はいくらですか？", "肌の状態とご希望によって内容が変わるため、カウンセリング時にご案内します。"),
+             ("料金はいくらですか？", "はじめての方は、肌質改善コースを初回限定5,500円（通常11,000円）でお受けいただけます。2回目以降は、肌の状態とご希望をうかがってカウンセリング時にご案内します。"),
              ("肌質改善だけでも利用できますか？", "まずは公式LINEからお気軽にご相談ください。お悩みやご希望をうかがい、合うメニューをご案内します。"),
              ("どのくらいで変化を感じられますか？", "肌の状態には個人差があるため、一概にはお伝えできません。カウンセリングで、通い方の目安をご相談しながら進めます。"),
              ("ほかのメニューと組み合わせられますか？", "はい。ダイエットや整体など、ほかのお悩みとあわせてご相談いただけます。")]),
