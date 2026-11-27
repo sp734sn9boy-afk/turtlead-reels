@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>集客診断レポート（見本）</title>
+<!-- フォント：Google Fonts（自社サイトと同じ Noto Sans JP / Outfit。ロゴ文字は M PLUS Rounded 1c）
+     ロゴマーク：自社サイト https://www.turtle-ad.com/ のインラインSVGをそのまま使用（自社素材）
+     図・アイコン：すべてこのファイル内で作成したSVG/CSS。人物写真・他社ロゴは不使用 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@800&text=turtle%20ad&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#060b18; --navy2:#0e1a36; --navy3:#1a2c55;
+  --cyan:#4fe3ff; --cyan-d:#0b7f9c; --cyan-l:#e6fbff; --cyan-m:#b8f3ff;
+  --ink:#121826; --sub:#465068; --muted:#7a849c; --line:#d9e0ec; --paper:#ffffff; --soft:#f4f7fb;
+  --warn:#e8590c; --warn-l:#fff1e8; --ok:#178a5a; --ok-l:#e8f7ef;
+  --en:'Outfit',system-ui,sans-serif; --jp:'Noto Sans JP',system-ui,sans-serif;
+}
+@page{size:A4;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{background:#8b93a6;font-family:var(--jp);color:var(--ink);font-size:12.5px;line-height:1.7;font-feature-settings:"palt"}
+.page{width:210mm;height:297mm;margin:16px auto;background:var(--paper);position:relative;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+@media print{body{background:#fff}.page{margin:0;box-shadow:none;page-break-after:always;break-after:page}.page:last-child{page-break-after:auto;break-after:auto}}
+b,strong{font-weight:700}
+.num{font-family:var(--en);font-weight:700;letter-spacing:.01em}
+
+/* ---- 共通ヘッダー・フッター ---- */
+.ph{background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 15mm;height:15mm;flex:none}
+.logo{display:flex;align-items:center;gap:7px;font-family:'M PLUS Rounded 1c',var(--en),sans-serif;font-weight:800;font-size:16px;color:#fff;line-height:1;letter-spacing:.02em}
+.logo svg{width:24px;height:24px;filter:drop-shadow(0 0 3px rgba(60,214,240,.6))}
+.logo b{color:#3CD6F0;font-weight:800}
+.ph .doc{font-size:10.5px;color:#c9d4f0;display:flex;align-items:center;gap:10px}
+.sample{display:inline-block;border:1px solid var(--cyan);color:var(--cyan);border-radius:999px;font-size:9.5px;font-weight:700;padding:1px 9px;line-height:1.6;letter-spacing:.04em}
+.sample.dark{border-color:var(--cyan-d);color:var(--cyan-d);background:#fff}
+.body{flex:1;padding:8mm 15mm 0;display:flex;flex-direction:column;min-height:0}
+.pf{flex:none;height:11mm;margin:0 15mm;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;font-size:9.5px;color:var(--muted)}
+.pf .pg{font-family:var(--en);font-weight:700;color:var(--navy)}
+
+/* ---- 見出し ---- */
+.sec{display:flex;align-items:center;gap:10px;margin:0 0 9px}
+.sec .no{flex:none;width:30px;height:30px;border-radius:8px;background:var(--navy);color:var(--cyan);font-family:var(--en);font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center}
+.sec h2{font-size:19px;font-weight:900;letter-spacing:.02em;line-height:1.3}
+.sec .rule{flex:1;height:2px;background:linear-gradient(90deg,var(--cyan),rgba(79,227,255,0))}
+h3{font-size:13.5px;font-weight:700;margin:0 0 6px;display:flex;align-items:center;gap:8px}
+h3::before{content:"";width:4px;height:14px;border-radius:2px;background:var(--cyan);flex:none}
+.mt{margin-top:14px}
+.note{font-size:10.5px;color:var(--sub);line-height:1.65}
+.callout{background:var(--soft);border-left:4px solid var(--navy3);border-radius:0 8px 8px 0;padding:7px 12px;font-size:10.5px;color:var(--sub);line-height:1.6}
+
+/* ---- 表紙 ---- */
+.cover-top{background:var(--navy);color:#fff;height:150mm;position:relative;overflow:hidden;padding:16mm 16mm 0;flex:none}
+.cover-top .grid{position:absolute;inset:0;opacity:.55}
+.cover-top .logo{font-size:22px;gap:10px;position:relative}
+.cover-top .logo svg{width:36px;height:36px}
+.cover-top .tagrow{position:relative;margin-top:30mm;display:flex;gap:8px;align-items:center}
+.cover-top .kicker{font-family:var(--en);font-weight:500;letter-spacing:.24em;font-size:12px;color:var(--cyan)}
+.cover-top .client{position:relative;margin-top:7mm;font-size:22px;font-weight:700;color:#e9f0ff}
+.cover-top h1{position:relative;font-size:46px;font-weight:900;line-height:1.2;letter-spacing:.03em;margin-top:2mm}
+.cover-top h1 small{font-size:24px;font-weight:700;color:var(--cyan);margin-left:6px}
+.cover-top .by{position:relative;margin-top:8mm;font-size:12px;color:#c9d4f0}
+.cover-band{background:var(--cyan);color:var(--navy);padding:9px 16mm;font-size:11.5px;font-weight:700;flex:none;display:flex;gap:10px;align-items:center}
+.cover-band .ic{flex:none;width:18px;height:18px;border-radius:50%;background:var(--navy);color:var(--cyan);font-family:var(--en);font-size:12px;display:flex;align-items:center;justify-content:center}
+.summary{padding:9mm 16mm 0;flex:1}
+.points{display:grid;gap:14px}
+.pt{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start;border:1px solid var(--line);border-radius:12px;padding:18px 18px}
+.pt .n{width:44px;height:44px;border-radius:50%;background:var(--navy);color:var(--cyan);font-family:var(--en);font-weight:700;font-size:22px;display:flex;align-items:center;justify-content:center}
+.pt .t{font-size:15.5px;font-weight:700;line-height:1.5;color:var(--navy)}
+.pt .d{font-size:12px;color:var(--sub);margin-top:2px}
+.pt.key{border:2px solid var(--cyan);background:var(--cyan-l)}
+
+/* ---- じょうご ---- */
+.funnel-wrap{display:grid;grid-template-columns:1fr 200px;gap:14px;align-items:stretch}
+.funnel{display:flex;flex-direction:column;align-items:center}
+.stage{color:#fff;text-align:center;clip-path:polygon(0 0,100% 0,94% 100%,6% 100%);padding:13px 0 14px;line-height:1.3}
+.stage .lb{font-size:12px;opacity:.9}
+.stage .v{font-size:27px;font-family:var(--en);font-weight:700}
+.stage .v small{font-family:var(--jp);font-size:12px;font-weight:700;margin-left:2px}
+.stage .sub{font-size:11px;opacity:.85;margin-top:1px}
+.s1{width:100%;background:var(--navy)}
+.s2{width:82%;background:var(--navy2)}
+.s3{width:64%;background:var(--navy3)}
+.s4{width:48%;background:var(--cyan);color:var(--navy)}
+.rate{display:flex;align-items:center;gap:6px;height:32px;font-size:11.5px;color:var(--sub)}
+.rate .ar{width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:8px solid var(--muted)}
+.rate b{font-family:var(--en);color:var(--navy);font-size:12px}
+.rate.bad b{color:var(--warn)}
+.rate.good b{color:var(--ok)}
+.side{display:flex;flex-direction:column;gap:12px;justify-content:center}
+.flag{border-radius:10px;padding:12px 12px;font-size:11px;line-height:1.55}
+.flag .big{font-family:var(--en);font-weight:700;font-size:24px;line-height:1.1}
+.flag.bad{background:var(--warn-l);border:1.5px solid var(--warn)}
+.flag.bad .big,.flag.bad .h{color:var(--warn)}
+.flag.good{background:var(--ok-l);border:1.5px solid var(--ok)}
+.flag.good .big,.flag.good .h{color:var(--ok)}
+.flag .h{font-weight:700;font-size:11px}
+.meter{height:8px;background:#fff;border-radius:4px;position:relative;margin:6px 0 3px;border:1px solid #f3c6a9}
+.meter i{position:absolute;left:0;top:0;bottom:0;width:60%;background:var(--warn);border-radius:4px}
+.meter u{position:absolute;top:-4px;bottom:-4px;left:calc(100% - 1px);width:2px;background:var(--navy)}
+.insta{display:flex;align-items:center;gap:6px;margin-top:16px;background:var(--soft);border-radius:10px;padding:8px 12px;font-size:10.5px}
+.insta .tt{font-weight:700;color:var(--navy);margin-right:4px;white-space:nowrap}
+.chip{background:#fff;border:1px solid var(--line);border-radius:8px;padding:3px 9px;text-align:center;line-height:1.3;flex:1}
+.chip .num{font-size:14px;color:var(--navy)}
+.chip span{display:block;font-size:9.5px;color:var(--sub)}
+.arr{color:var(--muted);font-family:var(--en);font-weight:700}
+.loss{display:grid;gap:11px}
+.loss li{list-style:none;display:grid;grid-template-columns:24px 1fr;gap:9px;font-size:12.5px;line-height:1.65}
+.loss .n{width:24px;height:24px;border-radius:50%;background:var(--warn);color:#fff;font-family:var(--en);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.loss li.ok .n{background:var(--ok)}
+.loss b{color:var(--ink)}
+
+/* ---- 課題カード ---- */
+.issues{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;align-content:start}
+.card{border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.card .hd{display:flex;align-items:center;gap:9px;padding:8px 12px;background:var(--soft);border-bottom:1px solid var(--line)}
+.card .pr{flex:none;font-family:var(--en);font-weight:700;font-size:10px;letter-spacing:.06em;background:var(--navy);color:var(--cyan);border-radius:6px;padding:3px 7px;line-height:1.2;text-align:center}
+.card .pr .num{display:block;font-size:17px;line-height:1}
+.card .ttl{font-size:14px;font-weight:700;line-height:1.4;color:var(--navy)}
+.card .tag{margin-left:auto;flex:none;font-size:9px;font-weight:700;border-radius:999px;padding:1px 7px;white-space:nowrap}
+.tag.free{background:var(--ok-l);color:var(--ok);border:1px solid var(--ok)}
+.tag.first{background:var(--cyan);color:var(--navy)}
+.card.top{border:2px solid var(--cyan)}
+.card.top .hd{background:var(--cyan-l)}
+.card .bd{padding:11px 13px 13px;font-size:11.8px;line-height:1.7;color:var(--sub)}
+.card .row{display:grid;grid-template-columns:60px 1fr;gap:8px;margin-top:8px}
+.card .row:first-child{margin-top:0}
+.card .k{font-size:10px;font-weight:700;color:var(--navy);background:var(--soft);border-radius:4px;text-align:center;height:fit-content;padding:1px 0;margin-top:2px}
+.card .row.do .k{background:var(--navy);color:var(--cyan)}
+.card .ps{display:block;margin-top:4px;font-size:10.8px;color:var(--warn)}
+
+/* ---- 広告費 ---- */
+.budget{display:grid;grid-template-columns:170px 1fr;gap:16px;align-items:center}
+.donut{position:relative;width:170px;height:170px}
+.donut .c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.2}
+.donut .c small{font-size:10.5px;color:var(--sub)}
+.donut .c .num{font-size:28px;color:var(--navy)}
+.donut .c .num small{font-family:var(--jp);font-size:13px;color:var(--navy);font-weight:700}
+.legend{display:grid;gap:4px}
+.lg{display:grid;grid-template-columns:12px 1fr auto;gap:8px;align-items:start;border-bottom:1px dashed var(--line);padding-bottom:3px}
+.lg:last-child{border-bottom:0}
+.lg .sw{width:12px;height:12px;border-radius:3px;margin-top:4px}
+.lg .nm{font-size:12px;font-weight:700;color:var(--navy);line-height:1.4}
+.lg .why{font-size:10px;color:var(--sub);line-height:1.5}
+.lg .amt{text-align:right;line-height:1.3}
+.lg .amt .num{font-size:15px;color:var(--navy)}
+.lg .amt span{display:block;font-size:9.5px;color:var(--muted)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.box{border:1px solid var(--line);border-radius:12px;padding:10px 13px}
+.box h4{font-size:12px;font-weight:700;color:var(--navy);margin-bottom:5px}
+.box ul{padding-left:1.1em;font-size:10.3px;line-height:1.6;color:var(--sub)}
+.box li{margin-bottom:2px}
+.formula{display:flex;align-items:center;justify-content:center;gap:6px;background:var(--navy);color:#fff;border-radius:8px;padding:6px 8px;margin:4px 0 6px}
+.formula .num{font-size:17px}
+.formula .eq{color:var(--cyan);font-family:var(--en);font-weight:700}
+.formula .res{color:var(--cyan)}
+.formula small{font-size:9px;color:#c9d4f0;display:block;line-height:1.1;text-align:center}
+.payer{display:flex;gap:10px;align-items:center;background:var(--cyan-l);border:1px solid var(--cyan-m);border-radius:10px;padding:7px 12px;font-size:10.5px;color:var(--sub);margin-bottom:10px}
+.payer svg{flex:none}
+
+/* ---- タイムライン ---- */
+.tl{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding-top:28px}
+.tl::before{content:"";position:absolute;top:12px;left:16%;right:16%;height:3px;background:linear-gradient(90deg,var(--navy),var(--cyan))}
+.tl .st{position:relative;border:1px solid var(--line);border-radius:12px;padding:8px 12px 8px}
+.tl .dot{position:absolute;top:-30px;left:50%;transform:translateX(-50%);width:26px;height:26px;border-radius:50%;background:var(--navy);border:3px solid var(--cyan);color:#fff;font-family:var(--en);font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center}
+.tl .m{font-family:var(--en);font-weight:700;font-size:10px;color:var(--cyan-d);letter-spacing:.08em}
+.tl .nm{font-size:13.5px;font-weight:900;color:var(--navy);margin-bottom:4px}
+.tl ul{padding-left:1em;font-size:10.2px;line-height:1.5;color:var(--sub)}
+.tl li{margin-bottom:2px}
+
+/* ---- 目標表 ---- */
+table.kpi{width:100%;border-collapse:separate;border-spacing:0;font-size:11px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.kpi th{background:var(--navy);color:#fff;font-weight:700;padding:6px 10px;text-align:left;font-size:10.5px}
+.kpi th:not(:first-child){text-align:center}
+.kpi td{padding:4px 10px;border-top:1px solid var(--line)}
+.kpi td:not(:first-child){text-align:center}
+.kpi tr:nth-child(even) td{background:var(--soft)}
+.kpi .goal{color:var(--cyan-d);font-weight:700}
+.kpi .hl td{background:var(--cyan-l)!important}
+.kpi .hl .goal{font-family:var(--en);font-size:13px}
+
+/* ---- ルール ---- */
+.rules{display:grid;gap:11px}
+.rule3{border:1px solid var(--line);border-radius:12px;padding:13px 15px;display:grid;grid-template-columns:34px 1fr;gap:11px}
+.rule3 .ic{width:34px;height:34px;border-radius:9px;background:var(--navy);display:flex;align-items:center;justify-content:center}
+.rule3 h4{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:3px}
+.rule3 ul{padding-left:1.05em;font-size:11.5px;line-height:1.7;color:var(--sub)}
+.rule3 li{margin-bottom:1px}
+.ng{display:flex;flex-wrap:wrap;gap:4px;margin:3px 0 3px}
+.ng span{font-size:10.4px;background:var(--warn-l);color:#b23f00;border:1px solid #f6c3a3;border-radius:5px;padding:0 6px;line-height:1.7}
+.ng span::before{content:"×";font-weight:700;margin-right:3px}
+.where{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:4px 0 4px}
+.where div{border-radius:7px;padding:6px 9px;font-size:10.6px;line-height:1.45}
+.where .y{background:var(--warn-l);border:1px solid #f6c3a3}
+.where .m2{background:#fff8e1;border:1px solid #f2d78a}
+.where .n2{background:var(--ok-l);border:1px solid #9fd8bd}
+.where b{display:block;font-size:10.5px;color:var(--ink)}
+.closing{flex:none;background:var(--navy);color:#fff;border-radius:14px;padding:16px 20px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;margin-top:auto;margin-bottom:6mm;position:relative;overflow:hidden}
+.closing .free{display:inline-block;background:var(--cyan);color:var(--navy);font-weight:900;font-size:13px;border-radius:6px;padding:1px 10px;margin-right:6px}
+.closing .lead{font-size:19px;font-weight:900;line-height:1.5}
+.closing p{font-size:11.5px;color:#c9d4f0;line-height:1.65;margin-top:4px}
+.closing .logo{font-size:17px}
+.closing .logo svg{width:30px;height:30px}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="mark" viewBox="0 0 100 100"><polygon points="50,6 88.1,28 88.1,72 50,94 11.9,72 11.9,28" fill="#0D3A34" stroke="#3CD6F0" stroke-width="3" stroke-linejoin="round"/><polygon points="50,32 65.6,41 65.6,59 50,68 34.4,59 34.4,41" fill="none" stroke="#3CD6F0" stroke-width="2.5" stroke-linejoin="round"/><path d="M50 6 L50 32 M88.1 28 L65.6 41 M88.1 72 L65.6 59 M50 94 L50 68 M11.9 72 L34.4 59 M11.9 28 L34.4 41" stroke="#3CD6F0" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.8"/><circle cx="50" cy="32" r="3" fill="#fff"/><circle cx="65.6" cy="41" r="3" fill="#fff"/><circle cx="65.6" cy="59" r="3" fill="#fff"/><circle cx="50" cy="68" r="3" fill="#fff"/><circle cx="34.4" cy="59" r="3" fill="#fff"/><circle cx="34.4" cy="41" r="3" fill="#fff"/><circle cx="50" cy="50" r="5" fill="#3CD6F0"/></symbol>
+  </defs>
+</svg>
+
+<!-- ============ 1ページ：表紙＋ひとことで言うと ============ -->
+<section class="page">
+  <div class="cover-top">
+    <svg class="grid" viewBox="0 0 794 567" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <radialGradient id="glow" cx="80%" cy="20%" r="60%"><stop offset="0" stop-color="#4fe3ff" stop-opacity=".28"/><stop offset="1" stop-color="#4fe3ff" stop-opacity="0"/></radialGradient>
+        <pattern id="hex" width="56" height="97" patternUnits="userSpaceOnUse" patternTransform="scale(.9)">
+          <path d="M28 0 L56 16 L56 48 L28 64 L0 48 L0 16 Z M28 64 L28 97" fill="none" stroke="#4fe3ff" stroke-opacity=".12" stroke-width="1"/>
+        </pattern>
+      </defs>
+      <rect width="794" height="567" fill="url(#hex)"/>
+      <rect width="794" height="567" fill="url(#glow)"/>
+      <!-- 右下：じょうご型のモチーフ -->
+      <g transform="translate(560,250)" opacity=".9">
+        <path d="M0 0 H190 L172 44 H18 Z" fill="#4fe3ff" fill-opacity=".14" stroke="#4fe3ff" stroke-opacity=".5"/>
+        <path d="M22 56 H168 L152 100 H38 Z" fill="#4fe3ff" fill-opacity=".22" stroke="#4fe3ff" stroke-opacity=".6"/>
+        <path d="M42 112 H148 L134 156 H56 Z" fill="#4fe3ff" fill-opacity=".34" stroke="#4fe3ff" stroke-opacity=".7"/>
+        <path d="M60 168 H130 L118 212 H72 Z" fill="#4fe3ff"/>
+      </g>
+    </svg>
+    <div class="logo"><svg><use href="#mark"/></svg><span>turtle <b>ad</b></span></div>
+    <div class="tagrow"><span class="kicker">MARKETING CHECK REPORT</span><span class="sample">見本</span></div>
+    <div class="client">みなみ整骨院 さま</div>
+    <h1>集客診断レポート<small>（見本）</small></h1>
+    <div class="by">作成：合同会社turtle ad</div>
+  </div>
+  <div class="cover-band"><span class="ic">i</span>この資料は説明用の見本です。「みなみ整骨院」は架空のお店で、数字もすべて見本の数字です。</div>
+  <div class="summary">
+    <div class="sec"><div class="no">1</div><h2>ひとことで言うと</h2><div class="rule"></div></div>
+    <div class="points">
+      <div class="pt key"><div class="n">1</div><div><div class="t">見られてはいるのに、予約の手前で取りこぼしています。</div><div class="d">投稿を増やすより先に、「見た人が予約しやすい形」に直すのが近道です。</div></div></div>
+      <div class="pt"><div class="n">2</div><div><div class="t">最初の一手は、お金のかからないGoogleマップの整備と、ホームページの予約の入口の見直しです。</div></div></div>
+      <div class="pt"><div class="n">3</div><div><div class="t">広告はそのあとに少額から。</div><div class="d">整骨院は広告に書けることが法律で限られているので、<b>書ける内容で選ばれる作り方</b>をします。</div></div></div>
+    </div>
+  </div>
+  <div class="pf"><span>合同会社turtle ad　集客診断レポート（見本）</span><span class="pg">01 / 05</span></div>
+</section>
+
+<!-- ============ 2ページ：いまの数字と取りこぼし ============ -->
+<section class="page">
+  <div class="ph"><div class="logo"><svg><use href="#mark"/></svg><span>turtle <b>ad</b></span></div><div class="doc">みなみ整骨院 さま　集客診断レポート<span class="sample">見本の数字です</span></div></div>
+  <div class="body">
+    <div class="sec"><div class="no">2</div><h2>いまの数字と、取りこぼしている場所</h2><div class="rule"></div></div>
+    <h3>新しい患者さんが予約するまでの流れ（1か月・見本の数字）</h3>
+    <div class="funnel-wrap">
+      <div class="funnel">
+        <div class="stage s1"><div class="lb">① 表示（Googleマップ・検索で院が表示された回数）</div><div class="v">3,500<small>回</small></div></div>
+        <div class="rate"><span class="ar"></span>表示の <b>約8.6%</b> が行動へ</div>
+        <div class="stage s2"><div class="lb">② 行動（ホームページを開く・電話・道順を調べる）</div><div class="v"><small>合計 約</small>300<small>回</small></div><div class="sub">うちホームページの訪問　約250回</div></div>
+        <div class="rate bad"><span class="ar"></span>行動の <b>約4.3%</b> が問い合わせへ</div>
+        <div class="stage s3"><div class="lb">③ 問い合わせ（電話・LINE・予約フォーム）</div><div class="v">13<small>件</small></div><div class="sub">うちホームページから　3件（訪問の約1.2%）</div></div>
+        <div class="rate good"><span class="ar"></span>問い合わせの <b>約77%</b> が予約へ</div>
+        <div class="stage s4"><div class="lb">④ 新規予約・来院</div><div class="v">10<small>件</small></div></div>
+      </div>
+      <div class="side">
+        <div class="flag bad">
+          <div class="h">いちばんの取りこぼし</div>
+          <div>ホームページ訪問 → 問い合わせ</div>
+          <div class="big">約1.2%</div>
+          <div class="meter"><i></i><u></u></div>
+          <div style="font-size:9.5px">目安の約2%（線）を下回っています</div>
+        </div>
+        <div class="flag bad" style="background:#fff;border-style:dashed">
+          <div class="h">表示 → 行動が低い</div>
+          <div>Googleマップの写真と口コミが少なく、比べたときに選ばれにくい状態</div>
+        </div>
+        <div class="flag good">
+          <div class="h">ここは良い数字</div>
+          <div>問い合わせ → 予約</div>
+          <div class="big">約77%</div>
+          <div>電話・LINEの対応は今のままで大丈夫そうです</div>
+        </div>
+      </div>
+    </div>
+    <div class="insta">
+      <span class="tt">参考：Instagram<br><span style="font-weight:400;font-size:9.5px;color:var(--sub)">（見本の数字）</span></span>
+      <div class="chip"><div class="num">約2,000回</div><span>投稿の表示</span></div><span class="arr">→</span>
+      <div class="chip"><div class="num">約40人</div><span>プロフィールを見た人</span></div><span class="arr">→</span>
+      <div class="chip"><div class="num">約6人</div><span>ホームページへのリンクを押した人</span></div>
+    </div>
+
+    <h3 class="mt">どこで取りこぼしているか</h3>
+    <ol class="loss">
+      <li><span class="n">1</span><div><b>ホームページに来た人が、ほとんど問い合わせていない（約1.2%）。</b>目安の約2%を下回っています。来てくれた人に「予約の仕方」「初めての流れ」が伝わっていない可能性が高いです。</div></li>
+      <li><span class="n">2</span><div><b>Googleマップで表示されても、行動につながる割合が低い。</b>写真と口コミが少なく、他院と比べたときに選ばれにくい状態です。</div></li>
+      <li><span class="n">3</span><div><b>Instagramは、いまのフォロワーの中で回っていて、新しい人にあまり届いていません。</b>いいねやフォロワーを増やすこと自体が目的ではなく、「この院なら安心」と感じてもらう材料として使い方を変えます。</div></li>
+      <li class="ok"><span class="n">4</span><div>問い合わせ→予約（約77%）は良い数字です。電話やLINEの対応は今のままで大丈夫そうです。</div></li>
+    </ol>
+    <div class="callout mt">実際の診断では、Googleマップの管理画面・ホームページのアクセス解析・予約台帳から、院の本当の数字を出します。</div>
+  </div>
+  <div class="pf"><span>※数字はすべて説明用の見本です</span><span class="pg">02 / 05</span></div>
+</section>
+
+<!-- ============ 3ページ：課題 ============ -->
+<section class="page">
+  <div class="ph"><div class="logo"><svg><use href="#mark"/></svg><span>turtle <b>ad</b></span></div><div class="doc">みなみ整骨院 さま　集客診断レポート<span class="sample">見本の数字です</span></div></div>
+  <div class="body">
+    <div class="sec"><div class="no">3</div><h2>見つかった課題（大事な順）</h2><div class="rule"></div></div>
+    <div class="issues">
+      <div class="card top">
+        <div class="hd"><div class="pr">優先<span class="num">1</span></div><div class="ttl">Googleマップの情報が少ない<br><span style="font-weight:500;font-size:10.5px">（写真が少ない・説明が短い）</span></div><span class="tag free">無料</span></div>
+        <div class="bd">
+          <div class="row"><span class="k">なぜ問題か</span><div>「地域名＋整骨院」で探す人の多くが、まずGoogleマップで比べます。写真が少ないと、院内の雰囲気や入口が分からず、不安で別の院を選ばれます。</div></div>
+          <div class="row do"><span class="k">当社が<br>やること</span><div>外観・入口・駐車場・受付・施術スペース・スタッフの写真をそろえて掲載。営業時間・休みの日・予約方法・駐車場の情報を正しく整えます。Googleマップの利用は無料です。</div></div>
+        </div>
+      </div>
+      <div class="card top">
+        <div class="hd"><div class="pr">優先<span class="num">2</span></div><div class="ttl">ホームページで<br>予約の入口が分かりにくい</div><span class="tag first">まず着手</span></div>
+        <div class="bd">
+          <div class="row"><span class="k">なぜ問題か</span><div>スマホで開いたとき、電話番号やLINE予約のボタンがすぐに見つからないと、そのまま閉じられてしまいます。</div></div>
+          <div class="row do"><span class="k">当社が<br>やること</span><div>画面の上と下に「電話する」「LINEで予約」のボタンを常に表示。「初めての方へ（来院から施術までの流れ・所要時間・持ち物・駐車場）」のページを作り、来院の不安を減らします。</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="hd"><div class="pr">優先<span class="num">3</span></div><div class="ttl">口コミが8件で、増える仕組みがない</div></div>
+        <div class="bd">
+          <div class="row"><span class="k">なぜ問題か</span><div>★4.1は良い評価ですが、件数が少ないと比べたときに目立ちません。</div></div>
+          <div class="row do"><span class="k">当社が<br>やること</span><div>お会計のときに<b>全員へ同じ文面とQRコード</b>でお願いする仕組みを作ります（受付に置くカードやLINEのお礼メッセージ）。いただいた口コミへの返信文の下書きもお手伝いします。<span class="ps">※割引やプレゼントと引き換えにお願いすること、満足していそうな人だけに頼むことはしません（6章）。</span></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="hd"><div class="pr">優先<span class="num">4</span></div><div class="ttl">新しい患者さんが<br>「何を見て来たか」を数えていない</div></div>
+        <div class="bd">
+          <div class="row"><span class="k">なぜ問題か</span><div>きっかけが分からないと、どこにお金と時間をかけるべきか判断できません。</div></div>
+          <div class="row do"><span class="k">当社が<br>やること</span><div>問診票に「当院を知ったきっかけ」の欄を追加。ホームページとGoogleマップの数字を毎月まとめ、予約台帳と合わせて見られるようにします。</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="hd"><div class="pr">優先<span class="num">5</span></div><div class="ttl">広告をまだ使っていない<br><span style="font-weight:500;font-size:10.5px">（使うなら作り方に工夫が必要）</span></div></div>
+        <div class="bd">
+          <div class="row"><span class="k">なぜ問題か</span><div>今困っている人が「鹿児島市 整骨院」などで検索したとき、上のほうに出られていません。ただし整骨院の広告は、症状名や「保険が使えます」などが書けないため、普通の作り方では効きにくい面があります。</div></div>
+          <div class="row do"><span class="k">当社が<br>やること</span><div>書ける内容（院名・場所・時間・予約方法・駐車場など）で選ばれる広告文を作り、詳しい説明はホームページで読んでもらう形にします<span style="white-space:nowrap">（4章・6章）</span>。</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="hd"><div class="pr">優先<span class="num">6</span></div><div class="ttl">Instagramの投稿が<br>新しい人に届いていない</div></div>
+        <div class="bd">
+          <div class="row"><span class="k">なぜ問題か</span><div>週3回の投稿は続いていますが、いいね平均5・フォロワー180で、新しい患者さんにつながりにくい状態です。</div></div>
+          <div class="row do"><span class="k">当社が<br>やること</span><div>投稿の目的を「院の雰囲気・スタッフの人柄・初めての流れが伝わること」に変え、プロフィールから予約までの道をつなぎます。あわせて、投稿の文章に広告では使えない言葉（6章）が入っていないかを点検します。</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pf"><span>※数字はすべて説明用の見本です</span><span class="pg">03 / 05</span></div>
+</section>
+
+<!-- ============ 4ページ：広告費＋3か月 ============ -->
+<section class="page">
+  <div class="ph"><div class="logo"><svg><use href="#mark"/></svg><span>turtle <b>ad</b></span></div><div class="doc">みなみ整骨院 さま　集客診断レポート<span class="sample">見本の数字です</span></div></div>
+  <div class="body">
+    <div class="sec"><div class="no">4</div><h2>広告費の使い方の提案（月3万円の場合）</h2><div class="rule"></div></div>
+    <div class="payer">
+      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x="2" y="6" width="24" height="16" rx="3" fill="#060b18"/><rect x="2" y="10" width="24" height="3" fill="#4fe3ff"/><rect x="5" y="16" width="8" height="2" rx="1" fill="#c9d4f0"/></svg>
+      <div>広告費はお店さまのご負担で、Googleなどに<b>お店さまのカードで直接お支払い</b>いただきます（当社が立て替えたり、上乗せしたりはしません）。広告の設定・見直しは当社が行います。</div>
+    </div>
+    <div class="budget">
+      <div class="donut">
+        <svg viewBox="0 0 200 200" width="170" height="170" aria-label="月3万円の配分">
+          <g transform="rotate(-90 100 100)" fill="none" stroke-width="30">
+            <circle cx="100" cy="100" r="70" stroke="#eef2f8"/>
+            <circle cx="100" cy="100" r="70" stroke="#060b18" stroke-dasharray="311.98 439.82" stroke-dashoffset="0"/>
+            <circle cx="100" cy="100" r="70" stroke="#4fe3ff" stroke-dasharray="109.96 439.82" stroke-dashoffset="-311.98"/>
+            <circle cx="100" cy="100" r="70" stroke="#a9b6d8" stroke-dasharray="17.89 439.82" stroke-dashoffset="-421.94"/>
+          </g>
+        </svg>
+        <div class="c"><small>月の広告費</small><div class="num">3<small>万円</small></div><small>（見本）</small></div>
+      </div>
+      <div class="legend">
+        <div class="lg"><span class="sw" style="background:#060b18"></span><div><div class="nm">Google検索広告</div><div class="why">「今、近くの整骨院を探している人」に届くため。いちばん予約に近い人です</div></div><div class="amt"><span>1日700円 → 月の上限</span><div class="num">21,280円</div></div></div>
+        <div class="lg"><span class="sw" style="background:#4fe3ff"></span><div><div class="nm">メタ広告（Instagram・Facebook）</div><div class="why">院の近くに住む人に、院内の様子やスタッフを知ってもらうため</div></div><div class="amt"><span>1日250円 → 月</span><div class="num">約7,500円</div></div></div>
+        <div class="lg"><span class="sw" style="background:#fff;border:2px solid var(--ok)"></span><div><div class="nm">Googleマップ</div><div class="why">整備は無料。まずここを整えてから広告を出します</div></div><div class="amt"><span>&nbsp;</span><div class="num" style="color:var(--ok)">0円</div></div></div>
+        <div class="lg"><span class="sw" style="background:#a9b6d8"></span><div><div class="nm">調整分</div><div class="why">月によって使う金額が前後するための余裕</div></div><div class="amt"><span>&nbsp;</span><div class="num">約1,200円</div></div></div>
+      </div>
+    </div>
+    <div class="two" style="margin-top:10px">
+      <div class="box">
+        <h4>Google広告の金額の仕組み</h4>
+        <div class="formula"><div><span class="num">700</span><small>1日の予算（円）</small></div><span class="eq">×</span><div><span class="num">30.4</span><small>365日÷12か月</small></div><span class="eq">＝</span><div><span class="num res">21,280</span><small>月の請求の上限（円）</small></div></div>
+        <ul>
+          <li>Google広告は「1日の予算」を決めます。日によっては1日の予算の2倍まで使うことがありますが、<b>1か月の請求は「1日の予算×30.4」が上限</b>です。上限を超えた分は請求されません。</li>
+          <li>予算の変更は、計算がずれないよう月初にまとめて行います。</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h4>最初にお伝えしておきたいこと</h4>
+        <ul>
+          <li>月3万円の場合、広告の良し悪しを判断できるだけの数字（クリック約300回が目安）がそろうまでに、<b>2〜3か月かかる見込み</b>です。最初の期間は「データを集める期間」とお考えください。</li>
+          <li>媒体はこの配分に決めつけません。院の場所・患者さんの年代によっては、チラシや地域の情報誌のほうが合う場合もあります。数字を見ながら毎月組み替えます。</li>
+          <li>メタ広告の1日の最低金額は広告を作る画面で確認します（見本の金額は目安です）。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec" style="margin-top:12px"><div class="no">5</div><h2>3か月の進め方</h2><div class="rule"></div></div>
+    <div class="tl">
+      <div class="st"><span class="dot">1</span><div class="m">MONTH 1</div><div class="nm">1か月目：土台づくり</div>
+        <ul><li>Googleマップの写真・情報の整備</li><li>ホームページの予約ボタンと「初めての方へ」ページ</li><li>口コミのお願いカード</li><li>問診票に「知ったきっかけ」欄</li><li>広告アカウントをお店さま名義で開設</li></ul></div>
+      <div class="st"><span class="dot">2</span><div class="m">MONTH 2</div><div class="nm">2か月目：広告スタート</div>
+        <ul><li>Google検索広告・メタ広告を少額で開始</li><li>毎週、どんな言葉で検索されたかを見て無駄を止める</li><li>Instagramの投稿内容を見直し</li></ul></div>
+      <div class="st"><span class="dot">3</span><div class="m">MONTH 3</div><div class="nm">3か月目：見直し</div>
+        <ul><li>数字を見て、①広告文 → ②ホームページの中身 → ③料金・メニューの見せ方（近くの院との比較）の順で直す</li><li>予算の配分を組み替える</li></ul></div>
+    </div>
+    <h3 class="mt">毎月見る数字と目標（見本）</h3>
+    <table class="kpi">
+      <tr><th>見る数字</th><th>いま（見本）</th><th>3か月後の目標（見本）</th></tr>
+      <tr><td>Googleマップ・検索の表示回数</td><td class="num">3,500回</td><td class="goal">増やす（広告分を含む）</td></tr>
+      <tr><td>ホームページの訪問</td><td class="num">約250回</td><td class="goal">増やす</td></tr>
+      <tr class="hl"><td><b>ホームページの問い合わせ率</b></td><td class="num">約1.2%</td><td class="goal">約2%</td></tr>
+      <tr><td>口コミの件数</td><td class="num">8件</td><td class="goal">毎月少しずつ増える状態に</td></tr>
+      <tr><td>新規予約</td><td class="num">10件</td><td class="goal">増やす（目標の件数は院長と相談して決めます）</td></tr>
+    </table>
+    <ul class="note" style="padding-left:1.1em;margin-top:5px">
+      <li>問い合わせ率の約2%は、一般的な目安です。整骨院について公的な基準になる数字は見つかっていないため、<b>院の実際の数字を基準にして、3か月で調整</b>します。</li>
+      <li>「必ず何件増えます」というお約束はできません。その代わり、毎月数字をお見せして、何を直したかを一緒に確認します。</li>
+    </ul>
+
+  </div>
+  <div class="pf"><span>※金額・数字はすべて説明用の見本です</span><span class="pg">04 / 05</span></div>
+</section>
+
+<!-- ============ 5ページ：目標・ルール・最後に ============ -->
+<section class="page">
+  <div class="ph"><div class="logo"><svg><use href="#mark"/></svg><span>turtle <b>ad</b></span></div><div class="doc">みなみ整骨院 さま　集客診断レポート<span class="sample">見本の数字です</span></div></div>
+  <div class="body">
+    <div class="sec"><div class="no">6</div><h2>広告で気をつけること（大切なルール）</h2><div class="rule"></div></div>
+    <div class="rules">
+      <div class="rule3">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2 L17 5 V10 C17 14 14 17 10 18 C6 17 3 14 3 10 V5 Z" fill="none" stroke="#4fe3ff" stroke-width="2" stroke-linejoin="round"/><path d="M7 10 L9.3 12.2 L13.5 7.8" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div><h4>整骨院の広告には、書けることが決まっています</h4>
+          <ul>
+            <li>整骨院・接骨院（柔道整復師法）や、はり・きゅう・マッサージ（あはき法）の広告は、<b>法律で決められた項目しか出せません</b>。出せるのは、施術者の氏名、院の名前・住所・電話番号、業務の種類、施術日・施術時間などです。違反には罰則があります。</li>
+            <li>自治体の資料で、広告に使えない例として挙がっているもの：
+              <div class="ng"><span>症状名：「腰痛」「肩こり」など</span><span>効果を思わせるメニュー名：「骨盤矯正」「姿勢改善」「小顔矯正」など</span><span>保険の表示：「各種保険取扱い」「各種保険適用」（交通事故・労災などを含むと受け取られるため）</span><span>施術料金、経歴、「治す」「治療」、交通事故治療の表示</span></div></li>
+            <li>2025年2月に厚生労働省が「あはき・柔整広告ガイドライン」を出し、書いてよい範囲がはっきりしました。</li>
+          </ul></div>
+      </div>
+      <div class="rule3">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="2" fill="none" stroke="#4fe3ff" stroke-width="2"/><path d="M6 8 H14 M6 12 H11" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <div><h4>どこが「広告」に当たるか</h4>
+          <div class="where">
+            <div class="y"><b>広告です</b>チラシ・Google広告・メタ広告・バナー広告。上のルールが当てはまります。</div>
+            <div class="m2"><b>条件によっては広告</b>Instagramなどの投稿も、規制の対象になりえます。当社が関わる投稿は、上のルールに沿って作ります。</div>
+            <div class="n2"><b>規制の対象外</b>ホームページ（ガイドライン上）。ただし内容を自主的に適正にすることが求められ、うそや大げさな表現は使えません。</div>
+          </div>
+          <ul>
+            <li>そのため、詳しい施術の説明はホームページに置き、広告は「院名・場所・時間・予約方法」で興味を持ってもらう形にします。</li>
+            <li>検索広告で「腰痛」などの言葉で検索した人に広告を出すこと（広告文には書かない）の扱いは、役所の見解が確認できていません。迷うものは使わないか、保健所に確認してから使います。</li>
+          </ul></div>
+      </div>
+      <div class="rule3">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5 L12.2 7.2 L17.3 7.7 L13.4 11.1 L14.6 16.1 L10 13.5 L5.4 16.1 L6.6 11.1 L2.7 7.7 L7.8 7.2 Z" fill="none" stroke="#4fe3ff" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+        <div><h4>口コミのお願いのしかた</h4>
+          <ul>
+            <li><b>割引・プレゼント・ポイントと引き換えに口コミを頼むことは、Googleのルールで禁止されています。</b>違反すると、新しい口コミが受け付けられなくなる、今ある口コミが見えなくなる、といった制限がかかることがあります。</li>
+            <li>星の数を指定したり、満足していそうな人だけに頼んだりすることも禁止です。</li>
+            <li>医療機関では、割引と引き換えに口コミを頼んだクリニックや、口コミにお金を払った歯科医院に、国（消費者庁）から措置命令が出た例があります。</li>
+            <li>当社では<b>「特典なし・星の指定なし・全員に同じお願い」</b>の方法だけで進めます。</li>
+          </ul></div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:5px">※法律の解釈は当社の整理で、法律相談ではありません。判断に迷う表現は、保健所に確認してから使います。</p>
+
+    <div class="closing">
+      <div>
+        <div style="font-family:var(--en);font-size:10px;letter-spacing:.2em;color:var(--cyan);font-weight:700">7　最後に</div>
+        <div class="lead">ここまでの診断は、<span class="free">無料</span>で行います。</div>
+        <p>院の本当の数字をもとに、どこで取りこぼしているか、何から直すとよいかをお見せします。<br>その先の、Googleマップの整備、ホームページの見直し、動画の手直し、広告の設定、毎月の数字の確認と改善は、みなみ整骨院さまと一緒に進めていきます。まずはお気軽にご相談ください。</p>
+      </div>
+      <div style="text-align:center"><div class="logo"><svg><use href="#mark"/></svg><span>turtle <b>ad</b></span></div><div style="font-size:10px;color:#c9d4f0;margin-top:4px">合同会社turtle ad</div></div>
+    </div>
+  </div>
+  <div class="pf"><span>※この資料は説明用の見本です</span><span class="pg">05 / 05</span></div>
+</section>
+</body>
+</html>
