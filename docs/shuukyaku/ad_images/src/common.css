@@ -1,0 +1,21 @@
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1350px;overflow:hidden}
+body{background:#060b18;color:#f2f6ff;font-family:'Noto Sans JP',sans-serif;position:relative}
+.bg{position:absolute;inset:0;background:
+ radial-gradient(700px 520px at 85% 8%,rgba(79,227,255,.18),transparent 70%),
+ radial-gradient(600px 500px at 0% 100%,rgba(90,70,200,.18),transparent 70%),
+ linear-gradient(180deg,#0a1226,#060b18 60%)}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(79,227,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(79,227,255,.05) 1px,transparent 1px);background-size:60px 60px}
+.wrap{position:absolute;inset:0;padding:84px 80px}
+.eyebrow{font-family:'Outfit',sans-serif;font-weight:700;letter-spacing:.18em;color:#4fe3ff;font-size:30px;display:flex;align-items:center;gap:18px}
+.eyebrow:before{content:"";width:60px;height:3px;background:#4fe3ff}
+.chip{display:inline-block;border:3px solid #4fe3ff;color:#4fe3ff;border-radius:999px;padding:10px 30px;font-weight:900;font-size:40px}
+.cyan{color:#4fe3ff}
+.cta{position:absolute;left:80px;right:80px;bottom:150px;background:#4fe3ff;color:#060b18;border-radius:28px;padding:30px 36px;text-align:center;box-shadow:0 0 60px rgba(79,227,255,.35)}
+.cta .s{font-size:34px;font-weight:700}
+.cta .l{font-size:62px;font-weight:900;line-height:1.25}
+.brand{position:absolute;left:80px;bottom:56px;display:flex;align-items:center;gap:16px}
+.brand svg{width:60px;height:60px;filter:drop-shadow(0 0 8px rgba(60,214,240,.6))}
+.brand span{font-family:'M PLUS Rounded 1c','Outfit',sans-serif;font-weight:800;font-size:44px;color:#f2f6ff}
+.brand b{color:#4fe3ff}
+.handle{position:absolute;right:80px;bottom:66px;font-family:'Outfit';font-weight:500;font-size:32px;color:#9fb0d6}
